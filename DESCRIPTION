@@ -18,8 +18,11 @@ License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 Imports:
     Matrix,
     RSpectra
 RoxygenNote: 6.1.1
+VignetteBuilder: knitr

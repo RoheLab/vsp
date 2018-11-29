@@ -9,6 +9,7 @@ validate_vsp <- function(x) {
   # input validation: values are actually good
 }
 
+#' @export
 print.vsp <- function(x, ...) {
   cat("Vintage Sparse PCA Factor Analysis\n\n")
 

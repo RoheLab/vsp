@@ -36,9 +36,9 @@ This code implements regularized spectral clustering with varimax.
 allows for symmetric, directed, and bipartite (i.e. rectangular A).
 }
 \details{
-The `irlba` package is used for non-centered calculations, which
- requires calculating a partial SVD. Calculations for centered problems
- use `rARPACK`.
+Uses `RSpectra` for matrix computations. These are best-in-class
+ implementations of sparse matrix eigendecompositions. The implementations
+ are not parallel, however.
 
  TODO: how the normalization is done, how the centering is done
 }

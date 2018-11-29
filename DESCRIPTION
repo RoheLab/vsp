@@ -19,7 +19,7 @@ Encoding: UTF-8
 LazyData: true
 Suggests: 
     testthat
-Imports: 
-    irlba,
-    Matrix
+Imports:
+    Matrix,
+    RSpectra
 RoxygenNote: 6.1.1

@@ -16,9 +16,9 @@
 #' @param center Should the adjacency matrix `A` be row and column centered?
 #' @param sym Set to `FALSE` for a two-way analysis.
 #'
-#' @details The `irlba` package is used for non-centered calculations, which
-#'  requires calculating a partial SVD. Calculations for centered problems
-#'  use `rARPACK`.
+#' @details Uses `RSpectra` for matrix computations. These are best-in-class
+#'  implementations of sparse matrix eigendecompositions. The implementations
+#'  are not parallel, however.
 #'
 #'  TODO: how the normalization is done, how the centering is done
 #'
@@ -32,7 +32,7 @@
 #'   - `Y`: TODO
 #'
 #' @export
-vsp <- function(A, k = 5, tau = NULL, normalize = TRUE, center = TRUE, sym = NULL) {
+vsp <- function(A, k = 5, tau = NULL, normalize = TRUE, center = TRUE, symmetric = NULL) {
 
   ### STEPS
   # 1. input validation
@@ -40,35 +40,22 @@ vsp <- function(A, k = 5, tau = NULL, normalize = TRUE, center = TRUE, sym = NUL
   # 3. do PCA on the graph laplacian
   # 4. varimax rotation
 
-  ## questions
-  # - what is a two-way analysis?
-  # - is -1 being used a flag to say "do some reasonable default?"
-
   ### STEP 1: INPUT VALIDATION
 
-  # need to know:
-  # - is the adjacency matrix A symmetric?
-  # - should we do a "one-way" or "two-way" calculation?
-  #   - one-way calculations use eigen (?)
-  #   - two-way calculations use svd (?)
   # - can check for symmetry with `base::isSymmetric(A)`
 
   # TODO: allow user to set this?
-  if (is.null(sym))
-    sym <- nrow(A) == ncol(A)
-
-  # two way analysis is what happens when A is not symmetric?
-  tw <- !sym
+  if (is.null(symmetric))
+    symmetric <- nrow(A) == ncol(A)
 
   rsA <- rowSums(A)  # rowSums are the (in/out?) degrees of each node
   csA <- colSums(A)
 
-  if (!tw) {
-    if (sd(rsA - csA) > 10^(-10)) {
-      tw <- T
-      print("The input matrix is not symmetric.  Performing a two-way analysis.")
-      # return(NA)
-    }
+  # warning: vector recycling
+  if (symmetric && sd(rsA - csA) > 10^(-10)) {
+    # TODO: understand why this is?
+    symmetric <- FALSE
+    print("The input matrix is not symmetric.  Performing a two-way analysis.")
   }
 
   ### STEP 2: CONSTRUCT GRAPH LAPLACIAN L
@@ -76,23 +63,25 @@ vsp <- function(A, k = 5, tau = NULL, normalize = TRUE, center = TRUE, sym = NUL
   n <- nrow(A)
   d <- ncol(A)
 
-  # normalize if requested
-
   if (normalize) {
 
-    # if the user hasn't specified a regulatization parameter tau,
-    # use the average (in/out?) node degree
-    if (is.null(tau)) {
-      tau <- mean(rsA)
-    }
+    # TODO: allow user to specify these. currently tau gets ignored
+    tau_row <- mean(rsA)
+    tau_col <- mean(csA)
 
     # normalization. this does *not* support vector valued tau
     # i.e. tau_row and tau_col must be the same
 
-    D <- Diagonal(n = n, x = 1 / sqrt(rsA + tau))
-    tmp <- D %*% A
-    if (tw) D <- Diagonal(n = d, x = 1 / sqrt(csA + mean(csA)))
-    L <- tmp %*% D
+    D1 <- Diagonal(n = n, x = 1 / sqrt(rsA + tau_row))
+
+    if (symmetric) {
+      D2 <- D1
+    } else {
+      D2 <- Diagonal(n = d, x = 1 / sqrt(csA + tau_col))
+    }
+
+    # TODO: subtract this from the identity!
+    L <- D1 %*% A %*% D2  # joke
   } else {
     L <- A
   }
@@ -106,45 +95,32 @@ vsp <- function(A, k = 5, tau = NULL, normalize = TRUE, center = TRUE, sym = NUL
   #  the reason it is fancy is that multiplying by that matrix can be fast, but can't
   #  define the full nxn (dense) matrix...
   if (center) {
+    s <- centered_svd(L, k, symmetric)
 
-    rsL <- rowSums(L)
-    csL <- colSums(L)
-
-    args <- list(
-      A = L,
-      At = t(L),
-      rs = rsL,
-      cs = csL,
-      n = n,
-      d = d,
-      meanA = mean(L),
-      onesR = rep(1, nrow(L)),
-      onesC = rep(1, ncol(L))
-    )
-
-    ei <- rARPACK::eigs_sym(fcent, n = n, k = k, args = args, which = "LA")
-
-    U <- ei$vectors
-
-    V <- if (tw) apply(t(U) %*% L, 1, function(x) return(x / sqrt(sum(x^2))))
-
-    d <- if(tw) sqrt(ei$values) else ei$values
+    U <- s$u
+    V <- s$v
+    d <- s$d
   } else{
     # uncentered PCA
 
     # only get the right singular vectors in the two-way case
-    nv <- if (tw) k else 0
-    s <- irlba::irlba(L, nu = k, nv = nv)
+    # how do we get V otherwise?
+    nv <- if (symmetric) 0 else k
+    s <- RSpectra::svds(L, nu = k, nv = nv)
     U <- s$u
     d <- s$d
+
+    # how do you get V in the symmetric
     V <- if (tw) s$v else NULL
   }
 
   ### STEP 4: VARIMAX ROTATION
 
-  # should rsA and csA be rsL and csL??
+  # rsL and csL not rsA and csA right?
+  rsL <- rowSums(L)
+  csL <- colSums(L)
 
-  rotHatU <- varimax(U[rsA > 1, ], normalize = F)$rot
+  rotHatU <- varimax(U[rsL > 1, ], normalize = F)$rot
   Zhat <- U %*% rotHatU
 
   # switch signs to ensure each column of Zhat has positive third moment.
@@ -154,8 +130,8 @@ vsp <- function(A, k = 5, tau = NULL, normalize = TRUE, center = TRUE, sym = NUL
 
   rotHatV <- rotHatU
 
-  if (tw) {
-    rotHatV <- varimax(V[csA > 1, ], normalize = F)$rot
+  if (!symmetric) {
+    rotHatV <- varimax(V[csL > 1, ], normalize = F)$rot
     Yhat <- V %*% rotHatV
 
     signss <- sign(colSums(Yhat^3))
@@ -164,15 +140,50 @@ vsp <- function(A, k = 5, tau = NULL, normalize = TRUE, center = TRUE, sym = NUL
   }
 
   Bhat <- t(rotHatU) %*% diag(d) %*% rotHatV
-  scree <- if (center) ei$values else s$d
+
+  # need to get this back now too
+  # scree <- if (center) ei$values else s$d
 
   ### STEP 5: CREATE A VSP OBJECT
 
-  Yhat <- if (tw) Yhat else NULL
+  Yhat <- if (!symmetric) Yhat else NULL
 
-  new_vsp(Z = Zhat, B = Bhat, Y = Yhat, scree = scree, U = U, V = V)
+  new_vsp(Z = Zhat, B = Bhat, Y = Yhat, scree = NULL, U = U, V = V)
 }
 
+# L is the graph Laplacian
+centered_svd <- function(L, k, symmetric) {
+
+  rsL <- rowSums(L)
+  csL <- colSums(L)
+
+  n <- nrow(L)
+  d <- ncol(L)
+
+  args <- list(
+    A = L,
+    At = t(L),
+    rs = rsL,
+    cs = csL,
+    n = n,
+    d = d,
+    meanA = mean(L),
+    onesR = rep(1, n),
+    onesC = rep(1, d)
+  )
+
+  # this implicitly does both symmetric and asymmetric cases,
+  # make this explicit
+  ei <- RSpectra::eigs_sym(fcent, n = n, k = k, args = args, which = "LA")
+
+  U <- ei$vectors
+
+  V <- if (!symmetric) apply(t(U) %*% L, 1, function(x) return(x / sqrt(sum(x^2))))
+
+  d <- if(symmetric) ei$values else sqrt(ei$values)
+
+  list(u = U, v = V, d = d)
+}
 
 # multiplies centered(args$A)%*%x, quickly for sparse A.
 # args$ contains: A, rs, n, meanA, onesR, At

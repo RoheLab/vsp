@@ -1,0 +1,25 @@
+Type: Package
+Package: vsp
+Title: Vintage Sparse PCA for Non-Parametric Factor Analysis
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Karl",
+             family = "Rohe",
+             role = "aut",
+             email = "karlrohe@stat.wisc.edu"),
+      person(given = "Alex",
+             family = "Hayes",
+             role = c("aut", "cre"),
+             email = "alexpghayes@gmail.com",
+             comment = c(ORCID = "0000-0002-4985-5160")))
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat
+Imports: 
+    irlba,
+    Matrix
+RoxygenNote: 6.1.1

@@ -71,14 +71,20 @@ vsp <- function(A, k = 5, tau_row = NULL, tau_col = NULL, normalize = TRUE, cent
   # this doesn't differentiate between the symmetric and asymmetric cases
   # so there's opportunity for speed gains here
 
+  # this includes a call to isSymmetric that we might be able to skip out on
   s <- RSpectra::svds(L, k = k, nu = k, nv = k)
   U <- s$u
   V <- s$v
 
   ### STEP 4: VARIMAX ROTATION
 
-  R_U <- varimax(U, normalize = FALSE, eps = 1e-10)$rotmat
-  R_V <- varimax(V, normalize = FALSE, eps = 1e-10)$rotmat
+  # subset to only nodes with degree greater than. huge time saver.
+  # some of karl's code uses rsL and csL here, which I think is a mistake
+  # because it drops the computation time by an order of magnitude. is that
+  # throwing out nonsense that doesn't affect results, or does it affect
+  # results?
+  R_U <- varimax(U[rsA > 1, ], normalize = FALSE, eps = 1e-5)$rotmat
+  R_V <- varimax(V[csA > 1, ], normalize = FALSE, eps = 1e-5)$rotmat
 
   Z <- sqrt(n) * U %*% R_U
   Y <- sqrt(d) * V %*% R_V

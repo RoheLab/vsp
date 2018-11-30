@@ -29,14 +29,62 @@ You'll need to set up a Github auth token. See the documentation in `?remotes::i
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Fitting a `vsp` factor analysis:
 
 ```{r}
 library(vsp)
 library(Matrix)
 
-M <- rsparsematrix(12, 12, nnz = 40)  # this breaks things
-M2 <- sign(M)^2                       # but this doesn't
-vsp(M2, k = 7)
+# make a random sparse graph
+M <- rsparsematrix(12, 12, nnz = 40)
+M2 <- sign(M)^2
+
+# vintage sparse pca
+fa <- vsp(M2, k = 7)
+fa
 ```
 
+The screeplot:
+
+```{r}
+screeplot(fa)
+```
+
+```{r}
+project_pca(fa)
+```
+
+```{r}
+project_varimax(fa)
+```
+
+```{r}
+pairs(project_pca(fa))
+```
+
+```{r}
+pairs(project_varimax(fa))
+```
+
+think about how else to visualize these matrices. distributions of loadings? am i actually plotting the loadings here or did i just do some nonsense?
+
+```{r}
+plot_simulation_test(M2, k = 3)
+```
+
+
+```{r eval = FALSE}
+library(tidyverse)
+
+fa$B %>%
+  as.matrix() %>%
+  as_tibble() %>%
+  mutate(row = row_number()) %>%
+  gather(k, v, -row) %>%
+  ggplot(aes(row, k, fill = v)) +
+  geom_tile() +
+  scale_fill_viridis_c()
+
+image(fa$B)
+image(fa$Z)
+```

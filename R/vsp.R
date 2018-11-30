@@ -18,22 +18,22 @@
 #'
 #'  TODO: how the normalization is done, how the centering is done
 #'
-#' @return An object of class `vsp`, which is a list with elements:
-#'
-#'   - `U`: TODO
-#'   - `d`: TODO
-#'   - `V`: TODO
-#'   - `Z`: TODO
-#'   - `B`: TODO
-#'   - `Y`: TODO
+#' @return An object of class `vsp`
+#' @import Matrix
 #'
 #' @export
 vsp <- function(A, k = 5, tau_row = NULL, tau_col = NULL, normalize = TRUE, center = FALSE) {
 
   ### Vintage Sparse PCA Reference Implementation
 
+  if (k < 2)
+    stop("`k` must be at least two.", call. = FALSE)
+
   n <- nrow(A)
   d <- ncol(A)
+
+  default_row <- is.null(tau_row)
+  default_col <- is.null(tau_col)
 
   ### STEP 1: OPTIONAL NORMALIZATION
 
@@ -42,17 +42,14 @@ vsp <- function(A, k = 5, tau_row = NULL, tau_col = NULL, normalize = TRUE, cent
 
   if (normalize) {
 
-    rsA <- rowSums(A)
-    csA <- colSums(A)
+    rsA <- Matrix::rowSums(A)  # out-degree
+    csA <- Matrix::colSums(A)  # in-degree
 
-    if (is.null(tau_row))
-      tau_row <- mean(rsA)
+    tau_r <- if (default_row) mean(rsA) else tau_row
+    tau_c <- if (default_col) mean(csA) else tau_col
 
-    if (is.null(tau_col))
-      tau_col <- mean(csA)
-
-    D_row <- Diagonal(n = n, x = 1 / sqrt(rsA + tau_row))
-    D_col <- Diagonal(n = d, x = 1 / sqrt(csA + tau_col))
+    D_row <- Diagonal(n = n, x = 1 / sqrt(rsA + tau_r))
+    D_col <- Diagonal(n = d, x = 1 / sqrt(csA + tau_c))
 
     # note: no identity matrix in the graph Laplacian here
     L <- D_row %*% A %*% D_col
@@ -66,9 +63,7 @@ vsp <- function(A, k = 5, tau_row = NULL, tau_col = NULL, normalize = TRUE, cent
   # implicitly for performance, as discussed in Remark 1.2
 
   if (center) {
-    L <- sweep(L, 1, Matrix::rowMeans(L))
-    L <- sweep(L, 2, Matrix::colMeans(L))
-    L <- L + Matrix::mean(L)
+    L <- double_center(L)
   }
 
   ### STEP 3: SVD
@@ -82,8 +77,8 @@ vsp <- function(A, k = 5, tau_row = NULL, tau_col = NULL, normalize = TRUE, cent
 
   ### STEP 4: VARIMAX ROTATION
 
-  R_U <- varimax(U, normalize = F)$rotmat
-  R_V <- varimax(V, normalize = F)$rotmat
+  R_U <- varimax(U, normalize = FALSE, eps = 1e-10)$rotmat
+  R_V <- varimax(V, normalize = FALSE, eps = 1e-10)$rotmat
 
   Z <- sqrt(n) * U %*% R_U
   Y <- sqrt(d) * V %*% R_V
@@ -105,6 +100,83 @@ vsp <- function(A, k = 5, tau_row = NULL, tau_col = NULL, normalize = TRUE, cent
     B = B,
     Y = Y,
     center = center,
-    normalize = normalize
+    normalize = normalize,
+    k = k,
+    tau_list = list(
+      tau_row = if (exists("tau_r")) tau_r else NULL,
+      tau_col = if (exists("tau_c")) tau_c else NULL,
+      default_row = default_row,
+      default_col = default_col
+    )
   )
 }
+
+double_center <- function(L) {
+  L <- sweep(L, 1, Matrix::rowMeans(L))
+  L <- sweep(L, 2, Matrix::colMeans(L))
+  L + Matrix::mean(L)
+}
+
+#' @export
+#' @importFrom tibble as_tibble
+project_pca <- function(x, ...) {
+  scores <- x$U %*% diag(x$d)
+  colnames(scores) <- paste0("PC", 1:x$k)
+  tibble::as_tibble(scores)
+}
+
+#' @export
+#' @importFrom tibble as_tibble
+project_varimax <- function(x, ...) {
+  # do i need to multiply by B or sqrt(B) here??
+  vrmx <- as.matrix(x$Z)
+  colnames(vrmx) <- paste0("factor", 1:x$k)
+  tibble::as_tibble(vrmx)
+}
+
+#' @export
+lambda_2_null_dist <- function(A, k = 3, reps = 100) {
+
+  # eventually the following should get written up into a package
+  source("https://raw.githubusercontent.com/karlrohe/fastRG/master/fastRDPG.R")
+  rs <- rowSums(A)
+  cs <- colSums(A)
+
+  rs <- cbind(rs, 0)
+  cs <- cbind(cs, 0)
+
+  lambda <- numeric(reps)
+
+  for (i in 1:reps){
+    A <- fastRG(
+      X = rs / sum(rs),
+      Y = cs / sum(cs),
+      S = diag(c(1, 0)),
+      avgDeg = sum(rs) * 2 / length(rs)
+    )
+    lambda[i] <- vsp(A, k = k, center = FALSE)$d[2]
+  }
+
+  lambda
+}
+
+#' @export
+#' @import ggplot2
+plot_simulation_test <- function(A, k, reps = 100) {
+
+  lambda_2_sim <- lambda_2_null_dist(A, k, reps)
+  lambda_2_obs <- vsp(A, k, center = FALSE)$d[2]
+
+  ggplot(NULL, aes(lambda_2_sim)) +
+    geom_histogram() +
+    geom_vline(xintercept = lambda_2_obs, color = "red", size = 1.5) +
+    labs(
+      title = "Distribution of second eigenvalue under null model",
+      x = "Second eigenvalue",
+      caption = "Red line is observed eigenvalue"
+    ) +
+    theme_bw()
+}
+
+
+

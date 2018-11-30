@@ -4,32 +4,25 @@
 \alias{vsp}
 \title{Non-Parametric Factor Analysis via Vintage Sparse PCA}
 \usage{
-vsp(A, k = 5, tau = NULL, normalize = TRUE, center = TRUE,
-  sym = NULL)
+vsp(A, k = 5, tau_row = NULL, tau_col = NULL, normalize = TRUE,
+  center = FALSE)
 }
 \arguments{
 \item{A}{A [matrix] or [Matrix::Matrix] object.}
 
-\item{k}{is the number of clusters.  must be same for rows and columns.}
+\item{k}{The number of factors to calculate.}
 
-\item{tau}{is regularization parameter.  it can be a 2 vectors.
-Default is pretty good.}
+\item{tau_row}{Row regularization term. Defaults is `NULL`, in which case
+we use the row degree.}
 
-\item{normalize}{Should the adjacency matrix be normalized?}
+\item{tau_col}{Column regularization term. Defaults is `NULL`, in which case
+we use the column degree.}
 
-\item{center}{Should the adjacency matrix `A` be row and column centered?}
-
-\item{sym}{Set to `FALSE` for a two-way analysis.}
+\item{normalize}{Should the graph laplacian be used instead of the
+raw adjacency matrix? Defaults to `TRUE`.}
 }
 \value{
-An object of class `vsp`, which is a list with elements:
-
-  - `V`: only returned in the rectangular case
-  - `U`: TODO
-  - `Z`: TODO
-  - `B`: TODO
-  - `scree`: TODO
-  - `Y`: TODO
+An object of class `vsp`
 }
 \description{
 This code implements regularized spectral clustering with varimax.

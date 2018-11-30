@@ -23,6 +23,7 @@ Suggests:
     rmarkdown
 Imports:
     Matrix,
-    RSpectra
+    RSpectra,
+    ggplot2
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

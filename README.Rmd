@@ -75,6 +75,11 @@ plot_simulation_test(M2, k = 3)
 
 ## Tidygraph integration
 
+Details on `tidygraph` can be found [here][tidygraph]. Details on `ggraph` can be found [here][ggraph].
+
+[tidygraph]: https://www.data-imaginist.com/2017/introducing-tidygraph/
+[ggraph]: https://www.data-imaginist.com/2017/ggraph-introduction-layouts/
+
 ```{r}
 library(tidygraph)
 library(ggraph)

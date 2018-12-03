@@ -16,6 +16,7 @@
 #'  we use the row degree. Ignored when `normalize = FALSE`.
 #' @param tau_col Column regularization term. Default is `NULL`, in which case
 #'  we use the column degree. Ignored when `normalize = FALSE`.
+#' @param ... Ignored.
 #'
 #' @details Sparse SVDs use `RSpectra` for performance.
 #'
@@ -23,14 +24,14 @@
 #'
 #' @export
 vsp <- function(x, k = 5, center = TRUE, normalize = TRUE,
-                tau_row = NULL, tau_col = NULL) {
+                tau_row = NULL, tau_col = NULL, ...) {
   UseMethod("vsp")
 }
 
 #' @rdname vsp
 #' @export
 vsp.default <- function(x, k = 5, center = TRUE, normalize = TRUE,
-                        tau_row = NULL, tau_col = NULL) {
+                        tau_row = NULL, tau_col = NULL, ...) {
 
   ### Vintage Sparse PCA Reference Implementation
 
@@ -133,7 +134,7 @@ vsp.default <- function(x, k = 5, center = TRUE, normalize = TRUE,
 #' @rdname vsp
 #' @export
 vsp.igraph <- function(x, k = 5, center = TRUE, normalize = TRUE,
-                       tau_row = NULL, tau_col = NULL) {
+                       tau_row = NULL, tau_col = NULL, ...) {
   x <- igraph::get.adjacency(x, sparse = TRUE)
   NextMethod()
 }

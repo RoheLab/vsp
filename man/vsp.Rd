@@ -7,13 +7,13 @@
 \title{Non-Parametric Factor Analysis via Vintage Sparse PCA}
 \usage{
 vsp(x, k = 5, center = TRUE, normalize = TRUE, tau_row = NULL,
-  tau_col = NULL)
+  tau_col = NULL, ...)
 
 \method{vsp}{default}(x, k = 5, center = TRUE, normalize = TRUE,
-  tau_row = NULL, tau_col = NULL)
+  tau_row = NULL, tau_col = NULL, ...)
 
 \method{vsp}{igraph}(x, k = 5, center = TRUE, normalize = TRUE,
-  tau_row = NULL, tau_col = NULL)
+  tau_row = NULL, tau_col = NULL, ...)
 }
 \arguments{
 \item{x}{Either a graph adjacency matrix, [igraph::igraph] or
@@ -35,6 +35,8 @@ we use the row degree. Ignored when `normalize = FALSE`.}
 
 \item{tau_col}{Column regularization term. Default is `NULL`, in which case
 we use the column degree. Ignored when `normalize = FALSE`.}
+
+\item{...}{Ignored.}
 }
 \value{
 An object of class `vsp`. TODO: Details

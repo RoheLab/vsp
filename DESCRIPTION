@@ -23,7 +23,8 @@ Suggests:
     rmarkdown,
     tidygraph,
     ggraph,
-    igraph
+    igraph,
+    tibble
 Imports:
     Matrix,
     RSpectra,

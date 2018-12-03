@@ -4,34 +4,35 @@
 \alias{vsp}
 \title{Non-Parametric Factor Analysis via Vintage Sparse PCA}
 \usage{
-vsp(A, k = 5, tau_row = NULL, tau_col = NULL, normalize = TRUE,
-  center = FALSE)
+vsp(A, k = 5, center = TRUE, normalize = TRUE, tau_row = NULL,
+  tau_col = NULL)
 }
 \arguments{
-\item{A}{A [matrix] or [Matrix::Matrix] object.}
+\item{A}{A [matrix] or [Matrix::Matrix] object representing an adjacency
+matrix. `A_ij` corresponds to the edge going from node `i` to node `j`.}
 
 \item{k}{The number of factors to calculate.}
 
-\item{tau_row}{Row regularization term. Defaults is `NULL`, in which case
-we use the row degree.}
-
-\item{tau_col}{Column regularization term. Defaults is `NULL`, in which case
-we use the column degree.}
+\item{center}{Should the adjacency matrix be row *and* column centered?
+Defaults to `TRUE`.}
 
 \item{normalize}{Should the graph laplacian be used instead of the
-raw adjacency matrix? Defaults to `TRUE`.}
+raw adjacency matrix? Defaults to `TRUE`. If `center = TRUE`, `A` will
+first be centered and then normalized.}
+
+\item{tau_row}{Row regularization term. Default is `NULL`, in which case
+we use the row degree. Ignored when `normalize = FALSE`.}
+
+\item{tau_col}{Column regularization term. Default is `NULL`, in which case
+we use the column degree. Ignored when `normalize = FALSE`.}
 }
 \value{
-An object of class `vsp`
+An object of class `vsp`. TODO: Details
 }
 \description{
 This code implements regularized spectral clustering with varimax.
 allows for symmetric, directed, and bipartite (i.e. rectangular A).
 }
 \details{
-Uses `RSpectra` for matrix computations. These are best-in-class
- implementations of sparse matrix eigendecompositions. The implementations
- are not parallel, however.
-
- TODO: how the normalization is done, how the centering is done
+Sparse SVDs use `RSpectra` for performance.
 }

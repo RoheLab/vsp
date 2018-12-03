@@ -73,6 +73,33 @@ plot_simulation_test(M2, k = 3)
 ```
 
 
+## Tidygraph integration
+
+```{r}
+library(tidygraph)
+library(ggraph)
+
+sbm <- play_blocks(25, 25, 0.1)
+```
+
+
+```{r}
+sbm_fa <- sbm %>% 
+  bind_varimax_factors()
+
+sbm_fa
+```
+
+```{r}
+ggraph(sbm_fa) + 
+    geom_edge_fan(aes(alpha = ..index..), show.legend = FALSE) + 
+    geom_node_point(aes(size = factor1)) + 
+    theme_graph(foreground = 'steelblue', fg_text_colour = 'white')
+```
+
+
+## Messy scratch
+
 ```{r eval = FALSE}
 library(tidyverse)
 

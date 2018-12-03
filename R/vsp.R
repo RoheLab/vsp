@@ -3,26 +3,25 @@
 #' This code implements regularized spectral clustering with varimax.
 #' allows for symmetric, directed, and bipartite (i.e. rectangular A).
 #'
-#' @param A A [matrix] or [Matrix::Matrix] object.
+#' @param A A [matrix] or [Matrix::Matrix] object representing an adjacency
+#'  matrix. `A_ij` corresponds to the edge going from node `i` to node `j`.
 #' @param k The number of factors to calculate.
-#' @param tau_row Row regularization term. Defaults is `NULL`, in which case
-#'  we use the row degree.
-#' @param tau_col Column regularization term. Defaults is `NULL`, in which case
-#'  we use the column degree.
+#' @param center Should the adjacency matrix be row *and* column centered?
+#'  Defaults to `TRUE`.
 #' @param normalize Should the graph laplacian be used instead of the
-#'  raw adjacency matrix? Defaults to `TRUE`.
+#'  raw adjacency matrix? Defaults to `TRUE`. If `center = TRUE`, `A` will
+#'  first be centered and then normalized.
+#' @param tau_row Row regularization term. Default is `NULL`, in which case
+#'  we use the row degree. Ignored when `normalize = FALSE`.
+#' @param tau_col Column regularization term. Default is `NULL`, in which case
+#'  we use the column degree. Ignored when `normalize = FALSE`.
 #'
-#' @details Uses `RSpectra` for matrix computations. These are best-in-class
-#'  implementations of sparse matrix eigendecompositions. The implementations
-#'  are not parallel, however.
+#' @details Sparse SVDs use `RSpectra` for performance.
 #'
-#'  TODO: how the normalization is done, how the centering is done
-#'
-#' @return An object of class `vsp`
-#' @import Matrix
+#' @return An object of class `vsp`. TODO: Details
 #'
 #' @export
-vsp <- function(A, k = 5, tau_row = NULL, tau_col = NULL, normalize = TRUE, center = FALSE) {
+vsp <- function(A, k = 5, center = TRUE, normalize = TRUE, tau_row = NULL, tau_col = NULL) {
 
   ### Vintage Sparse PCA Reference Implementation
 

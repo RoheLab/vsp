@@ -20,10 +20,17 @@ LazyData: true
 Suggests: 
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    tidygraph,
+    ggraph,
+    igraph
 Imports:
     Matrix,
     RSpectra,
-    ggplot2
+    ggplot2,
+    Rcpp
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo

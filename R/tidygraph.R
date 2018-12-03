@@ -12,10 +12,8 @@
 bind_varimax_factors <- function(graph, fa = NULL, ...) {
   stopifnot(inherits(graph, "tbl_graph"))
 
-  if (is.null(fa)) {
-    A <- igraph::get.adjacency(graph, sparse = TRUE)
-    fa <- vsp(A, ...)
-  }
+  if (is.null(fa))
+    fa <- vsp(graph, ...)
 
   # else: TODO: check that dimensions line up correctly
 
@@ -40,10 +38,8 @@ bind_varimax_factors <- function(graph, fa = NULL, ...) {
 bind_pca_factors <- function(graph, fa = NULL, ...) {
   stopifnot(inherits(graph, "tbl_graph"))
 
-  if (is.null(fa)) {
-    A <- igraph::get.adjacency(graph, sparse = TRUE)
-    fa <- vsp(A, ...)
-  }
+  if (is.null(fa))
+    fa <- vsp(graph, ...)
 
   # else: TODO: check that dimensions line up correctly
 

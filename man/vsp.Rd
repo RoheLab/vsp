@@ -2,14 +2,24 @@
 % Please edit documentation in R/vsp.R
 \name{vsp}
 \alias{vsp}
+\alias{vsp.default}
+\alias{vsp.igraph}
 \title{Non-Parametric Factor Analysis via Vintage Sparse PCA}
 \usage{
-vsp(A, k = 5, center = TRUE, normalize = TRUE, tau_row = NULL,
+vsp(x, k = 5, center = TRUE, normalize = TRUE, tau_row = NULL,
   tau_col = NULL)
+
+\method{vsp}{default}(x, k = 5, center = TRUE, normalize = TRUE,
+  tau_row = NULL, tau_col = NULL)
+
+\method{vsp}{igraph}(x, k = 5, center = TRUE, normalize = TRUE,
+  tau_row = NULL, tau_col = NULL)
 }
 \arguments{
-\item{A}{A [matrix] or [Matrix::Matrix] object representing an adjacency
-matrix. `A_ij` corresponds to the edge going from node `i` to node `j`.}
+\item{x}{Either a graph adjacency matrix, [igraph::igraph] or
+[tidygraph::tbl_graph]. If `x` is a [matrix] or [Matrix::Matrix]
+then `x[i, j]` should correspond to the edge going from node `i`
+to node `j`.}
 
 \item{k}{The number of factors to calculate.}
 
@@ -30,8 +40,7 @@ we use the column degree. Ignored when `normalize = FALSE`.}
 An object of class `vsp`. TODO: Details
 }
 \description{
-This code implements regularized spectral clustering with varimax.
-allows for symmetric, directed, and bipartite (i.e. rectangular A).
+This code implements TODO.
 }
 \details{
 Sparse SVDs use `RSpectra` for performance.

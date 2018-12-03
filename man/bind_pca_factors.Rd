@@ -14,8 +14,10 @@ you do not passed a [vsp] object, one will be created.}
 
 \item{...}{Arguments passed on to \code{vsp}
 \describe{
-  \item{A}{A [matrix] or [Matrix::Matrix] object representing an adjacency
-matrix. `A_ij` corresponds to the edge going from node `i` to node `j`.}
+  \item{x}{Either a graph adjacency matrix, [igraph::igraph] or
+[tidygraph::tbl_graph]. If `x` is a [matrix] or [Matrix::Matrix]
+then `x[i, j]` should correspond to the edge going from node `i`
+to node `j`.}
   \item{k}{The number of factors to calculate.}
   \item{center}{Should the adjacency matrix be row *and* column centered?
 Defaults to `TRUE`.}

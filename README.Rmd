@@ -82,16 +82,33 @@ library(ggraph)
 sbm <- play_blocks(25, 25, 0.1)
 ```
 
+`vsp` also works on `igraph` and `tidygraph` objects:
 
 ```{r}
-sbm_fa <- sbm %>% 
+fa2 <- vsp(sbm, k = 5)
+```
+
+You can then add the resulting factor loadings back into the node information about the graph:
+
+```{r}
+# if you already have a vsp object
+sbm_fa2 <- sbm %>% 
+  bind_varimax_factors(fa2)
+
+sbm_fa2
+```
+
+If you haven't already created a `vsp` object, that gets taken care of for you as well:
+
+```{r}
+sbm_fa3 <- sbm %>% 
   bind_varimax_factors()
 
-sbm_fa
+sbm_fa3
 ```
 
 ```{r}
-ggraph(sbm_fa) + 
+ggraph(sbm_fa2) + 
     geom_edge_fan(aes(alpha = ..index..), show.legend = FALSE) + 
     geom_node_point(aes(size = factor1)) + 
     theme_graph(foreground = 'steelblue', fg_text_colour = 'white')

@@ -40,7 +40,14 @@ M <- rsparsematrix(12, 12, nnz = 40)
 M2 <- sign(M)^2
 
 # vintage sparse pca
-fa <- vsp(M2, k = 7)
+fa <- vsp(M2, k = 4)
+fa
+```
+
+Efficient updating when you really wanted more components
+
+```{r}
+fa <- update(fa, graph = M2, k = 7)
 fa
 ```
 

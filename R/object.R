@@ -1,8 +1,17 @@
+
+
+#' Create a new `vsp` object
+#'
+#' Users should use `vsp`, this is a low-level internal constructor.
+#'
+#' @rdname vsp-object
+#'
 new_vsp <- function(U, d, V, Z, B, Y, center, normalize, k, tau_list) {
   # input validation: only type checks
 
   # tau_list: tau_row, tau_col, default_row = TRUE/FALSE, default_col = T/F
 
+  # should d be a diagonal matrix D to allow easy recovery of original data?
   object <- list(
     U = U,
     d = d,

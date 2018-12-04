@@ -12,7 +12,9 @@ project_pca <- function(x, ...) {
 project_varimax <- function(x, ...) {
   # do i need to multiply by B or sqrt(B) here??
   vrmx <- as.matrix(x$Z)
-  colnames(vrmx) <- paste0("factor", 1:x$k)
+  # NOTE: an update vsp object may not have object$k varimax factors
+  # if update_varimax was false.
+  colnames(vrmx) <- paste0("factor", 1:ncol(x$B))
   tibble::as_tibble(vrmx)
 }
 
@@ -67,5 +69,10 @@ plot_simulation_test <- function(A, k, reps = 100) {
     theme_bw()
 }
 
+# resolve sign ambiguity and perhaps reorder eigenvectors according
+# to eigenvalues
+identify <- function() {
+  .NotYetImplemented()
+}
 
 

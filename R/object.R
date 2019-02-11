@@ -38,6 +38,8 @@ print.vsp <- function(x, ...) {
   cat("Vintage Sparse PCA Factor Analysis\n\n")
 
   cat("Factors: ", x$k, "\n")
+  # TODO: print lambda_k, not lambda_2. perhaps print the eigengap as well.
+  # separate PCA and varimax factors? allow updating to get more varimax fctrs?
   cat("Lambda_2:", round(x$d[2], 4), "\n\n")
 
   cat("Pre-Processing Options\n\n")

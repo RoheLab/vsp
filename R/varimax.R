@@ -12,8 +12,8 @@ varimax2 <- function (x, eps = 1e-05) {
     B <- t(x) %*% (z^3 - z %*% diag(drop(rep(1, p) %*% z^2))/p)
 
     # projection to recover orthonormality
-    sB <- La.svd(B)
-    TT <- sB$u %*% sB$vt
+    sB <- RSpectra::svds(B, 50)
+    TT <- sB$u %*% t(sB$v)
 
     # convergence criteria
     dpast <- d
@@ -23,3 +23,20 @@ varimax2 <- function (x, eps = 1e-05) {
   }
   TT
 }
+
+100^2
+
+X <- matrix(rnorm(100^2), 100, 100)
+varimax(X, normalize = F)$rotmat
+varimax2(X)
+
+bm <- bench::mark(
+  varimax(X, normalize = FALSE)$rotmat,
+  varimax2(X),
+  min_iterations = 5,
+  check = F
+)
+
+plot(bm)
+
+c("response", "link", "precision", "variance", "quantile")

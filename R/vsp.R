@@ -144,9 +144,10 @@ graph_laplacian <- function(x, rs, cs, tau_row, tau_col) {
 }
 
 double_center <- function(L) {
+  mu <- Matrix::mean(L)
   L <- sweep(L, 1, Matrix::rowMeans(L))
   L <- sweep(L, 2, Matrix::colMeans(L))
-  L + Matrix::mean(L)
+  L + mu
 }
 
 #' Calculate new factors and add them to an existing factor analysis

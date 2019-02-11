@@ -36,6 +36,7 @@ library(vsp)
 library(Matrix)
 
 # make a random sparse graph
+set.seed(27)
 M <- rsparsematrix(12, 12, nnz = 40)
 M2 <- sign(M)^2
 

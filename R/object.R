@@ -1,5 +1,3 @@
-
-
 #' Create a new `vsp` object
 #'
 #' Users should use `vsp`, this is a low-level internal constructor.
@@ -38,9 +36,8 @@ print.vsp <- function(x, ...) {
   cat("Vintage Sparse PCA Factor Analysis\n\n")
 
   cat("Factors: ", x$k, "\n")
-  # TODO: print lambda_k, not lambda_2. perhaps print the eigengap as well.
-  # separate PCA and varimax factors? allow updating to get more varimax fctrs?
-  cat("Lambda_2:", round(x$d[2], 4), "\n\n")
+  # TODO: print the eigengap?
+  cat("Lambda[k]:", x$d[x$k], "\n\n")
 
   cat("Pre-Processing Options\n\n")
 
@@ -85,8 +82,23 @@ print.vsp <- function(x, ...) {
 }
 
 
+#' Create a screeplot from the adjacency matrix SVD
+#'
+#' If `x` was fit with `normalize = TRUE`, the singular values of
+#' the graph Laplacian. If `normalize = FALSE`, the singular values of
+#' the adjacency matrix.
+#'
+#' Since the SVD is truncated in both cases, and the data is network data,
+#' the standard "cumulative portion of variance explained" interpretation
+#' does not apply.
+#'
+#' @param x A [vsp][vsp-object] created by a call to [vsp()].
+#' @param ... Ignored.
+#'
 #' @export
 #' @import ggplot2
+#' @family diagnostics
+#' @family plots
 screeplot.vsp <- function(x, ...) {
   ggplot(data = NULL, aes(1:x$k, x$d)) +
     geom_point() +

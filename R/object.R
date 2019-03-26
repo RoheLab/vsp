@@ -29,7 +29,7 @@ print.vsp <- function(x, ...) {
   cat("Vintage Sparse PCA Factor Analysis\n\n")
 
   cat("Factors: ", x$k, "\n")
-  cat("Lambda_2:", round(x$d[2], 4), "\n\n")
+  cat("Lambda_k:", x$d[k], "\n\n")
 
   cat("Pre-Processing Options\n\n")
 

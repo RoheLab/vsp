@@ -28,6 +28,7 @@ Suggests:
 Imports:
     Matrix,
     RSpectra,
-    ggplot2
+    ggplot2,
+    scales
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

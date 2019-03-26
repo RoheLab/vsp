@@ -1,6 +1,7 @@
 # call on an eigen/singular-vector
 localization_factor <- function(x) {
-  -log(median(abs((x - mean(x)) / sd(x))))
+  normalized <- (x - mean(x)) / sd(x)
+  log(median(abs(normalized)))
 }
 
 #' Get the localization measure for each factor
@@ -50,7 +51,7 @@ get_localization <- function(fa) {
 #' @examples
 #'
 #' set.seed(27)
-#' M <- sign(rsparsematrix(12, 12, nnz = 40))^2
+#' M <- sign(Matrix::rsparsematrix(12, 12, nnz = 40))^2
 #'
 #' fa <- vsp(M, k = 4)
 #'
@@ -61,23 +62,19 @@ plot_localization <- function(fa) {
     ggplot(aes(u_loc, v_loc)) +
     geom_rect(
       xmin = -2, xmax = Inf, ymin = -2, ymax = Inf,
-      fill = "green",
-      alpha = 0.02
+      fill = "green", alpha = 0.02
     ) +
     geom_rect(
       xmin = -Inf, xmax = -2, ymin = -Inf, ymax = -2,
-      fill = "red",
-      alpha = 0.02
+      fill = "red", alpha = 0.02
     ) +
     geom_rect(
       xmin = -Inf, xmax = -2, ymin = -2, ymax = Inf,
-      fill = "yellow",
-      alpha = 0.02
+      fill = "yellow", alpha = 0.02
     ) +
     geom_rect(
       xmin = -2, xmax = Inf, ymin = -Inf, ymax = -2,
-      fill = "yellow",
-      alpha = 0.02
+      fill = "yellow", alpha = 0.02
     ) +
     geom_hline(
       yintercept = -2,

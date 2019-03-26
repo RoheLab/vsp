@@ -28,10 +28,11 @@ validate_vsp <- function(x) {
 print.vsp <- function(x, ...) {
   cat("Vintage Sparse PCA Factor Analysis\n\n")
 
-  cat("Factors: ", x$k, "\n")
-  cat("Lambda_k:", x$d[k], "\n\n")
+  cat(glue("Nodes (n):   {nrow(x$U)}"), sep = "\n")
+  cat(glue("Factors (k): {x$k}"), sep = "\n")
+  cat(glue("Lambda[k]:   {round(x$d[x$k], 4)}"), sep = "\n")
 
-  cat("Pre-Processing Options\n\n")
+  cat("\nPre-Processing Options\n\n")
 
   tau_details <- function(default, tau) {
     if (!x$normalize)

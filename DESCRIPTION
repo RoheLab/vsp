@@ -30,6 +30,8 @@ Imports:
     RSpectra,
     ggplot2,
     scales,
-    glue
+    glue,
+    GGally,
+    purrr
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

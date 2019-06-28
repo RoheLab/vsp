@@ -18,7 +18,7 @@ Get the localization measure for each factor
 \examples{
 
 set.seed(27)
-M <- sign(rsparsematrix(12, 12, nnz = 40))^2
+M <- sign(Matrix::rsparsematrix(12, 12, nnz = 40))^2
 
 fa <- vsp(M, k = 4)
 

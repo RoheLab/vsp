@@ -97,27 +97,3 @@ plot_localization <- function(fa) {
     ) +
     theme_minimal()
 }
-
-#' @export
-plot_svd_u <- function(fa) {
-  get_svd_u(fa) %>%
-    mutate(element = row_number()) %>%
-    gather(eigen, value, -element) %>%
-    ggplot(aes(element, value)) +
-    geom_line() +
-    facet_wrap(~eigen) +
-    theme_minimal() +
-    scale_x_continuous(breaks = scales::pretty_breaks())
-}
-
-#' @export
-plot_svd_v <- function(fa) {
-  get_svd_v(fa) %>%
-    mutate(element = row_number()) %>%
-    gather(eigen, value, -element) %>%
-    ggplot(aes(element, value)) +
-    geom_line() +
-    facet_wrap(~eigen) +
-    theme_minimal() +
-    scale_x_continuous(breaks = scales::pretty_breaks())
-}

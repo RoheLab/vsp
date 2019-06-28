@@ -16,14 +16,16 @@ get_svd_v <- function(x, ...) {
 #' @export
 #' @importFrom tibble as_tibble
 get_varimax_z <- function(x, ...) {
-  colnames(x$Z) <- paste0("z", 1:x$k)
-  as_tibble(x$Z)
+  z <- as.matrix(x$Z)
+  colnames(z) <- paste0("z", 1:x$k)
+  as_tibble(z)
 }
 
 #' @export
 #' @importFrom tibble as_tibble
 get_varimax_y <- function(x, ...) {
-  colnames(x$Y) <- paste0("y", 1:x$k)
-  as_tibble(x$Y)
+  y <- as.matrix(x$Y)
+  colnames(y) <- paste0("y", 1:x$k)
+  as_tibble(y)
 }
 

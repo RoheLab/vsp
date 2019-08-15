@@ -56,6 +56,7 @@ vsp.default <- function(x, k = 5, center = TRUE, normalize = TRUE,
 
   # normalization corresponds to the optional scaling step defined
   # defined in Remark 1.1
+  # laplacian
 
   if (normalize) {
 

@@ -1,0 +1,80 @@
+---
+title: "bff"
+author: "Fan Chen"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{bff}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+\newcommand{\1}{\mathds{1}}
+\newcommand{\T}{^\top}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+
+```{r setup}
+# library(vsp)
+```
+
+## Intro 
+In post-clustering analysis, the Best Feature Function (BFF) is useful in selecting representative features for each cluster, especially in the case when additional covariates are available for each feature. 
+For example, consider a social network of $n$ users partitioned into $k$ clusters, and each user possess a series of text document (covariates).
+We want to summarize words that are representative to each cluster.
+The BFF is suitable for this type of task. 
+
+This document describes the intuition behind the BFF as a follow-up step after the `vsp` (vintage specral clustering) and touches several technical issues regarding implementation.
+
+## Methodology 
+For simplicity, we consider a symmetric square input matrix (e.g., the adjacency matrix of an undirected graph); the analysis on rectangular input is also supported by `bff()`.
+Given a data matrix $A\in\R^{n \times n}$, the `vsp` returns an approximation with factorization, $ZBY\T$, where $B\in\R^{k \times k}$ is low-rank, and $Y\in\R^{n \times k}$ encodes the loadings of each feature (i.e., columns of $A$) with respect to clusters.
+In particular, when $A$ is the adjacency matrix of an undirected Blockmodel graph, each row of $Y$ decodes the block (cluster) membership of the vertex (feature).
+Generally, the loading $Y_{ij}$ (for $i=1,...,n$ and $j=1,...,k$) can be interpreted as an membership measure of the $i$-th feature to the $j$-th cluster. 
+<!-- When normalized, it is also an estimator of mixed membership. -->
+
+Now, suppose in addition that we have covariates on each feature, $D\in\R^{n \times p}$, where $p$ is the dimension of covariates.
+For example, $D$ can be a document-term matrix, where all text data associated with $i$-th (for $i=1,...,n$) feature are pooled into a meta document, and $p$ under this circumstance is the size of corpus (i.e., total number of words/terms), and $D_{il}$ is the frequency of word $l$ (for $l=1,...,p$) appearing in the $i$-th document.
+
+The BFF then uses $Y$ and $D$ to produce an assessment of covariates "best" for each cluster. 
+To start with, suppose both $Y$ and $D$ has only non-negative entries. 
+Define the importance, $I\in\R^{p \times k}$, of the $l$-th covariate to the $j$-th cluster by the average of $l$-th covariate (the $l$-th columns of $D$), weighted by the $j$-th column of $Y$,
+$$I_{lj} = \sum_{j=1}^n D_{jl}Y_{ij},\text{ for } l=1,...,p,i=1,...n,$$
+or compactly (side note: the cross product $\langle D,Y \rangle$ is defined as $D\T Y$ as in convention), 
+$$I=\langle D,Y \rangle.$$
+As such, a higher value in $I_{lj}$ indicates more significant importance. 
+BFF selects the "best" covariates for each cluster according to the $j$-th (for $j=1,...,k$) column of $I$.
+
+## Implementation
+
+Below are a few notes on the implementation of BFF:
+
+* **Positive skewness**. When $D$ is a document-term matrix (a.k.a., bags of words), it holds that all elements are non-negative. However, there is absolutely no guarantee that $Y$ has all non-negative entries. 
+This motivates the positive-skew transformation, i.e., we flip the signs of those columns of $Y$ that have negative sample third [moment](https://en.wikipedia.org/wiki/Moment_(mathematics)). 
+
+* **Handling negative elements**. 
+For now, we undergo a rather ad-hoc solution to the existence of negative elements in $Y$ -- pretending they have little effects. 
+In the above importance calculation, negative weights ($Y_{ij}<0$) are equally treated as $-1$. 
+In other words, the negative elements result in some subtractions/reduction/contraction in the importance metrics. 
+
+* **Weight normalization**. 
+In BFF, we utilize the $Y$ matrix as a way of weighting covariates (in $D$). 
+It is therefore natrual to expect the columns of $Y$ to be (akin to) some probability distributions, i.e., the probability to select one member from the cluster at random. 
+Recall also that the columns of $Y$ all have (or close to) unit $\ell_2$-norm. 
+Hence, additional transformation is needed: we normalized $Y$ by column.
+In particular, this is done separately for positive and negative elements. 
+
+
+* **Variance stabilization**. 
+If we model $I_{lj}$ with Poisson rate model $\text{Poisson}(\lambda_{lj})$, the sample mean and variance are coupled (i.e., both have the expectation of $\lambda_{lj}$). 
+In order to standardize our importance measure $I$, we need to decouple these two statistics.
+Performing a square-root transformation, $f(x)=\sqrt{x}$, does the trick; it stabilizes the sampling variance, which becomes nearly constant. 
+
+

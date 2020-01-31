@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 
-library(ggplot)
+library(ggplot2)
 theme_set(theme_minimal())
 ```
 
@@ -22,7 +22,7 @@ theme_set(theme_minimal())
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-**Disclaimer:** This package is a work in progress. Some basic functionality is available, but the API is subject to change. Code to reproduce the results in *Vintage Factor Analysis with Varimax Performs Statistical Inference* is [available here](https://github.com/RoheLab/vsp-paper).
+**Disclaimer:** This package is a work in progress. Some basic functionality is available, but the API is subject to change, as are some (minor) computational details. Code to reproduce the results in *Vintage Factor Analysis with Varimax Performs Statistical Inference* is [available here](https://github.com/RoheLab/vsp-paper).
 
 # vsp
 

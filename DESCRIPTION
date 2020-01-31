@@ -1,7 +1,8 @@
 Type: Package
 Package: vsp
-Title: Vintage Sparse PCA for Non-Parametric Factor Analysis
-Version: 0.0.0.9000
+Title: Vintage Sparse PCA for Semi-Parametric Network Factor
+    Analysis
+Version: 0.0.0.9001
 Authors@R: 
     c(person(given = "Karl",
              family = "Rohe",
@@ -11,28 +12,35 @@ Authors@R:
              family = "Hayes",
              role = c("aut", "cre"),
              email = "alexpghayes@gmail.com",
-             comment = c(ORCID = "0000-0002-4985-5160")))
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
-Encoding: UTF-8
-LazyData: true
+             comment = c(ORCID = "0000-0002-4985-5160")),
+      person(given = "Fan",
+             family = "Chen",
+             role = "aut"))
+Description: Provides fast spectral estimation of latent factors in random dot
+    product graphs using the vsp estimator. Under mild assumptions, the
+    vsp estimator is consistent for (degree-corrected) stochastic blockmodels,
+    (degree-corrected) mixed-membership stochastic blockmodels,
+    degree-corrected overlapping stochastic blockmodels.
+License: MIT + file LICENSE
+Imports:
+    dplyr,
+    GGally,
+    ggplot2,
+    glue,
+    magrittr,
+    Matrix,
+    purrr,
+    RSpectra,
+    scales
 Suggests: 
-    testthat,
+    igraph,
     knitr,
     rmarkdown,
-    tidygraph,
-    ggraph,
-    igraph,
+    testthat,
     tibble
-Imports:
-    Matrix,
-    RSpectra,
-    ggplot2,
-    scales,
-    glue,
-    GGally,
-    purrr,
-    magrittr
-RoxygenNote: 6.1.1
-VignetteBuilder: knitr
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.2

@@ -23,15 +23,15 @@
 #' @return An object of class `vsp`. TODO: Details
 #'
 #' @export
-vsp <- function(x, k = 5, center = TRUE, normalize = TRUE,
-                tau_row = NULL, tau_col = NULL, ...) {
+vsp <- function(x, ..., k = 5, center = TRUE, normalize = TRUE,
+                tau_row = NULL, tau_col = NULL) {
   UseMethod("vsp")
 }
 
 #' @rdname vsp
 #' @export
-vsp.default <- function(x, k = 5, center = TRUE, normalize = TRUE,
-                        tau_row = NULL, tau_col = NULL, ...) {
+vsp.default <- function(x, ..., k = 5, center = TRUE, normalize = TRUE,
+                        tau_row = NULL, tau_col = NULL) {
 
   ### Vintage Sparse PCA Reference Implementation
 
@@ -97,15 +97,24 @@ vsp.default <- function(x, k = 5, center = TRUE, normalize = TRUE,
   # because it drops the computation time by an order of magnitude. is that
   # throwing out nonsense that doesn't affect results, or does it affect
   # results?
-  R_U <- varimax(U[rsA > 1, ], normalize = FALSE, eps = 1e-8)$rotmat
-  R_V <- varimax(V[csA > 1, ], normalize = FALSE, eps = 1e-8)$rotmat
+
+  # TODO: use some quantile of the degree distribution here instead?
+  R_U <- varimax(U[rsA > 1, ], normalize = FALSE)$rotmat
+  R_V <- varimax(V[csA > 1, ], normalize = FALSE)$rotmat
 
   Z <- sqrt(n) * U %*% R_U
   Y <- sqrt(d) * V %*% R_V
 
+  # TODO: check the paper and see if we should divide B by sqrt(n * d) here?
   B <- t(R_U) %*% Diagonal(n = k, x = s$d) %*% R_V
 
-  ### STEP 5: RESCALE IF NORMALIZED, RETURN OUTPUT
+  ### STEP 5: MAKE Z, Y SKEW POSITIVE (REMARK 1.3)
+
+  # TODO: not sure I trust this fully just yet
+  Z <- make_columnwise_skew_positive(Z)
+  Y <- make_columnwise_skew_positive(Y)
+
+  ### STEP 6: RESCALE IF NORMALIZED, RETURN OUTPUT
 
   if (normalize) {
     Z <- D_row %*% Z

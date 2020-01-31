@@ -9,7 +9,7 @@
 #'  in the table of node information.
 #'
 #' @export
-bind_varimax_factors <- function(graph, fa = NULL, ...) {
+bind_varimax_z <- function(graph, fa = NULL, ...) {
   stopifnot(inherits(graph, "tbl_graph"))
 
   if (is.null(fa))
@@ -19,7 +19,7 @@ bind_varimax_factors <- function(graph, fa = NULL, ...) {
 
   graph <- graph %>%
     activate(nodes) %>%
-    mutate(!!!project_varimax(fa))
+    mutate(!!!get_varimax_z(fa))
 
   graph
 }
@@ -35,7 +35,7 @@ bind_varimax_factors <- function(graph, fa = NULL, ...) {
 #'  in the table of node information.
 #'
 #' @export
-bind_pca_factors <- function(graph, fa = NULL, ...) {
+bind_svd_u <- function(graph, fa = NULL, ...) {
   stopifnot(inherits(graph, "tbl_graph"))
 
   if (is.null(fa))
@@ -45,15 +45,8 @@ bind_pca_factors <- function(graph, fa = NULL, ...) {
 
   graph <- graph %>%
     activate(nodes) %>%
-    mutate(!!!project_pca(fa))
+    mutate(!!!get_svd_u(fa))
 
   graph
 }
 
-# spectral clustering: project into pca space, run kmeans++ on the node table,
-# bind clusters to
-
-# issue: now you have information about the kmeans which is more than what is
-# in the node table
-
-# what if you want to spectrally cluster the nodes

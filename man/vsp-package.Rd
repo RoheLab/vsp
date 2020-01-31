@@ -4,17 +4,22 @@
 \name{vsp-package}
 \alias{vsp}
 \alias{vsp-package}
-\title{vsp: Vintage Sparse PCA for Non-Parametric Factor Analysis}
+\title{vsp: Vintage Sparse PCA for Semi-Parametric Network Factor
+    Analysis}
 \description{
-More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Provides fast spectral estimation of latent factors in random dot
+    product graphs using the vsp estimator. Under mild assumptions, the
+    vsp estimator is consistent for (degree-corrected) stochastic blockmodels,
+    (degree-corrected) mixed-membership stochastic blockmodels,
+    degree-corrected overlapping stochastic blockmodels.
 }
 \author{
-\strong{Maintainer}: Alex Hayes \email{alexpghayes@gmail.com} (0000-0002-4985-5160)
+\strong{Maintainer}: Alex Hayes \email{alexpghayes@gmail.com} (\href{https://orcid.org/0000-0002-4985-5160}{ORCID})
 
 Authors:
 \itemize{
   \item Karl Rohe \email{karlrohe@stat.wisc.edu}
+  \item Fan Chen
 }
 
 }

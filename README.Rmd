@@ -6,83 +6,148 @@ output: github_document
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+library(ggplot)
+theme_set(theme_minimal())
 ```
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
+
+**Disclaimer:** This package is a work in progress. Some basic functionality is available, but the API is subject to change. Code to reproduce the results in *Vintage Factor Analysis with Varimax Performs Statistical Inference* is [available here](https://github.com/RoheLab/vsp-paper).
+
 # vsp
 
-The goal of vsp is to ...
+The goal of `vsp` to enable fast, spectral estimation of latent factors in random dot product graphs. Under mild assumptions, the `vsp` estimator is consistent for (degree-corrected) stochastic blockmodels, (degree-corrected) mixed-membership stochastic blockmodels, degree-corrected overlapping stochastic blockmodels.
+
+More generally, the `vsp` estimator is consistent for random dot product graphs that can be written in the form
+
+```
+E(A) = Z B Y^T
+```
+
+where `Z` and `Y` satisfy the varimax assumptions of [1]. `vsp` works on directed and undirected graphs, and on weighted and unweighted graphs.
 
 ## Installation
 
-`vsp` is experimental and nascent. If you are a collaborator on the project, you can install the development version with:
+You can install the development version of `vsp` with:
 
 ``` r
 install.packages("devtools")
-devtools::install_github("alexpghayes/vsp", auth_token = NEED_TO_DO_THIS)
+devtools::install_github("RoheLab/vsp")
 ```
-
-You'll need to set up a Github auth token. See the documentation in `?remotes::install_github()` for details on how to do this.
 
 ## Example
 
-Fitting a `vsp` factor analysis:
+Obtaining estimates from `vsp` is straightforward. We recommend representing networks as [`igraph`](https://igraph.org/r/) objects or (sparse) `Matrix` objects from the [`Matrix`](https://cran.r-project.org/web/packages/Matrix/index.html) package (see also `?Matrix`).
+
+Once you have your network in one of these formats, you can get estimates by calling the `vsp()` function. The result is an object of class `"vsp"`.
 
 ```{r}
 library(vsp)
 library(Matrix)
 
-# make a random sparse graph
-M <- rsparsematrix(12, 12, nnz = 40)
-M2 <- sign(M)^2
+# create a random sparse adjacency matrix
+M <- sign(rsparsematrix(12, 12, nnz = 40))^2
 
 # vintage sparse pca
-fa <- vsp(M2, k = 7)
+fa <- vsp(M, k = 5)
 fa
 ```
 
-The screeplot:
+`vsp()` is an S3 generic, so can similarly just pass an `igraph` object. This means that `vsp` also supports [`tidygraph`](https://github.com/thomasp85/tidygraph), which is built on top of `igraph`. We use `enron` network from `igraphdata` package to demonstrate this functionality.
+
+```{r}
+library(igraph)
+data(enron, package = "igraphdata")
+
+enron
+```
+
+```{r}
+enron_fa <- vsp(enron, k = 30, center = FALSE)
+enron_fa
+```
+
+The default print method has a large amount of valuable information. First, we learn that the graph has 184 nodes, and that we have used `k = 30` as our guess of the rank of `A`, the network adjacency matrix. The fifth singular value of `A` is 0.2077. This is of interest, as we expect `lambda[k] ~ 0` to indicate that we have we have overestimated the rank of `A`, in say, blockmodels. 
+
+The pre-processing section indicates that the matrix representation of the graph was row- and column-centered before estimation (`center = TRUE`), and that we used the graph Laplacian rather than the adjacency matrix (`normalize = TRUE`).
+
+By default, `normalize = TRUE` not only uses the graph Laplacian, but also regularizes the graph Laplacian using mean in-degree and out-degree. In particular, we form the graph Laplacian as follows:
+
+```
+# TODO
+```
+
+In general, you do not need to tune `tau_row` and `tau_col`. To turn off regularization (not recommended!), see `tau_row = 0` and `tau_col = 0`. This often leads to eigenvector localization and thus overfitting.
+
+```{r}
+vsp(M, k = 5, tau_row = 0, tau_col = 0)
+```
+
+The components `U`, `d`, and `V` are the standard elements of the singular value decomposition of your network. In particular, you can approximately reconstruct the matrix representation of your network as follows:
+
+```{r}
+fa2 <- vsp(M, k = 5, center = FALSE, normalize = FALSE)
+
+fa2$U %*% diag(fa2$d) %*% t(fa2$V)
+```
+
+Note that you don't want to do this for large networks since the reconstruction will be dense. Similarly, the varimax-rotated network approximate reconstruction is
+
+```{r}
+fa$Z %*% fa$B %*% t(fa$Y)
+```
+
+If you want to directly manipulate the estimates, you can access them as we have above with `fa$B` and so on and so forth. Note that these are `matrix` and `Matrix` objects, and you may need to perform type coercions. We also provide some utility functions to extract estimates into `tibbles`:
+
+```{r}
+get_varimax_z(fa)
+```
+
+```{r}
+get_varimax_y(fa)
+```
+
+To visualize a screeplot of the singular value, use:
 
 ```{r}
 screeplot(fa)
 ```
 
+At the moment, we also enjoy using pairs plots of the factors as a diagnostic measure:
+
 ```{r}
-project_pca(fa)
+plot_varimax_z_pairs(fa, 1:3)
 ```
 
 ```{r}
-project_varimax(fa)
+plot_varimax_y_pairs(fa, 1:3)
 ```
+
+Similarly, an IPR pairs plot can be a good way to check for singular vector localization (and thus overfitting!).
 
 ```{r}
-pairs(project_pca(fa))
+# TODO
 ```
 
-```{r}
-pairs(project_varimax(fa))
-```
+TODO: visualizing B
 
-think about how else to visualize these matrices. distributions of loadings? am i actually plotting the loadings here or did i just do some nonsense?
-
-```{r}
-plot_simulation_test(M2, k = 3)
-```
+TODO: selecting k
 
 
 ## Tidygraph integration
 
-Details on `tidygraph` can be found [here][tidygraph]. Details on `ggraph` can be found [here][ggraph].
-
-[tidygraph]: https://www.data-imaginist.com/2017/introducing-tidygraph/
-[ggraph]: https://www.data-imaginist.com/2017/ggraph-introduction-layouts/
-
 ```{r}
 library(tidygraph)
-library(ggraph)
 
 sbm <- play_blocks(25, 25, 0.1)
 ```
@@ -98,42 +163,12 @@ You can then add the resulting factor loadings back into the node information ab
 ```{r}
 # if you already have a vsp object
 sbm_fa2 <- sbm %>% 
-  bind_varimax_factors(fa2)
+  bind_varimax_z(fa2)
 
 sbm_fa2
 ```
 
-If you haven't already created a `vsp` object, that gets taken care of for you as well:
+## References
 
-```{r}
-sbm_fa3 <- sbm %>% 
-  bind_varimax_factors()
+1. Rohe, K. & Zeng, M. *Vintage Factor Analysis with Varimax Performs Statistical Inference*. 2020+.
 
-sbm_fa3
-```
-
-```{r}
-ggraph(sbm_fa2) + 
-    geom_edge_fan(aes(alpha = ..index..), show.legend = FALSE) + 
-    geom_node_point(aes(size = factor1)) + 
-    theme_graph(foreground = 'steelblue', fg_text_colour = 'white')
-```
-
-
-## Messy scratch
-
-```{r eval = FALSE}
-library(tidyverse)
-
-fa$B %>%
-  as.matrix() %>%
-  as_tibble() %>%
-  mutate(row = row_number()) %>%
-  gather(k, v, -row) %>%
-  ggplot(aes(row, k, fill = v)) +
-  geom_tile() +
-  scale_fill_viridis_c()
-
-image(fa$B)
-image(fa$Z)
-```

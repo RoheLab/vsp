@@ -73,19 +73,3 @@ print.vsp <- function(x, ...) {
   cat("B:", dim_and_class(x$B), "\n")
   cat("Y:", dim_and_class(x$Y), "\n\n")
 }
-
-
-#' @export
-#' @import ggplot2
-screeplot.vsp <- function(x, ...) {
-  ggplot(data = NULL, aes(1:x$k, x$d)) +
-    geom_point() +
-    labs(
-      title = "Singular values of adjacency matrix",
-      caption = "If `normalize = TRUE`, singular values of graph Laplacian",
-      x = "Singular value",
-      y = "Value"
-    ) +
-    ylim(0, 1) +
-    theme_bw()
-}

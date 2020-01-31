@@ -6,44 +6,66 @@
 \alias{vsp.igraph}
 \title{Non-Parametric Factor Analysis via Vintage Sparse PCA}
 \usage{
-vsp(x, k = 5, center = TRUE, normalize = TRUE, tau_row = NULL,
-  tau_col = NULL, ...)
+vsp(
+  x,
+  ...,
+  k = 5,
+  center = TRUE,
+  normalize = TRUE,
+  tau_row = NULL,
+  tau_col = NULL
+)
 
-\method{vsp}{default}(x, k = 5, center = TRUE, normalize = TRUE,
-  tau_row = NULL, tau_col = NULL, ...)
+\method{vsp}{default}(
+  x,
+  ...,
+  k = 5,
+  center = TRUE,
+  normalize = TRUE,
+  tau_row = NULL,
+  tau_col = NULL
+)
 
-\method{vsp}{igraph}(x, k = 5, center = TRUE, normalize = TRUE,
-  weights = NULL, tau_row = NULL, tau_col = NULL, ...)
+\method{vsp}{igraph}(
+  x,
+  k = 5,
+  center = TRUE,
+  normalize = TRUE,
+  weights = NULL,
+  tau_row = NULL,
+  tau_col = NULL,
+  ...
+)
 }
 \arguments{
-\item{x}{Either a graph adjacency matrix, [igraph::igraph] or
-[tidygraph::tbl_graph]. If `x` is a [matrix] or [Matrix::Matrix]
-then `x[i, j]` should correspond to the edge going from node `i`
-to node `j`.}
+\item{x}{Either a graph adjacency matrix, \link[igraph:igraph]{igraph::igraph} or
+\link[tidygraph:tbl_graph]{tidygraph::tbl_graph}. If \code{x} is a \link{matrix} or \link[Matrix:Matrix]{Matrix::Matrix}
+then \code{x[i, j]} should correspond to the edge going from node \code{i}
+to node \code{j}.}
+
+\item{...}{Ignored.}
 
 \item{k}{The number of factors to calculate.}
 
-\item{center}{Should the adjacency matrix be row *and* column centered?
-Defaults to `TRUE`.}
+\item{center}{Should the adjacency matrix be row \emph{and} column centered?
+Defaults to \code{TRUE}.}
 
 \item{normalize}{Should the graph laplacian be used instead of the
-raw adjacency matrix? Defaults to `TRUE`. If `center = TRUE`, `A` will
+raw adjacency matrix? Defaults to \code{TRUE}. If \code{center = TRUE}, \code{A} will
 first be centered and then normalized.}
 
-\item{tau_row}{Row regularization term. Default is `NULL`, in which case
-we use the row degree. Ignored when `normalize = FALSE`.}
+\item{tau_row}{Row regularization term. Default is \code{NULL}, in which case
+we use the row degree. Ignored when \code{normalize = FALSE}.}
 
-\item{tau_col}{Column regularization term. Default is `NULL`, in which case
-we use the column degree. Ignored when `normalize = FALSE`.}
-
-\item{...}{Ignored.}
+\item{tau_col}{Column regularization term. Default is \code{NULL}, in which case
+we use the column degree. Ignored when \code{normalize = FALSE}.}
 }
 \value{
-An object of class `vsp`. TODO: Details
+An object of class \code{vsp}. TODO: Details
 }
 \description{
 This code implements TODO.
 }
 \details{
-Sparse SVDs use `RSpectra` for performance.
+Sparse SVDs use \code{RSpectra} for performance.
 }

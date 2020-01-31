@@ -97,8 +97,8 @@ vsp.default <- function(x, k = 5, center = TRUE, normalize = TRUE,
   # because it drops the computation time by an order of magnitude. is that
   # throwing out nonsense that doesn't affect results, or does it affect
   # results?
-  R_U <- varimax(U[rsA > 1, ], normalize = FALSE, eps = 1e-5)$rotmat
-  R_V <- varimax(V[csA > 1, ], normalize = FALSE, eps = 1e-5)$rotmat
+  R_U <- varimax(U[rsA > 1, ], normalize = FALSE, eps = 1e-8)$rotmat
+  R_V <- varimax(V[csA > 1, ], normalize = FALSE, eps = 1e-8)$rotmat
 
   Z <- sqrt(n) * U %*% R_U
   Y <- sqrt(d) * V %*% R_V
@@ -134,8 +134,8 @@ vsp.default <- function(x, k = 5, center = TRUE, normalize = TRUE,
 #' @rdname vsp
 #' @export
 vsp.igraph <- function(x, k = 5, center = TRUE, normalize = TRUE,
-                       tau_row = NULL, tau_col = NULL, ...) {
-  x <- igraph::get.adjacency(x, sparse = TRUE)
+                       weights = NULL, tau_row = NULL, tau_col = NULL, ...) {
+  x <- igraph::get.adjacency(x, sparse = TRUE, attr = weights)
   NextMethod()
 }
 

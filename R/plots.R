@@ -1,27 +1,27 @@
 #' @importFrom GGally ggpairs
 #' @export
-plot_varimax_z_pairs <- function(fa, factors = 1:5, ...) {
+plot_varimax_z_pairs <- function(fa, factors = 1:max(5, fa$k), ...) {
   fa %>%
     get_varimax_z() %>%
     mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
     select(!!factors, leverage) %>%
-    sample_n(1000, weight = leverage^2) %>%
+    sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
     select(-leverage) %>%
     ggpairs(aes(alpha = 0.001), ...)
 }
 
 #' @importFrom GGally ggpairs
 #' @export
-plot_varimax_y_pairs <- function(fa, factors = 1:5, ...) {
+plot_varimax_y_pairs <- function(fa, factors = 1:max(5, fa$k), ...) {
   fa %>%
     get_varimax_y() %>%
     mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
     select(!!factors, leverage) %>%
-    sample_n(1000, weight = leverage^2) %>%
+    sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
     select(-leverage) %>%
     ggpairs(aes(alpha = 0.001), ...)
 }

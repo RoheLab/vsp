@@ -13,7 +13,7 @@ vsp(x, k = 5, center = TRUE, normalize = TRUE, tau_row = NULL,
   tau_row = NULL, tau_col = NULL, ...)
 
 \method{vsp}{igraph}(x, k = 5, center = TRUE, normalize = TRUE,
-  tau_row = NULL, tau_col = NULL, ...)
+  weights = NULL, tau_row = NULL, tau_col = NULL, ...)
 }
 \arguments{
 \item{x}{Either a graph adjacency matrix, [igraph::igraph] or

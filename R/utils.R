@@ -1,3 +1,34 @@
+#' Assign nodes to clusters via a rough heuristic
+#'
+#' This is a heuristic that assigns nodes clusters based on highest
+#' absolute value of loadings. Each node is assigned to a single cluster.#'
+#'
+#' @param x A factor analysis object.
+#' @param ... Ignored.
+#'
+#' @export
+get_y_clusters <- function(x, ...) {
+  x %>%
+    get_varimax_y() %>%
+    mutate_all(abs) %>%
+    apply(1, which.max)
+}
+
+#' Assign nodes to clusters via a rough heuristic
+#'
+#' This is a heuristic that assigns nodes clusters based on highest
+#' absolute value of loadings. Each node is assigned to a single cluster.#'
+#'
+#' @param x A factor analysis object.
+#' @param ... Ignored.
+#'
+#' @export
+get_z_clusters <- function(x, ...) {
+  x %>%
+    get_varimax_z() %>%
+    mutate_all(abs) %>%
+    apply(1, which.max)
+}
 
 #' @export
 #' @importFrom tibble as_tibble

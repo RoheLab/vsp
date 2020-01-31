@@ -32,6 +32,7 @@ Imports:
     scales,
     glue,
     GGally,
-    purrr
+    purrr,
+    magrittr
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

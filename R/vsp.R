@@ -31,7 +31,7 @@ vsp <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
 
 #' @rdname vsp
 #' @export
-vsp.default <- function(x, ..., k = 5, center = TRUE, normalize = TRUE,
+vsp.default <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
                         tau_row = NULL, tau_col = NULL) {
 
   ### Vintage Sparse PCA Reference Implementation
@@ -143,7 +143,7 @@ vsp.default <- function(x, ..., k = 5, center = TRUE, normalize = TRUE,
 
 #' @rdname vsp
 #' @export
-vsp.igraph <- function(x, k = 5, center = TRUE, normalize = TRUE,
+vsp.igraph <- function(x, k = 5, center = FALSE, normalize = TRUE,
                        weights = NULL, tau_row = NULL, tau_col = NULL, ...) {
   x <- igraph::get.adjacency(x, sparse = TRUE, attr = weights)
   NextMethod()

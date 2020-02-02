@@ -63,7 +63,7 @@ fa <- vsp(M, k = 5)
 fa
 ```
 
-`vsp()` is an S3 generic, so can similarly just pass an `igraph` object. This means that `vsp` also supports [`tidygraph`](https://github.com/thomasp85/tidygraph), which is built on top of `igraph`. We use `enron` network from `igraphdata` package to demonstrate this functionality.
+Here we demonstrate `vsp` usage on an `igraph` object, using the `enron` network from `igraphdata` package to demonstrate this functionality. First we peak at the graph:
 
 ```{r}
 library(igraph)
@@ -72,20 +72,18 @@ data(enron, package = "igraphdata")
 enron
 ```
 
+Now we estimate:
+
 ```{r}
 enron_fa <- vsp(enron, k = 30)
 enron_fa
 ```
 
-The default print method has a large amount of valuable information. First, we learn that the graph has 184 nodes, and that we have used `k = 30` as our guess of the rank of `A`, the network adjacency matrix. The fifth singular value of `A` is 0.2077. This is of interest, as we expect `lambda[k] ~ 0` to indicate that we have we have overestimated the rank of `A`, in say, blockmodels. 
+The default print method has a large amount of valuable information. First, we learn that the graph has 184 nodes, and that we have used `k = 30` as our guess of the rank of `A`, the network adjacency matrix. The 30th singular value of `A` is 0.2039. This is of interest, as we expect `lambda[k] ~ 0` to indicate that we have we have overestimated the rank of `A`, in say, blockmodels. 
 
-The pre-processing section indicates that the matrix representation of the graph was row- and column-centered before estimation (`center = TRUE`), and that we used the graph Laplacian rather than the adjacency matrix (`normalize = TRUE`).
+The pre-processing section indicates that the matrix representation of the graph was *not* row- and column-centered before estimation (`center = FALSE`), and that we used the graph Laplacian rather than the adjacency matrix (`normalize = TRUE`).
 
-By default, `normalize = TRUE` not only uses the graph Laplacian, but also regularizes the graph Laplacian using mean in-degree and out-degree. In particular, we form the graph Laplacian as follows:
-
-```
-# TODO
-```
+By default, `normalize = TRUE` not only uses the graph Laplacian, but also regularizes the graph Laplacian using mean in-degree and out-degree. See [1] for details on how we form the regularized graph Laplacian.
 
 In general, you do not need to tune `tau_row` and `tau_col`. To turn off regularization (not recommended!), see `tau_row = 0` and `tau_col = 0`. This often leads to eigenvector localization and thus overfitting.
 
@@ -101,8 +99,7 @@ At the moment, we are performing centering explicitly, which is inefficient and 
 vsp(M, k = 5, center = TRUE)
 ```
 
-
-Note that In particular, you can approximately reconstruct the matrix representation of your network as follows:
+You can approximately reconstruct the matrix representation of your network as follows:
 
 ```{r}
 fa2 <- vsp(M, k = 5, normalize = FALSE)
@@ -110,11 +107,13 @@ fa2 <- vsp(M, k = 5, normalize = FALSE)
 fa2$U %*% diag(fa2$d) %*% t(fa2$V)
 ```
 
-Note that you don't want to do this for large networks since the reconstruction will be dense. Similarly, the varimax-rotated network approximate reconstruction is
+In the example above, this will *not* approximate `M`, but rather the regularized graph Laplacian formed from `M`. Similarly, the varimax-rotated network approximate reconstruction is
 
 ```{r}
 fa$Z %*% fa$B %*% t(fa$Y)
 ```
+
+In general, you won't want to explicit reconstruct the network matrix for large networks since the reconstruction will be dense. 
 
 If you want to directly manipulate the estimates, you can access them as we have above with `fa$B` and so on and so forth. Note that these are `matrix` and `Matrix` objects, and you may need to perform type coercions. We also provide some utility functions to extract estimates into `tibbles`:
 

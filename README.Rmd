@@ -26,7 +26,7 @@ theme_set(theme_minimal())
 
 # vsp
 
-The goal of `vsp` to enable fast, spectral estimation of latent factors in random dot product graphs. Under mild assumptions, the `vsp` estimator is consistent for (degree-corrected) stochastic blockmodels, (degree-corrected) mixed-membership stochastic blockmodels, degree-corrected overlapping stochastic blockmodels.
+The goal of `vsp` is to enable fast, spectral estimation of latent factors in random dot product graphs. Under mild assumptions, the `vsp` estimator is consistent for (degree-corrected) stochastic blockmodels, (degree-corrected) mixed-membership stochastic blockmodels, and degree-corrected overlapping stochastic blockmodels.
 
 More generally, the `vsp` estimator is consistent for random dot product graphs that can be written in the form
 
@@ -34,7 +34,7 @@ More generally, the `vsp` estimator is consistent for random dot product graphs 
 E(A) = Z B Y^T
 ```
 
-where `Z` and `Y` satisfy the varimax assumptions of [1]. `vsp` works on directed and undirected graphs, and on weighted and unweighted graphs.
+where `Z` and `Y` satisfy the varimax assumptions of [1]. `vsp` works on directed and undirected graphs, and on weighted and unweighted graphs. Note that `vsp` is a semi-parametric estimator.
 
 ## Installation
 

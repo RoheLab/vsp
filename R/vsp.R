@@ -23,8 +23,9 @@
 #' @return An object of class `vsp`. TODO: Details
 #'
 #' @export
-vsp <- function(x, ..., k = 5, center = TRUE, normalize = TRUE,
+vsp <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
                 tau_row = NULL, tau_col = NULL) {
+  ellipsis::check_dots_empty()
   UseMethod("vsp")
 }
 
@@ -149,6 +150,11 @@ vsp.igraph <- function(x, k = 5, center = TRUE, normalize = TRUE,
 }
 
 double_center <- function(L) {
+  warning(
+    "Implicit centering has not yet been implemented.\n\n",
+    call. = FALSE
+  )
+
   L <- sweep(L, 1, Matrix::rowMeans(L))
   L <- sweep(L, 2, Matrix::colMeans(L))
   L + Matrix::mean(L)

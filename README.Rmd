@@ -73,7 +73,7 @@ enron
 ```
 
 ```{r}
-enron_fa <- vsp(enron, k = 30, center = FALSE)
+enron_fa <- vsp(enron, k = 30)
 enron_fa
 ```
 
@@ -93,10 +93,19 @@ In general, you do not need to tune `tau_row` and `tau_col`. To turn off regular
 vsp(M, k = 5, tau_row = 0, tau_col = 0)
 ```
 
-The components `U`, `d`, and `V` are the standard elements of the singular value decomposition of your network. In particular, you can approximately reconstruct the matrix representation of your network as follows:
+The components `U`, `d`, and `V` are the standard elements of the singular value decomposition of your network.
+
+At the moment, we are performing centering explicitly, which is inefficient and converts adjacency matrices from sparse into dense matrices. Setting `center = TRUE` produces a warning to remind you of this. We plan to implement implicit centering shortly.
+
+```{r warning = TRUE}
+vsp(M, k = 5, center = TRUE)
+```
+
+
+Note that In particular, you can approximately reconstruct the matrix representation of your network as follows:
 
 ```{r}
-fa2 <- vsp(M, k = 5, center = FALSE, normalize = FALSE)
+fa2 <- vsp(M, k = 5, normalize = FALSE)
 
 fa2$U %*% diag(fa2$d) %*% t(fa2$V)
 ```

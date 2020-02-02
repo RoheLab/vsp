@@ -31,7 +31,8 @@ Imports:
     Matrix,
     purrr,
     RSpectra,
-    scales
+    scales,
+    ellipsis
 Suggests: 
     igraph,
     knitr,

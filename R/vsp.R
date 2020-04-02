@@ -50,8 +50,11 @@ vsp.default <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
   default_col <- is.null(tau_col)
 
   # needed both for normalization and subsetting rows for varimax
-  rsA <- Matrix::rowSums(A)  # out-degree
-  csA <- Matrix::colSums(A)  # in-degree
+  # note that we use absolute value of edge weights in case elements
+  # of A are negative to avoid divide by zero issues
+
+  rsA <- Matrix::rowSums(A * sign(A))  # out-degree
+  csA <- Matrix::colSums(A * sign(A))  # in-degree
 
   ### STEP 1: OPTIONAL NORMALIZATION
 

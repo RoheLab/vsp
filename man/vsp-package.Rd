@@ -19,6 +19,7 @@ Provides fast spectral estimation of latent factors in random dot
 Authors:
 \itemize{
   \item Karl Rohe \email{karlrohe@stat.wisc.edu}
+  \item Muzhe Zeng \email{mzeng6@wisc.edu}
   \item Fan Chen
 }
 

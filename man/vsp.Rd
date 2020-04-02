@@ -10,7 +10,7 @@ vsp(
   x,
   ...,
   k = 5,
-  center = TRUE,
+  center = FALSE,
   normalize = TRUE,
   tau_row = NULL,
   tau_col = NULL
@@ -20,7 +20,7 @@ vsp(
   x,
   ...,
   k = 5,
-  center = TRUE,
+  center = FALSE,
   normalize = TRUE,
   tau_row = NULL,
   tau_col = NULL
@@ -29,7 +29,7 @@ vsp(
 \method{vsp}{igraph}(
   x,
   k = 5,
-  center = TRUE,
+  center = FALSE,
   normalize = TRUE,
   weights = NULL,
   tau_row = NULL,

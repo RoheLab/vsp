@@ -109,8 +109,8 @@ vsp.default <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
   Z <- sqrt(n) * U %*% R_U
   Y <- sqrt(d) * V %*% R_V
 
-  # TODO: check the paper and see if we should divide B by sqrt(n * d) here?
-  B <- t(R_U) %*% Diagonal(n = k, x = s$d) %*% R_V
+  # TODO: check the paper and see if we should divide B by sqrt(n * d) here?  Yes, we should... because we are scaling Z and Y.
+  B <- t(R_U) %*% Diagonal(n = k, x = s$d) %*% R_V/sqrt(n*d)
 
   ### STEP 5: MAKE Z, Y SKEW POSITIVE (REMARK 1.3)
 
@@ -120,10 +120,14 @@ vsp.default <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
 
   ### STEP 6: RESCALE IF NORMALIZED, RETURN OUTPUT
 
-  if (normalize) {
-    Z <- D_row %*% Z
-    Y <- D_col %*% Y
-  }
+  # if (normalize) {
+  #    If we are going to have this... need to redefine D_row and col to be their inverses... like this:
+  #   D_row <- Diagonal(n = n, x = sqrt(rsA + tau_r))
+  #   D_col <- Diagonal(n = d, x = sqrt(csA + tau_c))
+  #
+  #   Z <- D_row %*% Z
+  #   Y <- D_col %*% Y
+  # }
 
   new_vsp(
     U = U,

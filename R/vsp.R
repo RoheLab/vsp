@@ -122,14 +122,14 @@ vsp.default <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
 
   ### STEP 6: RESCALE IF NORMALIZED, RETURN OUTPUT
 
-  # if (normalize) {
-  #    If we are going to have this... need to redefine D_row and col to be their inverses... like this:
-  #   D_row <- Diagonal(n = n, x = sqrt(rsA + tau_r))
-  #   D_col <- Diagonal(n = d, x = sqrt(csA + tau_c))
-  #
-  #   Z <- D_row %*% Z
-  #   Y <- D_col %*% Y
-  # }
+  if (normalize) {
+    # proper re-normalization is like this:
+    Dnorm_row <- Diagonal(n = n, x = sqrt(rsA))
+    Dnorm_col <- Diagonal(n = d, x = sqrt(csA))
+  
+    Z <- Dnorm_row %*% Z
+    Y <- Dnorm_col %*% Y
+   }
 
   new_vsp(
     U = U,

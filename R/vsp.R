@@ -110,7 +110,9 @@ vsp.default <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
   Y <- sqrt(d) * V %*% R_V
 
   # TODO: check the paper and see if we should divide B by sqrt(n * d) here?  Yes, we should... because we are scaling Z and Y.
-  B <- t(R_U) %*% Diagonal(n = k, x = s$d) %*% R_V/sqrt(n*d)
+  # B <- t(R_U) %*% Diagonal(n = k, x = s$d) %*% R_V/sqrt(n*d)  # n*d causes integer overflow
+  B <- t(R_U) %*% Diagonal(n = k, x = s$d) %*% R_V/sqrt(n)
+  B <- B/sqrt(d)
 
   ### STEP 5: MAKE Z, Y SKEW POSITIVE (REMARK 1.3)
 

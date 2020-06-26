@@ -103,8 +103,17 @@ vsp.default <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
   # results?
 
   # TODO: use some quantile of the degree distribution here instead?
-  R_U <- varimax(U[rsA > 1, ], normalize = FALSE)$rotmat
-  R_V <- varimax(V[csA > 1, ], normalize = FALSE)$rotmat
+  # if we first rotate both together, then B tends to have a strong diagonal. 
+  #  without this R_both, B tends to have a permutation matrix applied to row/column, 
+  #  making the j_th column of Z not match the j_th column of Y. 
+  R_both <- varimax(rbind(U[rsA > 1, ],U[rsA > 1, ]), normalize = FALSE)$rotmat
+
+  R_U <- varimax(U[rsA > 1, ]%*%R_both, normalize = FALSE)$rotmat
+  R_V <- varimax(V[csA > 1, ]%*%R_both, normalize = FALSE)$rotmat
+
+  
+  #R_U <- varimax(U[rsA > 1, ], normalize = FALSE)$rotmat
+  #R_V <- varimax(V[csA > 1, ], normalize = FALSE)$rotmat
 
   Z <- sqrt(n) * U %*% R_U
   Y <- sqrt(d) * V %*% R_V

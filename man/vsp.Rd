@@ -8,8 +8,8 @@
 \usage{
 vsp(
   x,
+  k,
   ...,
-  k = 5,
   center = FALSE,
   normalize = TRUE,
   tau_row = NULL,
@@ -18,8 +18,8 @@ vsp(
 
 \method{vsp}{default}(
   x,
+  k,
   ...,
-  k = 5,
   center = FALSE,
   normalize = TRUE,
   tau_row = NULL,
@@ -28,24 +28,24 @@ vsp(
 
 \method{vsp}{igraph}(
   x,
-  k = 5,
+  k,
+  ...,
   center = FALSE,
   normalize = TRUE,
   weights = NULL,
   tau_row = NULL,
-  tau_col = NULL,
-  ...
+  tau_col = NULL
 )
 }
 \arguments{
-\item{x}{Either a graph adjacency matrix, \link[igraph:igraph]{igraph::igraph} or
+\item{x}{Either a graph adjacency matrix, \link[igraph:aaa-igraph-package]{igraph::igraph} or
 \link[tidygraph:tbl_graph]{tidygraph::tbl_graph}. If \code{x} is a \link{matrix} or \link[Matrix:Matrix]{Matrix::Matrix}
 then \code{x[i, j]} should correspond to the edge going from node \code{i}
 to node \code{j}.}
 
-\item{...}{Ignored.}
-
 \item{k}{The number of factors to calculate.}
+
+\item{...}{Ignored.}
 
 \item{center}{Should the adjacency matrix be row \emph{and} column centered?
 Defaults to \code{TRUE}.}

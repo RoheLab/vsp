@@ -53,16 +53,23 @@ plot_svd_v <- function(fa) {
 #' @export
 #' @import ggplot2
 screeplot.vsp <- function(x, ...) {
+
+  if (x$normalize) {
+    graph <- "Regularized Graph Laplacian"
+  } else {
+    graph <- "Adjacency Matrix"
+  }
+
   ggplot(data = NULL, aes(1:x$k, x$d)) +
     geom_point() +
     labs(
       title = "Singular values of adjacency matrix",
-      caption = "If `normalize = TRUE`, singular values of graph Laplacian",
+      caption = glue("Singular values of {graph}"),
       x = "Singular value",
       y = "Value"
     ) +
-    ylim(0, 1) +
-    theme_bw()
+    expand_limits(x = 0, y = 0) +
+    theme_minimal()
 }
 
 # normalized_ipr_table <- get_ipr(L, k)

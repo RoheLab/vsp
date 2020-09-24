@@ -15,7 +15,7 @@ you do not passed a \link{vsp} object, one will be created.}
 \item{...}{
   Arguments passed on to \code{\link[=vsp]{vsp}}
   \describe{
-    \item{\code{x}}{Either a graph adjacency matrix, \link[igraph:igraph]{igraph::igraph} or
+    \item{\code{x}}{Either a graph adjacency matrix, \link[igraph:aaa-igraph-package]{igraph::igraph} or
 \link[tidygraph:tbl_graph]{tidygraph::tbl_graph}. If \code{x} is a \link{matrix} or \link[Matrix:Matrix]{Matrix::Matrix}
 then \code{x[i, j]} should correspond to the edge going from node \code{i}
 to node \code{j}.}

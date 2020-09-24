@@ -20,14 +20,15 @@ Authors@R:
       person(given = "Fan",
              family = "Chen",
              role = "aut"))
-Description: Provides fast spectral estimation of latent factors in random dot
-    product graphs using the vsp estimator. Under mild assumptions, the
-    vsp estimator is consistent for (degree-corrected) stochastic blockmodels,
-    (degree-corrected) mixed-membership stochastic blockmodels,
-    degree-corrected overlapping stochastic blockmodels.
+Description: Provides fast spectral estimation of latent factors
+    in random dot product graphs using the vsp estimator. Under mild
+    assumptions, the vsp estimator is consistent for (degree-corrected)
+    stochastic blockmodels, (degree-corrected) mixed-membership stochastic
+    blockmodels, degree-corrected overlapping stochastic blockmodels.
 License: MIT + file LICENSE
 Imports:
     dplyr,
+    ellipsis,
     GGally,
     ggplot2,
     glue,
@@ -35,9 +36,9 @@ Imports:
     Matrix,
     purrr,
     RSpectra,
-    scales,
-    ellipsis
+    scales
 Suggests: 
+    fastadi,
     igraph,
     knitr,
     rmarkdown,
@@ -48,4 +49,4 @@ VignetteBuilder:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1.9000

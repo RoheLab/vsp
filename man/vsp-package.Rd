@@ -7,11 +7,11 @@
 \title{vsp: Vintage Sparse PCA for Semi-Parametric Network Factor
     Analysis}
 \description{
-Provides fast spectral estimation of latent factors in random dot
-    product graphs using the vsp estimator. Under mild assumptions, the
-    vsp estimator is consistent for (degree-corrected) stochastic blockmodels,
-    (degree-corrected) mixed-membership stochastic blockmodels,
-    degree-corrected overlapping stochastic blockmodels.
+Provides fast spectral estimation of latent factors
+    in random dot product graphs using the vsp estimator. Under mild
+    assumptions, the vsp estimator is consistent for (degree-corrected)
+    stochastic blockmodels, (degree-corrected) mixed-membership stochastic
+    blockmodels, degree-corrected overlapping stochastic blockmodels.
 }
 \author{
 \strong{Maintainer}: Alex Hayes \email{alexpghayes@gmail.com} (\href{https://orcid.org/0000-0002-4985-5160}{ORCID})

@@ -6,16 +6,22 @@
 #'  [tidygraph::tbl_graph]. If `x` is a [matrix] or [Matrix::Matrix]
 #'  then `x[i, j]` should correspond to the edge going from node `i`
 #'  to node `j`.
+#'
 #' @param k The number of factors to calculate.
+#'
 #' @param center Should the adjacency matrix be row *and* column centered?
 #'  Defaults to `TRUE`.
+#'
 #' @param normalize Should the graph laplacian be used instead of the
 #'  raw adjacency matrix? Defaults to `TRUE`. If `center = TRUE`, `A` will
 #'  first be centered and then normalized.
+#'
 #' @param tau_row Row regularization term. Default is `NULL`, in which case
 #'  we use the row degree. Ignored when `normalize = FALSE`.
+#'
 #' @param tau_col Column regularization term. Default is `NULL`, in which case
 #'  we use the column degree. Ignored when `normalize = FALSE`.
+#'
 #' @param ... Ignored.
 #'
 #' @details Sparse SVDs use `RSpectra` for performance.
@@ -23,7 +29,7 @@
 #' @return An object of class `vsp`. TODO: Details
 #'
 #' @export
-vsp <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
+vsp <- function(x, k, ..., center = FALSE, normalize = TRUE,
                 tau_row = NULL, tau_col = NULL) {
   ellipsis::check_dots_empty()
   UseMethod("vsp")
@@ -31,14 +37,14 @@ vsp <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
 
 #' @rdname vsp
 #' @export
-vsp.default <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
+vsp.default <- function(x, k, ..., center = FALSE, normalize = TRUE,
                         tau_row = NULL, tau_col = NULL) {
 
   ### Vintage Sparse PCA Reference Implementation
 
   ## INPUT VALIDATION
 
-  A <- x # TODO: cleanup temp hack
+  A <- x
 
   if (k < 2)
     stop("`k` must be at least two.", call. = FALSE)
@@ -103,15 +109,15 @@ vsp.default <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
   # results?
 
   # TODO: use some quantile of the degree distribution here instead?
-  # if we first rotate both together, then B tends to have a strong diagonal. 
-  #  without this R_both, B tends to have a permutation matrix applied to row/column, 
-  #  making the j_th column of Z not match the j_th column of Y. 
+  # if we first rotate both together, then B tends to have a strong diagonal.
+  #  without this R_both, B tends to have a permutation matrix applied to row/column,
+  #  making the j_th column of Z not match the j_th column of Y.
   #R_both <- varimax(rbind(U[rsA > 1, ],U[rsA > 1, ]), normalize = FALSE)$rotmat
 
   #R_U <- varimax(U[rsA > 1, ]%*%R_both, normalize = FALSE)$rotmat
   #R_V <- varimax(V[csA > 1, ]%*%R_both, normalize = FALSE)$rotmat
 
-  
+
   R_U <- varimax(U[rsA > 1, ], normalize = FALSE)$rotmat
   R_V <- varimax(V[csA > 1, ], normalize = FALSE)$rotmat
 
@@ -135,7 +141,7 @@ vsp.default <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
     # proper re-normalization is like this:
     Dnorm_row <- Diagonal(n = n, x = sqrt(rsA))
     Dnorm_col <- Diagonal(n = d, x = sqrt(csA))
-  
+
     Z <- Dnorm_row %*% Z
     Y <- Dnorm_col %*% Y
    }
@@ -161,8 +167,8 @@ vsp.default <- function(x, ..., k = 5, center = FALSE, normalize = TRUE,
 
 #' @rdname vsp
 #' @export
-vsp.igraph <- function(x, k = 5, center = FALSE, normalize = TRUE,
-                       weights = NULL, tau_row = NULL, tau_col = NULL, ...) {
+vsp.igraph <- function(x, k, ..., center = FALSE, normalize = TRUE,
+                       weights = NULL, tau_row = NULL, tau_col = NULL) {
   x <- igraph::get.adjacency(x, sparse = TRUE, attr = weights)
   NextMethod()
 }

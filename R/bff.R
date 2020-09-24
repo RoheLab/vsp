@@ -21,7 +21,7 @@ bff <- function(loadings, features, num_best, ...) {
 l1_normalize <- function(x) x / sum(x)
 
 #' @export
-bff.default <-  function(loadings, features, num_best){
+bff.default <-  function(loadings, features, num_best) {
 
   # Fan has this line in his code but I don't understand why?
   loadings[loadings < 0] <-  0
@@ -46,4 +46,18 @@ bff.default <-  function(loadings, features, num_best){
   }
 
   best_feat
+}
+
+
+#' @export
+bff2 <-  function(loadings, features, num_best) {
+
+  # variance stabilization
+
+  stabilized <- sqrt(features)
+
+  # turn into probabilities that each node belongs
+  # to a particular cluster
+  y_tilde <- apply(abs(loadings), 1, l1_normalize)
+  crossprod(y_tilde, stabilized)
 }

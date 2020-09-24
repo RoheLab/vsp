@@ -181,5 +181,5 @@ double_center <- function(L) {
 
   L <- sweep(L, 1, Matrix::rowMeans(L))
   L <- sweep(L, 2, Matrix::colMeans(L))
-  L + Matrix::mean(L)
+  L
 }

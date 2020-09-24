@@ -147,12 +147,12 @@ vsp.default <- function(x, k, ..., center = FALSE, normalize = TRUE,
    }
 
   new_vsp(
-    U = U,
+    U = as.matrix(U),
     d = s$d,
-    V = V,
-    Z = Z,
-    B = B,
-    Y = Y,
+    V = as.matrix(V),
+    Z = as.matrix(Z),
+    B = as.matrix(B),
+    Y = as.matrix(Y),
     center = center,
     normalize = normalize,
     k = k,

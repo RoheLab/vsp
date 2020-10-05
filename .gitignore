@@ -42,3 +42,4 @@ vignettes/*.pdf
 rsconnect/
 
 .DS_Store
+docs

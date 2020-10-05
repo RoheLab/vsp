@@ -1,75 +1,98 @@
-new_vsp <- function(U, d, V, Z, B, Y, center, normalize, k, tau_list) {
-  # input validation: only type checks
+#' Create a vintage sparse factor analysis object
+#'
+#' `adaptive_imputation` objects are a subclass of
+#' [LRMF3::svd_like()], with an additional field `alpha`.
+#'
+#' @param Z TODO
+#' @param B TODO
+#' @param Y TODO
+#'
+#' @param u A *matrix* "left singular-ish" vectors.
+#'
+#' @param d A *vector* of "singular-ish" values.
+#'
+#' @param v A *matrix* of "right singular-ish" vectors.
+#'
+#' @param transformers
+#'
+#' @return An `adaptive_imputation` object.
+#'
+#' @export
+vsp_fa <- function(u, d, v, Z, B, Y, transformers) {
 
-  # tau_list: tau_row, tau_col, default_row = TRUE/FALSE, default_col = T/F
-
-  object <- list(
-    U = U,
-    d = d,
-    V = V,
+  fa <- new_vsp_fa(
     Z = Z,
     B = B,
     Y = Y,
-    center = center,
-    normalize = normalize,
-    k = k,
-    tau_list = tau_list
+    subclasses = "vsp",
+    u = u,
+    d = d,
+    v = v,
+    transformers = transformers,
+    ...
   )
 
-  class(object) <- "vsp"
-  object
+  validate_vsp_fa(fa)
 }
 
-validate_vsp <- function(x) {
-  # input validation: values are actually good
+
+new_vsp_fa <- function(u, d, v, Z, B, Y, transformers) {
+  fa_like(
+    Z = Z,
+    B = B,
+    Y = Y,
+    subclasses = "vsp_fa",
+    u = u,
+    d = d,
+    v = v,
+    transformers = transformers,
+    ...
+  )
 }
 
+validate_vsp_fa <- function(x) {
+
+  # TODO
+
+  # if (is.null(ai$alpha)) {
+  #   stop(
+  #     "Must have `alpha` field in adaptive imputation object.",
+  #     call. = FALSE
+  #   )
+  # }
+  #
+  # if (!is.numeric(ai$alpha) || length(ai$alpha) != 1) {
+  #   stop(
+  #     "`alpha` must be a numeric vector of length 1.",
+  #     call. = FALSE
+  #   )
+  # }
+  x
+}
+
+
+#' @importFrom LRMF3 dim_and_class
+#' @method print vsp_fa
 #' @export
-print.vsp <- function(x, ...) {
+print.vsp_fa <- function(x, ...) {
   cat("Vintage Sparse PCA Factor Analysis\n\n")
 
   cat(glue("Nodes (n):   {nrow(x$U)}"), sep = "\n")
-  cat(glue("Factors (k): {x$k}"), sep = "\n")
-  cat(glue("Lambda[k]:   {round(x$d[x$k], 4)}"), sep = "\n")
+  cat(glue("Factors (rank): {x$rank}"), sep = "\n")
+  cat(glue("Lambda[rank]:   {round(x$d[x$rank], 4)}"), sep = "\n")
 
-  cat("\nPre-Processing Options\n\n")
-
-  tau_details <- function(default, tau) {
-    if (!x$normalize)
-      "None"
-    else if (default)
-      paste0(round(tau, 2), " [Default: Mean Degree]")
-    else
-      paste0(round(tau, 2), " [User-Specified]")
-  }
-
-  cat(" - Centering:    ", x$center, "\n")
-  cat(" - Normalization:", x$normalize, "\n")
-  cat(
-    "   - Tau (rows): ",
-    tau_details(x$tau_list$default_row, x$tau_list$tau_row), "\n"
-  )
-  cat(
-    "   - Tau (cols): ",
-    tau_details(x$tau_list$default_col, x$tau_list$tau_col), "\n\n"
-  )
+  cat("\nPre-Processing Options (TODO) \n\n")
 
   cat("Components\n\n")
 
-  dim_and_class <- function(x) {
-    if (is.vector(x))
-      paste0(length(x), "      [", class(x)[1], "]")
-    else
-      # is a matrix
-      paste0(nrow(x), " x ", ncol(x), " [", class(x)[1], "]")
-  }
-
   # get the class printing to line up
 
-  cat("U:", dim_and_class(x$U), "\n")
-  cat("d:", dim_and_class(x$d), "\n")
-  cat("V:", dim_and_class(x$V), "\n")
   cat("Z:", dim_and_class(x$Z), "\n")
   cat("B:", dim_and_class(x$B), "\n")
-  cat("Y:", dim_and_class(x$Y), "\n\n")
+  cat("Y:", dim_and_class(x$Y), "\n")
+
+  cat("u:", dim_and_class(x$U), "\n")
+  cat("d:", dim_and_class(x$d), "\n")
+  cat("v:", dim_and_class(x$V), "\n\n")
 }
+

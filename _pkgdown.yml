@@ -1,0 +1,10 @@
+authors:
+  Alex Hayes:
+    href: https://alexpghayes.com
+
+development:
+  mode: auto
+
+template:
+  params:
+    bootswatch: paper

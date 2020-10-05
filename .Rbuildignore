@@ -3,3 +3,8 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 scratch
+^codecov\.yml$
+^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

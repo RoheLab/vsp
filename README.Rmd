@@ -20,6 +20,8 @@ theme_set(theme_minimal())
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Codecov test coverage](https://codecov.io/gh/RoheLab/vsp/branch/master/graph/badge.svg)](https://codecov.io/gh/RoheLab/vsp?branch=master)
+[![R build status](https://github.com/RoheLab/vsp/workflows/R-CMD-check/badge.svg)](https://github.com/RoheLab/vsp/actions)
 <!-- badges: end -->
 
 **Disclaimer:** This package is a work in progress. Some basic functionality is available, but the API is subject to change, as are some (minor) computational details. Code to reproduce the results in *Vintage Factor Analysis with Varimax Performs Statistical Inference* is [available here](https://github.com/RoheLab/vsp-paper).

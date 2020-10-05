@@ -29,11 +29,22 @@
 #' @return An object of class `vsp`. TODO: Details
 #'
 #' @export
+#'
+#' @examples
+#'
+#' library(jiandjindata)
+#' library(igraph)
+#' library(invertiforms)
+#'
+#' A <- get.adjacency(citation_graph)
+#'
+#'
 vsp <- function(x, k, ..., center = FALSE, normalize = TRUE,
                 tau_row = NULL, tau_col = NULL) {
   ellipsis::check_dots_empty()
   UseMethod("vsp")
 }
+
 
 #' @rdname vsp
 #' @export
@@ -44,79 +55,28 @@ vsp.default <- function(x, k, ..., center = FALSE, normalize = TRUE,
 
   ## INPUT VALIDATION
 
-  A <- x
-
   if (k < 2)
     stop("`k` must be at least two.", call. = FALSE)
 
-  n <- nrow(A)
-  d <- ncol(A)
-
-  default_row <- is.null(tau_row)
-  default_col <- is.null(tau_col)
-
-  # needed both for normalization and subsetting rows for varimax
-  # note that we use absolute value of edge weights in case elements
-  # of A are negative to avoid divide by zero issues
-
-  rsA <- Matrix::rowSums(A * sign(A))  # out-degree
-  csA <- Matrix::colSums(A * sign(A))  # in-degree
-
-  ### STEP 1: OPTIONAL NORMALIZATION
-
-  # normalization corresponds to the optional scaling step defined
-  # defined in Remark 1.1
-
-  if (normalize) {
-
-    tau_r <- if (default_row) mean(rsA) else tau_row
-    tau_c <- if (default_col) mean(csA) else tau_col
-
-    D_row <- Diagonal(n = n, x = 1 / sqrt(rsA + tau_r))
-    D_col <- Diagonal(n = d, x = 1 / sqrt(csA + tau_c))
-
-    # note: no identity matrix in the graph Laplacian here
-    L <- D_row %*% A %*% D_col
-  } else {
-    L <- A
-  }
-
-  ### STEP 2: OPTIONAL CENTERING
-
-  # here we center explicitly for clarity, but this should be done
-  # implicitly for performance, as discussed in Remark 1.2
+  n <- nrow(x)
+  d <- ncol(x)
 
   if (center) {
-    L <- double_center(L)
+    centerer <- DoubleCenter(x)
+    L <- transform(centerer, x)
+  } else{
+    L <- x
   }
 
-  ### STEP 3: SVD
-
-  # this doesn't differentiate between the symmetric and asymmetric cases
-  # so there's opportunity for speed gains here
+  if (normalize) {
+    normalizer <- RegularizedLaplacian(A, tau_row = tau_row, tau_col = tau_col)
+    L <- transform(normalizer, L)
+  }
 
   # this includes a call to isSymmetric that we might be able to skip out on
   s <- RSpectra::svds(L, k = k, nu = k, nv = k)
   U <- s$u
   V <- s$v
-
-  ### STEP 4: VARIMAX ROTATION
-
-  # subset to only nodes with degree greater than 1. huge time saver.
-  # some of karl's code uses rsL and csL here, which I think is a mistake
-  # because it drops the computation time by an order of magnitude. is that
-  # throwing out nonsense that doesn't affect results, or does it affect
-  # results?
-
-  # TODO: use some quantile of the degree distribution here instead?
-  # if we first rotate both together, then B tends to have a strong diagonal.
-  #  without this R_both, B tends to have a permutation matrix applied to row/column,
-  #  making the j_th column of Z not match the j_th column of Y.
-  #R_both <- varimax(rbind(U[rsA > 1, ],U[rsA > 1, ]), normalize = FALSE)$rotmat
-
-  #R_U <- varimax(U[rsA > 1, ]%*%R_both, normalize = FALSE)$rotmat
-  #R_V <- varimax(V[csA > 1, ]%*%R_both, normalize = FALSE)$rotmat
-
 
   R_U <- varimax(U[rsA > 1, ], normalize = FALSE)$rotmat
   R_V <- varimax(V[csA > 1, ], normalize = FALSE)$rotmat
@@ -124,10 +84,11 @@ vsp.default <- function(x, k, ..., center = FALSE, normalize = TRUE,
   Z <- sqrt(n) * U %*% R_U
   Y <- sqrt(d) * V %*% R_V
 
-  # TODO: check the paper and see if we should divide B by sqrt(n * d) here?  Yes, we should... because we are scaling Z and Y.
-  # B <- t(R_U) %*% Diagonal(n = k, x = s$d) %*% R_V/sqrt(n*d)  # n*d causes integer overflow
-  B <- t(R_U) %*% Diagonal(n = k, x = s$d) %*% R_V/sqrt(n)
-  B <- B/sqrt(d)
+  B <- t(R_U) %*% Diagonal(n = k, x = s$d) %*% R_V / (sqrt(n) * sqrt(d))
+
+  # TODO: make fa skew positive, invert the transformationations
+
+  fa <- LRMF3::fa_like()
 
   ### STEP 5: MAKE Z, Y SKEW POSITIVE (REMARK 1.3)
 
@@ -171,15 +132,4 @@ vsp.igraph <- function(x, k, ..., center = FALSE, normalize = TRUE,
                        weights = NULL, tau_row = NULL, tau_col = NULL) {
   x <- igraph::get.adjacency(x, sparse = TRUE, attr = weights)
   NextMethod()
-}
-
-double_center <- function(L) {
-  warning(
-    "Implicit centering has not yet been implemented.\n\n",
-    call. = FALSE
-  )
-
-  L <- sweep(L, 1, Matrix::rowMeans(L))
-  L <- sweep(L, 2, Matrix::colMeans(L))
-  L
 }

@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# vsp
+
 <!-- badges: start -->
 
 [![Codecov test
@@ -8,8 +10,6 @@ coverage](https://codecov.io/gh/RoheLab/vsp/branch/master/graph/badge.svg)](http
 [![R build
 status](https://github.com/RoheLab/vsp/workflows/R-CMD-check/badge.svg)](https://github.com/RoheLab/vsp/actions)
 <!-- badges: end -->
-
-# vsp
 
 The goal of `vsp` is to enable fast, spectral estimation of latent
 factors in random dot product graphs. Under mild assumptions, the `vsp`
@@ -80,6 +80,5 @@ enron_fa
 1.  Rohe, K. & Zeng, M. *Vintage Factor Analysis with Varimax Performs
     Statistical Inference*. 2020+.
 
-Code to reproduce the results in *Vintage Factor Analysis with Varimax
-Performs Statistical Inference* is [available
+Code to reproduce the results from the paper is [available
 here](https://github.com/RoheLab/vsp-paper).

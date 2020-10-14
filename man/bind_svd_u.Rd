@@ -4,7 +4,7 @@
 \alias{bind_svd_u}
 \title{Add PCA factor loadings to node table of tidygraph}
 \usage{
-bind_svd_u(graph, fa = NULL, ...)
+bind_svd_u(graph, fa, ...)
 }
 \arguments{
 \item{graph}{A \link[tidygraph:tbl_graph]{tidygraph::tbl_graph} object.}

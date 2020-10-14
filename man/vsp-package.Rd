@@ -13,6 +13,14 @@ Provides fast spectral estimation of latent factors
     stochastic blockmodels, (degree-corrected) mixed-membership stochastic
     blockmodels, degree-corrected overlapping stochastic blockmodels.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/RoheLab/vsp}
+  \item Report bugs at \url{https://github.com/RoheLab/vsp/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Alex Hayes \email{alexpghayes@gmail.com} (\href{https://orcid.org/0000-0002-4985-5160}{ORCID})
 

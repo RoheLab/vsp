@@ -4,7 +4,7 @@
 \alias{bind_varimax_z}
 \title{Add varimax factor loadings to node table of tidygraph}
 \usage{
-bind_varimax_z(graph, fa = NULL, ...)
+bind_varimax_z(graph, fa, ...)
 }
 \arguments{
 \item{graph}{A \link[tidygraph:tbl_graph]{tidygraph::tbl_graph} object.}

@@ -61,7 +61,7 @@ library(Matrix)
 M <- sign(rsparsematrix(12, 12, nnz = 40))^2
 
 # vintage sparse pca
-fa <- vsp(M, k = 5)
+fa <- vsp(M, rank = 5, scale = TRUE, center = TRUE, recenter = TRUE)
 fa
 ```
 

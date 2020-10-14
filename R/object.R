@@ -18,7 +18,7 @@
 #' @return An `adaptive_imputation` object.
 #'
 #' @export
-vsp_fa <- function(u, d, v, Z, B, Y, transformers) {
+vsp_fa <- function(u, d, v, Z, B, Y, transformers, R_U, R_V) {
 
   fa <- new_vsp_fa(
     Z = as.matrix(Z),
@@ -27,14 +27,16 @@ vsp_fa <- function(u, d, v, Z, B, Y, transformers) {
     u = as.matrix(u),
     d = d,
     v = as.matrix(v),
-    transformers = transformers
+    transformers = transformers,
+    R_U = as.matrix(R_U),
+    R_V = as.matrix(R_V)
   )
 
   validate_vsp_fa(fa)
 }
 
 
-new_vsp_fa <- function(u, d, v, Z, B, Y, transformers) {
+new_vsp_fa <- function(u, d, v, Z, B, Y, transformers, R_U, R_V) {
   fa_like(
     Z = Z,
     B = B,
@@ -43,11 +45,15 @@ new_vsp_fa <- function(u, d, v, Z, B, Y, transformers) {
     u = u,
     d = d,
     v = v,
-    transformers = transformers
+    transformers = transformers,
+    R_U = R_U,
+    R_V = R_V
   )
 }
 
 validate_vsp_fa <- function(x) {
+
+  # LMRF3::validate_fa_like(x)
 
   # TODO
 

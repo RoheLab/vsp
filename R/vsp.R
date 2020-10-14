@@ -34,8 +34,9 @@
 #'
 #' library(LRMF3)
 #'
-#' vsp(ml100k, rank = 5, center = TRUE)
+#' vsp(ml100k, rank = 5, scale = TRUE)
 #' vsp(ml100k, rank = 5, rescale = FALSE)
+#' vsp(ml100k, rank = 5)
 #'
 #'
 vsp <- function(x, rank, ..., center = FALSE, recenter = FALSE,
@@ -65,7 +66,7 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
   if (rank < 2)
     stop("`rank` must be at least two.", call. = FALSE)
 
-  if (rescale && !scale)
+  if (recenter && !center)
     stop("`recenter` must be FALSE when `center` is FALSE.", call. = FALSE)
 
   if (rescale && !scale)
@@ -102,16 +103,11 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
   B <- t(R_U) %*% Diagonal(n = rank, x = s$d) %*% R_V / (sqrt(n) * sqrt(d))
 
   fa <- vsp_fa(
-    u = s$u,
-    d = s$d,
-    v = s$v,
-    Z = Z,
-    B = B,
-    Y = Y,
+    u = s$u, d = s$d, v = s$v,
+    Z = Z, B = B, Y = Y,
+    R_U = R_U, R_V = R_V,
     transformers = transformers
   )
-
-  fa <- make_skew_positive(fa)
 
   if (rescale) {
     fa <- inverse_transform(scaler, fa)
@@ -120,6 +116,9 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
   if (recenter) {
     fa <- inverse_transform(centerer, fa)
   }
+
+  # TODO: show this update R_U and R_V in addition to Z, Y and B?
+  fa <- make_skew_positive(fa)
 
   fa
 }

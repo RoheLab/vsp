@@ -50,7 +50,8 @@ Suggests:
     rmarkdown,
     scales,
     testthat,
-    tidyr
+    tidyr,
+    igraphdata
 VignetteBuilder: 
     knitr
 Remotes: 

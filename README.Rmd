@@ -20,6 +20,8 @@ theme_set(theme_minimal())
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Codecov test coverage](https://codecov.io/gh/RoheLab/vsp/branch/master/graph/badge.svg)](https://codecov.io/gh/RoheLab/vsp?branch=master)
+[![R build status](https://github.com/RoheLab/vsp/workflows/R-CMD-check/badge.svg)](https://github.com/RoheLab/vsp/actions)
 <!-- badges: end -->
 
 **Disclaimer:** This package is a work in progress. Some basic functionality is available, but the API is subject to change, as are some (minor) computational details. Code to reproduce the results in *Vintage Factor Analysis with Varimax Performs Statistical Inference* is [available here](https://github.com/RoheLab/vsp-paper).
@@ -49,17 +51,17 @@ devtools::install_github("RoheLab/vsp")
 
 Obtaining estimates from `vsp` is straightforward. We recommend representing networks as [`igraph`](https://igraph.org/r/) objects or (sparse) `Matrix` objects from the [`Matrix`](https://cran.r-project.org/web/packages/Matrix/index.html) package (see also `?Matrix`).
 
-Once you have your network in one of these formats, you can get estimates by calling the `vsp()` function. The result is an object of class `"vsp"`.
+Once you have your network in one of these formats, you can get estimates by calling the `vsp()` function. The result is an object of class `"vsp_fa"`.
 
 ```{r}
-library(vsp)
+# library(vsp)
 library(Matrix)
 
 # create a random sparse adjacency matrix
 M <- sign(rsparsematrix(12, 12, nnz = 40))^2
 
 # vintage sparse pca
-fa <- vsp(M, k = 5)
+fa <- vsp(M, rank = 5, scale = TRUE, center = TRUE, recenter = TRUE)
 fa
 ```
 
@@ -75,7 +77,9 @@ enron
 Now we estimate:
 
 ```{r}
-enron_fa <- vsp(enron, k = 30)
+library(Matrix)
+
+enron_fa <- vsp(enron, rank = 30)
 enron_fa
 ```
 

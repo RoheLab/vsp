@@ -29,157 +29,156 @@
 #' @return An object of class `vsp`. TODO: Details
 #'
 #' @export
-vsp <- function(x, k, ..., center = FALSE, normalize = TRUE,
-                tau_row = NULL, tau_col = NULL) {
-  ellipsis::check_dots_empty()
+#'
+#' @examples
+#'
+#' library(LRMF3)
+#'
+#' vsp(ml100k, rank = 5, scale = TRUE)
+#' vsp(ml100k, rank = 5, rescale = FALSE)
+#' vsp(ml100k, rank = 5)
+#'
+#'
+vsp <- function(x, rank, ...) {
+  # ellipsis::check_dots_used()
   UseMethod("vsp")
 }
 
 #' @rdname vsp
 #' @export
-vsp.default <- function(x, k, ..., center = FALSE, normalize = TRUE,
-                        tau_row = NULL, tau_col = NULL) {
+vsp.default <- function(x, rank, ...) {
+  stop(glue("No `vsp` method for objects of class {class(x)}. "))
+}
 
-  ### Vintage Sparse PCA Reference Implementation
+#' @importFrom invertiforms DoubleCenter RegularizedLaplacian
+#' @importFrom invertiforms transform inverse_transform
+#' @rdname vsp
+#' @export
+vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
+                       scale = TRUE, rescale = scale,
+                       tau_row = NULL, tau_col = NULL) {
 
-  ## INPUT VALIDATION
+  if (rank < 2)
+    stop("`rank` must be at least two.", call. = FALSE)
 
-  A <- x
+  if (recenter && !center)
+    stop("`recenter` must be FALSE when `center` is FALSE.", call. = FALSE)
 
-  if (k < 2)
-    stop("`k` must be at least two.", call. = FALSE)
+  if (rescale && !scale)
+    stop("`rescale` must be FALSE when `scale` is FALSE.", call. = FALSE)
 
-  n <- nrow(A)
-  d <- ncol(A)
+  n <- nrow(x)
+  d <- ncol(x)
 
-  default_row <- is.null(tau_row)
-  default_col <- is.null(tau_col)
-
-  # needed both for normalization and subsetting rows for varimax
-  # note that we use absolute value of edge weights in case elements
-  # of A are negative to avoid divide by zero issues
-
-  rsA <- Matrix::rowSums(A * sign(A))  # out-degree
-  csA <- Matrix::colSums(A * sign(A))  # in-degree
-
-  ### STEP 1: OPTIONAL NORMALIZATION
-
-  # normalization corresponds to the optional scaling step defined
-  # defined in Remark 1.1
-
-  if (normalize) {
-
-    tau_r <- if (default_row) mean(rsA) else tau_row
-    tau_c <- if (default_col) mean(csA) else tau_col
-
-    D_row <- Diagonal(n = n, x = 1 / sqrt(rsA + tau_r))
-    D_col <- Diagonal(n = d, x = 1 / sqrt(csA + tau_c))
-
-    # note: no identity matrix in the graph Laplacian here
-    L <- D_row %*% A %*% D_col
-  } else {
-    L <- A
-  }
-
-  ### STEP 2: OPTIONAL CENTERING
-
-  # here we center explicitly for clarity, but this should be done
-  # implicitly for performance, as discussed in Remark 1.2
+  transformers <- list()
 
   if (center) {
-    L <- double_center(L)
+    centerer <- DoubleCenter(x)
+    transformers <- append(transformers, centerer)
+    L <- transform(centerer, x)
+  } else{
+    L <- x
   }
 
-  ### STEP 3: SVD
-
-  # this doesn't differentiate between the symmetric and asymmetric cases
-  # so there's opportunity for speed gains here
+  if (scale) {
+    scaler <- RegularizedLaplacian(L, tau_row = tau_row, tau_col = tau_col)
+    transformers <- append(transformers, scaler)
+    L <- transform(scaler, L)
+  }
 
   # this includes a call to isSymmetric that we might be able to skip out on
-  s <- RSpectra::svds(L, k = k, nu = k, nv = k)
-  U <- s$u
-  V <- s$v
+  s <- svds(L, k = rank, nu = rank, nv = rank)
 
-  ### STEP 4: VARIMAX ROTATION
+  R_U <- varimax(s$u, normalize = FALSE)$rotmat
+  R_V <- varimax(s$v, normalize = FALSE)$rotmat
 
-  # subset to only nodes with degree greater than 1. huge time saver.
-  # some of karl's code uses rsL and csL here, which I think is a mistake
-  # because it drops the computation time by an order of magnitude. is that
-  # throwing out nonsense that doesn't affect results, or does it affect
-  # results?
+  Z <- sqrt(n) * s$u %*% R_U
+  Y <- sqrt(d) * s$v %*% R_V
 
-  # TODO: use some quantile of the degree distribution here instead?
-  # if we first rotate both together, then B tends to have a strong diagonal.
-  #  without this R_both, B tends to have a permutation matrix applied to row/column,
-  #  making the j_th column of Z not match the j_th column of Y.
-  #R_both <- varimax(rbind(U[rsA > 1, ],U[rsA > 1, ]), normalize = FALSE)$rotmat
+  B <- t(R_U) %*% Diagonal(n = rank, x = s$d) %*% R_V / (sqrt(n) * sqrt(d))
 
-  #R_U <- varimax(U[rsA > 1, ]%*%R_both, normalize = FALSE)$rotmat
-  #R_V <- varimax(V[csA > 1, ]%*%R_both, normalize = FALSE)$rotmat
-
-
-  R_U <- varimax(U[rsA > 1, ], normalize = FALSE)$rotmat
-  R_V <- varimax(V[csA > 1, ], normalize = FALSE)$rotmat
-
-  Z <- sqrt(n) * U %*% R_U
-  Y <- sqrt(d) * V %*% R_V
-
-  # TODO: check the paper and see if we should divide B by sqrt(n * d) here?  Yes, we should... because we are scaling Z and Y.
-  # B <- t(R_U) %*% Diagonal(n = k, x = s$d) %*% R_V/sqrt(n*d)  # n*d causes integer overflow
-  B <- t(R_U) %*% Diagonal(n = k, x = s$d) %*% R_V/sqrt(n)
-  B <- B/sqrt(d)
-
-  ### STEP 5: MAKE Z, Y SKEW POSITIVE (REMARK 1.3)
-
-  # TODO: not sure I trust this fully just yet
-  Z <- make_columnwise_skew_positive(Z)
-  Y <- make_columnwise_skew_positive(Y)
-
-  ### STEP 6: RESCALE IF NORMALIZED, RETURN OUTPUT
-
-  if (normalize) {
-    # proper re-normalization is like this:
-    Dnorm_row <- Diagonal(n = n, x = sqrt(rsA))
-    Dnorm_col <- Diagonal(n = d, x = sqrt(csA))
-
-    Z <- Dnorm_row %*% Z
-    Y <- Dnorm_col %*% Y
-   }
-
-  new_vsp(
-    U = as.matrix(U),
-    d = s$d,
-    V = as.matrix(V),
-    Z = as.matrix(Z),
-    B = as.matrix(B),
-    Y = as.matrix(Y),
-    center = center,
-    normalize = normalize,
-    k = k,
-    tau_list = list(
-      tau_row = if (exists("tau_r")) tau_r else NULL,
-      tau_col = if (exists("tau_c")) tau_c else NULL,
-      default_row = default_row,
-      default_col = default_col
-    )
+  fa <- vsp_fa(
+    u = s$u, d = s$d, v = s$v,
+    Z = Z, B = B, Y = Y,
+    R_U = R_U, R_V = R_V,
+    transformers = transformers
   )
+
+  if (rescale) {
+    fa <- inverse_transform(scaler, fa)
+  }
+
+  if (recenter) {
+    fa <- inverse_transform(centerer, fa)
+  }
+
+  fa <- make_skew_positive(fa)
+  fa
+}
+
+#' Perform varimax rotation on a low rank matrix factorization
+#'
+#' @param x
+#'
+#' @param rank
+#' @param ...
+#' @param centerer
+#' @param scaler
+#'
+#' @export
+#'
+#' @examples
+#'
+#' library(fastadi)
+#'
+#' mf <- adaptive_impute(ml100k, rank = 20, max_iter = 5)
+#' fa <- vsp(mf)
+#'
+vsp.svd_like <- function(x, rank, ...,
+                         centerer = NULL, scaler = NULL,
+                         recenter = FALSE, rescale = TRUE) {
+
+  n <- nrow(x$u)
+  d <- nrow(x$v)
+
+  R_U <- varimax(x$u, normalize = FALSE)$rotmat
+  R_V <- varimax(x$v, normalize = FALSE)$rotmat
+
+  Z <- sqrt(n) * x$u %*% R_U
+  Y <- sqrt(d) * x$v %*% R_V
+
+  B <- t(R_U) %*% Diagonal(n = rank, x = x$d) %*% R_V / (sqrt(n) * sqrt(d))
+
+  fa <- vsp_fa(
+    u = x$u, d = x$d, v = x$v,
+    Z = Z, B = B, Y = Y,
+    R_U = R_U, R_V = R_V,
+    transformers = list(centerer, scaler)
+  )
+
+  if (!is.null(scaler) && rescale) {
+    fa <- inverse_transform(scaler, fa)
+  }
+
+  if (!is.null(centerer) && recenter) {
+    fa <- inverse_transform(centerer, fa)
+  }
+
+  fa <- make_skew_positive(fa)
+  fa
 }
 
 #' @rdname vsp
 #' @export
-vsp.igraph <- function(x, k, ..., center = FALSE, normalize = TRUE,
-                       weights = NULL, tau_row = NULL, tau_col = NULL) {
-  x <- igraph::get.adjacency(x, sparse = TRUE, attr = weights)
-  NextMethod()
-}
+vsp.Matrix <- vsp.matrix
 
-double_center <- function(L) {
-  warning(
-    "Implicit centering has not yet been implemented.\n\n",
-    call. = FALSE
-  )
+#' @rdname vsp
+#' @export
+vsp.dgCMatrix <- vsp.matrix
 
-  L <- sweep(L, 1, Matrix::rowMeans(L))
-  L <- sweep(L, 2, Matrix::colMeans(L))
-  L
+#' @rdname vsp
+#' @export
+vsp.igraph <- function(x, rank, ..., attr = NULL) {
+  x <- igraph::get.adjacency(x, sparse = TRUE, attr = attr)
+  vsp.matrix(x, rank, ...)
 }

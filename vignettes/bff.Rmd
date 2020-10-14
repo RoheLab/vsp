@@ -12,18 +12,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  eval = FALSE
+  comment = "#>"
 )
-```
-
-\newcommand{\1}{\mathds{1}}
-\newcommand{\T}{^\top}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\E}{\mathbb{E}}
-
-```{r setup}
-# library(vsp)
 ```
 
 ## Intro 
@@ -38,19 +28,20 @@ This document describes the intuition behind the BFF as a follow-up step after t
 ## Methodology 
 
 For simplicity, we consider a symmetric square input matrix (e.g., the adjacency matrix of an undirected graph); the analysis on rectangular input is also supported by `bff()`.
-Given a data matrix $A\in\R^{n \times n}$, the `vsp` returns an approximation with factorization, $ZBY\T$, where $B\in\R^{k \times k}$ is low-rank, and $Y\in\R^{n \times k}$ encodes the loadings of each feature (i.e., columns of $A$) with respect to clusters.
+Given a data matrix $A \in \mathbb{R}^{n \times n}$, the `vsp` returns an approximation with factorization, $ZBY^T$, where $B \in \mathbb{R}^{k \times k}$ is low-rank, and $Y \in \mathbb{R}^{n \times k}$ encodes the loadings of each feature (i.e., columns of $A$) with respect to clusters.
 In particular, when $A$ is the adjacency matrix of an undirected Blockmodel graph, each row of $Y$ decodes the block (cluster) membership of the vertex (feature).
 Generally, the loading $Y_{ij}$ (for $i=1,...,n$ and $j=1,...,k$) can be interpreted as an membership measure of the $i$-th feature to the $j$-th cluster. 
 <!-- When normalized, it is also an estimator of mixed membership. -->
 
-Now, suppose in addition that we have covariates on each feature, $D\in\R^{n \times p}$, where $p$ is the dimension of covariates.
+Now, suppose in addition that we have covariates on each feature, $D \in \mathbb{R}^{n \times p}$, where $p$ is the dimension of covariates.
 For example, $D$ can be a document-term matrix, where all text data associated with $i$-th (for $i=1,...,n$) feature are pooled into a meta document, and $p$ under this circumstance is the size of corpus (i.e., total number of words/terms), and $D_{il}$ is the frequency of word $l$ (for $l=1,...,p$) appearing in the $i$-th document.
 
 The BFF then uses $Y$ and $D$ to produce an assessment of covariates "best" for each cluster. 
 To start with, suppose both $Y$ and $D$ has only non-negative entries. 
-Define the importance, $I\in\R^{p \times k}$, of the $l$-th covariate to the $j$-th cluster by the average of $l$-th covariate (the $l$-th columns of $D$), weighted by the $j$-th column of $Y$,
-$$I_{lj} = \sum_{j=1}^n D_{jl}Y_{ij},\text{ for } l=1,...,p,i=1,...n,$$
-or compactly (side note: the cross product $\langle D,Y \rangle$ is defined as $D\T Y$ as in convention), 
+Define the importance, $I \in \mathbb{R}^{p \times k}$, of the $l$-th covariate to the $j$-th cluster by the average of $l$-th covariate (the $l$-th columns of $D$), weighted by the $j$-th column of $Y$,
+$$I_{lj} = \sum_{j=1}^n D_{jl} Y_{ij}, \text{ for } l=1,...,p,i=1,...n,$$
+or compactly (side note: the cross product $\langle D,Y \rangle$ is defined as $D^T Y$ as in convention), 
+
 $$I=\langle D,Y \rangle.$$
 As such, a higher value in $I_{lj}$ indicates more significant importance. 
 BFF selects the "best" covariates for each cluster according to the $j$-th (for $j=1,...,k$) column of $I$.

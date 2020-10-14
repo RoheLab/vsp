@@ -15,9 +15,15 @@
 )
 }
 \arguments{
-\item{x}{}
+\item{x}{TODO}
 
-\item{scaler}{}
+\item{rank}{TODO}
+
+\item{...}{TODO}
+
+\item{centerer}{TODO}
+
+\item{scaler}{TODO}
 }
 \description{
 Perform varimax rotation on a low rank matrix factorization

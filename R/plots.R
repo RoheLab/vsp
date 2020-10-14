@@ -1,4 +1,3 @@
-#' @importFrom GGally ggpairs
 #' @export
 plot_varimax_z_pairs <- function(fa, factors = 1:max(5, fa$k), ...) {
 
@@ -16,7 +15,6 @@ plot_varimax_z_pairs <- function(fa, factors = 1:max(5, fa$k), ...) {
     ggpairs(aes(alpha = 0.001), ...)
 }
 
-#' @importFrom GGally ggpairs
 #' @export
 plot_varimax_y_pairs <- function(fa, factors = 1:max(5, fa$k), ...) {
 
@@ -69,9 +67,11 @@ plot_svd_v <- function(fa) {
     scale_x_continuous(breaks = scales::pretty_breaks())
 }
 
+#' @method screeplot vsp_fa
 #' @export
 #' @import ggplot2
-screeplot.vsp <- function(x, ...) {
+#' @importFrom stats screeplot
+screeplot.vsp_fa <- function(x, ...) {
 
   if (x$normalize) {
     graph <- "Regularized Graph Laplacian"

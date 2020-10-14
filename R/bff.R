@@ -21,7 +21,7 @@ bff <- function(loadings, features, num_best, ...) {
 l1_normalize <- function(x) x / sum(x)
 
 #' @export
-bff.default <-  function(loadings, features, num_best) {
+bff.default <-  function(loadings, features, num_best, ...) {
 
   # Fan has this line in his code but I don't understand why?
   loadings[loadings < 0] <-  0
@@ -50,7 +50,7 @@ bff.default <-  function(loadings, features, num_best) {
 
 
 #' @export
-bff2 <-  function(loadings, features, num_best) {
+bff2 <-  function(loadings, features, num_best, ...) {
 
   # variance stabilization
 

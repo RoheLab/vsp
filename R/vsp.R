@@ -89,8 +89,8 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
   # this includes a call to isSymmetric that we might be able to skip out on
   s <- svds(L, k = rank, nu = rank, nv = rank)
 
-  R_U <- varimax(s$u, normalize = FALSE)$rotmat
-  R_V <- varimax(s$v, normalize = FALSE)$rotmat
+  R_U <- stats::varimax(s$u, normalize = FALSE)$rotmat
+  R_V <- stats::varimax(s$v, normalize = FALSE)$rotmat
 
   Z <- sqrt(n) * s$u %*% R_U
   Y <- sqrt(d) * s$v %*% R_V
@@ -118,12 +118,12 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
 
 #' Perform varimax rotation on a low rank matrix factorization
 #'
-#' @param x
+#' @param x TODO
 #'
-#' @param rank
-#' @param ...
-#' @param centerer
-#' @param scaler
+#' @param rank TODO
+#' @param ... TODO
+#' @param centerer TODO
+#' @param scaler TODO
 #'
 #' @export
 #'
@@ -141,8 +141,8 @@ vsp.svd_like <- function(x, rank, ...,
   n <- nrow(x$u)
   d <- nrow(x$v)
 
-  R_U <- varimax(x$u, normalize = FALSE)$rotmat
-  R_V <- varimax(x$v, normalize = FALSE)$rotmat
+  R_U <- stats::varimax(x$u, normalize = FALSE)$rotmat
+  R_V <- stats::varimax(x$v, normalize = FALSE)$rotmat
 
   Z <- sqrt(n) * x$u %*% R_U
   Y <- sqrt(d) * x$v %*% R_V

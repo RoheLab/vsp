@@ -39,20 +39,15 @@
 #' vsp(ml100k, rank = 5)
 #'
 #'
-vsp <- function(x, rank, ..., center = FALSE, recenter = FALSE,
-                scale = TRUE, rescale = scale,
-                tau_row = NULL, tau_col = NULL) {
-  ellipsis::check_dots_empty()
+vsp <- function(x, rank, ...) {
+  # ellipsis::check_dots_used()
   UseMethod("vsp")
 }
 
 #' @rdname vsp
 #' @export
-vsp.default <- function(x, rank, ..., center = FALSE, recenter = FALSE,
-                        scale = TRUE, rescale = scale,
-                        tau_row = NULL, tau_col = NULL) {
-
-  stop(glue("No `vsp` method for objects of class {class(x)}."))
+vsp.default <- function(x, rank, ...) {
+  stop(glue("No `vsp` method for objects of class {class(x)}. "))
 }
 
 #' @importFrom invertiforms DoubleCenter RegularizedLaplacian
@@ -117,9 +112,59 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
     fa <- inverse_transform(centerer, fa)
   }
 
-  # TODO: show this update R_U and R_V in addition to Z, Y and B?
   fa <- make_skew_positive(fa)
+  fa
+}
 
+#' Perform varimax rotation on a low rank matrix factorization
+#'
+#' @param x
+#'
+#' @param rank
+#' @param ...
+#' @param centerer
+#' @param scaler
+#'
+#' @export
+#'
+#' @examples
+#'
+#' library(fastadi)
+#'
+#' mf <- adaptive_impute(ml100k, rank = 20, max_iter = 5)
+#' fa <- vsp(mf)
+#'
+vsp.svd_like <- function(x, rank, ...,
+                         centerer = NULL, scaler = NULL,
+                         recenter = FALSE, rescale = TRUE) {
+
+  n <- nrow(x$u)
+  d <- nrow(x$v)
+
+  R_U <- varimax(x$u, normalize = FALSE)$rotmat
+  R_V <- varimax(x$v, normalize = FALSE)$rotmat
+
+  Z <- sqrt(n) * x$u %*% R_U
+  Y <- sqrt(d) * x$v %*% R_V
+
+  B <- t(R_U) %*% Diagonal(n = rank, x = x$d) %*% R_V / (sqrt(n) * sqrt(d))
+
+  fa <- vsp_fa(
+    u = x$u, d = x$d, v = x$v,
+    Z = Z, B = B, Y = Y,
+    R_U = R_U, R_V = R_V,
+    transformers = list(centerer, scaler)
+  )
+
+  if (!is.null(scaler) && rescale) {
+    fa <- inverse_transform(scaler, fa)
+  }
+
+  if (!is.null(centerer) && recenter) {
+    fa <- inverse_transform(centerer, fa)
+  }
+
+  fa <- make_skew_positive(fa)
   fa
 }
 
@@ -129,9 +174,11 @@ vsp.Matrix <- vsp.matrix
 
 #' @rdname vsp
 #' @export
-vsp.igraph <- function(x, rank, ..., center = FALSE, recenter = FALSE,
-                    scale = TRUE, rescale = scale,
-                    tau_row = NULL, tau_col = NULL) {
-  x <- igraph::get.adjacency(x, sparse = TRUE, attr = weights)
-  NextMethod()
+vsp.dgCMatrix <- vsp.matrix
+
+#' @rdname vsp
+#' @export
+vsp.igraph <- function(x, rank, ..., attr = NULL) {
+  x <- igraph::get.adjacency(x, sparse = TRUE, attr = attr)
+  vsp.matrix(x, rank, ...)
 }

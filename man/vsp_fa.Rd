@@ -4,7 +4,7 @@
 \alias{vsp_fa}
 \title{Create a vintage sparse factor analysis object}
 \usage{
-vsp_fa(u, d, v, Z, B, Y, transformers)
+vsp_fa(u, d, v, Z, B, Y, transformers, R_U, R_V)
 }
 \arguments{
 \item{u}{A \emph{matrix} "left singular-ish" vectors.}

@@ -5,32 +5,13 @@
 \alias{vsp.default}
 \alias{vsp.matrix}
 \alias{vsp.Matrix}
+\alias{vsp.dgCMatrix}
 \alias{vsp.igraph}
 \title{Non-Parametric Factor Analysis via Vintage Sparse PCA}
 \usage{
-vsp(
-  x,
-  rank,
-  ...,
-  center = FALSE,
-  recenter = FALSE,
-  scale = TRUE,
-  rescale = TRUE,
-  tau_row = NULL,
-  tau_col = NULL
-)
+vsp(x, rank, ...)
 
-\method{vsp}{default}(
-  x,
-  rank,
-  ...,
-  center = FALSE,
-  recenter = FALSE,
-  scale = TRUE,
-  rescale = TRUE,
-  tau_row = NULL,
-  tau_col = NULL
-)
+\method{vsp}{default}(x, rank, ...)
 
 \method{vsp}{matrix}(
   x,
@@ -39,7 +20,7 @@ vsp(
   center = FALSE,
   recenter = FALSE,
   scale = TRUE,
-  rescale = TRUE,
+  rescale = scale,
   tau_row = NULL,
   tau_col = NULL
 )
@@ -51,22 +32,24 @@ vsp(
   center = FALSE,
   recenter = FALSE,
   scale = TRUE,
-  rescale = TRUE,
+  rescale = scale,
   tau_row = NULL,
   tau_col = NULL
 )
 
-\method{vsp}{igraph}(
+\method{vsp}{dgCMatrix}(
   x,
   rank,
   ...,
   center = FALSE,
   recenter = FALSE,
   scale = TRUE,
-  rescale = TRUE,
+  rescale = scale,
   tau_row = NULL,
   tau_col = NULL
 )
+
+\method{vsp}{igraph}(x, rank, ..., attr = NULL)
 }
 \arguments{
 \item{x}{Either a graph adjacency matrix, \link[igraph:aaa-igraph-package]{igraph::igraph} or
@@ -104,6 +87,8 @@ Sparse SVDs use \code{RSpectra} for performance.
 
 library(LRMF3)
 
+vsp(ml100k, rank = 5, scale = TRUE)
+vsp(ml100k, rank = 5, rescale = FALSE)
 vsp(ml100k, rank = 5)
 
 

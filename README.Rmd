@@ -77,7 +77,9 @@ enron
 Now we estimate:
 
 ```{r}
-enron_fa <- vsp(enron, k = 30)
+library(Matrix)
+
+enron_fa <- vsp(enron, rank = 30)
 enron_fa
 ```
 

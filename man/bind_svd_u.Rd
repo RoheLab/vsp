@@ -19,12 +19,8 @@ you do not passed a \link{vsp} object, one will be created.}
 \link[tidygraph:tbl_graph]{tidygraph::tbl_graph}. If \code{x} is a \link{matrix} or \link[Matrix:Matrix]{Matrix::Matrix}
 then \code{x[i, j]} should correspond to the edge going from node \code{i}
 to node \code{j}.}
-    \item{\code{k}}{The number of factors to calculate.}
     \item{\code{center}}{Should the adjacency matrix be row \emph{and} column centered?
 Defaults to \code{TRUE}.}
-    \item{\code{normalize}}{Should the graph laplacian be used instead of the
-raw adjacency matrix? Defaults to \code{TRUE}. If \code{center = TRUE}, \code{A} will
-first be centered and then normalized.}
     \item{\code{tau_row}}{Row regularization term. Default is \code{NULL}, in which case
 we use the row degree. Ignored when \code{normalize = FALSE}.}
     \item{\code{tau_col}}{Column regularization term. Default is \code{NULL}, in which case

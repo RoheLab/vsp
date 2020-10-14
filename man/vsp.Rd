@@ -3,36 +3,67 @@
 \name{vsp}
 \alias{vsp}
 \alias{vsp.default}
+\alias{vsp.matrix}
+\alias{vsp.Matrix}
 \alias{vsp.igraph}
 \title{Non-Parametric Factor Analysis via Vintage Sparse PCA}
 \usage{
 vsp(
   x,
-  k,
+  rank,
   ...,
   center = FALSE,
-  normalize = TRUE,
+  recenter = FALSE,
+  scale = TRUE,
+  rescale = TRUE,
   tau_row = NULL,
   tau_col = NULL
 )
 
 \method{vsp}{default}(
   x,
-  k,
+  rank,
   ...,
   center = FALSE,
-  normalize = TRUE,
+  recenter = FALSE,
+  scale = TRUE,
+  rescale = TRUE,
+  tau_row = NULL,
+  tau_col = NULL
+)
+
+\method{vsp}{matrix}(
+  x,
+  rank,
+  ...,
+  center = FALSE,
+  recenter = FALSE,
+  scale = TRUE,
+  rescale = TRUE,
+  tau_row = NULL,
+  tau_col = NULL
+)
+
+\method{vsp}{Matrix}(
+  x,
+  rank,
+  ...,
+  center = FALSE,
+  recenter = FALSE,
+  scale = TRUE,
+  rescale = TRUE,
   tau_row = NULL,
   tau_col = NULL
 )
 
 \method{vsp}{igraph}(
   x,
-  k,
+  rank,
   ...,
   center = FALSE,
-  normalize = TRUE,
-  weights = NULL,
+  recenter = FALSE,
+  scale = TRUE,
+  rescale = TRUE,
   tau_row = NULL,
   tau_col = NULL
 )
@@ -43,22 +74,22 @@ vsp(
 then \code{x[i, j]} should correspond to the edge going from node \code{i}
 to node \code{j}.}
 
-\item{k}{The number of factors to calculate.}
-
 \item{...}{Ignored.}
 
 \item{center}{Should the adjacency matrix be row \emph{and} column centered?
 Defaults to \code{TRUE}.}
-
-\item{normalize}{Should the graph laplacian be used instead of the
-raw adjacency matrix? Defaults to \code{TRUE}. If \code{center = TRUE}, \code{A} will
-first be centered and then normalized.}
 
 \item{tau_row}{Row regularization term. Default is \code{NULL}, in which case
 we use the row degree. Ignored when \code{normalize = FALSE}.}
 
 \item{tau_col}{Column regularization term. Default is \code{NULL}, in which case
 we use the column degree. Ignored when \code{normalize = FALSE}.}
+
+\item{k}{The number of factors to calculate.}
+
+\item{normalize}{Should the graph laplacian be used instead of the
+raw adjacency matrix? Defaults to \code{TRUE}. If \code{center = TRUE}, \code{A} will
+first be centered and then normalized.}
 }
 \value{
 An object of class \code{vsp}. TODO: Details
@@ -68,4 +99,12 @@ This code implements TODO.
 }
 \details{
 Sparse SVDs use \code{RSpectra} for performance.
+}
+\examples{
+
+library(LRMF3)
+
+vsp(ml100k, rank = 5)
+
+
 }

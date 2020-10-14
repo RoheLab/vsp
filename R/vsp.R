@@ -32,104 +32,107 @@
 #'
 #' @examples
 #'
-#' library(jiandjindata)
-#' library(igraph)
-#' library(invertiforms)
+#' library(LRMF3)
 #'
-#' A <- get.adjacency(citation_graph)
+#' vsp(ml100k, rank = 5, center = TRUE)
+#' vsp(ml100k, rank = 5, rescale = FALSE)
 #'
 #'
-vsp <- function(x, k, ..., center = FALSE, normalize = TRUE,
+vsp <- function(x, rank, ..., center = FALSE, recenter = FALSE,
+                scale = TRUE, rescale = scale,
                 tau_row = NULL, tau_col = NULL) {
   ellipsis::check_dots_empty()
   UseMethod("vsp")
 }
 
-
 #' @rdname vsp
 #' @export
-vsp.default <- function(x, k, ..., center = FALSE, normalize = TRUE,
+vsp.default <- function(x, rank, ..., center = FALSE, recenter = FALSE,
+                        scale = TRUE, rescale = scale,
                         tau_row = NULL, tau_col = NULL) {
 
-  ### Vintage Sparse PCA Reference Implementation
+  stop(glue("No `vsp` method for objects of class {class(x)}."))
+}
 
-  ## INPUT VALIDATION
+#' @importFrom invertiforms DoubleCenter RegularizedLaplacian
+#' @importFrom invertiforms transform inverse_transform
+#' @rdname vsp
+#' @export
+vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
+                       scale = TRUE, rescale = scale,
+                       tau_row = NULL, tau_col = NULL) {
 
-  if (k < 2)
-    stop("`k` must be at least two.", call. = FALSE)
+  if (rank < 2)
+    stop("`rank` must be at least two.", call. = FALSE)
+
+  if (rescale && !scale)
+    stop("`recenter` must be FALSE when `center` is FALSE.", call. = FALSE)
+
+  if (rescale && !scale)
+    stop("`rescale` must be FALSE when `scale` is FALSE.", call. = FALSE)
 
   n <- nrow(x)
   d <- ncol(x)
 
+  transformers <- list()
+
   if (center) {
     centerer <- DoubleCenter(x)
+    transformers <- append(transformers, centerer)
     L <- transform(centerer, x)
   } else{
     L <- x
   }
 
-  if (normalize) {
-    normalizer <- RegularizedLaplacian(A, tau_row = tau_row, tau_col = tau_col)
-    L <- transform(normalizer, L)
+  if (scale) {
+    scaler <- RegularizedLaplacian(L, tau_row = tau_row, tau_col = tau_col)
+    transformers <- append(transformers, scaler)
+    L <- transform(scaler, L)
   }
 
   # this includes a call to isSymmetric that we might be able to skip out on
-  s <- RSpectra::svds(L, k = k, nu = k, nv = k)
-  U <- s$u
-  V <- s$v
+  s <- svds(L, k = rank, nu = rank, nv = rank)
 
-  R_U <- varimax(U[rsA > 1, ], normalize = FALSE)$rotmat
-  R_V <- varimax(V[csA > 1, ], normalize = FALSE)$rotmat
+  R_U <- varimax(s$u, normalize = FALSE)$rotmat
+  R_V <- varimax(s$v, normalize = FALSE)$rotmat
 
-  Z <- sqrt(n) * U %*% R_U
-  Y <- sqrt(d) * V %*% R_V
+  Z <- sqrt(n) * s$u %*% R_U
+  Y <- sqrt(d) * s$v %*% R_V
 
-  B <- t(R_U) %*% Diagonal(n = k, x = s$d) %*% R_V / (sqrt(n) * sqrt(d))
+  B <- t(R_U) %*% Diagonal(n = rank, x = s$d) %*% R_V / (sqrt(n) * sqrt(d))
 
-  # TODO: make fa skew positive, invert the transformationations
-
-  fa <- LRMF3::fa_like()
-
-  ### STEP 5: MAKE Z, Y SKEW POSITIVE (REMARK 1.3)
-
-  # TODO: not sure I trust this fully just yet
-  Z <- make_columnwise_skew_positive(Z)
-  Y <- make_columnwise_skew_positive(Y)
-
-  ### STEP 6: RESCALE IF NORMALIZED, RETURN OUTPUT
-
-  if (normalize) {
-    # proper re-normalization is like this:
-    Dnorm_row <- Diagonal(n = n, x = sqrt(rsA))
-    Dnorm_col <- Diagonal(n = d, x = sqrt(csA))
-
-    Z <- Dnorm_row %*% Z
-    Y <- Dnorm_col %*% Y
-   }
-
-  new_vsp(
-    U = as.matrix(U),
+  fa <- vsp_fa(
+    u = s$u,
     d = s$d,
-    V = as.matrix(V),
-    Z = as.matrix(Z),
-    B = as.matrix(B),
-    Y = as.matrix(Y),
-    center = center,
-    normalize = normalize,
-    k = k,
-    tau_list = list(
-      tau_row = if (exists("tau_r")) tau_r else NULL,
-      tau_col = if (exists("tau_c")) tau_c else NULL,
-      default_row = default_row,
-      default_col = default_col
-    )
+    v = s$v,
+    Z = Z,
+    B = B,
+    Y = Y,
+    transformers = transformers
   )
+
+  fa <- make_skew_positive(fa)
+
+  if (rescale) {
+    fa <- inverse_transform(scaler, fa)
+  }
+
+  if (recenter) {
+    fa <- inverse_transform(centerer, fa)
+  }
+
+  fa
 }
 
 #' @rdname vsp
 #' @export
-vsp.igraph <- function(x, k, ..., center = FALSE, normalize = TRUE,
-                       weights = NULL, tau_row = NULL, tau_col = NULL) {
+vsp.Matrix <- vsp.matrix
+
+#' @rdname vsp
+#' @export
+vsp.igraph <- function(x, rank, ..., center = FALSE, recenter = FALSE,
+                    scale = TRUE, rescale = scale,
+                    tau_row = NULL, tau_col = NULL) {
   x <- igraph::get.adjacency(x, sparse = TRUE, attr = weights)
   NextMethod()
 }

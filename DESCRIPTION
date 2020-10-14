@@ -27,26 +27,29 @@ Description: Provides fast spectral estimation of latent factors
     blockmodels, degree-corrected overlapping stochastic blockmodels.
 License: MIT + file LICENSE
 Imports:
-    dplyr,
     ellipsis,
+    glue,
+    invertiforms (>= 0.0.0.9000),
+    LRMF3 (>= 0.0.0.9003),
+    Matrix,
+    RSpectra
+Suggests: 
+    covr,
+    dplyr,
     GGally,
     ggplot2,
-    glue,
-    magrittr,
-    Matrix,
-    purrr,
-    RSpectra,
-    scales
-Suggests: 
-    fastadi,
     igraph,
     knitr,
+    purrr,
     rmarkdown,
+    scales,
     testthat,
-    tibble,
-    covr
+    tibble
 VignetteBuilder: 
     knitr
+Remotes: 
+    RoheLab/invertiforms,
+    RoheLab/LRMF3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

@@ -13,7 +13,7 @@
 #'
 #' @param v A *matrix* of "right singular-ish" vectors.
 #'
-#' @param transformers
+#' @param transformers TODO
 #'
 #' @return An `adaptive_imputation` object.
 #'
@@ -21,15 +21,13 @@
 vsp_fa <- function(u, d, v, Z, B, Y, transformers) {
 
   fa <- new_vsp_fa(
-    Z = Z,
-    B = B,
-    Y = Y,
-    subclasses = "vsp",
-    u = u,
+    Z = as.matrix(Z),
+    B = as.matrix(B),
+    Y = as.matrix(Y),
+    u = as.matrix(u),
     d = d,
-    v = v,
-    transformers = transformers,
-    ...
+    v = as.matrix(v),
+    transformers = transformers
   )
 
   validate_vsp_fa(fa)
@@ -45,8 +43,7 @@ new_vsp_fa <- function(u, d, v, Z, B, Y, transformers) {
     u = u,
     d = d,
     v = v,
-    transformers = transformers,
-    ...
+    transformers = transformers
   )
 }
 
@@ -77,7 +74,8 @@ validate_vsp_fa <- function(x) {
 print.vsp_fa <- function(x, ...) {
   cat("Vintage Sparse PCA Factor Analysis\n\n")
 
-  cat(glue("Nodes (n):   {nrow(x$U)}"), sep = "\n")
+  cat(glue("Rows (n):   {nrow(x$u)}"), sep = "\n")
+  cat(glue("Cols (d):   {nrow(x$v)}"), sep = "\n")
   cat(glue("Factors (rank): {x$rank}"), sep = "\n")
   cat(glue("Lambda[rank]:   {round(x$d[x$rank], 4)}"), sep = "\n")
 
@@ -91,8 +89,8 @@ print.vsp_fa <- function(x, ...) {
   cat("B:", dim_and_class(x$B), "\n")
   cat("Y:", dim_and_class(x$Y), "\n")
 
-  cat("u:", dim_and_class(x$U), "\n")
+  cat("u:", dim_and_class(x$u), "\n")
   cat("d:", dim_and_class(x$d), "\n")
-  cat("v:", dim_and_class(x$V), "\n\n")
+  cat("v:", dim_and_class(x$v), "\n\n")
 }
 

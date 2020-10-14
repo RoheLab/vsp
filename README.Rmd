@@ -54,7 +54,7 @@ Obtaining estimates from `vsp` is straightforward. We recommend representing net
 Once you have your network in one of these formats, you can get estimates by calling the `vsp()` function. The result is an object of class `"vsp"`.
 
 ```{r}
-library(vsp)
+# library(vsp)
 library(Matrix)
 
 # create a random sparse adjacency matrix

@@ -4,4 +4,5 @@
 #' @importFrom glue glue
 #' @importFrom RSpectra svds
 #' @keywords internal
+#' @aliases vsp-package
 "_PACKAGE"

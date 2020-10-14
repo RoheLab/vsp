@@ -2,8 +2,8 @@
 % Please edit documentation in R/vsp-package.R
 \docType{package}
 \name{vsp-package}
-\alias{vsp}
 \alias{vsp-package}
+\alias{_PACKAGE}
 \title{vsp: Vintage Sparse PCA for Semi-Parametric Network Factor
     Analysis}
 \description{

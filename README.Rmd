@@ -51,7 +51,7 @@ devtools::install_github("RoheLab/vsp")
 
 Obtaining estimates from `vsp` is straightforward. We recommend representing networks as [`igraph`](https://igraph.org/r/) objects or (sparse) `Matrix` objects from the [`Matrix`](https://cran.r-project.org/web/packages/Matrix/index.html) package (see also `?Matrix`).
 
-Once you have your network in one of these formats, you can get estimates by calling the `vsp()` function. The result is an object of class `"vsp"`.
+Once you have your network in one of these formats, you can get estimates by calling the `vsp()` function. The result is an object of class `"vsp_fa"`.
 
 ```{r}
 # library(vsp)

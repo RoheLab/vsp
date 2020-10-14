@@ -1,6 +1,10 @@
 #' @importFrom GGally ggpairs
 #' @export
 plot_varimax_z_pairs <- function(fa, factors = 1:max(5, fa$k), ...) {
+
+  stop_if_not_installed("dplyr")
+  stop_if_not_installed("GGally")
+
   fa %>%
     get_varimax_z() %>%
     mutate(
@@ -15,6 +19,10 @@ plot_varimax_z_pairs <- function(fa, factors = 1:max(5, fa$k), ...) {
 #' @importFrom GGally ggpairs
 #' @export
 plot_varimax_y_pairs <- function(fa, factors = 1:max(5, fa$k), ...) {
+
+  stop_if_not_installed("dplyr")
+  stop_if_not_installed("GGally")
+
   fa %>%
     get_varimax_y() %>%
     mutate(
@@ -28,6 +36,11 @@ plot_varimax_y_pairs <- function(fa, factors = 1:max(5, fa$k), ...) {
 
 #' @export
 plot_svd_u <- function(fa) {
+
+  stop_if_not_installed("dplyr")
+  stop_if_not_installed("ggplot2")
+  stop_if_not_installed("tidyr")
+
   get_svd_u(fa) %>%
     mutate(element = row_number()) %>%
     gather(eigen, value, -element) %>%
@@ -40,6 +53,12 @@ plot_svd_u <- function(fa) {
 
 #' @export
 plot_svd_v <- function(fa) {
+
+  stop_if_not_installed("dplyr")
+  stop_if_not_installed("ggplot2")
+  stop_if_not_installed("scales")
+  stop_if_not_installed("tidyr")
+
   get_svd_v(fa) %>%
     mutate(element = row_number()) %>%
     gather(eigen, value, -element) %>%
@@ -71,16 +90,3 @@ screeplot.vsp <- function(x, ...) {
     expand_limits(x = 0, y = 0) +
     theme_minimal()
 }
-
-# normalized_ipr_table <- get_ipr(L, k)
-#
-# ggplot(normalized_ipr_table, aes(u_ipr, v_ipr)) +
-#   geom_point() +
-#   labs(
-#     title = "Supreme Court citation IPR Pair Plot",
-#     subtitle = "singular vectors of regularized graph Laplacian (optimal tau)",
-#     x = "Inverse participation ratio (U)",
-#     y = "Inverse participation ratio (V)",
-#     caption = "Each point represents one U-V singular vector pair"
-#   ) +
-#   theme_minimal()

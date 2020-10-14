@@ -9,11 +9,8 @@
 #'  in the table of node information.
 #'
 #' @export
-bind_varimax_z <- function(graph, fa = NULL, ...) {
+bind_varimax_z <- function(graph, fa, ...) {
   stopifnot(inherits(graph, "tbl_graph"))
-
-  if (is.null(fa))
-    fa <- vsp(graph, ...)
 
   # else: TODO: check that dimensions line up correctly
 
@@ -35,11 +32,8 @@ bind_varimax_z <- function(graph, fa = NULL, ...) {
 #'  in the table of node information.
 #'
 #' @export
-bind_svd_u <- function(graph, fa = NULL, ...) {
+bind_svd_u <- function(graph, fa, ...) {
   stopifnot(inherits(graph, "tbl_graph"))
-
-  if (is.null(fa))
-    fa <- vsp(graph, ...)
 
   # else: TODO: check that dimensions line up correctly
 

@@ -46,3 +46,9 @@ make_skew_positive <- function(fa) {
 
   fa
 }
+
+stop_if_not_installed <- function(package) {
+  if (!requireNamespace(package, quietly = TRUE)) {
+    stop(glue("Must install {package} for this functionality.", call. = FALSE))
+  }
+}

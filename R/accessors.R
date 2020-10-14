@@ -8,9 +8,12 @@
 #'
 #' @export
 get_y_clusters <- function(x, ...) {
+
+  stop_if_not_installed("dplyr")
+
   x %>%
     get_varimax_y() %>%
-    mutate_all(abs) %>%
+    dplyr::mutate_all(abs) %>%
     apply(1, which.max)
 }
 
@@ -24,58 +27,65 @@ get_y_clusters <- function(x, ...) {
 #'
 #' @export
 get_z_clusters <- function(x, ...) {
+
+  stop_if_not_installed("dplyr")
+
   x %>%
     get_varimax_z() %>%
-    mutate_all(abs) %>%
+    dplyr::mutate_all(abs) %>%
     apply(1, which.max)
 }
 
 #' @export
-#' @importFrom tibble as_tibble
 get_svd_u <- function(x, ...) {
-  colnames(x$U) <- paste0("u", 1:x$k)
-  as_tibble(x$U)
+  colnames(x$u) <- paste0("u", 1:x$rank)
+  as_tibble(x$u)
 }
 
 #' @export
-#' @importFrom tibble as_tibble
 get_svd_v <- function(x, ...) {
-  colnames(x$V) <- paste0("v", 1:x$k)
-  as_tibble(x$V)
+  colnames(x$v) <- paste0("v", 1:x$rank)
+  as_tibble(x$v)
 }
 
 #' @export
-#' @importFrom tibble as_tibble
 get_varimax_z <- function(x, ...) {
   z <- as.matrix(x$Z)
-  colnames(z) <- paste0("z", 1:x$k)
+  colnames(z) <- paste0("z", 1:x$rank)
   as_tibble(z)
 }
 
 #' @export
-#' @importFrom tibble as_tibble
 get_varimax_y <- function(x, ...) {
   y <- as.matrix(x$Y)
-  colnames(y) <- paste0("y", 1:x$k)
+  colnames(y) <- paste0("y", 1:x$rank)
   as_tibble(y)
 }
 
 #' @export
 get_z_hubs <- function(fa, hubs_per_factor = 10) {
+
+  stop_if_not_installed("dplyr")
+  stop_if_not_installed("tidyr")
+
   fa %>%
     get_varimax_z() %>%
-    mutate(index = row_number()) %>%
-    gather(factor, loading, contains("z"), -index) %>%
-    group_by(factor) %>%
-    top_n(hubs_per_factor, wt = abs(loading))
+    dplyr::mutate(index = dplyr::row_number()) %>%
+    tidyr::gather(factor, loading, dplyr::contains("z"), -index) %>%
+    dplyr::group_by(factor) %>%
+    dplyr::top_n(hubs_per_factor, wt = abs(loading))
 }
 
 #' @export
 get_y_hubs <- function(fa, hubs_per_factor = 10) {
+
+  stop_if_not_installed("dplyr")
+  stop_if_not_installed("tidyr")
+
   fa %>%
     get_varimax_y() %>%
-    mutate(index = row_number()) %>%
-    gather(factor, loading, contains("y"), -index) %>%
-    group_by(factor) %>%
-    top_n(hubs_per_factor, wt = abs(loading))
+    dplyr::mutate(index = dplyr::row_number()) %>%
+    tidyr::gather(factor, loading, dplyr::contains("y"), -index) %>%
+    dplyr::group_by(factor) %>%
+    dplyr::top_n(hubs_per_factor, wt = abs(loading))
 }

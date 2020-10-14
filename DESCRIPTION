@@ -25,11 +25,15 @@ Description: Provides fast spectral estimation of latent factors
     assumptions, the vsp estimator is consistent for (degree-corrected)
     stochastic blockmodels, (degree-corrected) mixed-membership stochastic
     blockmodels, degree-corrected overlapping stochastic blockmodels.
+License: MIT + file LICENSE
+URL: https://github.com/RoheLab/vsp
+BugReports: https://github.com/RoheLab/vsp/issues
 Imports:
     ellipsis,
     glue,
-    invertiforms (>= 0.0.0.9000),
+    invertiforms (>= 0.0.0.9002),
     LRMF3 (>= 0.0.0.9003),
+    magrittr,
     Matrix,
     RSpectra
 Suggests: 
@@ -54,4 +58,3 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
-License: MIT + file LICENSE

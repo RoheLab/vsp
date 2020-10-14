@@ -51,7 +51,8 @@ Suggests:
     scales,
     testthat,
     tidyr,
-    igraphdata
+    igraphdata,
+    tidygraph
 VignetteBuilder: 
     knitr
 Remotes: 

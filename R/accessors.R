@@ -50,26 +50,23 @@ get_svd_v <- function(x, ...) {
 
 #' @export
 get_varimax_z <- function(x, ...) {
-  z <- as.matrix(x$Z)
-  colnames(z) <- paste0("z", 1:x$rank)
-  as_tibble(z)
+  as_tibble(as.matrix(x$Z[, factors, drop = FALSE]))
 }
 
 #' @export
-get_varimax_y <- function(x, ...) {
-  y <- as.matrix(x$Y)
-  colnames(y) <- paste0("y", 1:x$rank)
-  as_tibble(y)
+get_varimax_y <- function(x, factors = 1:x$rank, ...) {
+  # TODO: eventually this type coercion shouldn't be necessary
+  as_tibble(as.matrix(x$Y[, factors, drop = FALSE]))
 }
 
 #' @export
-get_z_hubs <- function(fa, hubs_per_factor = 10) {
+get_z_hubs <- function(fa, hubs_per_factor = 10, factors = 1:fa$rank) {
 
   stop_if_not_installed("dplyr")
   stop_if_not_installed("tidyr")
 
   fa %>%
-    get_varimax_z() %>%
+    get_varimax_z(factors) %>%
     dplyr::mutate(index = dplyr::row_number()) %>%
     tidyr::gather(factor, loading, dplyr::contains("z"), -index) %>%
     dplyr::group_by(factor) %>%

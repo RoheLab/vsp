@@ -1,8 +1,9 @@
 #' @export
-plot_varimax_z_pairs <- function(fa, factors = 1:max(5, fa$k), ...) {
+plot_varimax_z_pairs <- function(fa, factors = 1:max(5, fa$rank), ...) {
 
   stop_if_not_installed("dplyr")
   stop_if_not_installed("GGally")
+  stop_if_not_installed("purrr")
 
   fa %>%
     get_varimax_z() %>%
@@ -12,14 +13,15 @@ plot_varimax_z_pairs <- function(fa, factors = 1:max(5, fa$k), ...) {
     select(!!factors, leverage) %>%
     sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
     select(-leverage) %>%
-    ggpairs(aes(alpha = 0.001), ...)
+    GGally::ggpairs(aes(alpha = 0.001), ...)
 }
 
 #' @export
-plot_varimax_y_pairs <- function(fa, factors = 1:max(5, fa$k), ...) {
+plot_varimax_y_pairs <- function(fa, factors = 1:max(5, fa$rank), ...) {
 
   stop_if_not_installed("dplyr")
   stop_if_not_installed("GGally")
+  stop_if_not_installed("purrr")
 
   fa %>%
     get_varimax_y() %>%
@@ -29,7 +31,7 @@ plot_varimax_y_pairs <- function(fa, factors = 1:max(5, fa$k), ...) {
     select(!!factors, leverage) %>%
     sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
     select(-leverage) %>%
-    ggpairs(aes(alpha = 0.001), ...)
+    GGally::ggpairs(aes(alpha = 0.001), ...)
 }
 
 #' @export
@@ -53,7 +55,6 @@ plot_svd_u <- function(fa) {
 plot_svd_v <- function(fa) {
 
   stop_if_not_installed("dplyr")
-  stop_if_not_installed("ggplot2")
   stop_if_not_installed("scales")
   stop_if_not_installed("tidyr")
 
@@ -73,19 +74,12 @@ plot_svd_v <- function(fa) {
 #' @importFrom stats screeplot
 screeplot.vsp_fa <- function(x, ...) {
 
-  if (x$normalize) {
-    graph <- "Regularized Graph Laplacian"
-  } else {
-    graph <- "Adjacency Matrix"
-  }
-
-  ggplot(data = NULL, aes(1:x$k, x$d)) +
+  ggplot(data = NULL, aes(1:x$rank, x$d)) +
     geom_point() +
     labs(
-      title = "Singular values of adjacency matrix",
-      caption = glue("Singular values of {graph}"),
-      x = "Singular value",
-      y = "Value"
+      title = "Screeplot of graph spectrum",
+      x = "Index",
+      y = "Singular value"
     ) +
     expand_limits(x = 0, y = 0) +
     theme_minimal()

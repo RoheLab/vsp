@@ -18,7 +18,12 @@
 #' @return An `adaptive_imputation` object.
 #'
 #' @export
-vsp_fa <- function(u, d, v, Z, B, Y, transformers, R_U, R_V) {
+vsp_fa <- function(
+  u, d, v,
+  Z, B, Y,
+  transformers,
+  R_U, R_V,
+  rownames = NULL, colnames = NULL) {
 
   fa <- new_vsp_fa(
     Z = as.matrix(Z),
@@ -31,6 +36,29 @@ vsp_fa <- function(u, d, v, Z, B, Y, transformers, R_U, R_V) {
     R_U = as.matrix(R_U),
     R_V = as.matrix(R_V)
   )
+
+  if (is.null(rownames)) {
+    rownames <- paste0("row", 1:nrow(fa$u))
+  }
+
+  if (is.null(colnames)) {
+    colnames <- paste0("col", 1:nrow(fa$v))
+  }
+
+  rownames(fa$Z) <- rownames
+  rownames(fa$u) <- rownames
+
+  colnames(fa$Z) <- paste0("z", 1:fa$rank)
+  colnames(fa$u) <- paste0("u", 1:fa$rank)
+
+  rownames(fa$B) <- paste0("z", 1:fa$rank)
+  colnames(fa$B) <- paste0("y", 1:fa$rank)
+
+  rownames(fa$Y) <- colnames
+  rownames(fa$v) <- colnames
+
+  colnames(fa$Y) <- paste0("y", 1:fa$rank)
+  colnames(fa$v) <- paste0("v", 1:fa$rank)
 
   validate_vsp_fa(fa)
 }
@@ -99,4 +127,3 @@ print.vsp_fa <- function(x, ...) {
   cat("d:", dim_and_class(x$d), "\n")
   cat("v:", dim_and_class(x$v), "\n\n")
 }
-

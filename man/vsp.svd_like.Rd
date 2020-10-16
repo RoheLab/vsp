@@ -11,7 +11,9 @@
   centerer = NULL,
   scaler = NULL,
   recenter = FALSE,
-  rescale = TRUE
+  rescale = TRUE,
+  rownames = NULL,
+  colnames = NULL
 )
 }
 \arguments{

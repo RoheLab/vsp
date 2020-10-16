@@ -37,26 +37,23 @@ get_z_clusters <- function(x, ...) {
 }
 
 #' @export
-get_svd_u <- function(x, ...) {
-  colnames(x$u) <- paste0("u", 1:x$rank)
-  as_tibble(x$u)
+get_svd_u <- function(x, factors, ...) {
+  as_tibble(as.matrix(x$u[, factors, drop = FALSE]), rownames = "id")
 }
 
 #' @export
-get_svd_v <- function(x, ...) {
-  colnames(x$v) <- paste0("v", 1:x$rank)
-  as_tibble(x$v)
+get_svd_v <- function(x, factors, ...) {
+  as_tibble(as.matrix(x$v[, factors, drop = FALSE]), rownames = "id")
 }
 
 #' @export
-get_varimax_z <- function(x, ...) {
-  as_tibble(as.matrix(x$Z[, factors, drop = FALSE]))
+get_varimax_z <- function(x, factors = 1:x$rank, ...) {
+  as_tibble(as.matrix(x$Z[, factors, drop = FALSE]), rownames = "id")
 }
 
 #' @export
 get_varimax_y <- function(x, factors = 1:x$rank, ...) {
-  # TODO: eventually this type coercion shouldn't be necessary
-  as_tibble(as.matrix(x$Y[, factors, drop = FALSE]))
+  as_tibble(as.matrix(x$Y[, factors, drop = FALSE]), rownames = "id")
 }
 
 #' @export
@@ -67,8 +64,7 @@ get_z_hubs <- function(fa, hubs_per_factor = 10, factors = 1:fa$rank) {
 
   fa %>%
     get_varimax_z(factors) %>%
-    dplyr::mutate(index = dplyr::row_number()) %>%
-    tidyr::gather(factor, loading, dplyr::contains("z"), -index) %>%
+    tidyr::gather(factor, loading, dplyr::contains("z"), -id) %>%
     dplyr::group_by(factor) %>%
     dplyr::top_n(hubs_per_factor, wt = abs(loading))
 }
@@ -81,8 +77,7 @@ get_y_hubs <- function(fa, hubs_per_factor = 10) {
 
   fa %>%
     get_varimax_y() %>%
-    dplyr::mutate(index = dplyr::row_number()) %>%
-    tidyr::gather(factor, loading, dplyr::contains("y"), -index) %>%
+    tidyr::gather(factor, loading, dplyr::contains("y"), -id) %>%
     dplyr::group_by(factor) %>%
     dplyr::top_n(hubs_per_factor, wt = abs(loading))
 }

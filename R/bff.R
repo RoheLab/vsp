@@ -14,7 +14,7 @@
 #'   ith "most important" feature for cluster j.
 #'
 #' @export
-bff <- function(loadings, features, num_best, ...) {
+  bff <- function(loadings, features, num_best, ...) {
   UseMethod("bff")
 }
 

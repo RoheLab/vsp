@@ -136,7 +136,8 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
 #'
 vsp.svd_like <- function(x, rank, ...,
                          centerer = NULL, scaler = NULL,
-                         recenter = FALSE, rescale = TRUE) {
+                         recenter = FALSE, rescale = TRUE,
+                         rownames = NULL, colnames = NULL) {
 
   n <- nrow(x$u)
   d <- nrow(x$v)
@@ -153,7 +154,8 @@ vsp.svd_like <- function(x, rank, ...,
     u = x$u, d = x$d, v = x$v,
     Z = Z, B = B, Y = Y,
     R_U = R_U, R_V = R_V,
-    transformers = list(centerer, scaler)
+    transformers = list(centerer, scaler),
+    rownames = rownames, colnames = colnames
   )
 
   if (!is.null(scaler) && rescale) {

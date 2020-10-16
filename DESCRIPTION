@@ -2,7 +2,7 @@ Type: Package
 Package: vsp
 Title: Vintage Sparse PCA for Semi-Parametric Network Factor
     Analysis
-Version: 0.0.0.9004
+Version: 0.0.0.9005
 Authors@R: 
     c(person(given = "Karl",
              family = "Rohe",

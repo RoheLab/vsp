@@ -6,7 +6,7 @@ plot_varimax_z_pairs <- function(fa, factors = 1:max(5, fa$rank), ...) {
   stop_if_not_installed("purrr")
 
   fa %>%
-    get_varimax_z() %>%
+    get_varimax_z(factors) %>%
     select(-id) %>%
     mutate(
       leverage = purrr::pmap_dbl(., sum)
@@ -26,7 +26,7 @@ plot_varimax_y_pairs <- function(fa, factors = 1:max(5, fa$rank), ...) {
   stop_if_not_installed("purrr")
 
   fa %>%
-    get_varimax_y() %>%
+    get_varimax_y(factors) %>%
     select(-id) %>%
     mutate(
       leverage = purrr::pmap_dbl(., sum)

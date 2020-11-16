@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">vsp</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9005</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9007</span>
       </span>
     </div>
 
@@ -95,8 +95,8 @@
     
 <p>Obtaining estimates from <code>vsp</code> is straightforward. We recommend representing networks as <a href="https://igraph.org/r/"><code>igraph</code></a> objects or (sparse) <code>Matrix</code> objects from the <a href="https://cran.r-project.org/web/packages/Matrix/index.html"><code>Matrix</code></a> package (see also <code><a href="https://rdrr.io/pkg/Matrix/man/Matrix.html">?Matrix</a></code>).</p>
 <p>Once you have your network in one of these formats, you can get estimates by calling the <code><a href="../reference/vsp.html">vsp()</a></code> function. The result is an object of class <code>"vsp_fa"</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RoheLab/vsp">vsp</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RoheLab/vsp">vsp</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://Matrix.R-forge.R-project.org/">Matrix</a></span><span class="op">)</span>
 
 <span class="co"># create a random sparse adjacency matrix</span>
@@ -110,7 +110,7 @@
 <span class="co">#&gt; Rows (n):   12</span>
 <span class="co">#&gt; Cols (d):   12</span>
 <span class="co">#&gt; Factors (rank): 5</span>
-<span class="co">#&gt; Lambda[rank]:   0.0999</span>
+<span class="co">#&gt; Lambda[rank]:   0.105</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Pre-Processing Options (TODO) </span>
 <span class="co">#&gt; </span>
@@ -121,10 +121,10 @@
 <span class="co">#&gt; Y: 12 x 5 [dgeMatrix] </span>
 <span class="co">#&gt; u: 12 x 5 [matrix] </span>
 <span class="co">#&gt; d: 5      [numeric] </span>
-<span class="co">#&gt; v: 12 x 5 [matrix]</span></pre></div>
+<span class="co">#&gt; v: 12 x 5 [matrix]</span></code></pre></div>
 <p>Here we demonstrate <code>vsp</code> usage on an <code>igraph</code> object, using the <code>enron</code> network from <code>igraphdata</code> package to demonstrate this functionality. First we peak at the graph:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'igraph'</span>
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
@@ -147,10 +147,10 @@
 <span class="co">#&gt; [25]  64-&gt;164  64-&gt;164  64-&gt;168  66-&gt; 66  66-&gt; 66  67-&gt;129  67-&gt;129  67-&gt;129</span>
 <span class="co">#&gt; [33]  67-&gt;129  93-&gt; 10  93-&gt; 10  93-&gt; 10  93-&gt; 10  93-&gt; 39  93-&gt; 39  93-&gt; 93</span>
 <span class="co">#&gt; [41]  93-&gt; 93  93-&gt; 93  93-&gt; 93  93-&gt;124  93-&gt;124 100-&gt; 61 100-&gt; 61 115-&gt;115</span>
-<span class="co">#&gt; + ... omitted several edges</span></pre></div>
+<span class="co">#&gt; + ... omitted several edges</span></code></pre></div>
 <p>Now we estimate:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://Matrix.R-forge.R-project.org/">Matrix</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://Matrix.R-forge.R-project.org/">Matrix</a></span><span class="op">)</span>
 
 <span class="va">enron_fa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">enron</span>, rank <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
 <span class="va">enron_fa</span>
@@ -170,19 +170,19 @@
 <span class="co">#&gt; Y: 184 x 30 [dgeMatrix] </span>
 <span class="co">#&gt; u: 184 x 30 [matrix] </span>
 <span class="co">#&gt; d: 30      [numeric] </span>
-<span class="co">#&gt; v: 184 x 30 [matrix]</span></pre></div>
+<span class="co">#&gt; v: 184 x 30 [matrix]</span></code></pre></div>
 <p>The default print method has a large amount of valuable information. First, we learn that the graph has 184 nodes, and that we have used <code>rank = 30</code> as our guess of the rank of <code>A</code>, the network adjacency matrix. The 30th singular value of <code>A</code> is 0.2039. This is of interest, as we expect <code>lambda[k] ~ 0</code> to indicate that we have we have overestimated the rank of <code>A</code>, in say, blockmodels.</p>
 <p>The pre-processing section indicates that the matrix representation of the graph was <em>not</em> row- and column-centered before estimation (<code>center = FALSE</code>), and that we used the graph Laplacian rather than the adjacency matrix (<code>normalize = TRUE</code>).</p>
 <p>By default, <code>normalize = TRUE</code> not only uses the graph Laplacian, but also regularizes the graph Laplacian using mean in-degree and out-degree. See [1] for details on how we form the regularized graph Laplacian.</p>
 <p>In general, you do not need to tune <code>tau_row</code> and <code>tau_col</code>. To turn off regularization (not recommended!), see <code>tau_row = 0</code> and <code>tau_col = 0</code>. This often leads to eigenvector localization and thus overfitting.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">M</span>, rank <span class="op">=</span> <span class="fl">5</span>, tau_row <span class="op">=</span> <span class="fl">0</span>, tau_col <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">M</span>, rank <span class="op">=</span> <span class="fl">5</span>, tau_row <span class="op">=</span> <span class="fl">0</span>, tau_col <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 <span class="co">#&gt; Vintage Sparse PCA Factor Analysis</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Rows (n):   12</span>
 <span class="co">#&gt; Cols (d):   12</span>
 <span class="co">#&gt; Factors (rank): 5</span>
-<span class="co">#&gt; Lambda[rank]:   0.5182</span>
+<span class="co">#&gt; Lambda[rank]:   0.5198</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Pre-Processing Options (TODO) </span>
 <span class="co">#&gt; </span>
@@ -193,17 +193,17 @@
 <span class="co">#&gt; Y: 12 x 5 [dgeMatrix] </span>
 <span class="co">#&gt; u: 12 x 5 [matrix] </span>
 <span class="co">#&gt; d: 5      [numeric] </span>
-<span class="co">#&gt; v: 12 x 5 [matrix]</span></pre></div>
+<span class="co">#&gt; v: 12 x 5 [matrix]</span></code></pre></div>
 <p>The components <code>U</code>, <code>d</code>, and <code>V</code> are the standard elements of the singular value decomposition of your network.</p>
 <p>At the moment, we are performing centering explicitly, which is inefficient and converts adjacency matrices from sparse into dense matrices. Setting <code>center = TRUE</code> produces a warning to remind you of this. We plan to implement implicit centering shortly.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">M</span>, rank <span class="op">=</span> <span class="fl">5</span>, center <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">M</span>, rank <span class="op">=</span> <span class="fl">5</span>, center <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Vintage Sparse PCA Factor Analysis</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Rows (n):   12</span>
 <span class="co">#&gt; Cols (d):   12</span>
 <span class="co">#&gt; Factors (rank): 5</span>
-<span class="co">#&gt; Lambda[rank]:   0.0999</span>
+<span class="co">#&gt; Lambda[rank]:   0.105</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Pre-Processing Options (TODO) </span>
 <span class="co">#&gt; </span>
@@ -214,135 +214,148 @@
 <span class="co">#&gt; Y: 12 x 5 [dgeMatrix] </span>
 <span class="co">#&gt; u: 12 x 5 [matrix] </span>
 <span class="co">#&gt; d: 5      [numeric] </span>
-<span class="co">#&gt; v: 12 x 5 [matrix]</span></pre></div>
+<span class="co">#&gt; v: 12 x 5 [matrix]</span></code></pre></div>
 <p>You can approximately reconstruct the matrix representation of your network as follows:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">fa2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">M</span>, rank <span class="op">=</span> <span class="fl">5</span>, normalize <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fa2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">M</span>, rank <span class="op">=</span> <span class="fl">5</span>, normalize <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="va">fa2</span><span class="op">$</span><span class="va">u</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">fa2</span><span class="op">$</span><span class="va">d</span><span class="op">)</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">fa2</span><span class="op">$</span><span class="va">v</span><span class="op">)</span>
 <span class="co">#&gt;               col1         col2         col3         col4         col5</span>
-<span class="co">#&gt; row1   0.044966527  0.046612298  0.100719022  0.015439384 -0.003210199</span>
-<span class="co">#&gt; row2   0.045646876  0.020713423  0.108382197  0.072034531  0.021090256</span>
-<span class="co">#&gt; row3  -0.014600511  0.126623635  0.035455261 -0.025962548  0.003838041</span>
-<span class="co">#&gt; row4   0.003194962 -0.049553104  0.036005589  0.124191282  0.052036551</span>
-<span class="co">#&gt; row5  -0.004953384  0.017637785 -0.015683038  0.034090031  0.021445593</span>
-<span class="co">#&gt; row6   0.046008611  0.100638062  0.102623872 -0.005724373  0.013515145</span>
-<span class="co">#&gt; row7   0.043429053 -0.012305090 -0.014847896 -0.034330759 -0.021749958</span>
-<span class="co">#&gt; row8   0.104384145  0.104625183  0.170303813 -0.023304681 -0.026169920</span>
-<span class="co">#&gt; row9   0.008247956  0.162619211  0.099785311 -0.002674467  0.016027622</span>
-<span class="co">#&gt; row10 -0.036136104  0.005766042  0.008464382  0.129881831  0.079045265</span>
-<span class="co">#&gt; row11  0.008885904  0.015684765 -0.006916329  0.037375522  0.039014150</span>
-<span class="co">#&gt; row12  0.115134843  0.014534077  0.121300032 -0.007299528 -0.012192179</span>
-<span class="co">#&gt;               col6          col7          col8         col9        col10</span>
-<span class="co">#&gt; row1   0.018444883  0.0102994112 -0.0190708885 -0.012521664 -0.009080035</span>
-<span class="co">#&gt; row2   0.097999903  0.0005946547  0.0007268225  0.005604963 -0.001793204</span>
-<span class="co">#&gt; row3  -0.005816527 -0.0194571033  0.0286640118  0.122997100  0.061866457</span>
-<span class="co">#&gt; row4   0.154020983 -0.0113731252 -0.0011816091  0.014554075  0.016838843</span>
-<span class="co">#&gt; row5   0.110727145 -0.0441725652  0.1363343464  0.121610203  0.020341643</span>
-<span class="co">#&gt; row6  -0.012988249  0.1064572469 -0.0632079422  0.046204217  0.122817845</span>
-<span class="co">#&gt; row7   0.032560313 -0.0041670263  0.1546294075  0.040614661 -0.030669585</span>
-<span class="co">#&gt; row8   0.008932962  0.0368841982  0.0387190477  0.009481957 -0.010088556</span>
-<span class="co">#&gt; row9   0.015028734  0.0127548813 -0.0077006541  0.131464909  0.099479076</span>
-<span class="co">#&gt; row10  0.168788624  0.0011925059 -0.0023324903  0.118653105  0.114275900</span>
-<span class="co">#&gt; row11  0.087310517  0.0629316438  0.0561561754  0.108513542  0.119818775</span>
-<span class="co">#&gt; row12  0.012973572  0.1218247664  0.0073297521 -0.044020127  0.034249805</span>
-<span class="co">#&gt;              col11        col12</span>
-<span class="co">#&gt; row1  -0.011839213  0.007761500</span>
-<span class="co">#&gt; row2  -0.015993798  0.016530753</span>
-<span class="co">#&gt; row3  -0.015915096 -0.007816694</span>
-<span class="co">#&gt; row4  -0.008815264 -0.008326543</span>
-<span class="co">#&gt; row5  -0.020034107  0.069515830</span>
-<span class="co">#&gt; row6   0.128091611  0.041302040</span>
-<span class="co">#&gt; row7   0.018588635  0.139548393</span>
-<span class="co">#&gt; row8   0.015839788  0.095316445</span>
-<span class="co">#&gt; row9   0.014752518 -0.006351334</span>
-<span class="co">#&gt; row10  0.033365661 -0.021725714</span>
-<span class="co">#&gt; row11  0.120761562  0.092171380</span>
-<span class="co">#&gt; row12  0.139144368  0.145347780</span></pre></div>
+<span class="co">#&gt; row1   0.002803890  0.099369903  0.018198617  0.137349871  0.025787745</span>
+<span class="co">#&gt; row2   0.148737015  0.076320989  0.047692393 -0.021639245  0.008376763</span>
+<span class="co">#&gt; row3  -0.008752899  0.017588668  0.002544318  0.113340695 -0.014281405</span>
+<span class="co">#&gt; row4   0.019024472  0.005977208 -0.006129983  0.062115681  0.003853118</span>
+<span class="co">#&gt; row5   0.001295453  0.122774333  0.150096949  0.012599570 -0.022119681</span>
+<span class="co">#&gt; row6   0.013463843  0.066111758  0.046650293 -0.018373799  0.069722378</span>
+<span class="co">#&gt; row7   0.012535507  0.128576037 -0.007063898  0.011042825  0.145993819</span>
+<span class="co">#&gt; row8   0.009368428  0.070009115  0.126860202 -0.023232197 -0.029796768</span>
+<span class="co">#&gt; row9   0.169185919  0.059812719 -0.018327796 -0.006131100  0.026552023</span>
+<span class="co">#&gt; row10  0.173848837 -0.008062627 -0.030004836  0.020298761 -0.041208736</span>
+<span class="co">#&gt; row11 -0.016830312  0.116629773  0.127347841  0.032817480  0.002712164</span>
+<span class="co">#&gt; row12 -0.019505175  0.036243056 -0.038264962 -0.001833591  0.126083786</span>
+<span class="co">#&gt;                col6        col7        col8 col9        col10         col11</span>
+<span class="co">#&gt; row1  -0.0448653311  0.10657988  0.12721385    0  0.133804374  0.0265790924</span>
+<span class="co">#&gt; row2   0.0442995224  0.00998244  0.04627915    0  0.028098201  0.0844552063</span>
+<span class="co">#&gt; row3  -0.0001478656  0.14390795  0.00320656    0  0.158317556  0.0841826193</span>
+<span class="co">#&gt; row4   0.0258840032  0.12480529 -0.01886154    0  0.117909522  0.0983501382</span>
+<span class="co">#&gt; row5   0.0506831774  0.01768152  0.02164633    0 -0.014543065  0.0953318636</span>
+<span class="co">#&gt; row6   0.0873777659  0.10798977 -0.02020366    0  0.006533823  0.1532885245</span>
+<span class="co">#&gt; row7  -0.0145605667  0.03133938  0.16367162    0 -0.038072540 -0.0002318473</span>
+<span class="co">#&gt; row8   0.0805037630  0.02659970 -0.04830427    0 -0.019773597  0.1231524472</span>
+<span class="co">#&gt; row9  -0.0166634579 -0.03058467  0.11381187    0  0.033696434 -0.0079499848</span>
+<span class="co">#&gt; row10 -0.0028826376  0.01380906  0.02665186    0  0.113451940  0.0312092732</span>
+<span class="co">#&gt; row11  0.0552807616  0.07011031  0.01666484    0  0.016329300  0.1201497225</span>
+<span class="co">#&gt; row12  0.0455463582  0.12169780  0.01748372    0  0.010916034  0.0938208528</span>
+<span class="co">#&gt;               col12</span>
+<span class="co">#&gt; row1  -0.0259461666</span>
+<span class="co">#&gt; row2   0.0222148660</span>
+<span class="co">#&gt; row3   0.0052178691</span>
+<span class="co">#&gt; row4   0.0256334897</span>
+<span class="co">#&gt; row5   0.0043247886</span>
+<span class="co">#&gt; row6   0.0639113019</span>
+<span class="co">#&gt; row7   0.0088977088</span>
+<span class="co">#&gt; row8   0.0287910731</span>
+<span class="co">#&gt; row9  -0.0069481948</span>
+<span class="co">#&gt; row10 -0.0004159705</span>
+<span class="co">#&gt; row11  0.0172710079</span>
+<span class="co">#&gt; row12  0.0585344869</span></code></pre></div>
 <p>In the example above, this will <em>not</em> approximate <code>M</code>, but rather the regularized graph Laplacian formed from <code>M</code>. Similarly, the varimax-rotated network approximate reconstruction is</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="va">fa</span><span class="op">$</span><span class="va">Z</span> <span class="op">%*%</span> <span class="va">fa</span><span class="op">$</span><span class="va">B</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">fa</span><span class="op">$</span><span class="va">Y</span><span class="op">)</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fa</span><span class="op">$</span><span class="va">Z</span> <span class="op">%*%</span> <span class="va">fa</span><span class="op">$</span><span class="va">B</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">fa</span><span class="op">$</span><span class="va">Y</span><span class="op">)</span>
 <span class="co">#&gt; 12 x 12 Matrix of class "dgeMatrix"</span>
-<span class="co">#&gt;              col1        col2        col3       col4          col5         col6</span>
-<span class="co">#&gt; row1  -0.22602350  0.08095986  0.50027970 -0.3099668 -0.2157701935 -0.283520322</span>
-<span class="co">#&gt; row2  -0.41694745 -0.25877690  0.37907544 -0.1846316 -0.1972231909  0.006738273</span>
-<span class="co">#&gt; row3  -0.17662382  0.84599056 -0.01044447 -0.2498131  0.0102015694 -0.427064850</span>
-<span class="co">#&gt; row4  -0.24269523 -0.38245486 -0.13673760  0.4359282  0.1344096120  0.474859064</span>
-<span class="co">#&gt; row5  -0.85013948 -0.41441397 -0.56510463 -0.5402831 -0.3304235890  0.006841211</span>
-<span class="co">#&gt; row6  -0.02711244  0.73602782  1.19233740 -0.3612677  0.0193821882 -0.202429255</span>
-<span class="co">#&gt; row7  -0.17633070 -0.25972014 -0.39160429 -0.5596803 -0.3325736142 -0.318911592</span>
-<span class="co">#&gt; row8   0.49198098  0.70056530  0.46622361 -0.2917102 -0.1776795213 -0.907005903</span>
-<span class="co">#&gt; row9  -0.29432414  1.03560877  0.44775158 -0.3461979 -0.0008893516 -0.458059551</span>
-<span class="co">#&gt; row10 -0.36908098  0.06390190 -0.39163055  0.7145812  0.4536327046  0.773537068</span>
-<span class="co">#&gt; row11  0.19284911  0.37486138 -0.11185099  0.3269506  0.5121854665  0.665514324</span>
-<span class="co">#&gt; row12  0.64225680  0.18110628  0.89395924 -0.1732062 -0.0312055505 -0.258144577</span>
-<span class="co">#&gt;              col7        col8        col9       col10       col11      col12</span>
-<span class="co">#&gt; row1   0.04489539 -0.20087952 -0.32696375 -0.13611122 -0.18154976 -0.6043884</span>
-<span class="co">#&gt; row2  -0.01881989 -0.19435381 -0.42075931 -0.18576372 -0.24896345 -0.8243716</span>
-<span class="co">#&gt; row3  -0.17873608 -0.05943618  0.72787559  0.35020188 -0.23038447 -0.3333272</span>
-<span class="co">#&gt; row4  -0.21259114 -0.29730917 -0.15557399 -0.07291237 -0.29908465 -0.5268132</span>
-<span class="co">#&gt; row5  -0.46213155  0.52344329  0.22104772 -0.29463335 -0.55051756 -0.7216488</span>
-<span class="co">#&gt; row6   0.85756852 -0.20885231  0.25916730  0.95252948  0.90822401 -0.3428749</span>
-<span class="co">#&gt; row7  -0.21040591  0.57442786 -0.06482438 -0.45465998 -0.21175350  0.2164263</span>
-<span class="co">#&gt; row8  -0.04682603 -0.31130675 -0.31263058 -0.36492418 -0.27926191  0.2488529</span>
-<span class="co">#&gt; row9   0.05685803 -0.23123189  0.72867455  0.62246096 -0.04552591 -0.6962441</span>
-<span class="co">#&gt; row10 -0.21396881 -0.31818052  0.72996608  0.63236333 -0.11167128 -0.6121774</span>
-<span class="co">#&gt; row11  0.70067738  0.37478109  1.16936607  1.36722935  1.30167532  0.7719779</span>
-<span class="co">#&gt; row12  0.81167835 -0.03943032 -0.47048077  0.22573953  0.92370601  0.7509040</span></pre></div>
+<span class="co">#&gt;              col1         col2        col3         col4        col5        col6</span>
+<span class="co">#&gt; row1  -0.35680240  1.110925457  0.37149589  1.342986227  0.03812955 -0.01089212</span>
+<span class="co">#&gt; row2  -0.02163731  0.170420394  0.44827500 -0.001532004 -0.30519937  0.07487050</span>
+<span class="co">#&gt; row3  -0.52716914  0.008639759  0.33906152  0.933906527 -0.11364967 -0.02900485</span>
+<span class="co">#&gt; row4  -0.48853136 -0.200489549  0.27131873  0.539206558 -0.03507966  0.04771571</span>
+<span class="co">#&gt; row5  -0.58006088  0.714256036  1.23667882  0.193588656 -0.19433250  0.07034591</span>
+<span class="co">#&gt; row6  -0.34761633  1.010132276  0.48468565  0.499562411  0.10307749  1.31868721</span>
+<span class="co">#&gt; row7  -0.50346874  0.719176533  0.17748732  0.168116415  0.72852967 -0.20269911</span>
+<span class="co">#&gt; row8  -0.42116509  0.178836787  0.95007008 -0.123747253 -0.27771040  0.36002047</span>
+<span class="co">#&gt; row9   0.23798190  0.023898500 -0.06016724 -0.023799232 -0.17162429 -0.21478913</span>
+<span class="co">#&gt; row10  0.22508957 -0.584808191 -0.07037167  0.061496805 -0.48845026 -0.27745300</span>
+<span class="co">#&gt; row11 -0.75367075  0.749347251  1.19570048  0.409845492 -0.04787488  0.17528649</span>
+<span class="co">#&gt; row12 -0.84744536 -0.348017950  0.10407461 -0.024706448  0.72320807 -0.11587127</span>
+<span class="co">#&gt;             col7         col8         col9        col10       col11</span>
+<span class="co">#&gt; row1   1.1955151  0.798111595  0.347722548  1.120666097  0.17628813</span>
+<span class="co">#&gt; row2  -0.1327528 -0.202540014  0.007642460 -0.049254986  0.23192371</span>
+<span class="co">#&gt; row3   1.2782427 -0.280831835  0.200327016  1.170075874  0.76227190</span>
+<span class="co">#&gt; row4   0.9899515 -0.468698726  0.121669534  0.763248600  0.77054282</span>
+<span class="co">#&gt; row5   0.1427367 -0.291280701  0.089992492 -0.170645259  0.77293269</span>
+<span class="co">#&gt; row6   1.2696519 -0.006163336  0.394420438  0.164397305  1.16502326</span>
+<span class="co">#&gt; row7   0.2134333  0.642753548  0.077141519 -0.342551577 -0.11217918</span>
+<span class="co">#&gt; row8   0.1418534 -0.733808009  0.039655953 -0.246443275  0.96764570</span>
+<span class="co">#&gt; row9  -0.3807006  0.188552986 -0.053050759 -0.008058864 -0.38508952</span>
+<span class="co">#&gt; row10 -0.1401368 -0.385173617 -0.088634891  0.466194403 -0.06411807</span>
+<span class="co">#&gt; row11  0.5949241 -0.290180793  0.165873607  0.061868588  0.98932377</span>
+<span class="co">#&gt; row12  0.7483483 -0.435089974  0.005627101 -0.060627953  0.69019567</span>
+<span class="co">#&gt;              col12</span>
+<span class="co">#&gt; row1   0.286168965</span>
+<span class="co">#&gt; row2  -0.048069814</span>
+<span class="co">#&gt; row3   0.052530452</span>
+<span class="co">#&gt; row4   0.038886335</span>
+<span class="co">#&gt; row5  -0.143344721</span>
+<span class="co">#&gt; row6   1.197539025</span>
+<span class="co">#&gt; row7  -0.050580410</span>
+<span class="co">#&gt; row8   0.039002662</span>
+<span class="co">#&gt; row9  -0.172950272</span>
+<span class="co">#&gt; row10 -0.303614597</span>
+<span class="co">#&gt; row11  0.005948836</span>
+<span class="co">#&gt; row12 -0.134925366</span></code></pre></div>
 <p>In general, you won’t want to explicit reconstruct the network matrix for large networks since the reconstruction will be dense.</p>
 <p>If you want to directly manipulate the estimates, you can access them as we have above with <code>fa$B</code> and so on and so forth. Note that these are <code>matrix</code> and <code>Matrix</code> objects, and you may need to perform type coercions. We also provide some utility functions to extract estimates into <code>tibbles</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu">get_varimax_z</span><span class="op">(</span><span class="va">fa</span><span class="op">)</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">get_varimax_z</span><span class="op">(</span><span class="va">fa</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 12 x 6</span>
-<span class="co">#&gt;    id       z1     z2      z3     z4     z5</span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 row1  -2.84 -2.08  -0.315  -4.69  -2.25 </span>
-<span class="co">#&gt;  2 row2  -1.25 -2.03   0.687  -5.33  -4.64 </span>
-<span class="co">#&gt;  3 row3  -2.84 -1.17  -7.56    0.125  0.978</span>
-<span class="co">#&gt;  4 row4   4.86 -2.19   0.467  -2.01  -1.83 </span>
-<span class="co">#&gt;  5 row5  -2.53  5.13  -3.77   -2.22  -6.85 </span>
-<span class="co">#&gt;  6 row6  -8.51 -6.85  -0.0903 -0.780 -5.62 </span>
-<span class="co">#&gt;  7 row7  -3.17  6.41  -0.322   0.174 -0.763</span>
-<span class="co">#&gt;  8 row8  -2.13 -0.934 -1.56   -2.51   8.02 </span>
-<span class="co">#&gt;  9 row9  -5.23 -4.30  -7.74   -1.55  -1.74 </span>
-<span class="co">#&gt; 10 row10  5.74 -4.20  -4.16    1.68  -3.03 </span>
-<span class="co">#&gt; 11 row11 -2.14 -1.61  -0.120   9.98  -3.93 </span>
-<span class="co">#&gt; 12 row12 -4.74 -2.24   6.48    1.23   1.45</span></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu">get_varimax_y</span><span class="op">(</span><span class="va">fa</span><span class="op">)</span>
+<span class="co">#&gt;    id        z1      z2     z3     z4     z5</span>
+<span class="co">#&gt;    &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 row1   -5.61 10.9    -1.31  -4.22  -1.49 </span>
+<span class="co">#&gt;  2 row2   -2.07 -1.57   -1.60  -3.05  -1.19 </span>
+<span class="co">#&gt;  3 row3   -4.80  5.84   -7.78   1.38  -2.66 </span>
+<span class="co">#&gt;  4 row4   -3.82  2.61   -6.71   2.90  -1.51 </span>
+<span class="co">#&gt;  5 row5   -9.22 -1.67   -1.56  -3.93  -4.38 </span>
+<span class="co">#&gt;  6 row6   -4.83  0.866  -2.48  -0.974 11.8  </span>
+<span class="co">#&gt;  7 row7   -4.77  2.93    6.65   1.94  -1.92 </span>
+<span class="co">#&gt;  8 row8   -6.17 -4.80   -4.03  -1.34  -0.594</span>
+<span class="co">#&gt;  9 row9    1.48  0.470   1.11  -2.53  -1.84 </span>
+<span class="co">#&gt; 10 row10   2.21 -0.0277 -4.92  -1.15  -3.35 </span>
+<span class="co">#&gt; 11 row11 -10.2  -0.0124 -2.63  -2.16  -3.24 </span>
+<span class="co">#&gt; 12 row12  -4.89 -0.425  -0.889  9.31  -1.95</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">get_varimax_y</span><span class="op">(</span><span class="va">fa</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 12 x 6</span>
-<span class="co">#&gt;    id        y1    y2      y3     y4     y5</span>
-<span class="co">#&gt;    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 col1   0.469 -5.94  -0.317 -1.06   7.03 </span>
-<span class="co">#&gt;  2 col2   8.12  -5.75  -3.03  -3.03   0.737</span>
-<span class="co">#&gt;  3 col3   0.989 -4.50   6.99  -4.07  -2.14 </span>
-<span class="co">#&gt;  4 col4  -3.56  -7.32  -3.21   3.47   1.45 </span>
-<span class="co">#&gt;  5 col5  -1.50  -5.43  -3.72  -0.215  0.950</span>
-<span class="co">#&gt;  6 col6  -7.84  -3.54  -3.97   0.265 -1.68 </span>
-<span class="co">#&gt;  7 col7  -3.06  -5.12   0.459 -6.82   0.994</span>
-<span class="co">#&gt;  8 col8  -1.72   5.37  -3.16  -3.72   1.66 </span>
-<span class="co">#&gt;  9 col9   2.44  -3.60 -10.7   -4.03  -0.835</span>
-<span class="co">#&gt; 10 col10 -1.51  -8.51  -6.73  -7.08  -1.64 </span>
-<span class="co">#&gt; 11 col11 -5.17  -7.26  -3.22  -9.64   2.76 </span>
-<span class="co">#&gt; 12 col12 -1.95  -4.35  -4.96  -4.50  11.5</span></pre></div>
+<span class="co">#&gt;    id        y1     y2     y3    y4     y5</span>
+<span class="co">#&gt;    &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 col1   1.26  -0.792   6.17 -3.39 -2.29 </span>
+<span class="co">#&gt;  2 col2   9.47  -3.69   -7.80 -6.04  0.487</span>
+<span class="co">#&gt;  3 col3   0.815 -0.906  -4.06 -3.75  7.75 </span>
+<span class="co">#&gt;  4 col4   2.72   3.65   -5.86 -5.36 -3.03 </span>
+<span class="co">#&gt;  5 col5   1.48  -1.01   -4.37  7.15 -2.45 </span>
+<span class="co">#&gt;  6 col6  -0.526 -6.98   -3.28 -4.76 -3.69 </span>
+<span class="co">#&gt;  7 col7  -1.97   0.912 -10.1  -2.42 -6.25 </span>
+<span class="co">#&gt;  8 col8   9.18   0.185  -2.69 -1.19 -3.73 </span>
+<span class="co">#&gt;  9 col9   0.990 -0.630  -2.50 -1.88 -1.33 </span>
+<span class="co">#&gt; 10 col10 -1.57   6.26   -2.42 -5.59 -4.51 </span>
+<span class="co">#&gt; 11 col11 -5.39  -2.71   -6.18 -2.04  1.60 </span>
+<span class="co">#&gt; 12 col12  1.17  -5.43   -3.99 -4.37 -5.68</span></code></pre></div>
 <p>To visualize a screeplot of the singular value, use:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="co"># screeplot(fa)</span></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># screeplot(fa)</span></code></pre></div>
 <p>At the moment, we also enjoy using pairs plots of the factors as a diagnostic measure:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="co"># plot_varimax_z_pairs(fa, 1:3)</span></pre></div>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="co"># plot_varimax_y_pairs(fa, 1:3)</span></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># plot_varimax_z_pairs(fa, 1:3)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># plot_varimax_y_pairs(fa, 1:3)</span></code></pre></div>
 <p>Similarly, an IPR pairs plot can be a good way to check for singular vector localization (and thus overfitting!).</p>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="co"># TODO</span></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># TODO</span></code></pre></div>
 <p>TODO: visualizing B</p>
 <p>TODO: selecting k</p>
 <div id="tidygraph-integration" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tidygraph-integration" class="anchor"></a>Tidygraph integration</h2>
-<div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'tidygraph'</span>
 <span class="co">#&gt; The following object is masked from 'package:igraph':</span>
@@ -352,39 +365,39 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     filter</span>
 
-<span class="va">sbm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/component_games.html">play_blocks</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">25</span>, <span class="fl">0.1</span><span class="op">)</span></pre></div>
+<span class="va">sbm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/component_games.html">play_blocks</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">25</span>, <span class="fl">0.1</span><span class="op">)</span></code></pre></div>
 <p><code>vsp</code> also works on <code>igraph</code> and <code>tidygraph</code> objects:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="va">fa2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">sbm</span>, rank <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fa2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">sbm</span>, rank <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <p>You can then add the resulting factor loadings back into the node information about the graph:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit">
-<span class="co"># if you already have a vsp object</span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># if you already have a vsp object</span>
 <span class="va">sbm_fa2</span> <span class="op">&lt;-</span> <span class="va">sbm</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/bind_varimax_z.html">bind_varimax_z</a></span><span class="op">(</span><span class="va">fa2</span><span class="op">)</span>
 
 <span class="va">sbm_fa2</span>
-<span class="co">#&gt; # A tbl_graph: 25 nodes and 57 edges</span>
+<span class="co">#&gt; # A tbl_graph: 25 nodes and 54 edges</span>
 <span class="co">#&gt; #</span>
-<span class="co">#&gt; # A directed simple graph with 1 component</span>
+<span class="co">#&gt; # A directed simple graph with 2 components</span>
 <span class="co">#&gt; #</span>
 <span class="co">#&gt; # Node Data: 25 x 6 (active)</span>
 <span class="co">#&gt;   id           z1        z2        z3        z4        z5</span>
 <span class="co">#&gt;   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 row1  -3.29e- 3  4.00e+ 0  2.10e- 1  4.41e- 1 -1.46e+ 0</span>
-<span class="co">#&gt; 2 row2   2.44e-16  7.48e-16 -7.10e-16  7.87e-16 -9.10e-16</span>
-<span class="co">#&gt; 3 row3  -4.70e- 1  7.29e- 2  1.13e- 1 -6.46e- 2  1.97e+ 0</span>
-<span class="co">#&gt; 4 row4  -6.59e- 2  5.14e+ 0  2.67e- 1  3.40e- 1 -1.14e+ 0</span>
-<span class="co">#&gt; 5 row5   4.64e+ 0 -3.33e- 1  1.24e+ 0 -1.33e+ 0 -4.36e- 1</span>
-<span class="co">#&gt; 6 row6   1.23e+ 0  2.28e- 1  4.51e- 1  3.84e+ 0 -7.52e- 1</span>
+<span class="co">#&gt; 1 row1   6.37e+ 0 -1.84e+ 0  3.29e+ 0  5.45e- 1  2.63e- 1</span>
+<span class="co">#&gt; 2 row2  -5.72e-16 -6.27e-17  7.77e-16  2.02e-17  3.24e-16</span>
+<span class="co">#&gt; 3 row3   8.13e+ 0  4.76e- 1 -9.39e- 1 -7.94e- 1 -1.50e- 1</span>
+<span class="co">#&gt; 4 row4   6.84e- 1  5.01e+ 0 -4.67e- 1  8.53e- 1  9.87e- 1</span>
+<span class="co">#&gt; 5 row5   1.53e- 1 -6.19e- 1 -8.49e- 2 -2.52e- 1  6.00e+ 0</span>
+<span class="co">#&gt; 6 row6  -1.29e+ 0  5.89e+ 0  8.51e- 1 -9.49e- 1 -7.06e- 1</span>
 <span class="co">#&gt; # … with 19 more rows</span>
 <span class="co">#&gt; #</span>
-<span class="co">#&gt; # Edge Data: 57 x 2</span>
+<span class="co">#&gt; # Edge Data: 54 x 2</span>
 <span class="co">#&gt;    from    to</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1     7     1</span>
-<span class="co">#&gt; 2    11     1</span>
-<span class="co">#&gt; 3    25     1</span>
-<span class="co">#&gt; # … with 54 more rows</span></pre></div>
+<span class="co">#&gt; 1     1    25</span>
+<span class="co">#&gt; 2     5     1</span>
+<span class="co">#&gt; 3    10     1</span>
+<span class="co">#&gt; # … with 51 more rows</span></code></pre></div>
 </div>
   </div>
 

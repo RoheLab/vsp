@@ -13,6 +13,7 @@ get_y_clusters <- function(x, ...) {
 
   x %>%
     get_varimax_y() %>%
+    select(-id) %>%
     dplyr::mutate_all(abs) %>%
     apply(1, which.max)
 }
@@ -32,6 +33,7 @@ get_z_clusters <- function(x, ...) {
 
   x %>%
     get_varimax_z() %>%
+    select(-id) %>%
     dplyr::mutate_all(abs) %>%
     apply(1, which.max)
 }

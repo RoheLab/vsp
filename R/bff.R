@@ -14,14 +14,8 @@
 #'   ith "most important" feature for cluster j.
 #'
 #' @export
-  bff <- function(loadings, features, num_best, ...) {
-  UseMethod("bff")
-}
-
-l1_normalize <- function(x) x / sum(x)
-
-#' @export
-bff.default <-  function(loadings, features, num_best, ...) {
+bff <- function(loadings, features, num_best, ...) {
+  l1_normalize <- function(x) x / sum(x)
 
   # Fan has this line in his code but I don't understand why?
   loadings[loadings < 0] <-  0
@@ -40,24 +34,25 @@ bff.default <-  function(loadings, features, num_best, ...) {
   # contrast: sqrt(A) - sqrt(B), variance stabilization
   diff <-  inCluster - outCluster
 
-  for (j in 1:k) {
-    bestIndex <-  order(-diff[,j])[1:num_best]
-    best_feat[,j] <-  colnames(features[, bestIndex])
-  }
-
-  best_feat
-}
-
-
-#' @export
-bff2 <-  function(loadings, features, num_best, ...) {
-
-  # variance stabilization
-
-  stabilized <- sqrt(features)
-
-  # turn into probabilities that each node belongs
-  # to a particular cluster
-  y_tilde <- apply(abs(loadings), 1, l1_normalize)
-  crossprod(y_tilde, stabilized)
+  diff %>%
+    as.matrix() %>%
+    as_tibble(rownames = "word") %>%
+    pivot_longer(
+      -word,
+      names_to = "factor",
+      values_to = "importance"
+    ) %>%
+    group_by(factor) %>%
+    top_n(num_best, importance) %>%
+    arrange(factor, desc(importance)) %>%
+    mutate(
+      rank = row_number()
+    ) %>%
+    ungroup() %>%
+    pivot_wider(
+      id_cols = factor,
+      names_from = rank,
+      names_prefix = "word",
+      values_from = word
+    )
 }

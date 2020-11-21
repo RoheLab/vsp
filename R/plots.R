@@ -1,5 +1,5 @@
 #' @export
-plot_varimax_z_pairs <- function(fa, factors = 1:max(5, fa$rank), ...) {
+plot_varimax_z_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
 
   stop_if_not_installed("dplyr")
   stop_if_not_installed("GGally")
@@ -19,7 +19,7 @@ plot_varimax_z_pairs <- function(fa, factors = 1:max(5, fa$rank), ...) {
 }
 
 #' @export
-plot_varimax_y_pairs <- function(fa, factors = 1:max(5, fa$rank), ...) {
+plot_varimax_y_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
 
   stop_if_not_installed("dplyr")
   stop_if_not_installed("GGally")
@@ -39,7 +39,7 @@ plot_varimax_y_pairs <- function(fa, factors = 1:max(5, fa$rank), ...) {
 }
 
 #' @export
-plot_svd_u <- function(fa, factors = 1:max(5, fa$rank)) {
+plot_svd_u <- function(fa, factors = 1:min(5, fa$rank)) {
 
   stop_if_not_installed("dplyr")
   stop_if_not_installed("ggplot2")
@@ -57,7 +57,7 @@ plot_svd_u <- function(fa, factors = 1:max(5, fa$rank)) {
 }
 
 #' @export
-plot_svd_v <- function(fa, factors = 1:max(5, fa$rank)) {
+plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
 
   stop_if_not_installed("dplyr")
   stop_if_not_installed("scales")

@@ -22,6 +22,10 @@
 #' @param tau_col Column regularization term. Default is `NULL`, in which case
 #'  we use the column degree. Ignored when `normalize = FALSE`.
 #'
+#' @param rownames TODO. = NUL
+#'
+#' @param colnames TODO. = NULL
+#'
 #' @param ... Ignored.
 #'
 #' @details Sparse SVDs use `RSpectra` for performance.
@@ -56,7 +60,8 @@ vsp.default <- function(x, rank, ...) {
 #' @export
 vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
                        scale = TRUE, rescale = scale,
-                       tau_row = NULL, tau_col = NULL) {
+                       tau_row = NULL, tau_col = NULL,
+                       rownames = NULL, colnames = NULL) {
 
   if (rank < 2)
     stop("`rank` must be at least two.", call. = FALSE)
@@ -101,7 +106,8 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
     u = s$u, d = s$d, v = s$v,
     Z = Z, B = B, Y = Y,
     R_U = R_U, R_V = R_V,
-    transformers = transformers
+    transformers = transformers,
+    rownames = rownames, colnames = colnames
   )
 
   if (rescale) {

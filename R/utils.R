@@ -1,4 +1,23 @@
 
+#' Title
+#'
+#' @param x A vector of integers, small enough the scientific
+#'
+#' @return TODO
+#' @keywords internal
+#'
+left_padded_sequence <- function(x) {
+
+  original <- withr::with_options(
+    c(scipen = 999),
+    as.character(x)
+  )
+
+  max_digits <- max(vapply(original, nchar, integer(1)))
+  formatC(x, width = max_digits, format = "d", flag = "0")
+}
+
+
 # return +1 when skew positive, -1 when skew negative
 skew_sign <- function(x) {
   sign(sum((x - mean(x))^3))
@@ -19,6 +38,7 @@ skew_sign <- function(x) {
 #'   equivalent to the original object.
 #'
 #' @export
+#' @keywords internal
 make_skew_positive <- function(fa) {
 
   if (!inherits(fa, "fa_like"))

@@ -39,7 +39,8 @@ Imports:
     Matrix,
     RSpectra,
     stats,
-    tibble
+    tibble,
+    withr
 Suggests: 
     covr,
     dplyr,

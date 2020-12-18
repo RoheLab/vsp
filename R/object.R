@@ -38,27 +38,27 @@ vsp_fa <- function(
   )
 
   if (is.null(rownames)) {
-    rownames <- paste0("row", 1:nrow(fa$u))
+    rownames <- paste0("row", left_padded_sequence(1:nrow(fa$u)))
   }
 
   if (is.null(colnames)) {
-    colnames <- paste0("col", 1:nrow(fa$v))
+    colnames <- paste0("col", left_padded_sequence(1:nrow(fa$v)))
   }
 
   rownames(fa$Z) <- rownames
   rownames(fa$u) <- rownames
 
-  colnames(fa$Z) <- paste0("z", 1:fa$rank)
-  colnames(fa$u) <- paste0("u", 1:fa$rank)
+  colnames(fa$Z) <- paste0("z", left_padded_sequence(1:fa$rank))
+  colnames(fa$u) <- paste0("u", left_padded_sequence(1:fa$rank))
 
-  rownames(fa$B) <- paste0("z", 1:fa$rank)
-  colnames(fa$B) <- paste0("y", 1:fa$rank)
+  rownames(fa$B) <- paste0("z", left_padded_sequence(1:fa$rank))
+  colnames(fa$B) <- paste0("y", left_padded_sequence(1:fa$rank))
 
   rownames(fa$Y) <- colnames
   rownames(fa$v) <- colnames
 
-  colnames(fa$Y) <- paste0("y", 1:fa$rank)
-  colnames(fa$v) <- paste0("v", 1:fa$rank)
+  colnames(fa$Y) <- paste0("y", left_padded_sequence(1:fa$rank))
+  colnames(fa$v) <- paste0("v", left_padded_sequence(1:fa$rank))
 
   validate_vsp_fa(fa)
 }

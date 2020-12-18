@@ -22,7 +22,9 @@ vsp(x, rank, ...)
   scale = TRUE,
   rescale = scale,
   tau_row = NULL,
-  tau_col = NULL
+  tau_col = NULL,
+  rownames = NULL,
+  colnames = NULL
 )
 
 \method{vsp}{Matrix}(
@@ -34,7 +36,9 @@ vsp(x, rank, ...)
   scale = TRUE,
   rescale = scale,
   tau_row = NULL,
-  tau_col = NULL
+  tau_col = NULL,
+  rownames = NULL,
+  colnames = NULL
 )
 
 \method{vsp}{dgCMatrix}(
@@ -46,7 +50,9 @@ vsp(x, rank, ...)
   scale = TRUE,
   rescale = scale,
   tau_row = NULL,
-  tau_col = NULL
+  tau_col = NULL,
+  rownames = NULL,
+  colnames = NULL
 )
 
 \method{vsp}{igraph}(x, rank, ..., attr = NULL)
@@ -67,6 +73,10 @@ we use the row degree. Ignored when \code{normalize = FALSE}.}
 
 \item{tau_col}{Column regularization term. Default is \code{NULL}, in which case
 we use the column degree. Ignored when \code{normalize = FALSE}.}
+
+\item{rownames}{TODO. = NUL}
+
+\item{colnames}{TODO. = NULL}
 
 \item{k}{The number of factors to calculate.}
 

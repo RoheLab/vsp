@@ -21,3 +21,4 @@ skew positive. Note that this also causes
 corresponding sign flips in \code{B}. This
 helps with interpretability of factors.
 }
+\keyword{internal}

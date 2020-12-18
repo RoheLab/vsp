@@ -63,6 +63,65 @@ vsp_fa <- function(
   validate_vsp_fa(fa)
 }
 
+#' TODO
+#'
+#' @param fa TODO
+#'
+#' @param names TODO
+#'
+#' @return TODO
+#'
+#' @export
+set_z_factor_names <- function(fa, names) {
+
+  if (length(unique(names)) != fa$rank) {
+    stop("New Z factor names must be unique.", call. = FALSE)
+  }
+
+  if (length(names) != fa$rank) {
+    stop(
+      glue(
+        "Incorrect number of Z factor names. Got {length(names)} but needed {fa$rank}."
+      ),
+      call. = FALSE
+    )
+  }
+
+  colnames(fa$Z) <- names
+  rownames(fa$B) <- names
+
+  fa
+}
+
+#' TODO
+#'
+#' @param fa TODO
+#'
+#' @param names TODO
+#'
+#' @return TODO
+#'
+#' @export
+set_y_factor_names <- function(fa, names) {
+
+  if (length(unique(names)) != fa$rank) {
+    stop("New Y factor names must be unique.", call. = FALSE)
+  }
+
+  if (length(names) != fa$rank) {
+    stop(
+      glue(
+        "Incorrect number of Y factor names. Got {length(names)} but needed {fa$rank}."
+      ),
+      call. = FALSE
+    )
+  }
+
+  colnames(fa$B) <- names
+  colnames(fa$Y) <- names
+
+  fa
+}
 
 new_vsp_fa <- function(u, d, v, Z, B, Y, transformers, R_U, R_V) {
   fa_like(

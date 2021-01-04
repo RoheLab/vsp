@@ -72,3 +72,31 @@ stop_if_not_installed <- function(package) {
     stop(glue("Must install {package} for this functionality.", call. = FALSE))
   }
 }
+
+utils::globalVariables(
+  c(
+    ".",
+    "activate",
+    "arrange",
+    "desc",
+    "element",
+    "gather",
+    "group_by",
+    "id",
+    "importance",
+    "leverage",
+    "loading",
+    "mutate",
+    "nodes",
+    "pivot_longer",
+    "pivot_wider",
+    "row_number",
+    "sample_n",
+    "select",
+    "top_n",
+    "ungroup",
+    "value",
+    "word"
+  )
+)
+

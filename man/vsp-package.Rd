@@ -4,14 +4,13 @@
 \name{vsp-package}
 \alias{vsp-package}
 \alias{_PACKAGE}
-\title{vsp: Vintage Sparse PCA for Semi-Parametric Network Factor
-    Analysis}
+\title{vsp: Vintage Sparse PCA for Semi-Parametric Factor Analysis}
 \description{
 Provides fast spectral estimation of latent factors
     in random dot product graphs using the vsp estimator. Under mild
     assumptions, the vsp estimator is consistent for (degree-corrected)
     stochastic blockmodels, (degree-corrected) mixed-membership stochastic
-    blockmodels, degree-corrected overlapping stochastic blockmodels.
+    blockmodels, and degree-corrected overlapping stochastic blockmodels.
 }
 \seealso{
 Useful links:

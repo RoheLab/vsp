@@ -16,6 +16,8 @@ node in the network.}
 
 \item{num_best}{An integer indicating how many of the top features
 for differentiating between loadings you want.}
+
+\item{...}{Ignored.}
 }
 \value{
 An \code{n} by \code{k} matrix whose \verb{[i, j]} entry is the

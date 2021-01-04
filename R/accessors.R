@@ -38,27 +38,68 @@ get_z_clusters <- function(x, ...) {
     apply(1, which.max)
 }
 
+#' Title
+#'
+#' @param x TODO
+#' @param factors TODO
+#' @param ... TODO
+#'
+#' @return TODO
 #' @export
+#'
 get_svd_u <- function(x, factors, ...) {
   as_tibble(as.matrix(x$u[, factors, drop = FALSE]), rownames = "id")
 }
 
+#' Title
+#'
+#' @param x TODO
+#' @param factors TODO
+#' @param ... TODO
+#'
+#' @return TODO
 #' @export
+#'
 get_svd_v <- function(x, factors, ...) {
   as_tibble(as.matrix(x$v[, factors, drop = FALSE]), rownames = "id")
 }
 
+#' Title
+#'
+#' @param x TODO
+#' @param factors TODO
+#' @param ... TODO
+#'
+#' @return TODO
 #' @export
+#'
 get_varimax_z <- function(x, factors = 1:x$rank, ...) {
   as_tibble(as.matrix(x$Z[, factors, drop = FALSE]), rownames = "id")
 }
 
+#' Title
+#'
+#' @param x TODO
+#' @param factors TODO
+#' @param ... TODO
+#'
+#' @return TODO
 #' @export
+#'
 get_varimax_y <- function(x, factors = 1:x$rank, ...) {
   as_tibble(as.matrix(x$Y[, factors, drop = FALSE]), rownames = "id")
 }
 
+
+#' Title
+#'
+#' @param fa TODO
+#' @param hubs_per_factor TODO
+#' @param factors TODO
+#'
+#' @return TODO
 #' @export
+#'
 get_z_hubs <- function(fa, hubs_per_factor = 10, factors = 1:fa$rank) {
 
   stop_if_not_installed("dplyr")
@@ -71,14 +112,22 @@ get_z_hubs <- function(fa, hubs_per_factor = 10, factors = 1:fa$rank) {
     dplyr::top_n(hubs_per_factor, wt = abs(loading))
 }
 
+#' Title
+#'
+#' @param fa TODO
+#' @param hubs_per_factor TODO
+#' @param factors TODO
+#'
+#' @return TODO
 #' @export
-get_y_hubs <- function(fa, hubs_per_factor = 10) {
+#'
+get_y_hubs <- function(fa, hubs_per_factor = 10, factors = 1:fa$rank) {
 
   stop_if_not_installed("dplyr")
   stop_if_not_installed("tidyr")
 
   fa %>%
-    get_varimax_y() %>%
+    get_varimax_y(factors) %>%
     tidyr::gather(factor, loading, dplyr::contains("y"), -id) %>%
     dplyr::group_by(factor) %>%
     dplyr::top_n(hubs_per_factor, wt = abs(loading))

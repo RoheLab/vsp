@@ -19,15 +19,39 @@
 )
 }
 \arguments{
-\item{x}{TODO}
+\item{x}{Either a graph adjacency matrix, \link[igraph:aaa-igraph-package]{igraph::igraph} or
+\link[tidygraph:tbl_graph]{tidygraph::tbl_graph}. If \code{x} is a \link{matrix} or \link[Matrix:Matrix]{Matrix::Matrix}
+then \code{x[i, j]} should correspond to the edge going from node \code{i}
+to node \code{j}.}
 
-\item{rank}{TODO}
+\item{rank}{The number of factors to calculate.}
 
-\item{...}{TODO}
+\item{...}{Ignored.}
 
 \item{centerer}{TODO}
 
 \item{scaler}{TODO}
+
+\item{recenter}{Should the varimax factors be re-centered around the
+original factor means? Only used when \code{center = TRUE}, defaults to \code{FALSE}.}
+
+\item{rescale}{Should the regularized graph laplacian be used instead of the
+raw adjacency matrix? Defaults to \code{TRUE}. If \code{center = TRUE}, \code{A} will
+first be centered and then normalized.}
+
+\item{kaiser_normalize_u}{Whether or not to use Kaiser normalization
+when rotating the left singular vectors \code{U}. Defaults to \code{FALSE}.}
+
+\item{kaiser_normalize_v}{Whether or not to use Kaiser normalization
+when rotating the right singular vectors \code{V}. Defaults to \code{FALSE}.}
+
+\item{rownames}{Character vector of row names of \code{x}. These row names
+are propagated into the row names of the \code{U} and \code{Z}. Defaults
+to \code{NULL}.}
+
+\item{colnames}{Character vector of column names of \code{x}. These column names
+are propagated into the row names of the \code{V} and \code{Y}. Defaults
+to \code{NULL}.}
 }
 \description{
 Perform varimax rotation on a low rank matrix factorization

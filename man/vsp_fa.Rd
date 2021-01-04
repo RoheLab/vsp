@@ -32,6 +32,14 @@ vsp_fa(
 \item{Y}{TODO}
 
 \item{transformers}{TODO}
+
+\item{R_U}{TODO}
+
+\item{R_V}{TODO}
+
+\item{rownames}{TODO}
+
+\item{colnames}{TODO}
 }
 \value{
 An \code{adaptive_imputation} object.

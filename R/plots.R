@@ -1,4 +1,13 @@
+
+#' Title
+#'
+#' @param fa TODO
+#' @param factors TODO
+#' @param ... TODO
+#'
+#' @return TOOD
 #' @export
+#'
 plot_varimax_z_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
 
   stop_if_not_installed("dplyr")
@@ -18,7 +27,15 @@ plot_varimax_z_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
     theme_minimal()
 }
 
+#' Title
+#'
+#' @param fa TODO
+#' @param factors TODO
+#' @param ... TODO
+#'
+#' @return TOOD
 #' @export
+#'
 plot_varimax_y_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
 
   stop_if_not_installed("dplyr")
@@ -38,7 +55,14 @@ plot_varimax_y_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
     theme_minimal()
 }
 
+#' Title
+#'
+#' @param fa TODO
+#' @param factors TODO
+#'
+#' @return TOOD
 #' @export
+#'
 plot_svd_u <- function(fa, factors = 1:min(5, fa$rank)) {
 
   stop_if_not_installed("dplyr")
@@ -55,8 +79,14 @@ plot_svd_u <- function(fa, factors = 1:min(5, fa$rank)) {
     theme_minimal() +
     scale_x_continuous(breaks = scales::pretty_breaks())
 }
-
+#' Title
+#'
+#' @param fa TODO
+#' @param factors TODO
+#'
+#' @return TOOD
 #' @export
+#'
 plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
 
   stop_if_not_installed("dplyr")
@@ -91,7 +121,14 @@ screeplot.vsp_fa <- function(x, ...) {
     theme_minimal()
 }
 
+#' Title
+#'
+#' @param fa TODO
+#' @param ... TODO
+#'
+#' @return TOOD
 #' @export
+#'
 #' @import ggplot2
 plot_mixing_matrix <- function(fa, ...) {
   as_tibble(as.matrix(fa$B), rownames = "row") %>%
@@ -102,7 +139,14 @@ plot_mixing_matrix <- function(fa, ...) {
     theme_minimal()
 }
 
+#' Title
+#'
+#' @param fa TODO
+#' @param ... TODO
+#'
+#' @return TOOD
 #' @export
+#'
 #' @import ggplot2
 plot_ipr_pairs <- function(fa, ...) {
 

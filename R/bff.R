@@ -10,6 +10,8 @@
 #' @param num_best An integer indicating how many of the top features
 #'   for differentiating between loadings you want.
 #'
+#' @param ... Ignored.
+#'
 #' @return An `n` by `k` matrix whose `[i, j]` entry is the
 #'   ith "most important" feature for cluster j.
 #'

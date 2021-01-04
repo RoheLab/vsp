@@ -14,6 +14,10 @@
 #' @param v A *matrix* of "right singular-ish" vectors.
 #'
 #' @param transformers TODO
+#' @param R_U TODO
+#' @param R_V TODO
+#' @param rownames TODO
+#' @param colnames TODO
 #'
 #' @return An `adaptive_imputation` object.
 #'

@@ -171,10 +171,8 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
 
 #' Perform varimax rotation on a low rank matrix factorization
 #'
-#' @param x TODO
+#' @inheritParams vsp
 #'
-#' @param rank TODO
-#' @param ... TODO
 #' @param centerer TODO
 #' @param scaler TODO
 #'

@@ -11,7 +11,9 @@
   centerer = NULL,
   scaler = NULL,
   recenter = FALSE,
-  rescale = TRUE,
+  rescale = FALSE,
+  kaiser_normalize_u = FALSE,
+  kaiser_normalize_v = FALSE,
   rownames = NULL,
   colnames = NULL
 )

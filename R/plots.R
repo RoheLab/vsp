@@ -96,7 +96,6 @@ screeplot.vsp_fa <- function(x, ...) {
 plot_mixing_matrix <- function(fa, ...) {
   as_tibble(as.matrix(fa$B), rownames = "row") %>%
     tidyr::gather(col, value, -row) %>%
-    dplyr::arrange(row, col) %>%
     ggplot(aes(x = col, y = row, fill = value)) +
     geom_tile() +
     scale_fill_gradient2() +

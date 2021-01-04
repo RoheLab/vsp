@@ -7,7 +7,7 @@
 \alias{vsp.Matrix}
 \alias{vsp.dgCMatrix}
 \alias{vsp.igraph}
-\title{Non-Parametric Factor Analysis via Vintage Sparse PCA}
+\title{Semi-Parametric Factor Analysis via Vintage Sparse PCA}
 \usage{
 vsp(x, rank, ...)
 
@@ -19,10 +19,12 @@ vsp(x, rank, ...)
   ...,
   center = FALSE,
   recenter = FALSE,
-  scale = TRUE,
-  rescale = scale,
+  scale = FALSE,
+  rescale = FALSE,
   tau_row = NULL,
   tau_col = NULL,
+  kaiser_normalize_u = FALSE,
+  kaiser_normalize_v = FALSE,
   rownames = NULL,
   colnames = NULL
 )
@@ -33,10 +35,12 @@ vsp(x, rank, ...)
   ...,
   center = FALSE,
   recenter = FALSE,
-  scale = TRUE,
-  rescale = scale,
+  scale = FALSE,
+  rescale = FALSE,
   tau_row = NULL,
   tau_col = NULL,
+  kaiser_normalize_u = FALSE,
+  kaiser_normalize_v = FALSE,
   rownames = NULL,
   colnames = NULL
 )
@@ -47,15 +51,17 @@ vsp(x, rank, ...)
   ...,
   center = FALSE,
   recenter = FALSE,
-  scale = TRUE,
-  rescale = scale,
+  scale = FALSE,
+  rescale = FALSE,
   tau_row = NULL,
   tau_col = NULL,
+  kaiser_normalize_u = FALSE,
+  kaiser_normalize_v = FALSE,
   rownames = NULL,
   colnames = NULL
 )
 
-\method{vsp}{igraph}(x, rank, ..., attr = NULL)
+\method{vsp}{igraph}(x, rank, ..., edge_weights = NULL)
 }
 \arguments{
 \item{x}{Either a graph adjacency matrix, \link[igraph:aaa-igraph-package]{igraph::igraph} or
@@ -63,26 +69,46 @@ vsp(x, rank, ...)
 then \code{x[i, j]} should correspond to the edge going from node \code{i}
 to node \code{j}.}
 
+\item{rank}{The number of factors to calculate.}
+
 \item{...}{Ignored.}
 
 \item{center}{Should the adjacency matrix be row \emph{and} column centered?
-Defaults to \code{TRUE}.}
+Defaults to \code{FALSE}.}
 
-\item{tau_row}{Row regularization term. Default is \code{NULL}, in which case
-we use the row degree. Ignored when \code{normalize = FALSE}.}
+\item{recenter}{Should the varimax factors be re-centered around the
+original factor means? Only used when \code{center = TRUE}, defaults to \code{FALSE}.}
 
-\item{tau_col}{Column regularization term. Default is \code{NULL}, in which case
-we use the column degree. Ignored when \code{normalize = FALSE}.}
-
-\item{rownames}{TODO. = NUL}
-
-\item{colnames}{TODO. = NULL}
-
-\item{k}{The number of factors to calculate.}
-
-\item{normalize}{Should the graph laplacian be used instead of the
+\item{scale}{Should the regularized graph laplacian be used instead of the
 raw adjacency matrix? Defaults to \code{TRUE}. If \code{center = TRUE}, \code{A} will
 first be centered and then normalized.}
+
+\item{rescale}{Should the regularized graph laplacian be used instead of the
+raw adjacency matrix? Defaults to \code{TRUE}. If \code{center = TRUE}, \code{A} will
+first be centered and then normalized.}
+
+\item{tau_row}{Row regularization term. Default is \code{NULL}, in which case
+we use the row degree. Ignored when \code{scale = FALSE}.}
+
+\item{tau_col}{Column regularization term. Default is \code{NULL}, in which case
+we use the column degree. Ignored when \code{scale = FALSE}.}
+
+\item{kaiser_normalize_u}{Whether or not to use Kaiser normalization
+when rotating the left singular vectors \code{U}. Defaults to \code{FALSE}.}
+
+\item{kaiser_normalize_v}{Whether or not to use Kaiser normalization
+when rotating the right singular vectors \code{V}. Defaults to \code{FALSE}.}
+
+\item{rownames}{Character vector of row names of \code{x}. These row names
+are propagated into the row names of the \code{U} and \code{Z}. Defaults
+to \code{NULL}.}
+
+\item{colnames}{Character vector of column names of \code{x}. These column names
+are propagated into the row names of the \code{V} and \code{Y}. Defaults
+to \code{NULL}.}
+
+\item{edge_weights}{When \code{x} is an \link[igraph:aaa-igraph-package]{igraph::igraph}, an edge attribute
+to use to form a weighted adjacency matrix.}
 }
 \value{
 An object of class \code{vsp}. TODO: Details
@@ -97,9 +123,34 @@ Sparse SVDs use \code{RSpectra} for performance.
 
 library(LRMF3)
 
-vsp(ml100k, rank = 5, scale = TRUE)
-vsp(ml100k, rank = 5, rescale = FALSE)
 vsp(ml100k, rank = 5)
+vsp(ml100k, rank = 5, scale = TRUE)
 
+vsp(ml100k, rank = 5, scale = TRUE, center = TRUE)
+
+vsp(
+  ml100k,
+  rank = 5,
+  scale = TRUE,
+  rescale = TRUE,
+  center = TRUE,
+  recenter = TRUE
+)
+
+vsp(
+  ml100k,
+  rank = 5,
+  scale = TRUE,
+  rownames = rownames(ml100k),
+  colnames = colnames(ml100k)
+)
+
+vsp(
+  ml100k,
+  rank = 5,
+  scale = TRUE,
+  kaiser_normalize_u = TRUE,
+  kaiser_normalize_v = TRUE
+)
 
 }

@@ -19,6 +19,7 @@ you do not passed a \link{vsp} object, one will be created.}
 \link[tidygraph:tbl_graph]{tidygraph::tbl_graph}. If \code{x} is a \link{matrix} or \link[Matrix:Matrix]{Matrix::Matrix}
 then \code{x[i, j]} should correspond to the edge going from node \code{i}
 to node \code{j}.}
+    \item{\code{rank}}{The number of factors to calculate.}
   }}
 }
 \value{

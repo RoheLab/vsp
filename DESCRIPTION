@@ -1,7 +1,6 @@
 Type: Package
 Package: vsp
-Title: Vintage Sparse PCA for Semi-Parametric Network Factor
-    Analysis
+Title: Vintage Sparse PCA for Semi-Parametric Factor Analysis
 Version: 0.0.0.9007
 Authors@R: 
     c(person(given = "Karl",
@@ -24,7 +23,7 @@ Description: Provides fast spectral estimation of latent factors
     in random dot product graphs using the vsp estimator. Under mild
     assumptions, the vsp estimator is consistent for (degree-corrected)
     stochastic blockmodels, (degree-corrected) mixed-membership stochastic
-    blockmodels, degree-corrected overlapping stochastic blockmodels.
+    blockmodels, and degree-corrected overlapping stochastic blockmodels.
 License: MIT + file LICENSE
 URL: https://github.com/RoheLab/vsp
 BugReports: https://github.com/RoheLab/vsp/issues
@@ -66,4 +65,4 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
 Depends: 
-    R (>= 2.10)
+    R (>= 3.1)

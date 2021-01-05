@@ -117,7 +117,7 @@ screeplot.vsp_fa <- function(x, ...) {
       x = "Index",
       y = "Singular value"
     ) +
-    expand_limits(x = 0, y = 0) +
+    expand_limits(x = 1, y = 0) +
     theme_minimal()
 }
 

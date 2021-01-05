@@ -210,10 +210,20 @@ vsp.svd_like <- function(x, rank, ...,
   n <- nrow(x$u)
   d <- nrow(x$v)
 
-  browser()
+  if (kaiser_normalize_u) {
+    scu <- sqrt(drop(apply(s$u, 1L, function(x) sum(x^2))))
+    scu[scu == 0] <- 1
+    s$u <- s$u / scu
+  }
 
-  R_U <- stats::varimax(x$u, normalize = kaiser_normalize_u)$rotmat
-  R_V <- stats::varimax(x$v, normalize = kaiser_normalize_v)$rotmat
+  if (kaiser_normalize_v) {
+    scv <- sqrt(drop(apply(s$v, 1L, function(x) sum(x^2))))
+    scv[scv == 0] <- 1
+    s$v <- s$v / scv
+  }
+
+  R_U <- stats::varimax(s$u)$rotmat
+  R_V <- stats::varimax(s$v)$rotmat
 
   Z <- sqrt(n) * x$u %*% R_U
   Y <- sqrt(d) * x$v %*% R_V

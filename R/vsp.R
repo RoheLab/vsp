@@ -141,8 +141,23 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
   # this includes a call to isSymmetric that we might be able to skip out on
   s <- svds(L, k = rank, nu = rank, nv = rank)
 
-  R_U <- stats::varimax(s$u, normalize = kaiser_normalize_u)$rotmat
-  R_V <- stats::varimax(s$v, normalize = kaiser_normalize_v)$rotmat
+  # do kaiser normalization by hand so we can deal with rows of all zeros
+  # without erroring
+
+  if (kaiser_normalize_u) {
+    scu <- sqrt(drop(apply(s$u, 1L, function(x) sum(x^2))))
+    scu[scu == 0] <- 1
+    s$u <- s$u / scu
+  }
+
+  if (kaiser_normalize_v) {
+    scv <- sqrt(drop(apply(s$v, 1L, function(x) sum(x^2))))
+    scv[scv == 0] <- 1
+    s$v <- s$v / scv
+  }
+
+  R_U <- stats::varimax(s$u)$rotmat
+  R_V <- stats::varimax(s$v)$rotmat
 
   Z <- sqrt(n) * s$u %*% R_U
   Y <- sqrt(d) * s$v %*% R_V
@@ -194,6 +209,8 @@ vsp.svd_like <- function(x, rank, ...,
 
   n <- nrow(x$u)
   d <- nrow(x$v)
+
+  browser()
 
   R_U <- stats::varimax(x$u, normalize = kaiser_normalize_u)$rotmat
   R_V <- stats::varimax(x$v, normalize = kaiser_normalize_v)$rotmat

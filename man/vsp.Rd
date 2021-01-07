@@ -153,4 +153,12 @@ vsp(
   kaiser_normalize_v = TRUE
 )
 
+
+library(RSpectra)
+
+s <- svds(ml100k, k = 5)
+mf <- as_svd_like(s)
+
+vsp(mf, kaiser_normalize_u = TRUE)
+
 }

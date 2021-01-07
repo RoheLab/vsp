@@ -73,6 +73,27 @@ stop_if_not_installed <- function(package) {
   }
 }
 
+
+#' Safe L2 row normalization
+#'
+#' Helper function for Kaiser normalization to handle rows with zero (or
+#' numerically zero) norm, which results in a divide by zero error
+#' in the `stats::varimax()` implementation.
+#'
+#' @param x A matrix to row normalize.
+#' @param eps Tolerance to use when assessing if squared L2 row norm is
+#'   numerically larger or smaller than zero.
+#'
+#' @keywords internal
+#'
+#' @return The row-rescaled matrix
+#'
+safe_row_l2_normalize <- function(x, eps = 1e-10) {
+  sc <- drop(apply(x, 1L, function(y) sum(y^2)))
+  sc[sc < eps] <- 1
+  x / sqrt(sc)
+}
+
 utils::globalVariables(
   c(
     ".",

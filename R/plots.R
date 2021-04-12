@@ -20,7 +20,6 @@ plot_varimax_z_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
     mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
-    select(!!factors, leverage) %>%
     sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
     select(-leverage) %>%
     GGally::ggpairs(aes(alpha = 0.001), ...) +
@@ -48,7 +47,6 @@ plot_varimax_y_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
     mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
-    select(!!factors, leverage) %>%
     sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
     select(-leverage) %>%
     GGally::ggpairs(aes(alpha = 0.001), ...) +

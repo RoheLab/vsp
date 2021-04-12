@@ -61,8 +61,11 @@ make_skew_positive <- function(fa) {
   fa$R_U <- fa$R_U %*% S_Z
   fa$R_V <- fa$R_V %*% S_Y
 
-  stopifnot(all(apply(fa$Z, 2, skew_sign) > 0))
-  stopifnot(all(apply(fa$Y, 2, skew_sign) > 0))
+  # in some cases (i.e. columns of Y or Z are constant) the skew
+  # is zero
+
+  stopifnot(all(apply(fa$Z, 2, skew_sign) >= 0))
+  stopifnot(all(apply(fa$Y, 2, skew_sign) >= 0))
 
   fa
 }

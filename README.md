@@ -78,7 +78,7 @@ enron_fa
 ## References
 
 1.  Rohe, K. & Zeng, M. *Vintage Factor Analysis with Varimax Performs
-    Statistical Inference*. 2020+.
+    Statistical Inference*. 2020+. <https://arxiv.org/abs/2004.05387>.
 
 Code to reproduce the results from the paper is [available
 here](https://github.com/RoheLab/vsp-paper).

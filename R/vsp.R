@@ -58,43 +58,16 @@
 #'
 #' library(LRMF3)
 #'
-#' vsp(ml100k, rank = 5)
-#' vsp(ml100k, rank = 5, scale = TRUE)
-#'
-#' vsp(ml100k, rank = 5, scale = TRUE, center = TRUE)
-#'
 #' vsp(
 #'   ml100k,
-#'   rank = 5,
+#'   rank = 2,
 #'   scale = TRUE,
-#'   rescale = TRUE,
-#'   center = TRUE,
-#'   recenter = TRUE
-#' )
-#'
-#' vsp(
-#'   ml100k,
-#'   rank = 5,
-#'   scale = TRUE,
+#'   rescale = FALSE,
+#'   center = FALSE,
+#'   recenter = FALSE,
 #'   rownames = rownames(ml100k),
 #'   colnames = colnames(ml100k)
 #' )
-#'
-#' vsp(
-#'   ml100k,
-#'   rank = 5,
-#'   scale = TRUE,
-#'   kaiser_normalize_u = TRUE,
-#'   kaiser_normalize_v = TRUE
-#' )
-#'
-#'
-#' library(RSpectra)
-#'
-#' s <- svds(ml100k, k = 5)
-#' mf <- as_svd_like(s)
-#'
-#' vsp(mf, kaiser_normalize_u = TRUE)
 #'
 vsp <- function(x, rank, ...) {
   # ellipsis::check_dots_used()
@@ -198,10 +171,12 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
 #'
 #' @examples
 #'
-#' library(fastadi)
+#' library(LRMF3)
+#' library(RSpectra)
 #'
-#' mf <- adaptive_impute(ml100k, rank = 20, max_iter = 5)
-#' fa <- vsp(mf)
+#' s <- svds(ml100k, k = 2)
+#' mf <- as_svd_like(s)
+#' fa <- vsp(mf, rank = 2)
 #'
 vsp.svd_like <- function(x, rank, ...,
                          centerer = NULL, scaler = NULL,

@@ -1,6 +1,3 @@
-# replace this with fastRG simulation once fastRG object orientation is
-# complete
-
 library(igraph)
 
 set.seed(27)

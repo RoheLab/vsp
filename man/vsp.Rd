@@ -123,42 +123,15 @@ Sparse SVDs use \code{RSpectra} for performance.
 
 library(LRMF3)
 
-vsp(ml100k, rank = 5)
-vsp(ml100k, rank = 5, scale = TRUE)
-
-vsp(ml100k, rank = 5, scale = TRUE, center = TRUE)
-
 vsp(
   ml100k,
-  rank = 5,
+  rank = 2,
   scale = TRUE,
-  rescale = TRUE,
-  center = TRUE,
-  recenter = TRUE
-)
-
-vsp(
-  ml100k,
-  rank = 5,
-  scale = TRUE,
+  rescale = FALSE,
+  center = FALSE,
+  recenter = FALSE,
   rownames = rownames(ml100k),
   colnames = colnames(ml100k)
 )
-
-vsp(
-  ml100k,
-  rank = 5,
-  scale = TRUE,
-  kaiser_normalize_u = TRUE,
-  kaiser_normalize_v = TRUE
-)
-
-
-library(RSpectra)
-
-s <- svds(ml100k, k = 5)
-mf <- as_svd_like(s)
-
-vsp(mf, kaiser_normalize_u = TRUE)
 
 }

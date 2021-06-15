@@ -1,9 +1,7 @@
-# devtools::install_github("RoheLab/fastRG")
-library(fastRG)
 library(vsp)
 
 n <- 1000
-A <- erdos_renyi(n, avg_deg = 20) + 0
+A <- rsparsematrix(10, 10, density = 0.1)
 
 # these tests confirm that the matrix reconstructions based on (U, D, V)
 # and (Z, B, Y) match

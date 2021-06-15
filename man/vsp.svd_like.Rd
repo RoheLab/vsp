@@ -58,9 +58,11 @@ Perform varimax rotation on a low rank matrix factorization
 }
 \examples{
 
-library(fastadi)
+library(LRMF3)
+library(RSpectra)
 
-mf <- adaptive_impute(ml100k, rank = 20, max_iter = 5)
-fa <- vsp(mf)
+s <- svds(ml100k, k = 2)
+mf <- as_svd_like(s)
+fa <- vsp(mf, rank = 2)
 
 }

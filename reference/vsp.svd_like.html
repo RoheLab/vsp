@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">vsp</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9007</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9012</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -106,7 +106,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/RoheLab/vsp/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -140,7 +140,9 @@
   centerer <span class='op'>=</span> <span class='cn'>NULL</span>,
   scaler <span class='op'>=</span> <span class='cn'>NULL</span>,
   recenter <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  rescale <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  rescale <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  kaiser_normalize_u <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  kaiser_normalize_v <span class='op'>=</span> <span class='cn'>FALSE</span>,
   rownames <span class='op'>=</span> <span class='cn'>NULL</span>,
   colnames <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
@@ -150,15 +152,18 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>TODO</p></td>
+      <td><p>Either a graph adjacency matrix, igraph::igraph or
+<a href='https://tidygraph.data-imaginist.com/reference/tbl_graph.html'>tidygraph::tbl_graph</a>. If <code>x</code> is a <a href='https://rdrr.io/r/base/matrix.html'>matrix</a> or <a href='https://rdrr.io/pkg/Matrix/man/Matrix.html'>Matrix::Matrix</a>
+then <code>x[i, j]</code> should correspond to the edge going from node <code>i</code>
+to node <code>j</code>.</p></td>
     </tr>
     <tr>
       <th>rank</th>
-      <td><p>TODO</p></td>
+      <td><p>The number of factors to calculate.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>TODO</p></td>
+      <td><p>Ignored.</p></td>
     </tr>
     <tr>
       <th>centerer</th>
@@ -168,24 +173,50 @@
       <th>scaler</th>
       <td><p>TODO</p></td>
     </tr>
+    <tr>
+      <th>recenter</th>
+      <td><p>Should the varimax factors be re-centered around the
+original factor means? Only used when <code>center = TRUE</code>, defaults to <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>rescale</th>
+      <td><p>Should the regularized graph laplacian be used instead of the
+raw adjacency matrix? Defaults to <code>TRUE</code>. If <code>center = TRUE</code>, <code>A</code> will
+first be centered and then normalized.</p></td>
+    </tr>
+    <tr>
+      <th>kaiser_normalize_u</th>
+      <td><p>Whether or not to use Kaiser normalization
+when rotating the left singular vectors <code>U</code>. Defaults to <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>kaiser_normalize_v</th>
+      <td><p>Whether or not to use Kaiser normalization
+when rotating the right singular vectors <code>V</code>. Defaults to <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>rownames</th>
+      <td><p>Character vector of row names of <code>x</code>. These row names
+are propagated into the row names of the <code>U</code> and <code>Z</code>. Defaults
+to <code>NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>colnames</th>
+      <td><p>Character vector of column names of <code>x</code>. These column names
+are propagated into the row names of the <code>V</code> and <code>Y</code>. Defaults
+to <code>NULL</code>.</p></td>
+    </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/RoheLab/fastadi'>fastadi</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/RoheLab/LRMF3'>LRMF3</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/yixuan/RSpectra'>RSpectra</a></span><span class='op'>)</span>
 
-<span class='va'>mf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/fastadi/man/adaptive_impute.html'>adaptive_impute</a></span><span class='op'>(</span><span class='va'>ml100k</span>, rank <span class='op'>=</span> <span class='fl'>20</span>, max_iter <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; INFO [2020-11-21 00:42:34] Using svd initialization.
-#&gt; INFO [2020-11-21 00:42:34] Done initializing.
-#&gt; INFO [2020-11-21 00:42:34] Beginning AdaptiveImpute (max 5 iterations).
-#&gt; INFO [2020-11-21 00:42:34] Checking convergence every 1 iteration(s).
-#&gt; INFO [2020-11-21 00:42:35] Iter 1 complete. delta = 0.141364942080261, alpha = 211.680043817722
-#&gt; INFO [2020-11-21 00:42:36] Iter 2 complete. delta = 0.0337279590653107, alpha = 149.270605766213
-#&gt; INFO [2020-11-21 00:42:36] Iter 3 complete. delta = 0.0140181419142469, alpha = 117.618041284888
-#&gt; INFO [2020-11-21 00:42:37] Iter 4 complete. delta = 0.00741491366888598, alpha = 98.5325304350175
-#&gt; INFO [2020-11-21 00:42:37] Iter 5 complete. delta = 0.00450016707720721, alpha = 85.7878105197386</div><div class='output co'>#&gt; <span class='warning'>Warning: </span>
-#&gt; <span class='warning'>Reached maximum allowed iterations. Returning early.</span></div><div class='input'><span class='va'>fa</span> <span class='op'>&lt;-</span> <span class='fu'><a href='vsp.html'>vsp</a></span><span class='op'>(</span><span class='va'>mf</span><span class='op'>)</span>
+<span class='va'>s</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/RSpectra/man/svds.html'>svds</a></span><span class='op'>(</span><span class='va'>ml100k</span>, k <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>mf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/LRMF3/man/as_svd_like.html'>as_svd_like</a></span><span class='op'>(</span><span class='va'>s</span><span class='op'>)</span>
+<span class='va'>fa</span> <span class='op'>&lt;-</span> <span class='fu'><a href='vsp.html'>vsp</a></span><span class='op'>(</span><span class='va'>mf</span>, rank <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 
 </div></pre>
   </div>

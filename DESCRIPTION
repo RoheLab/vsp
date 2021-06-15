@@ -34,7 +34,7 @@ Imports:
     ggplot2,
     glue,
     invertiforms (>= 0.0.0.9002),
-    LRMF3 (>= 0.0.0.9003),
+    LRMF3 (>= 0.0.0.9009),
     magrittr,
     Matrix,
     RSpectra,

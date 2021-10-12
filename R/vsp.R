@@ -91,6 +91,9 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
                        kaiser_normalize_v = FALSE,
                        rownames = NULL, colnames = NULL) {
 
+  if (!is.integer(rank))
+    rank <- round(rank)
+
   if (rank < 2)
     stop("`rank` must be at least two.", call. = FALSE)
 

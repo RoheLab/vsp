@@ -78,10 +78,6 @@ vsp_fa <- function(
 #' @export
 set_z_factor_names <- function(fa, names) {
 
-  if (length(unique(names)) != fa$rank) {
-    stop("New Z factor names must be unique.", call. = FALSE)
-  }
-
   if (length(names) != fa$rank) {
     stop(
       glue(
@@ -107,10 +103,6 @@ set_z_factor_names <- function(fa, names) {
 #'
 #' @export
 set_y_factor_names <- function(fa, names) {
-
-  if (length(unique(names)) != fa$rank) {
-    stop("New Y factor names must be unique.", call. = FALSE)
-  }
 
   if (length(names) != fa$rank) {
     stop(

@@ -20,8 +20,6 @@
 #' @param colnames TODO
 #'
 #' @return An `adaptive_imputation` object.
-#'
-#' @export
 vsp_fa <- function(
   u, d, v,
   Z, B, Y,
@@ -168,7 +166,7 @@ print.vsp_fa <- function(x, ...) {
   cat(glue("Factors (rank): {x$rank}"), sep = "\n")
   cat(glue("Lambda[rank]:   {round(x$d[x$rank], 4)}"), sep = "\n")
 
-  cat("\nPre-Processing Options (TODO) \n\n")
+  # cat("\nPre-Processing Options (TODO) \n\n")
 
   cat("Components\n\n")
 

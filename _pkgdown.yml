@@ -11,3 +11,18 @@ template:
   bootstrap: 5
   params:
     bootswatch: flatly
+
+reference:
+- title: "Estimation and estimation helpers"
+  contents:
+  - contains("vsp")
+  - contains("set")
+  - bff
+- title: "Turn latent factors into nice tibbles"
+  contents:
+  - contains("get")
+  - contains("hub")
+  - contains("bind")
+- title: "Plotting"
+  contents:
+  - contains("plot")

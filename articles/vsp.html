@@ -4,86 +4,77 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="vsp">
 <title>vsp • vsp</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="vsp">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="vsp">
 <meta property="og:description" content="vsp">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">vsp</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9013</span>
-      </span>
-    </div>
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">vsp</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../articles/vsp.html">Get started</a>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9013</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/vsp.html">Get started</a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/bff.html">bff</a>
-    </li>
-  </ul>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/RoheLab/vsp/" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/bff.html">bff</a>
   </div>
-<!--/.container -->
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/RoheLab/vsp/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><script src="vsp_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>vsp</h1>
+
+
+<script src="vsp_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>vsp</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/RoheLab/vsp/blob/HEAD/vignettes/vsp.Rmd" class="external-link"><code>vignettes/vsp.Rmd</code></a></small>
-      <div class="hidden name"><code>vsp.Rmd</code></div>
-
+      <div class="d-none name"><code>vsp.Rmd</code></div>
     </div>
 
     
@@ -92,7 +83,7 @@
 <p>Once you have your network in one of these formats, you can get estimates by calling the <code><a href="../reference/vsp.html">vsp()</a></code> function. The result is an object of class <code>"vsp_fa"</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RoheLab/vsp" class="external-link">vsp</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span>
 
 <span class="co"># create a random sparse adjacency matrix</span>
 <span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sign.html" class="external-link">sign</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html" class="external-link">rsparsematrix</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">12</span>, nnz <span class="op">=</span> <span class="fl">40</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
@@ -105,7 +96,7 @@
 <span class="co">#&gt; Rows (n):   12</span>
 <span class="co">#&gt; Cols (d):   12</span>
 <span class="co">#&gt; Factors (rank): 5</span>
-<span class="co">#&gt; Lambda[rank]:   0.114</span>
+<span class="co">#&gt; Lambda[rank]:   0.1054</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Pre-Processing Options (TODO) </span>
 <span class="co">#&gt; </span>
@@ -145,7 +136,7 @@
 <span class="co">#&gt; + ... omitted several edges</span></code></pre></div>
 <p>Now we estimate:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span>
 
 <span class="va">enron_fa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">enron</span>, rank <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
 <span class="va">enron_fa</span>
@@ -177,7 +168,7 @@
 <span class="co">#&gt; Rows (n):   12</span>
 <span class="co">#&gt; Cols (d):   12</span>
 <span class="co">#&gt; Factors (rank): 5</span>
-<span class="co">#&gt; Lambda[rank]:   1.8509</span>
+<span class="co">#&gt; Lambda[rank]:   1.5234</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Pre-Processing Options (TODO) </span>
 <span class="co">#&gt; </span>
@@ -198,7 +189,7 @@
 <span class="co">#&gt; Rows (n):   12</span>
 <span class="co">#&gt; Cols (d):   12</span>
 <span class="co">#&gt; Factors (rank): 5</span>
-<span class="co">#&gt; Lambda[rank]:   1.4445</span>
+<span class="co">#&gt; Lambda[rank]:   1.3999</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Pre-Processing Options (TODO) </span>
 <span class="co">#&gt; </span>
@@ -215,124 +206,124 @@
 <code class="sourceCode R"><span class="va">fa2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">M</span>, rank <span class="op">=</span> <span class="fl">5</span>, normalize <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="va">fa2</span><span class="op">$</span><span class="va">u</span> <span class="op"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">fa2</span><span class="op">$</span><span class="va">d</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">fa2</span><span class="op">$</span><span class="va">v</span><span class="op">)</span>
-<span class="co">#&gt;             col01       col02       col03        col04       col05       col06</span>
-<span class="co">#&gt; row01  0.21304975  0.82941927  0.38920397  1.071628387 -0.09516363  0.15496359</span>
-<span class="co">#&gt; row02 -0.05266579 -0.18401247  0.01761563 -0.107922383  1.06372690  0.93401352</span>
-<span class="co">#&gt; row03 -0.01523871  0.38141851  0.56303179  0.072927600  0.34320721 -0.13511196</span>
-<span class="co">#&gt; row04  0.07698425  0.42131932 -0.28438947  0.857960397  0.02946709  0.81814102</span>
-<span class="co">#&gt; row05  0.50953211  0.21501210 -0.15831679  0.836847791 -0.14975746 -0.13216443</span>
-<span class="co">#&gt; row06  0.38479042 -0.25827478 -0.09683808  0.212912887  0.35614197  0.03107211</span>
-<span class="co">#&gt; row07 -0.05323900  0.94742135 -0.02553597  1.055753988  0.11844727  0.87303984</span>
-<span class="co">#&gt; row08  0.09052068  0.87175745  0.14744651  0.935586161 -0.10262522  0.23370225</span>
-<span class="co">#&gt; row09 -0.03531932  0.50602867  0.65323596  0.221960960  0.23051212 -0.09731858</span>
-<span class="co">#&gt; row10 -0.10775875  0.27690329  1.08519093 -0.226480314  0.83842459 -0.05141374</span>
-<span class="co">#&gt; row11 -0.10324390 -0.02034111  0.00846553  0.141890262  0.92255065  1.15985731</span>
-<span class="co">#&gt; row12  0.11391098  0.07862083  0.30087184 -0.007119518  0.68561837  0.09173482</span>
-<span class="co">#&gt;              col07         col08       col09        col10       col11</span>
-<span class="co">#&gt; row01 -0.076262766  0.0644056473 -0.03697556 -0.050586156  1.02984815</span>
-<span class="co">#&gt; row02  0.732754378  0.1313454816  0.29378847  0.908964164  0.33036036</span>
-<span class="co">#&gt; row03  0.208962905 -0.0286638024  0.68665483 -0.105654046 -0.28901463</span>
-<span class="co">#&gt; row04 -0.014428413  0.0185873043 -0.06680952  0.323271802  0.86527975</span>
-<span class="co">#&gt; row05  0.955567719  0.3847904180  0.13595395  0.228880730  1.08111263</span>
-<span class="co">#&gt; row06  1.103922740  0.4217840534 -0.11753150  0.612287567  0.94872545</span>
-<span class="co">#&gt; row07 -0.048682977 -0.1780187118  1.03142494 -0.006936989  0.10181739</span>
-<span class="co">#&gt; row08  0.118525213 -0.0768517711  0.99355443 -0.247748621  0.04318179</span>
-<span class="co">#&gt; row09 -0.142233791 -0.0678099429  0.29121433 -0.157356590  0.01228747</span>
-<span class="co">#&gt; row10 -0.003396507 -0.0003643307  0.00794500  0.192253725  0.13485232</span>
-<span class="co">#&gt; row11  0.255013019  0.0591580315 -0.19503896  0.899643958  0.73441209</span>
-<span class="co">#&gt; row12  0.971358894  0.1660027869  0.93795311  0.341557676 -0.13638615</span>
-<span class="co">#&gt;             col12</span>
-<span class="co">#&gt; row01  0.70038679</span>
-<span class="co">#&gt; row02 -0.10547446</span>
-<span class="co">#&gt; row03  0.18689693</span>
-<span class="co">#&gt; row04  0.11188066</span>
-<span class="co">#&gt; row05  0.10529100</span>
-<span class="co">#&gt; row06  0.06404132</span>
-<span class="co">#&gt; row07 -0.08595706</span>
-<span class="co">#&gt; row08  0.01354669</span>
-<span class="co">#&gt; row09  0.47834613</span>
-<span class="co">#&gt; row10  0.80915183</span>
-<span class="co">#&gt; row11  0.18310072</span>
-<span class="co">#&gt; row12 -0.14351712</span></code></pre></div>
+<span class="co">#&gt;               col01         col02         col03         col04         col05</span>
+<span class="co">#&gt; row01  1.139478e+00 -7.445132e-03  8.987101e-01 -5.237751e-02  8.158076e-02</span>
+<span class="co">#&gt; row02  9.124665e-01 -1.327117e-02  2.411952e-02  9.716245e-01  1.258359e-01</span>
+<span class="co">#&gt; row03  6.243783e-01 -9.126398e-02  2.013262e-01  5.198603e-01 -1.152675e-01</span>
+<span class="co">#&gt; row04 -1.294512e-01  1.118427e+00  1.461999e-01  1.666631e-01  1.011572e+00</span>
+<span class="co">#&gt; row05  9.124665e-01 -1.327117e-02  2.411952e-02  9.716245e-01  1.258359e-01</span>
+<span class="co">#&gt; row06  1.262195e-01  8.565405e-01  8.424121e-01 -1.217852e-01  1.598468e-01</span>
+<span class="co">#&gt; row07  8.219307e-01  1.944985e-01  1.191562e+00  1.082412e-01  2.815874e-03</span>
+<span class="co">#&gt; row08 -3.708852e-16  3.773716e-16 -5.967696e-17 -2.347734e-16  7.782283e-17</span>
+<span class="co">#&gt; row09 -4.223191e-02  8.621128e-01 -5.972893e-02 -2.400803e-02 -1.677030e-01</span>
+<span class="co">#&gt; row10  4.120805e-01  1.621230e-01 -1.439115e-01  7.913162e-01 -1.671618e-02</span>
+<span class="co">#&gt; row11  1.392801e-01  1.526193e-01  9.355900e-02 -1.227494e-01 -2.224429e-01</span>
+<span class="co">#&gt; row12  1.138764e+00 -1.147107e-01  8.865550e-01  8.568041e-01  7.885116e-01</span>
+<span class="co">#&gt;               col06         col07         col08         col09         col10</span>
+<span class="co">#&gt; row01  1.108023e+00  8.351955e-01  8.216648e-02  8.514380e-01  1.441878e-02</span>
+<span class="co">#&gt; row02  1.653072e-02  6.259816e-02 -6.949948e-02  7.138600e-02 -1.467388e-01</span>
+<span class="co">#&gt; row03  2.257439e-01  7.894169e-03  1.878060e-01 -1.567059e-01 -2.050054e-02</span>
+<span class="co">#&gt; row04  6.355222e-02  1.624247e-02  1.081851e-01  8.434490e-01  7.727982e-01</span>
+<span class="co">#&gt; row05  1.653072e-02  6.259816e-02 -6.949948e-02  7.138600e-02 -1.467388e-01</span>
+<span class="co">#&gt; row06  1.040643e+00 -1.076778e-01  1.117134e+00  2.094906e-02  1.047497e+00</span>
+<span class="co">#&gt; row07  1.027304e+00  1.058541e-01  8.881703e-01 -7.718105e-02  7.168217e-01</span>
+<span class="co">#&gt; row08  1.339319e-16 -7.548061e-17  2.021883e-16  8.213634e-17  2.532147e-16</span>
+<span class="co">#&gt; row09  9.541310e-01  8.399017e-02  6.878328e-01  2.465836e-01  3.491708e-01</span>
+<span class="co">#&gt; row10 -3.628561e-02 -2.429121e-01  2.146725e-01 -2.781904e-01  4.516013e-02</span>
+<span class="co">#&gt; row11  5.547377e-01  1.906606e-01  2.467740e-01  1.297852e-01  3.590614e-03</span>
+<span class="co">#&gt; row12 -2.094547e-01  6.533829e-02 -1.132255e-01  2.497041e-01  4.014367e-01</span>
+<span class="co">#&gt;               col11         col12</span>
+<span class="co">#&gt; row01  6.351460e-02 -2.368416e-01</span>
+<span class="co">#&gt; row02 -3.847864e-02  2.317722e-01</span>
+<span class="co">#&gt; row03  1.934320e-01  4.413428e-01</span>
+<span class="co">#&gt; row04  1.299575e-01 -2.542867e-01</span>
+<span class="co">#&gt; row05 -3.847864e-02  2.317722e-01</span>
+<span class="co">#&gt; row06  9.500899e-01  1.011667e+00</span>
+<span class="co">#&gt; row07  1.085708e+00  1.031598e+00</span>
+<span class="co">#&gt; row08  1.580365e-17  2.585310e-17</span>
+<span class="co">#&gt; row09 -1.437191e-01  3.645178e-01</span>
+<span class="co">#&gt; row10  9.900062e-02  5.491225e-01</span>
+<span class="co">#&gt; row11 -9.710155e-02  8.646379e-02</span>
+<span class="co">#&gt; row12  8.212167e-01  2.849656e-01</span></code></pre></div>
 <p>In the example above, this will <em>not</em> approximate <code>M</code>, but rather the regularized graph Laplacian formed from <code>M</code>. Similarly, the varimax-rotated network approximate reconstruction is</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fa</span><span class="op">$</span><span class="va">Z</span> <span class="op"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html" class="external-link">%*%</a></span> <span class="va">fa</span><span class="op">$</span><span class="va">B</span> <span class="op"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">fa</span><span class="op">$</span><span class="va">Y</span><span class="op">)</span>
 <span class="co">#&gt; 12 x 12 Matrix of class "dgeMatrix"</span>
-<span class="co">#&gt;              col01      col02        col03      col04        col05      col06</span>
-<span class="co">#&gt; row01  0.068079834 0.11685250 -0.012327561 0.17958717  0.051332186 0.14916294</span>
-<span class="co">#&gt; row02  0.060110094 0.06853968 -0.018695117 0.12275274  0.148677010 0.21449918</span>
-<span class="co">#&gt; row03 -0.021013165 0.03581390 -0.035383341 0.04101432  0.006701423 0.05371847</span>
-<span class="co">#&gt; row04  0.091057659 0.13320165 -0.020130769 0.20854961  0.102789013 0.22491882</span>
-<span class="co">#&gt; row05  0.135190005 0.09418834 -0.025070872 0.20295220  0.088575648 0.14929767</span>
-<span class="co">#&gt; row06  0.070184924 0.07543105 -0.014155596 0.11378814  0.060223995 0.14602515</span>
-<span class="co">#&gt; row07  0.027008396 0.11861694 -0.049432428 0.16000430  0.045251019 0.17561564</span>
-<span class="co">#&gt; row08  0.025104042 0.10048800 -0.050485149 0.14055248  0.014108185 0.12253884</span>
-<span class="co">#&gt; row09 -0.026276605 0.05948916 -0.021633441 0.05264643 -0.011201190 0.06337831</span>
-<span class="co">#&gt; row10  0.005833957 0.02601563  0.001398434 0.05497328  0.081787006 0.08493431</span>
-<span class="co">#&gt; row11  0.062806518 0.09622420 -0.007659286 0.14734303  0.145572777 0.23949574</span>
-<span class="co">#&gt; row12  0.050296371 0.03565375 -0.039840003 0.09773757  0.100163565 0.12388281</span>
-<span class="co">#&gt;              col07        col08      col09        col10         col11</span>
-<span class="co">#&gt; row01  0.006596797  0.003310369 0.06798066  0.026936607  1.006472e-01</span>
-<span class="co">#&gt; row02  0.083292221  0.032146378 0.11372282  0.117572599  8.045099e-02</span>
-<span class="co">#&gt; row03 -0.032362571 -0.048452679 0.07087336 -0.029138633 -4.624341e-02</span>
-<span class="co">#&gt; row04  0.059423638  0.038739592 0.11122316  0.093861719  1.352589e-01</span>
-<span class="co">#&gt; row05  0.116567441  0.046523431 0.11604276  0.060787909  1.353948e-01</span>
-<span class="co">#&gt; row06  0.092151244  0.083258972 0.07634208  0.117468053  1.128398e-01</span>
-<span class="co">#&gt; row07 -0.002877941 -0.018769673 0.13258102  0.024728589  3.257596e-02</span>
-<span class="co">#&gt; row08 -0.007266987 -0.026670739 0.11922608 -0.007582559  1.432950e-02</span>
-<span class="co">#&gt; row09 -0.058291145 -0.035197858 0.04027578 -0.017967873 -1.716508e-02</span>
-<span class="co">#&gt; row10 -0.026809702 -0.053872723 0.02898994 -0.009502465  9.793742e-05</span>
-<span class="co">#&gt; row11  0.065548932  0.043177833 0.09555099  0.132312702  1.137027e-01</span>
-<span class="co">#&gt; row12  0.066758680 -0.017945855 0.12698890  0.027287308  9.526040e-03</span>
+<span class="co">#&gt;            col01        col02       col03      col04       col05       col06</span>
+<span class="co">#&gt; row01 0.16436709 -0.022686781  0.13643611 0.09306943 -0.01491409  0.14017289</span>
+<span class="co">#&gt; row02 0.05168906 -0.119396102 -0.01044093 0.07660081 -0.10628150 -0.02568864</span>
+<span class="co">#&gt; row03 0.13842461 -0.030944189  0.09504762 0.11453048 -0.03061231  0.07238115</span>
+<span class="co">#&gt; row04 0.07641810  0.041154690  0.07394844 0.08295991  0.04727431  0.05676765</span>
+<span class="co">#&gt; row05 0.05168906 -0.119396102 -0.01044093 0.07660081 -0.10628150 -0.02568864</span>
+<span class="co">#&gt; row06 0.26381946  0.186596389  0.28539684 0.24595003  0.14511178  0.28832859</span>
+<span class="co">#&gt; row07 0.34051646  0.189324383  0.34931523 0.29455560  0.17823973  0.32478818</span>
+<span class="co">#&gt; row08 0.13082916  0.016561579  0.11151358 0.12208716  0.01144979  0.10467825</span>
+<span class="co">#&gt; row09 0.04156830  0.009371194  0.04180904 0.06524322 -0.06813023  0.10686900</span>
+<span class="co">#&gt; row10 0.00969078 -0.126796167 -0.05184711 0.03989437 -0.14209809 -0.05675711</span>
+<span class="co">#&gt; row11 0.12735730  0.019737826  0.11634127 0.10964355 -0.01201865  0.14100882</span>
+<span class="co">#&gt; row12 0.28655718  0.099710847  0.26382805 0.28374697  0.15885594  0.19138704</span>
+<span class="co">#&gt;              col07       col08        col09        col10        col11</span>
+<span class="co">#&gt; row01  0.122827100  0.08728526  0.026768184  0.006276919  0.097312665</span>
+<span class="co">#&gt; row02 -0.041066041 -0.01296508 -0.139892244 -0.110128912  0.002260621</span>
+<span class="co">#&gt; row03  0.057876755  0.08409949 -0.031606760  0.018815945  0.100240059</span>
+<span class="co">#&gt; row04  0.041356266  0.07305384  0.020192285  0.053598904  0.087249571</span>
+<span class="co">#&gt; row05 -0.041066041 -0.01296508 -0.139892244 -0.110128912  0.002260621</span>
+<span class="co">#&gt; row06  0.194089357  0.31207901  0.109075391  0.215014299  0.309476487</span>
+<span class="co">#&gt; row07  0.248749740  0.33626617  0.148154662  0.244335291  0.360963287</span>
+<span class="co">#&gt; row08  0.068809436  0.10957027 -0.005988087  0.035710055  0.117918119</span>
+<span class="co">#&gt; row09  0.009603229  0.11282753 -0.082151470 -0.024945008  0.058601879</span>
+<span class="co">#&gt; row10 -0.074149589 -0.02343805 -0.164342882 -0.108364246 -0.027209781</span>
+<span class="co">#&gt; row11  0.080062990  0.12911725 -0.012249093  0.022656896  0.113770749</span>
+<span class="co">#&gt; row12  0.163436911  0.21137616  0.080170646  0.143866937  0.282486744</span>
 <span class="co">#&gt;              col12</span>
-<span class="co">#&gt; row01  0.083823660</span>
-<span class="co">#&gt; row02  0.041710175</span>
-<span class="co">#&gt; row03 -0.029415288</span>
-<span class="co">#&gt; row04  0.079934222</span>
-<span class="co">#&gt; row05  0.074680459</span>
-<span class="co">#&gt; row06  0.017763002</span>
-<span class="co">#&gt; row07  0.005287041</span>
-<span class="co">#&gt; row08 -0.006344251</span>
-<span class="co">#&gt; row09 -0.007617832</span>
-<span class="co">#&gt; row10  0.060960648</span>
-<span class="co">#&gt; row11  0.069197891</span>
-<span class="co">#&gt; row12  0.004550312</span></code></pre></div>
+<span class="co">#&gt; row01  0.086788585</span>
+<span class="co">#&gt; row02 -0.005373126</span>
+<span class="co">#&gt; row03  0.161491414</span>
+<span class="co">#&gt; row04  0.076393823</span>
+<span class="co">#&gt; row05 -0.005373126</span>
+<span class="co">#&gt; row06  0.300886135</span>
+<span class="co">#&gt; row07  0.349825221</span>
+<span class="co">#&gt; row08  0.112591557</span>
+<span class="co">#&gt; row09  0.041843573</span>
+<span class="co">#&gt; row10  0.036651143</span>
+<span class="co">#&gt; row11  0.098914804</span>
+<span class="co">#&gt; row12  0.197959886</span></code></pre></div>
 <p>In general, you won’t want to explicit reconstruct the network matrix for large networks since the reconstruction will be dense.</p>
 <p>If you want to directly manipulate the estimates, you can access them as we have above with <code>fa$B</code> and so on and so forth. Note that these are <code>matrix</code> and <code>Matrix</code> objects, and you may need to perform type coercions. We also provide some utility functions to extract estimates into <code>tibbles</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_varimax_z.html">get_varimax_z</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 6</span></span>
-<span class="co">#&gt;    id       z1     z2      z3      z4     z5</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> row01 1.54  -<span style="color: #BB0000;">1.60</span>  -<span style="color: #BB0000;">1.95</span>    0.559  -<span style="color: #BB0000;">3.19</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> row02 3.30  -<span style="color: #BB0000;">1.99</span>   0.942  -<span style="color: #BB0000;">0.711</span>  -<span style="color: #BB0000;">2.51</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> row03 0.305 -<span style="color: #BB0000;">1.80</span>   0.720  -<span style="color: #BB0000;">0.844</span>  -<span style="color: #BB0000;">2.45</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> row04 2.72  -<span style="color: #BB0000;">2.64</span>  -<span style="color: #BB0000;">1.22</span>    0.161  -<span style="color: #BB0000;">3.10</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> row05 1.59  -<span style="color: #BB0000;">2.07</span>  -<span style="color: #BB0000;">0.042</span><span style="color: #BB0000; text-decoration: underline;">9</span>  2.56   -<span style="color: #BB0000;">2.43</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> row06 1.73  -<span style="color: #BB0000;">2.44</span>  -<span style="color: #BB0000;">0.197</span>  -<span style="color: #BB0000;">0.021</span><span style="color: #BB0000; text-decoration: underline;">3</span>  0.222</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> row07 1.58  -<span style="color: #BB0000;">3.66</span>  -<span style="color: #BB0000;">0.207</span>  -<span style="color: #BB0000;">0.876</span>  -<span style="color: #BB0000;">3.79</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> row08 0.711 -<span style="color: #BB0000;">3.34</span>  -<span style="color: #BB0000;">0.051</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.230</span>  -<span style="color: #BB0000;">3.38</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> row09 0.356 -<span style="color: #BB0000;">1.60</span>  -<span style="color: #BB0000;">0.772</span>  -<span style="color: #BB0000;">1.31</span>   -<span style="color: #BB0000;">2.02</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> row10 1.62   0.552 -<span style="color: #BB0000;">0.162</span>  -<span style="color: #BB0000;">0.339</span>  -<span style="color: #BB0000;">3.41</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> row11 3.60  -<span style="color: #BB0000;">1.90</span>  -<span style="color: #BB0000;">0.365</span>  -<span style="color: #BB0000;">1.06</span>   -<span style="color: #BB0000;">2.50</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> row12 1.68  -<span style="color: #BB0000;">1.94</span>   2.14    0.551  -<span style="color: #BB0000;">3.20</span></span></code></pre></div>
+<span class="co">#&gt;    id          z1    z2      z3       z4      z5</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> row01  0.104   -<span style="color: #BB0000;">4.52</span>  2.25    0.354   -<span style="color: #BB0000;">0.354</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> row02 -<span style="color: #BB0000;">1.39</span>    -<span style="color: #BB0000;">4.89</span> -<span style="color: #BB0000;">0.926</span>   0.954   -<span style="color: #BB0000;">0.027</span><span style="color: #BB0000; text-decoration: underline;">0</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> row03  0.241   -<span style="color: #BB0000;">4.55</span> -<span style="color: #BB0000;">0.736</span>  -<span style="color: #BB0000;">0.783</span>   -<span style="color: #BB0000;">1.77</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> row04  0.208   -<span style="color: #BB0000;">1.20</span> -<span style="color: #BB0000;">0.835</span>   0.596   -<span style="color: #BB0000;">0.208</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> row05 -<span style="color: #BB0000;">1.39</span>    -<span style="color: #BB0000;">4.89</span> -<span style="color: #BB0000;">0.926</span>   0.954   -<span style="color: #BB0000;">0.027</span><span style="color: #BB0000; text-decoration: underline;">0</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> row06  1.87    -<span style="color: #BB0000;">4.56</span> -<span style="color: #BB0000;">1.62</span>    0.433    0.264 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> row07  1.91    -<span style="color: #BB0000;">5.31</span> -<span style="color: #BB0000;">0.914</span>   0.826   -<span style="color: #BB0000;">0.758</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> row08  0.152   -<span style="color: #BB0000;">3.79</span> -<span style="color: #BB0000;">0.519</span>   0.517   -<span style="color: #BB0000;">0.102</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> row09  0.139   -<span style="color: #BB0000;">4.54</span> -<span style="color: #BB0000;">1.05</span>    0.006<span style="text-decoration: underline;">25</span>  2.51  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> row10 -<span style="color: #BB0000;">0.872</span>   -<span style="color: #BB0000;">4.56</span> -<span style="color: #BB0000;">1.89</span>   -<span style="color: #BB0000;">0.850</span>   -<span style="color: #BB0000;">0.806</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> row11  0.294   -<span style="color: #BB0000;">4.55</span>  0.069<span style="text-decoration: underline;">6</span>  0.351    0.891 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> row12  0.005<span style="text-decoration: underline;">04</span> -<span style="color: #BB0000;">4.42</span> -<span style="color: #BB0000;">1.08</span>    3.28    -<span style="color: #BB0000;">0.639</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_varimax_y.html">get_varimax_y</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 6</span></span>
-<span class="co">#&gt;    id        y1     y2     y3      y4      y5</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> col01  0.286 -<span style="color: #BB0000;">2.37</span>  -<span style="color: #BB0000;">1.39</span>   1.43   -<span style="color: #BB0000;">0.926</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> col02 -<span style="color: #BB0000;">1.06</span>  -<span style="color: #BB0000;">1.63</span>  -<span style="color: #BB0000;">0.655</span> -<span style="color: #BB0000;">1.19</span>   -<span style="color: #BB0000;">0.377</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> col03  0.340  0.391 -<span style="color: #BB0000;">1.10</span>  -<span style="color: #BB0000;">0.084</span><span style="color: #BB0000; text-decoration: underline;">7</span>  0.093<span style="text-decoration: underline;">4</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> col04 -<span style="color: #BB0000;">0.420</span> -<span style="color: #BB0000;">3.30</span>  -<span style="color: #BB0000;">1.24</span>  -<span style="color: #BB0000;">0.223</span>  -<span style="color: #BB0000;">1.62</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> col05  2.87  -<span style="color: #BB0000;">2.02</span>  -<span style="color: #BB0000;">1.11</span>  -<span style="color: #BB0000;">0.018</span><span style="color: #BB0000; text-decoration: underline;">7</span> -<span style="color: #BB0000;">0.044</span><span style="color: #BB0000; text-decoration: underline;">5</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> col06  1.10  -<span style="color: #BB0000;">3.39</span>  -<span style="color: #BB0000;">1.18</span>  -<span style="color: #BB0000;">1.78</span>    0.570 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> col07  0.741 -<span style="color: #BB0000;">2.71</span>  -<span style="color: #BB0000;">0.836</span>  2.16    0.458 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> col08 -<span style="color: #BB0000;">0.781</span> -<span style="color: #BB0000;">1.62</span>  -<span style="color: #BB0000;">1.47</span>   0.674   1.35  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> col09  0.280 -<span style="color: #BB0000;">2.19</span>   1.36   0.224  -<span style="color: #BB0000;">0.250</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> col10  0.451 -<span style="color: #BB0000;">2.31</span>  -<span style="color: #BB0000;">1.70</span>  -<span style="color: #BB0000;">0.279</span>   2.00  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> col11 -<span style="color: #BB0000;">0.333</span> -<span style="color: #BB0000;">2.81</span>  -<span style="color: #BB0000;">2.96</span>   0.341  -<span style="color: #BB0000;">0.045</span><span style="color: #BB0000; text-decoration: underline;">8</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> col12  1.12  -<span style="color: #BB0000;">0.996</span> -<span style="color: #BB0000;">2.44</span>  -<span style="color: #BB0000;">0.180</span>  -<span style="color: #BB0000;">1.39</span></span></code></pre></div>
+<span class="co">#&gt;    id       y1    y2     y3    y4     y5</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> col01 -<span style="color: #BB0000;">6.24</span> -<span style="color: #BB0000;">5.72</span> -<span style="color: #BB0000;">1.88</span>  -<span style="color: #BB0000;">5.06</span> -<span style="color: #BB0000;">1.47</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> col02 -<span style="color: #BB0000;">6.74</span> -<span style="color: #BB0000;">5.80</span> -<span style="color: #BB0000;">1.96</span>  -<span style="color: #BB0000;">1.13</span> -<span style="color: #BB0000;">1.79</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> col03 -<span style="color: #BB0000;">7.92</span> -<span style="color: #BB0000;">6.72</span> -<span style="color: #BB0000;">1.96</span>  -<span style="color: #BB0000;">4.62</span> -<span style="color: #BB0000;">2.11</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> col04 -<span style="color: #BB0000;">3.98</span> -<span style="color: #BB0000;">6.13</span> -<span style="color: #BB0000;">2.12</span>  -<span style="color: #BB0000;">3.31</span> -<span style="color: #BB0000;">1.59</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> col05 -<span style="color: #BB0000;">6.84</span> -<span style="color: #BB0000;">5.87</span> -<span style="color: #BB0000;">3.84</span>  -<span style="color: #BB0000;">2.89</span> -<span style="color: #BB0000;">2.40</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> col06 -<span style="color: #BB0000;">7.46</span> -<span style="color: #BB0000;">5.86</span>  0.166 -<span style="color: #BB0000;">3.03</span> -<span style="color: #BB0000;">2.15</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> col07 -<span style="color: #BB0000;">6.91</span> -<span style="color: #BB0000;">4.27</span> -<span style="color: #BB0000;">1.15</span>  -<span style="color: #BB0000;">3.92</span> -<span style="color: #BB0000;">1.61</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> col08 -<span style="color: #BB0000;">6.79</span> -<span style="color: #BB0000;">6.95</span> -<span style="color: #BB0000;">0.686</span> -<span style="color: #BB0000;">2.26</span> -<span style="color: #BB0000;">1.47</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> col09 -<span style="color: #BB0000;">7.53</span> -<span style="color: #BB0000;">3.86</span> -<span style="color: #BB0000;">2.57</span>  -<span style="color: #BB0000;">3.17</span> -<span style="color: #BB0000;">1.68</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> col10 -<span style="color: #BB0000;">7.91</span> -<span style="color: #BB0000;">6.25</span> -<span style="color: #BB0000;">2.97</span>  -<span style="color: #BB0000;">2.65</span> -<span style="color: #BB0000;">0.924</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> col11 -<span style="color: #BB0000;">7.34</span> -<span style="color: #BB0000;">7.69</span> -<span style="color: #BB0000;">2.43</span>  -<span style="color: #BB0000;">3.87</span> -<span style="color: #BB0000;">1.84</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> col12 -<span style="color: #BB0000;">7.00</span> -<span style="color: #BB0000;">5.99</span> -<span style="color: #BB0000;">1.95</span>  -<span style="color: #BB0000;">3.36</span>  1.64</span></code></pre></div>
 <p>To visualize a screeplot of the singular value, use:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># screeplot(fa)</span></code></pre></div>
@@ -371,56 +362,48 @@
   <span class="fu"><a href="../reference/bind_varimax_z.html">bind_varimax_z</a></span><span class="op">(</span><span class="va">fa2</span><span class="op">)</span>
 
 <span class="va">sbm_fa2</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tbl_graph: 25 nodes and 45 edges</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tbl_graph: 25 nodes and 50 edges</span></span>
 <span class="co"><span style="color: #949494;">#&gt; #</span></span>
-<span class="co"><span style="color: #949494;">#&gt; # A directed simple graph with 1 component</span></span>
+<span class="co"><span style="color: #949494;">#&gt; # A directed simple graph with 2 components</span></span>
 <span class="co"><span style="color: #949494;">#&gt; #</span></span>
 <span class="co"><span style="color: #949494;">#&gt; # Node Data: 25 × 6 (active)</span></span>
-<span class="co">#&gt;   id          z1      z2      z3      z4      z5</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> row01 -<span style="color: #BB0000;">0.007</span><span style="color: #BB0000; text-decoration: underline;">20</span>  0.552  -<span style="color: #BB0000;">0.060</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.047<span style="text-decoration: underline;">4</span>  0.359 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> row02  0.779    0.021<span style="text-decoration: underline;">0</span>  0.012<span style="text-decoration: underline;">3</span> -<span style="color: #BB0000;">0.218</span>  -<span style="color: #BB0000;">0.085</span><span style="color: #BB0000; text-decoration: underline;">8</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> row03 -<span style="color: #BB0000;">0.113</span>    0.016<span style="text-decoration: underline;">8</span> -<span style="color: #BB0000;">0.040</span><span style="color: #BB0000; text-decoration: underline;">0</span>  0.089<span style="text-decoration: underline;">8</span>  4.02  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> row04  0.911   -<span style="color: #BB0000;">0.076</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.918</span>   3.38    0.288 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> row05 -<span style="color: #BB0000;">0.114</span>   -<span style="color: #BB0000;">0.055</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.295</span>   0.597   0.221 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> row06 -<span style="color: #BB0000;">0.039</span><span style="color: #BB0000; text-decoration: underline;">4</span>  -<span style="color: #BB0000;">0.340</span>   1.09   -<span style="color: #BB0000;">0.338</span>   2.17  </span>
+<span class="co">#&gt;   id           z1        z2        z3        z4        z5</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> row01 -<span style="color: #BB0000;">1.39</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>  1.57<span style="color: #949494;">e</span>+ 0 -<span style="color: #BB0000;">2.12</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>  1.34<span style="color: #949494;">e</span>+ 0  3.14<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> row02  6.19<span style="color: #949494;">e</span><span style="color: #BB0000;">-17</span> -<span style="color: #BB0000;">4.63</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-16</span>  1.81<span style="color: #949494;">e</span><span style="color: #BB0000;">-16</span>  1.16<span style="color: #949494;">e</span><span style="color: #BB0000;">-15</span>  6.22<span style="color: #949494;">e</span><span style="color: #BB0000;">-16</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> row03 -<span style="color: #BB0000;">3.37</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>  3.15<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>  9.70<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>  1.35<span style="color: #949494;">e</span>+ 0 -<span style="color: #BB0000;">1.26</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> row04  8.93<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> -<span style="color: #BB0000;">2.18</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> -<span style="color: #BB0000;">4.43</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>  1.67<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> -<span style="color: #BB0000;">4.14</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> row05  6.90<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> -<span style="color: #BB0000;">7.26</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>  1.40<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> -<span style="color: #BB0000;">3.27</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> -<span style="color: #BB0000;">3.46</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> row06 -<span style="color: #BB0000;">2.29</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> -<span style="color: #BB0000;">1.46</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>  2.10<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span>  2.55<span style="color: #949494;">e</span>+ 0 -<span style="color: #BB0000;">3.76</span><span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span></span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 19 more rows</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#</span></span>
-<span class="co"><span style="color: #949494;">#&gt; # Edge Data: 45 × 2</span></span>
+<span class="co"><span style="color: #949494;">#&gt; # Edge Data: 50 × 2</span></span>
 <span class="co">#&gt;    from    to</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    17     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    12     2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    22     2</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 42 more rows</span></span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     8     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2    25</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     9     2</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 47 more rows</span></span></code></pre></div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main>
 </div>
 
 
 
-      <footer><div class="copyright">
+    <footer><div class="pkgdown-footer-left">
   <p></p>
 <p>Developed by Karl Rohe, Muzhe Zeng, <a href="https://alexpghayes.com" class="external-link">Alex Hayes</a>, Fan Chen.</p>
 </div>
 
-<div class="pkgdown">
+<div class="pkgdown-footer-right">
   <p></p>
 <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
-
 
   
 

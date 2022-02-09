@@ -15,7 +15,7 @@ template:
 reference:
 - title: "Estimation and estimation helpers"
   contents:
-  - contains("vsp")
+  - vsp
   - contains("set")
   - bff
 - title: "Turn latent factors into nice tibbles"

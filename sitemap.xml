@@ -1,111 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://rohelab.github.io/invertiforms/404.html</loc>
+    <loc>https://rohelab.github.io/vsp/404.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/LICENSE-text.html</loc>
+    <loc>https://rohelab.github.io/vsp/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/LICENSE.html</loc>
+    <loc>https://rohelab.github.io/vsp/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/articles/bff.html</loc>
+    <loc>https://rohelab.github.io/vsp/articles/bff.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/articles/index.html</loc>
+    <loc>https://rohelab.github.io/vsp/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/articles/vsp.html</loc>
+    <loc>https://rohelab.github.io/vsp/authors.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/authors.html</loc>
+    <loc>https://rohelab.github.io/vsp/index.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/index.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/bff.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/bff.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/bind_svd_u.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/bind_svd_u.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/bind_varimax_z.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/bind_varimax_z.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/get_svd_u.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/get_svd_u.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/get_svd_v.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/get_svd_v.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/get_varimax_y.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/get_varimax_y.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/get_varimax_z.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/get_varimax_z.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/get_y_clusters.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/get_y_clusters.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/get_y_hubs.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/get_y_hubs.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/get_z_clusters.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/get_z_clusters.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/get_z_hubs.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/get_z_hubs.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/index.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/left_padded_sequence.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/left_padded_sequence.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/make_skew_positive.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/make_skew_positive.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/pipe.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/plot_ipr_pairs.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/plot_ipr_pairs.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/plot_mixing_matrix.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/plot_mixing_matrix.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/plot_svd_u.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/plot_svd_u.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/plot_svd_v.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/plot_svd_v.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/plot_varimax_y_pairs.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/plot_varimax_y_pairs.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/plot_varimax_z_pairs.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/plot_varimax_z_pairs.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/safe_row_l2_normalize.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/safe_row_l2_normalize.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/set_y_factor_names.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/set_y_factor_names.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/set_z_factor_names.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/set_z_factor_names.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/vsp-package.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/vsp-package.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/vsp.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/vsp.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/vsp.svd_like.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/vsp.svd_like.html</loc>
-  </url>
-  <url>
-    <loc>https://rohelab.github.io/invertiforms/reference/vsp_fa.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/vsp_fa.html</loc>
   </url>
 </urlset>

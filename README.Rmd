@@ -21,8 +21,8 @@ theme_set(theme_minimal())
 # vsp
 
 <!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/RoheLab/vsp/branch/master/graph/badge.svg)](https://codecov.io/gh/RoheLab/vsp?branch=master)
-[![R build status](https://github.com/RoheLab/vsp/workflows/R-CMD-check/badge.svg)](https://github.com/RoheLab/vsp/actions)
+[![Codecov test coverage](https://codecov.io/gh/RoheLab/vsp/branch/main/graph/badge.svg)](https://app.codecov.io/gh/RoheLab/vsp?branch=main)
+[![R-CMD-check](https://github.com/RoheLab/vsp/workflows/R-CMD-check/badge.svg)](https://github.com/RoheLab/vsp/actions)
 <!-- badges: end -->
 
 The goal of `vsp` is to enable fast, spectral estimation of latent factors in random dot product graphs. Under mild assumptions, the `vsp` estimator is consistent for (degree-corrected) stochastic blockmodels, (degree-corrected) mixed-membership stochastic blockmodels, and degree-corrected overlapping stochastic blockmodels.

@@ -62,7 +62,7 @@
   centerer <span class="op">=</span> <span class="cn">NULL</span>,
   scaler <span class="op">=</span> <span class="cn">NULL</span>,
   recenter <span class="op">=</span> <span class="cn">FALSE</span>,
-  rescale <span class="op">=</span> <span class="cn">FALSE</span>,
+  renormalize <span class="op">=</span> <span class="cn">FALSE</span>,
   kaiser_normalize_u <span class="op">=</span> <span class="cn">FALSE</span>,
   kaiser_normalize_v <span class="op">=</span> <span class="cn">FALSE</span>,
   rownames <span class="op">=</span> <span class="cn">NULL</span>,
@@ -80,7 +80,7 @@ to node <code>j</code>.</p></dd>
 <dt>rank</dt>
 <dd><p>The number of factors to calculate.</p></dd>
 <dt>...</dt>
-<dd><p>Ignored.</p></dd>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 <dt>centerer</dt>
 <dd><p>TODO</p></dd>
 <dt>scaler</dt>
@@ -88,7 +88,7 @@ to node <code>j</code>.</p></dd>
 <dt>recenter</dt>
 <dd><p>Should the varimax factors be re-centered around the
 original factor means? Only used when <code>center = TRUE</code>, defaults to <code>FALSE</code>.</p></dd>
-<dt>rescale</dt>
+<dt>renormalize</dt>
 <dd><p>Should the regularized graph laplacian be used instead of the
 raw adjacency matrix? Defaults to <code>TRUE</code>. If <code>center = TRUE</code>, <code>A</code> will
 first be centered and then normalized.</p></dd>

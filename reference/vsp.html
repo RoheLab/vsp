@@ -66,8 +66,8 @@
   <span class="va">...</span>,
   center <span class="op">=</span> <span class="cn">FALSE</span>,
   recenter <span class="op">=</span> <span class="cn">FALSE</span>,
-  scale <span class="op">=</span> <span class="cn">FALSE</span>,
-  rescale <span class="op">=</span> <span class="cn">FALSE</span>,
+  degree_normalize <span class="op">=</span> <span class="cn">TRUE</span>,
+  renormalize <span class="op">=</span> <span class="cn">FALSE</span>,
   tau_row <span class="op">=</span> <span class="cn">NULL</span>,
   tau_col <span class="op">=</span> <span class="cn">NULL</span>,
   kaiser_normalize_u <span class="op">=</span> <span class="cn">FALSE</span>,
@@ -83,8 +83,8 @@
   <span class="va">...</span>,
   center <span class="op">=</span> <span class="cn">FALSE</span>,
   recenter <span class="op">=</span> <span class="cn">FALSE</span>,
-  scale <span class="op">=</span> <span class="cn">FALSE</span>,
-  rescale <span class="op">=</span> <span class="cn">FALSE</span>,
+  degree_normalize <span class="op">=</span> <span class="cn">TRUE</span>,
+  renormalize <span class="op">=</span> <span class="cn">FALSE</span>,
   tau_row <span class="op">=</span> <span class="cn">NULL</span>,
   tau_col <span class="op">=</span> <span class="cn">NULL</span>,
   kaiser_normalize_u <span class="op">=</span> <span class="cn">FALSE</span>,
@@ -100,8 +100,8 @@
   <span class="va">...</span>,
   center <span class="op">=</span> <span class="cn">FALSE</span>,
   recenter <span class="op">=</span> <span class="cn">FALSE</span>,
-  scale <span class="op">=</span> <span class="cn">FALSE</span>,
-  rescale <span class="op">=</span> <span class="cn">FALSE</span>,
+  degree_normalize <span class="op">=</span> <span class="cn">TRUE</span>,
+  renormalize <span class="op">=</span> <span class="cn">FALSE</span>,
   tau_row <span class="op">=</span> <span class="cn">NULL</span>,
   tau_col <span class="op">=</span> <span class="cn">NULL</span>,
   kaiser_normalize_u <span class="op">=</span> <span class="cn">FALSE</span>,
@@ -124,27 +124,27 @@ to node <code>j</code>.</p></dd>
 <dt>rank</dt>
 <dd><p>The number of factors to calculate.</p></dd>
 <dt>...</dt>
-<dd><p>Ignored.</p></dd>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 <dt>center</dt>
 <dd><p>Should the adjacency matrix be row <em>and</em> column centered?
 Defaults to <code>FALSE</code>.</p></dd>
 <dt>recenter</dt>
 <dd><p>Should the varimax factors be re-centered around the
 original factor means? Only used when <code>center = TRUE</code>, defaults to <code>FALSE</code>.</p></dd>
-<dt>scale</dt>
+<dt>degree_normalize</dt>
 <dd><p>Should the regularized graph laplacian be used instead of the
 raw adjacency matrix? Defaults to <code>TRUE</code>. If <code>center = TRUE</code>, <code>A</code> will
 first be centered and then normalized.</p></dd>
-<dt>rescale</dt>
+<dt>renormalize</dt>
 <dd><p>Should the regularized graph laplacian be used instead of the
 raw adjacency matrix? Defaults to <code>TRUE</code>. If <code>center = TRUE</code>, <code>A</code> will
 first be centered and then normalized.</p></dd>
 <dt>tau_row</dt>
 <dd><p>Row regularization term. Default is <code>NULL</code>, in which case
-we use the row degree. Ignored when <code>scale = FALSE</code>.</p></dd>
+we use the row degree. Ignored when <code>degree_normalize = FALSE</code>.</p></dd>
 <dt>tau_col</dt>
 <dd><p>Column regularization term. Default is <code>NULL</code>, in which case
-we use the column degree. Ignored when <code>scale = FALSE</code>.</p></dd>
+we use the column degree. Ignored when <code>degree_normalize = FALSE</code>.</p></dd>
 <dt>kaiser_normalize_u</dt>
 <dd><p>Whether or not to use Kaiser normalization
 when rotating the left singular vectors <code>U</code>. Defaults to <code>FALSE</code>.</p></dd>
@@ -178,20 +178,22 @@ to use to form a weighted adjacency matrix.</p></dd>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RoheLab/LRMF3" class="external-link">LRMF3</a></span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: Matrix</span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">vsp</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">ml100k</span>,</span>
-<span class="r-in">  rank <span class="op">=</span> <span class="fl">2</span>,</span>
-<span class="r-in">  scale <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">  rescale <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">  center <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">  recenter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">  rownames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">ml100k</span><span class="op">)</span>,</span>
-<span class="r-in">  colnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">ml100k</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Arguments in `...` must be used.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Problematic arguments:</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> scale = TRUE</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> rescale = FALSE</span>
+<span class="r-in"><span class="fu">vsp</span><span class="op">(</span><span class="va">ml100k</span>, rank <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Vintage Sparse PCA Factor Analysis</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rows (n):   943</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cols (d):   1682</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Factors (rank): 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Lambda[rank]:   0.2994</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Components</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Z: 943 x 2 [dgeMatrix] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> B: 2 x 2 [dgeMatrix] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Y: 1682 x 2 [dgeMatrix] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> u: 943 x 2 [matrix] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> d: 2      [numeric] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> v: 1682 x 2 [matrix] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

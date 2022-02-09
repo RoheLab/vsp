@@ -5,7 +5,7 @@ Version: 0.0.0.9013
 Authors@R: c(
     person("Karl", "Rohe", , "karlrohe@stat.wisc.edu", role = "aut"),
     person("Muzhe", "Zeng", , "mzeng6@wisc.edu", role = "aut"),
-    person("Alex", "Hayes", , "alexpghayes@gmail.com", role = c("aut", "cre"),
+    person("Alex", "Hayes", , "alexpghayes@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-4985-5160")),
     person("Fan", "Chen", role = "aut")
   )

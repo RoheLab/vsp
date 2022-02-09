@@ -2,20 +2,65 @@
 % Please edit documentation in R/plots.R
 \name{plot_varimax_z_pairs}
 \alias{plot_varimax_z_pairs}
-\title{Title}
+\alias{plot_varimax_y_pairs}
+\alias{plot_svd_u}
+\alias{plot_svd_v}
+\title{Create a pairs plot of select Y factors}
 \usage{
 plot_varimax_z_pairs(fa, factors = 1:min(5, fa$rank), ...)
+
+plot_varimax_y_pairs(fa, factors = 1:min(5, fa$rank), ...)
+
+plot_svd_u(fa, factors = 1:min(5, fa$rank))
+
+plot_svd_v(fa, factors = 1:min(5, fa$rank))
 }
 \arguments{
-\item{fa}{TODO}
+\item{factors}{The specific columns to index into. The most reliable
+option here is to index with an integer vector of column indices,
+but you could also use a character vector if columns have been named.
+By default returns all factors/singular vectors.}
 
-\item{factors}{TODO}
-
-\item{...}{TODO}
+\item{...}{
+  Arguments passed on to \code{\link[GGally:ggpairs]{GGally::ggpairs}}
+  \describe{
+    \item{\code{data}}{data set using.  Can have both numerical and categorical data.}
+    \item{\code{mapping}}{aesthetic mapping (besides \code{x} and \code{y}).  See \code{\link[ggplot2]{aes}()}.  If \code{mapping} is numeric, \code{columns} will be set to the \code{mapping} value and \code{mapping} will be set to \code{NULL}.}
+    \item{\code{columns}}{which columns are used to make plots.  Defaults to all columns.}
+    \item{\code{title}}{title, x label, and y label for the graph}
+    \item{\code{xlab}}{title, x label, and y label for the graph}
+    \item{\code{ylab}}{title, x label, and y label for the graph}
+    \item{\code{upper}}{see Details}
+    \item{\code{lower}}{see Details}
+    \item{\code{diag}}{see Details}
+    \item{\code{params}}{deprecated.  Please see \code{\link[GGally]{wrap_fn_with_param_arg}}}
+    \item{\code{axisLabels}}{either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels}
+    \item{\code{columnLabels}}{label names to be displayed.  Defaults to names of columns being used.}
+    \item{\code{labeller}}{labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.}
+    \item{\code{switch}}{switch parameter for facet_grid. See \code{ggplot2::\link[ggplot2]{facet_grid}}.  By default, the labels are displayed on the top and right of the plot. If \code{"x"}, the top labels will be displayed to the bottom. If \code{"y"}, the right-hand side labels will be displayed to the left. Can also be set to \code{"both"}}
+    \item{\code{showStrips}}{boolean to determine if each plot's strips should be displayed. \code{NULL} will default to the top and right side plots only. \code{TRUE} or \code{FALSE} will turn all strips on or off respectively.}
+    \item{\code{legend}}{May be the two objects described below or the default \code{NULL} value.  The legend position can be moved by using ggplot2's theme element \code{pm + theme(legend.position = "bottom")} \describe{\item{a numeric vector of length 2}{provides the location of the plot to use the legend for the plot matrix's legend. Such as \code{legend = c(3,5)} which will use the legend from the plot in the third row and fifth column}\item{a single numeric value}{provides the location of a plot according to the display order. Such as \code{legend = 3} in a plot matrix with 2 rows and 5 columns displayed by column will return the plot in position \code{c(1,2)}}\item{a object from \code{\link[GGally]{grab_legend}()}}{a predetermined plot legend that will be displayed directly}}}
+    \item{\code{cardinality_threshold}}{maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15}
+    \item{\code{progress}}{\code{NULL} (default) for a progress bar in interactive sessions with more than 15 plots, \code{TRUE} for a progress bar, \code{FALSE} for no progress bar, or a function that accepts at least a plot matrix and returns a new \code{progress::\link[progress]{progress_bar}}.  See \code{\link[GGally]{ggmatrix_progress}}.}
+    \item{\code{proportions}}{Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.}
+    \item{\code{legends}}{deprecated}
+  }}
 }
 \value{
-TOOD
+A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} plot or \code{\link[GGally:ggpairs]{GGally::ggpairs()}} plot.
 }
 \description{
-Title
+To avoid overplotting, plots data for a maximum of 1000 nodes. If there
+are more than 1000 nodes, samples 1000 nodes randomly proportional to
+row norms (i.e. nodes with embeddings larger in magniture are more likely
+to be sampled).
 }
+\section{Functions}{
+\itemize{
+\item \code{plot_varimax_y_pairs}: Create a pairs plot of select Z factors
+
+\item \code{plot_svd_u}: Create a pairs plot of select left singular vectors
+
+\item \code{plot_svd_v}: Create a pairs plot of select right singular vectors
+}}
+

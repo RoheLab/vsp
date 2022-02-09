@@ -1,11 +1,16 @@
 
-#' Title
+#' Create a pairs plot of select Y factors
 #'
-#' @param fa TODO
-#' @param factors TODO
-#' @param ... TODO
+#' To avoid overplotting, plots data for a maximum of 1000 nodes. If there
+#' are more than 1000 nodes, samples 1000 nodes randomly proportional to
+#' row norms (i.e. nodes with embeddings larger in magniture are more likely
+#' to be sampled).
 #'
-#' @return TOOD
+#' @inheritParams get_svd_u
+#' @inheritDotParams GGally::ggpairs
+#'
+#' @return A [ggplot2::ggplot()] plot or [GGally::ggpairs()] plot.
+#'
 #' @export
 #'
 plot_varimax_z_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
@@ -26,15 +31,8 @@ plot_varimax_z_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
     theme_minimal()
 }
 
-#' Title
-#'
-#' @param fa TODO
-#' @param factors TODO
-#' @param ... TODO
-#'
-#' @return TOOD
+#' @describeIn plot_varimax_z_pairs Create a pairs plot of select Z factors
 #' @export
-#'
 plot_varimax_y_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
 
   stop_if_not_installed("dplyr")
@@ -53,14 +51,8 @@ plot_varimax_y_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
     theme_minimal()
 }
 
-#' Title
-#'
-#' @param fa TODO
-#' @param factors TODO
-#'
-#' @return TOOD
+#' @describeIn plot_varimax_z_pairs Create a pairs plot of select left singular vectors
 #' @export
-#'
 plot_svd_u <- function(fa, factors = 1:min(5, fa$rank)) {
 
   stop_if_not_installed("dplyr")
@@ -83,14 +75,8 @@ plot_svd_u <- function(fa, factors = 1:min(5, fa$rank)) {
     scale_x_continuous(breaks = scales::pretty_breaks())
 }
 
-#' Title
-#'
-#' @param fa TODO
-#' @param factors TODO
-#'
-#' @return TOOD
+#' @describeIn plot_varimax_z_pairs Create a pairs plot of select right singular vectors
 #' @export
-#'
 plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
 
   stop_if_not_installed("dplyr")
@@ -113,6 +99,10 @@ plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
     scale_x_continuous(breaks = scales::pretty_breaks())
 }
 
+#' Create a screeplot from a factor analysis object
+#'
+#' @inherit get_svd_u params return
+#'
 #' @method screeplot vsp_fa
 #' @export
 #' @import ggplot2
@@ -130,16 +120,12 @@ screeplot.vsp_fa <- function(x, ...) {
     theme_minimal()
 }
 
-#' Title
+#' Plot the mixing matrix B
 #'
-#' @param fa TODO
-#' @param ... TODO
+#' @inherit get_svd_u params return
 #'
-#' @return TOOD
 #' @export
-#'
-#' @import ggplot2
-plot_mixing_matrix <- function(fa, ...) {
+plot_mixing_matrix <- function(fa) {
   as_tibble(as.matrix(fa$B), rownames = "row") %>%
     tidyr::gather(col, value, -row) %>%
     ggplot(aes(x = col, y = row, fill = value)) +
@@ -148,16 +134,21 @@ plot_mixing_matrix <- function(fa, ...) {
     theme_minimal()
 }
 
-#' Title
+#' Plot pairs of inverse participation ratios for singular vectors
 #'
-#' @param fa TODO
-#' @param ... TODO
+#' When IPR for a given singular vector is O(1) rather than O(1 / sqrt(n)),
+#' this can indicate that the singular vector is localizing on a small
+#' subset of nodes. Oftentimes this localization indicates overfitting.
+#' If you see IPR values that are not close to zero (where "close to zero"
+#' is something you sort of have to pick up over time), then you need
+#' to some further investigation to see if you have localization and that
+#' localization corresponds to overfitting. Note, however, that not all
+#' localization is overfitting.
 #'
-#' @return TOOD
+#' @inherit get_svd_u params return
+#'
 #' @export
-#'
-#' @import ggplot2
-plot_ipr_pairs <- function(fa, ...) {
+plot_ipr_pairs <- function(fa) {
 
   ipr <- function(x) sum(x^4)
 

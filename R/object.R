@@ -1,25 +1,30 @@
 #' Create a vintage sparse factor analysis object
 #'
-#' `adaptive_imputation` objects are a subclass of
-#' [LRMF3::svd_like()], with an additional field `alpha`.
+#' `vsp_fa` objects are a subclass of [LRMF3::fa_like()], with additional
+#'  fields `u`, `d`, `v`, `transformers`, `R_U`, and `R_V`
 #'
-#' @param Z TODO
-#' @param B TODO
-#' @param Y TODO
+#'  @inheritParams LRMF3::fa_like
 #'
-#' @param u A *matrix* "left singular-ish" vectors.
+#' @param u A [matrix()] of "left singular-ish" vectors.
 #'
-#' @param d A *vector* of "singular-ish" values.
+#' @param d A [numeric()] vector of "singular-ish" values.
 #'
-#' @param v A *matrix* of "right singular-ish" vectors.
+#' @param v A [matrix()] of "right singular-ish" vectors.
 #'
-#' @param transformers TODO
-#' @param R_U TODO
-#' @param R_V TODO
-#' @param rownames TODO
-#' @param colnames TODO
+#' @param transformers A list of transformatioms from the [invertiforms]
+#'   package.
 #'
-#' @return An `adaptive_imputation` object.
+#' @param R_U Varimax rotation matrix use to transform `u` into `Z`.
+#' @param R_V Varimax rotation matrix use to transform `v` into `Y`.
+#' @param rownames Identifying names for each row of the original
+#'   data. Defaults to `NULL`, in which cases each row is given a
+#'   row number left-padded with zeros as a name.
+#' @param colnames Identifying names for each column of the original
+#'   data. Defaults to `NULL`, in which cases each column is given a
+#'   row column left-padded with zeros as a name.
+#'
+#' @return A `svd_fa` object.
+#'
 vsp_fa <- function(
   u, d, v,
   Z, B, Y,
@@ -62,16 +67,18 @@ vsp_fa <- function(
   colnames(fa$Y) <- paste0("y", left_padded_sequence(1:fa$rank))
   colnames(fa$v) <- paste0("v", left_padded_sequence(1:fa$rank))
 
-  validate_vsp_fa(fa)
+  fa
 }
 
-#' TODO
+#' Give the dimensions of Z factors informative names
 #'
-#' @param fa TODO
+#' @param fa A [vsp_fa()] object.
+#' @param names Describe new names for Z/Y factors.
 #'
-#' @param names TODO
-#'
-#' @return TODO
+#' @return A new [vsp_fa()] object, but the columns names of `Z` and the
+#'   row names of `B` have been set to `names` (for `set_z_factor_names`),
+#'   and the column names of `B` and the column names of `Y` have been
+#'   set to `names` (for `set_y_factor_names`).
 #'
 #' @export
 set_z_factor_names <- function(fa, names) {
@@ -91,15 +98,9 @@ set_z_factor_names <- function(fa, names) {
   fa
 }
 
-#' TODO
-#'
-#' @param fa TODO
-#'
-#' @param names TODO
-#'
-#' @return TODO
-#'
+
 #' @export
+#' @describeIn set_z_factor_names Give the dimensions of Y factors informative names
 set_y_factor_names <- function(fa, names) {
 
   if (length(names) != fa$rank) {
@@ -131,29 +132,6 @@ new_vsp_fa <- function(u, d, v, Z, B, Y, transformers, R_U, R_V) {
     R_V = R_V
   )
 }
-
-validate_vsp_fa <- function(x) {
-
-  # LMRF3::validate_fa_like(x)
-
-  # TODO
-
-  # if (is.null(ai$alpha)) {
-  #   stop(
-  #     "Must have `alpha` field in adaptive imputation object.",
-  #     call. = FALSE
-  #   )
-  # }
-  #
-  # if (!is.numeric(ai$alpha) || length(ai$alpha) != 1) {
-  #   stop(
-  #     "`alpha` must be a numeric vector of length 1.",
-  #     call. = FALSE
-  #   )
-  # }
-  x
-}
-
 
 #' @importFrom LRMF3 dim_and_class
 #' @method print vsp_fa

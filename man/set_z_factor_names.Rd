@@ -2,18 +2,29 @@
 % Please edit documentation in R/object.R
 \name{set_z_factor_names}
 \alias{set_z_factor_names}
-\title{TODO}
+\alias{set_y_factor_names}
+\title{Give the dimensions of Z factors informative names}
 \usage{
 set_z_factor_names(fa, names)
+
+set_y_factor_names(fa, names)
 }
 \arguments{
-\item{fa}{TODO}
+\item{fa}{A \code{\link[=vsp_fa]{vsp_fa()}} object.}
 
-\item{names}{TODO}
+\item{names}{Describe new names for Z/Y factors.}
 }
 \value{
-TODO
+A new \code{\link[=vsp_fa]{vsp_fa()}} object, but the columns names of \code{Z} and the
+row names of \code{B} have been set to \code{names} (for \code{set_z_factor_names}),
+and the column names of \code{B} and the column names of \code{Y} have been
+set to \code{names} (for \code{set_y_factor_names}).
 }
 \description{
-TODO
+Give the dimensions of Z factors informative names
 }
+\section{Functions}{
+\itemize{
+\item \code{set_y_factor_names}: Give the dimensions of Y factors informative names
+}}
+

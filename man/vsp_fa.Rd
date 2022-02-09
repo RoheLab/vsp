@@ -19,32 +19,34 @@ vsp_fa(
 )
 }
 \arguments{
-\item{u}{A \emph{matrix} "left singular-ish" vectors.}
+\item{u}{A \code{\link[=matrix]{matrix()}} of "left singular-ish" vectors.}
 
-\item{d}{A \emph{vector} of "singular-ish" values.}
+\item{d}{A \code{\link[=numeric]{numeric()}} vector of "singular-ish" values.}
 
-\item{v}{A \emph{matrix} of "right singular-ish" vectors.}
+\item{v}{A \code{\link[=matrix]{matrix()}} of "right singular-ish" vectors.}
 
-\item{Z}{TODO}
+\item{transformers}{A list of transformatioms from the \link{invertiforms}
+package.}
 
-\item{B}{TODO}
+\item{R_U}{Varimax rotation matrix use to transform \code{u} into \code{Z}.}
 
-\item{Y}{TODO}
+\item{R_V}{Varimax rotation matrix use to transform \code{v} into \code{Y}.}
 
-\item{transformers}{TODO}
+\item{rownames}{Identifying names for each row of the original
+data. Defaults to \code{NULL}, in which cases each row is given a
+row number left-padded with zeros as a name.}
 
-\item{R_U}{TODO}
-
-\item{R_V}{TODO}
-
-\item{rownames}{TODO}
-
-\item{colnames}{TODO}
+\item{colnames}{Identifying names for each column of the original
+data. Defaults to \code{NULL}, in which cases each column is given a
+row column left-padded with zeros as a name.}
 }
 \value{
-An \code{adaptive_imputation} object.
+A \code{svd_fa} object.
 }
 \description{
-\code{adaptive_imputation} objects are a subclass of
-\code{\link[LRMF3:svd_like]{LRMF3::svd_like()}}, with an additional field \code{alpha}.
+\code{vsp_fa} objects are a subclass of \code{\link[LRMF3:fa_like]{LRMF3::fa_like()}}, with additional
+fields \code{u}, \code{d}, \code{v}, \code{transformers}, \code{R_U}, and \code{R_V}
+}
+\details{
+@inheritParams LRMF3::fa_like
 }

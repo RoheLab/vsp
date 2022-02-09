@@ -4,7 +4,7 @@
 \alias{bff}
 \title{Find features most associated with cluster membership}
 \usage{
-bff(loadings, features, num_best, ...)
+bff(loadings, features, num_best)
 }
 \arguments{
 \item{loadings}{An \code{n} by \code{k} matrix of weights that indicates how
@@ -16,8 +16,6 @@ node in the network.}
 
 \item{num_best}{An integer indicating how many of the top features
 for differentiating between loadings you want.}
-
-\item{...}{Ignored.}
 }
 \value{
 An \code{n} by \code{k} matrix whose \verb{[i, j]} entry is the
@@ -25,4 +23,7 @@ ith "most important" feature for cluster j.
 }
 \description{
 Find features most associated with cluster membership
+}
+\details{
+See \code{vignette("bff")}.
 }

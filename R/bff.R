@@ -10,13 +10,13 @@
 #' @param num_best An integer indicating how many of the top features
 #'   for differentiating between loadings you want.
 #'
-#' @param ... Ignored.
-#'
 #' @return An `n` by `k` matrix whose `[i, j]` entry is the
 #'   ith "most important" feature for cluster j.
 #'
+#' @details See `vignette("bff")`.
+#'
 #' @export
-bff <- function(loadings, features, num_best, ...) {
+bff <- function(loadings, features, num_best) {
   l1_normalize <- function(x) x / sum(x)
 
   # Fan has this line in his code but I don't understand why?

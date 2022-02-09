@@ -2,18 +2,22 @@
 % Please edit documentation in R/plots.R
 \name{plot_ipr_pairs}
 \alias{plot_ipr_pairs}
-\title{Title}
+\title{Plot pairs of inverse participation ratios for singular vectors}
 \usage{
-plot_ipr_pairs(fa, ...)
-}
-\arguments{
-\item{fa}{TODO}
-
-\item{...}{TODO}
+plot_ipr_pairs(fa)
 }
 \value{
-TOOD
+A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each node, and one column
+containing each of the requested factor or singular vector, plus
+an additional \code{id} column.
 }
 \description{
-Title
+When IPR for a given singular vector is O(1) rather than O(1 / sqrt(n)),
+this can indicate that the singular vector is localizing on a small
+subset of nodes. Oftentimes this localization indicates overfitting.
+If you see IPR values that are not close to zero (where "close to zero"
+is something you sort of have to pick up over time), then you need
+to some further investigation to see if you have localization and that
+localization corresponds to overfitting. Note, however, that not all
+localization is overfitting.
 }

@@ -1,11 +1,15 @@
-
-#' Title
+#' Pipe operator
 #'
-#' @param x A vector of integers, small enough the scientific
+#' See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.
 #'
-#' @return TODO
+#' @name %>%
+#' @rdname pipe
 #' @keywords internal
-#'
+#' @export
+#' @importFrom magrittr %>%
+#' @usage lhs \%>\% rhs
+NULL
+
 left_padded_sequence <- function(x) {
 
   original <- withr::with_options(

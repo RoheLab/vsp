@@ -2,20 +2,41 @@
 % Please edit documentation in R/accessors.R
 \name{get_svd_u}
 \alias{get_svd_u}
-\title{Title}
+\alias{get_svd_v}
+\alias{get_varimax_z}
+\alias{get_varimax_y}
+\title{Get left singular vectors in a tibble}
 \usage{
-get_svd_u(x, factors, ...)
+get_svd_u(x, factors = 1:x$rank)
+
+get_svd_v(x, factors = 1:x$rank)
+
+get_varimax_z(x, factors = 1:x$rank)
+
+get_varimax_y(x, factors = 1:x$rank)
 }
 \arguments{
-\item{x}{TODO}
+\item{x}{A \code{\link[=vsp_fa]{vsp_fa()}} object.}
 
-\item{factors}{TODO}
-
-\item{...}{TODO}
+\item{factors}{The specific columns to index into. The most reliable
+option here is to index with an integer vector of column indices,
+but you could also use a character vector if columns have been named.
+By default returns all factors/singular vectors.}
 }
 \value{
-TODO
+A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each node, and one column
+containing each of the requested factor or singular vector, plus
+an additional \code{id} column.
 }
 \description{
-Title
+Get left singular vectors in a tibble
 }
+\section{Functions}{
+\itemize{
+\item \code{get_svd_v}: Get right singular vectors in a tibble
+
+\item \code{get_varimax_z}: Get varimax Y factors in a tibble
+
+\item \code{get_varimax_y}: Get varimax Z factors in a tibble
+}}
+

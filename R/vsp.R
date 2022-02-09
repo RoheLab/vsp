@@ -18,19 +18,19 @@
 #' @param recenter Should the varimax factors be re-centered around the
 #'  original factor means? Only used when `center = TRUE`, defaults to `FALSE`.
 #'
-#' @param scale Should the regularized graph laplacian be used instead of the
+#' @param degree_normalize Should the regularized graph laplacian be used instead of the
 #'  raw adjacency matrix? Defaults to `TRUE`. If `center = TRUE`, `A` will
 #'  first be centered and then normalized.
 #'
-#' @param rescale Should the regularized graph laplacian be used instead of the
+#' @param renormalize Should the regularized graph laplacian be used instead of the
 #'  raw adjacency matrix? Defaults to `TRUE`. If `center = TRUE`, `A` will
 #'  first be centered and then normalized.
 #'
 #' @param tau_row Row regularization term. Default is `NULL`, in which case
-#'  we use the row degree. Ignored when `scale = FALSE`.
+#'  we use the row degree. Ignored when `degree_normalize = FALSE`.
 #'
 #' @param tau_col Column regularization term. Default is `NULL`, in which case
-#'  we use the column degree. Ignored when `scale = FALSE`.
+#'  we use the column degree. Ignored when `degree_normalize = FALSE`.
 #'
 #' @param kaiser_normalize_u Whether or not to use Kaiser normalization
 #'  when rotating the left singular vectors `U`. Defaults to `FALSE`.
@@ -61,8 +61,8 @@
 #' vsp(
 #'   ml100k,
 #'   rank = 2,
-#'   scale = TRUE,
-#'   rescale = FALSE,
+#'   degree_normalize = TRUE,
+#'   renormalize = FALSE,
 #'   center = FALSE,
 #'   recenter = FALSE,
 #'   rownames = rownames(ml100k),
@@ -70,7 +70,7 @@
 #' )
 #'
 vsp <- function(x, rank, ...) {
-  # ellipsis::check_dots_used()
+  rlang::check_dots_used()
   UseMethod("vsp")
 }
 
@@ -85,7 +85,7 @@ vsp.default <- function(x, rank, ...) {
 #' @rdname vsp
 #' @export
 vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
-                       scale = FALSE, rescale = FALSE,
+                       degree_normalize = TRUE, renormalize = FALSE,
                        tau_row = NULL, tau_col = NULL,
                        kaiser_normalize_u = FALSE,
                        kaiser_normalize_v = FALSE,
@@ -100,8 +100,8 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
   if (recenter && !center)
     stop("`recenter` must be FALSE when `center` is FALSE.", call. = FALSE)
 
-  if (rescale && !scale)
-    stop("`rescale` must be FALSE when `scale` is FALSE.", call. = FALSE)
+  if (renormalize && !degree_normalize)
+    stop("`renormalize` must be FALSE when `degree_normalize` is FALSE.", call. = FALSE)
 
   n <- nrow(x)
   d <- ncol(x)
@@ -116,7 +116,7 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
     L <- x
   }
 
-  if (scale) {
+  if (degree_normalize) {
     scaler <- RegularizedLaplacian(L, tau_row = tau_row, tau_col = tau_col)
     transformers <- append(transformers, scaler)
     L <- transform(scaler, L)
@@ -151,7 +151,7 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
     rownames = rownames, colnames = colnames
   )
 
-  if (rescale) {
+  if (renormalize) {
     fa <- inverse_transform(scaler, fa)
   }
 
@@ -183,7 +183,7 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
 #'
 vsp.svd_like <- function(x, rank, ...,
                          centerer = NULL, scaler = NULL,
-                         recenter = FALSE, rescale = FALSE,
+                         recenter = FALSE, renormalize = FALSE,
                          kaiser_normalize_u = FALSE,
                          kaiser_normalize_v = FALSE,
                          rownames = NULL, colnames = NULL) {
@@ -217,7 +217,7 @@ vsp.svd_like <- function(x, rank, ...,
     rownames = rownames, colnames = colnames
   )
 
-  if (!is.null(scaler) && rescale) {
+  if (!is.null(scaler) && renormalize) {
     fa <- inverse_transform(scaler, fa)
   }
 

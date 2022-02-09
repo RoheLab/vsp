@@ -4,10 +4,10 @@
 \alias{screeplot.vsp_fa}
 \title{Create a screeplot from a factor analysis object}
 \usage{
-\method{screeplot}{vsp_fa}(fa, ...)
+\method{screeplot}{vsp_fa}(x, ...)
 }
 \arguments{
-\item{fa}{A \code{\link[=vsp_fa]{vsp_fa()}} object.}
+\item{x}{A \code{\link[=vsp_fa]{vsp_fa()}} object.}
 
 \item{...}{Ignored, included only for consistency with S3 generic.}
 }

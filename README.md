@@ -6,9 +6,8 @@
 <!-- badges: start -->
 
 [![Codecov test
-coverage](https://codecov.io/gh/RoheLab/vsp/branch/master/graph/badge.svg)](https://codecov.io/gh/RoheLab/vsp?branch=master)
-[![R build
-status](https://github.com/RoheLab/vsp/workflows/R-CMD-check/badge.svg)](https://github.com/RoheLab/vsp/actions)
+coverage](https://codecov.io/gh/RoheLab/vsp/branch/main/graph/badge.svg)](https://app.codecov.io/gh/RoheLab/vsp?branch=main)
+[![R-CMD-check](https://github.com/RoheLab/vsp/workflows/R-CMD-check/badge.svg)](https://github.com/RoheLab/vsp/actions)
 <!-- badges: end -->
 
 The goal of `vsp` is to enable fast, spectral estimation of latent
@@ -28,6 +27,12 @@ graphs. Note that `vsp` is a semi-parametric estimator.
 
 ## Installation
 
+You can install the released version of `vsp` from CRAN with
+
+``` r
+install.packages("vsp")
+```
+
 You can install the development version of `vsp` with:
 
 ``` r
@@ -39,13 +44,10 @@ devtools::install_github("RoheLab/vsp")
 
 Obtaining estimates from `vsp` is straightforward. We recommend
 representing networks as [`igraph`](https://igraph.org/r/) objects or
-(sparse) `Matrix` objects from the
-[`Matrix`](https://cran.r-project.org/web/packages/Matrix/index.html)
-package (see also `?Matrix`).
-
-Once you have your network in one of these formats, you can get
-estimates by calling the `vsp()` function. The result is an object of
-class `"vsp_fa"`.
+sparse adjacency matrices using the
+[`Matrix`](https://cran.r-project.org/package=Matrix) package. Once you
+have your network in one of these formats, you can get estimates by
+calling the `vsp()` function. The result is a `vsp_fa` S3 object.
 
 ``` r
 library(Matrix)
@@ -62,9 +64,6 @@ enron_fa
 #> Cols (d):   184
 #> Factors (rank): 30
 #> Lambda[rank]:   0.2077
-#> 
-#> Pre-Processing Options (TODO) 
-#> 
 #> Components
 #> 
 #> Z: 184 x 30 [dgeMatrix] 
@@ -78,7 +77,7 @@ enron_fa
 ## References
 
 1.  Rohe, K. & Zeng, M. *Vintage Factor Analysis with Varimax Performs
-    Statistical Inference*. 2020+. <https://arxiv.org/abs/2004.05387>.
+    Statistical Inference*. 2022+. <https://arxiv.org/abs/2004.05387>.
 
 Code to reproduce the results from the paper is [available
 here](https://github.com/RoheLab/vsp-paper).

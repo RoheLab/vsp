@@ -1,5 +1,5 @@
 ---
-title: "bff"
+title: "Interpreting factors with bff(), the Best Feature Function"
 author: "Fan Chen"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

@@ -23,6 +23,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -35,18 +37,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">vsp</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9012</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9013</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="articles/vsp.html">Get started</a>
 </li>
@@ -68,7 +64,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/RoheLab/vsp/">
+  <a href="https://github.com/RoheLab/vsp/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -85,34 +81,34 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="vsp" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#vsp" class="anchor"></a>vsp</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="vsp">vsp<a class="anchor" aria-label="anchor" href="#vsp"></a>
+</h1></div>
 <!-- badges: start -->
 
 <p>The goal of <code>vsp</code> is to enable fast, spectral estimation of latent factors in random dot product graphs. Under mild assumptions, the <code>vsp</code> estimator is consistent for (degree-corrected) stochastic blockmodels, (degree-corrected) mixed-membership stochastic blockmodels, and degree-corrected overlapping stochastic blockmodels.</p>
 <p>More generally, the <code>vsp</code> estimator is consistent for random dot product graphs that can be written in the form</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">E</span>(A) =<span class="st"> </span>Z B Y<span class="op">^</span>T</span></code></pre></div>
-<p>where <code>Z</code> and <code>Y</code> satisfy the varimax assumptions of <br><span class="math display">1</span><br>. <code>vsp</code> works on directed and undirected graphs, and on weighted and unweighted graphs. Note that <code>vsp</code> is a semi-parametric estimator.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<p>where <code>Z</code> and <code>Y</code> satisfy the varimax assumptions of [1]. <code>vsp</code> works on directed and undirected graphs, and on weighted and unweighted graphs. Note that <code>vsp</code> is a semi-parametric estimator.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>You can install the development version of <code>vsp</code> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"RoheLab/vsp"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
-<p>Obtaining estimates from <code>vsp</code> is straightforward. We recommend representing networks as <a href="https://igraph.org/r/"><code>igraph</code></a> objects or (sparse) <code>Matrix</code> objects from the <a href="https://cran.r-project.org/web/packages/Matrix/index.html"><code>Matrix</code></a> package (see also <code><a href="https://rdrr.io/pkg/Matrix/man/Matrix.html">?Matrix</a></code>).</p>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<p>Obtaining estimates from <code>vsp</code> is straightforward. We recommend representing networks as <a href="https://igraph.org/r/" class="external-link"><code>igraph</code></a> objects or (sparse) <code>Matrix</code> objects from the <a href="https://cran.r-project.org/web/packages/Matrix/index.html" class="external-link"><code>Matrix</code></a> package (see also <code><a href="https://rdrr.io/pkg/Matrix/man/Matrix.html" class="external-link">?Matrix</a></code>).</p>
 <p>Once you have your network in one of these formats, you can get estimates by calling the <code><a href="reference/vsp.html">vsp()</a></code> function. The result is an object of class <code>"vsp_fa"</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://Matrix.R-forge.R-project.org/">Matrix</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RoheLab/vsp">vsp</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RoheLab/vsp" class="external-link">vsp</a></span><span class="op">)</span>
 
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">enron</span>, package <span class="op">=</span> <span class="st">"igraphdata"</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">enron</span>, package <span class="op">=</span> <span class="st">"igraphdata"</span><span class="op">)</span>
 
 <span class="va">enron_fa</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">enron</span>, rank <span class="op">=</span> <span class="fl">30</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">enron_fa</span>
@@ -134,62 +130,73 @@
 <span class="co">#&gt; d: 30      [numeric] </span>
 <span class="co">#&gt; v: 184 x 30 [matrix]</span></code></pre></div>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
-<ol>
-<li>Rohe, K. &amp; Zeng, M. <em>Vintage Factor Analysis with Varimax Performs Statistical Inference</em>. 2020+. <a href="https://arxiv.org/abs/2004.05387" class="uri">https://arxiv.org/abs/2004.05387</a>.</li>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>Rohe, K. &amp; Zeng, M. <em>Vintage Factor Analysis with Varimax Performs Statistical Inference</em>. 2020+. <a href="https://arxiv.org/abs/2004.05387" class="external-link uri">https://arxiv.org/abs/2004.05387</a>.</li>
 </ol>
-<p>Code to reproduce the results from the paper is <a href="https://github.com/RoheLab/vsp-paper">available here</a>.</p>
+<p>Code to reproduce the results from the paper is <a href="https://github.com/RoheLab/vsp-paper" class="external-link">available here</a>.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/RoheLab/vsp/">https://​github.com/​RoheLab/​vsp/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/RoheLab/vsp/issues">https://​github.com/​RoheLab/​vsp/​issues</a>
-</li>
+<li><a href="https://github.com/RoheLab/vsp/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/RoheLab/vsp/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing vsp</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Karl Rohe <br><small class="roles"> Author </small>  </li>
 <li>Muzhe Zeng <br><small class="roles"> Author </small>  </li>
 <li>
-<a href="https://alexpghayes.com">Alex Hayes</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4985-5160" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="https://alexpghayes.com" class="external-link">Alex Hayes</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4985-5160" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Fan Chen <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://codecov.io/gh/RoheLab/vsp?branch=master"><img src="https://codecov.io/gh/RoheLab/vsp/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/RoheLab/vsp/actions"><img src="https://github.com/RoheLab/vsp/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/RoheLab/vsp?branch=master" class="external-link"><img src="https://codecov.io/gh/RoheLab/vsp/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/RoheLab/vsp/actions" class="external-link"><img src="https://github.com/RoheLab/vsp/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Karl Rohe, Muzhe Zeng, <a href="https://alexpghayes.com">Alex Hayes</a>, Fan Chen.</p>
+  <p></p>
+<p>Developed by Karl Rohe, Muzhe Zeng, <a href="https://alexpghayes.com" class="external-link">Alex Hayes</a>, Fan Chen.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -197,6 +204,8 @@
 
   
 
+
+  
 
   </body>
 </html>

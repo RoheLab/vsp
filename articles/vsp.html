@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">vsp</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9012</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9013</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/vsp.html">Get started</a>
 </li>
@@ -64,7 +60,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/RoheLab/vsp/">
+  <a href="https://github.com/RoheLab/vsp/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -85,21 +81,21 @@
       <h1 data-toc-skip>vsp</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/RoheLab/vsp/blob/master/vignettes/vsp.Rmd"><code>vignettes/vsp.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/RoheLab/vsp/blob/HEAD/vignettes/vsp.Rmd" class="external-link"><code>vignettes/vsp.Rmd</code></a></small>
       <div class="hidden name"><code>vsp.Rmd</code></div>
 
     </div>
 
     
     
-<p>Obtaining estimates from <code>vsp</code> is straightforward. We recommend representing networks as <a href="https://igraph.org/r/"><code>igraph</code></a> objects or (sparse) <code>Matrix</code> objects from the <a href="https://cran.r-project.org/web/packages/Matrix/index.html"><code>Matrix</code></a> package (see also <code><a href="https://rdrr.io/pkg/Matrix/man/Matrix.html">?Matrix</a></code>).</p>
+<p>Obtaining estimates from <code>vsp</code> is straightforward. We recommend representing networks as <a href="https://igraph.org/r/" class="external-link"><code>igraph</code></a> objects or (sparse) <code>Matrix</code> objects from the <a href="https://cran.r-project.org/web/packages/Matrix/index.html" class="external-link"><code>Matrix</code></a> package (see also <code><a href="https://rdrr.io/pkg/Matrix/man/Matrix.html" class="external-link">?Matrix</a></code>).</p>
 <p>Once you have your network in one of these formats, you can get estimates by calling the <code><a href="../reference/vsp.html">vsp()</a></code> function. The result is an object of class <code>"vsp_fa"</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RoheLab/vsp">vsp</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://Matrix.R-forge.R-project.org/">Matrix</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RoheLab/vsp" class="external-link">vsp</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span>
 
 <span class="co"># create a random sparse adjacency matrix</span>
-<span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html">rsparsematrix</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">12</span>, nnz <span class="op">=</span> <span class="fl">40</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
+<span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sign.html" class="external-link">sign</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html" class="external-link">rsparsematrix</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">12</span>, nnz <span class="op">=</span> <span class="fl">40</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
 
 <span class="co"># vintage sparse pca</span>
 <span class="va">fa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">M</span>, rank <span class="op">=</span> <span class="fl">5</span>, scale <span class="op">=</span> <span class="cn">TRUE</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, recenter <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
@@ -109,7 +105,7 @@
 <span class="co">#&gt; Rows (n):   12</span>
 <span class="co">#&gt; Cols (d):   12</span>
 <span class="co">#&gt; Factors (rank): 5</span>
-<span class="co">#&gt; Lambda[rank]:   0.113</span>
+<span class="co">#&gt; Lambda[rank]:   0.114</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Pre-Processing Options (TODO) </span>
 <span class="co">#&gt; </span>
@@ -123,7 +119,7 @@
 <span class="co">#&gt; v: 12 x 5 [matrix]</span></code></pre></div>
 <p>Here we demonstrate <code>vsp</code> usage on an <code>igraph</code> object, using the <code>enron</code> network from <code>igraphdata</code> package to demonstrate this functionality. First we peak at the graph:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'igraph'</span>
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
@@ -132,7 +128,7 @@
 <span class="co">#&gt; The following object is masked from 'package:base':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     union</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">enron</span>, package <span class="op">=</span> <span class="st">"igraphdata"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">enron</span>, package <span class="op">=</span> <span class="st">"igraphdata"</span><span class="op">)</span>
 
 <span class="va">enron</span>
 <span class="co">#&gt; IGRAPH 64ec693 D--- 184 125409 -- Enron email network</span>
@@ -149,7 +145,7 @@
 <span class="co">#&gt; + ... omitted several edges</span></code></pre></div>
 <p>Now we estimate:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://Matrix.R-forge.R-project.org/">Matrix</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span>
 
 <span class="va">enron_fa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">enron</span>, rank <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
 <span class="va">enron_fa</span>
@@ -181,7 +177,7 @@
 <span class="co">#&gt; Rows (n):   12</span>
 <span class="co">#&gt; Cols (d):   12</span>
 <span class="co">#&gt; Factors (rank): 5</span>
-<span class="co">#&gt; Lambda[rank]:   1.5672</span>
+<span class="co">#&gt; Lambda[rank]:   1.8509</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Pre-Processing Options (TODO) </span>
 <span class="co">#&gt; </span>
@@ -202,7 +198,7 @@
 <span class="co">#&gt; Rows (n):   12</span>
 <span class="co">#&gt; Cols (d):   12</span>
 <span class="co">#&gt; Factors (rank): 5</span>
-<span class="co">#&gt; Lambda[rank]:   1.519</span>
+<span class="co">#&gt; Lambda[rank]:   1.4445</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Pre-Processing Options (TODO) </span>
 <span class="co">#&gt; </span>
@@ -218,112 +214,125 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fa2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">M</span>, rank <span class="op">=</span> <span class="fl">5</span>, normalize <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-<span class="va">fa2</span><span class="op">$</span><span class="va">u</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">fa2</span><span class="op">$</span><span class="va">d</span><span class="op">)</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">fa2</span><span class="op">$</span><span class="va">v</span><span class="op">)</span>
-<span class="co">#&gt;             col01        col02       col03         col04       col05</span>
-<span class="co">#&gt; row01  0.44903214 -0.107853306  0.13197642 -0.0953282389  0.83876500</span>
-<span class="co">#&gt; row02 -0.23762628 -0.004892146  0.83962402  0.0335138985  0.12085849</span>
-<span class="co">#&gt; row03 -0.17976949  1.043876192  0.32608464  0.2192719832 -0.11797458</span>
-<span class="co">#&gt; row04  0.75256701 -0.121121625  1.08442731 -0.2559784659  0.26555808</span>
-<span class="co">#&gt; row05  0.08864657  0.017007333 -0.06679486 -0.0004665658  0.53429148</span>
-<span class="co">#&gt; row06  0.21763211  0.223372537  0.18060494 -0.0442300119 -0.07620922</span>
-<span class="co">#&gt; row07  0.25592920  1.063213972  0.98507546  0.1950766551  1.05839510</span>
-<span class="co">#&gt; row08 -0.35130670  0.831219769  0.06898386  0.2695942490  0.04884331</span>
-<span class="co">#&gt; row09 -0.13322943 -0.017941309  0.48635681  0.0603517100  0.28278019</span>
-<span class="co">#&gt; row10  0.22274511  0.003355140  1.05857343 -0.0822745168  0.69384888</span>
-<span class="co">#&gt; row11  0.04617206  0.932069275  0.60975773  0.1472768816  0.08672905</span>
-<span class="co">#&gt; row12  0.17661663  0.117277072  0.78569325  0.0313694105  0.73592894</span>
-<span class="co">#&gt;             col06        col07       col08       col09       col10       col11</span>
-<span class="co">#&gt; row01  0.20503763 -0.179177770  0.14897185 -0.06146857 -0.34672714  0.42680482</span>
-<span class="co">#&gt; row02  0.13763333  1.103585015  0.23375897  0.87059022  0.57241596  0.34246658</span>
-<span class="co">#&gt; row03 -0.18321141 -0.014270736  0.95954363  0.05186653  0.43760235  0.04423063</span>
-<span class="co">#&gt; row04  0.84684578  0.031067172  1.16630415  0.79915440 -0.07066863 -0.11541314</span>
-<span class="co">#&gt; row05 -0.34368506  0.096170758  0.05337097  0.00847362 -0.03401221  0.60903989</span>
-<span class="co">#&gt; row06 -0.09143024 -0.184299509  0.67910744  0.18038990  0.05706365  0.04582201</span>
-<span class="co">#&gt; row07  0.97437119  0.009964594  0.92299442 -0.04093219  0.03424554  0.09548334</span>
-<span class="co">#&gt; row08  0.03081931  0.011591092  0.17914253 -0.30473908  0.25278588 -0.08274108</span>
-<span class="co">#&gt; row09  0.63256075  0.490718059 -0.27572975  0.16795457  0.09618891 -0.12382340</span>
-<span class="co">#&gt; row10  0.06050996  0.967746529  0.82541556  1.06385393  0.42070942  0.84527411</span>
-<span class="co">#&gt; row11  0.21944902 -0.026763265  1.08308492  0.17114611  0.31435027 -0.03661042</span>
-<span class="co">#&gt; row12  1.10274353  0.298954212  0.01296548  0.11881229 -0.10534390 -0.13942191</span>
-<span class="co">#&gt;              col12</span>
-<span class="co">#&gt; row01  0.938183530</span>
-<span class="co">#&gt; row02 -0.338629273</span>
-<span class="co">#&gt; row03 -0.007864531</span>
-<span class="co">#&gt; row04 -0.144575624</span>
-<span class="co">#&gt; row05  0.742050299</span>
-<span class="co">#&gt; row06  0.007548964</span>
-<span class="co">#&gt; row07  0.840756820</span>
-<span class="co">#&gt; row08  0.099281850</span>
-<span class="co">#&gt; row09 -0.123690904</span>
-<span class="co">#&gt; row10  0.389277759</span>
-<span class="co">#&gt; row11  0.040193860</span>
-<span class="co">#&gt; row12  0.263233467</span></code></pre></div>
+<span class="va">fa2</span><span class="op">$</span><span class="va">u</span> <span class="op"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">fa2</span><span class="op">$</span><span class="va">d</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">fa2</span><span class="op">$</span><span class="va">v</span><span class="op">)</span>
+<span class="co">#&gt;             col01       col02       col03        col04       col05       col06</span>
+<span class="co">#&gt; row01  0.21304975  0.82941927  0.38920397  1.071628387 -0.09516363  0.15496359</span>
+<span class="co">#&gt; row02 -0.05266579 -0.18401247  0.01761563 -0.107922383  1.06372690  0.93401352</span>
+<span class="co">#&gt; row03 -0.01523871  0.38141851  0.56303179  0.072927600  0.34320721 -0.13511196</span>
+<span class="co">#&gt; row04  0.07698425  0.42131932 -0.28438947  0.857960397  0.02946709  0.81814102</span>
+<span class="co">#&gt; row05  0.50953211  0.21501210 -0.15831679  0.836847791 -0.14975746 -0.13216443</span>
+<span class="co">#&gt; row06  0.38479042 -0.25827478 -0.09683808  0.212912887  0.35614197  0.03107211</span>
+<span class="co">#&gt; row07 -0.05323900  0.94742135 -0.02553597  1.055753988  0.11844727  0.87303984</span>
+<span class="co">#&gt; row08  0.09052068  0.87175745  0.14744651  0.935586161 -0.10262522  0.23370225</span>
+<span class="co">#&gt; row09 -0.03531932  0.50602867  0.65323596  0.221960960  0.23051212 -0.09731858</span>
+<span class="co">#&gt; row10 -0.10775875  0.27690329  1.08519093 -0.226480314  0.83842459 -0.05141374</span>
+<span class="co">#&gt; row11 -0.10324390 -0.02034111  0.00846553  0.141890262  0.92255065  1.15985731</span>
+<span class="co">#&gt; row12  0.11391098  0.07862083  0.30087184 -0.007119518  0.68561837  0.09173482</span>
+<span class="co">#&gt;              col07         col08       col09        col10       col11</span>
+<span class="co">#&gt; row01 -0.076262766  0.0644056473 -0.03697556 -0.050586156  1.02984815</span>
+<span class="co">#&gt; row02  0.732754378  0.1313454816  0.29378847  0.908964164  0.33036036</span>
+<span class="co">#&gt; row03  0.208962905 -0.0286638024  0.68665483 -0.105654046 -0.28901463</span>
+<span class="co">#&gt; row04 -0.014428413  0.0185873043 -0.06680952  0.323271802  0.86527975</span>
+<span class="co">#&gt; row05  0.955567719  0.3847904180  0.13595395  0.228880730  1.08111263</span>
+<span class="co">#&gt; row06  1.103922740  0.4217840534 -0.11753150  0.612287567  0.94872545</span>
+<span class="co">#&gt; row07 -0.048682977 -0.1780187118  1.03142494 -0.006936989  0.10181739</span>
+<span class="co">#&gt; row08  0.118525213 -0.0768517711  0.99355443 -0.247748621  0.04318179</span>
+<span class="co">#&gt; row09 -0.142233791 -0.0678099429  0.29121433 -0.157356590  0.01228747</span>
+<span class="co">#&gt; row10 -0.003396507 -0.0003643307  0.00794500  0.192253725  0.13485232</span>
+<span class="co">#&gt; row11  0.255013019  0.0591580315 -0.19503896  0.899643958  0.73441209</span>
+<span class="co">#&gt; row12  0.971358894  0.1660027869  0.93795311  0.341557676 -0.13638615</span>
+<span class="co">#&gt;             col12</span>
+<span class="co">#&gt; row01  0.70038679</span>
+<span class="co">#&gt; row02 -0.10547446</span>
+<span class="co">#&gt; row03  0.18689693</span>
+<span class="co">#&gt; row04  0.11188066</span>
+<span class="co">#&gt; row05  0.10529100</span>
+<span class="co">#&gt; row06  0.06404132</span>
+<span class="co">#&gt; row07 -0.08595706</span>
+<span class="co">#&gt; row08  0.01354669</span>
+<span class="co">#&gt; row09  0.47834613</span>
+<span class="co">#&gt; row10  0.80915183</span>
+<span class="co">#&gt; row11  0.18310072</span>
+<span class="co">#&gt; row12 -0.14351712</span></code></pre></div>
 <p>In the example above, this will <em>not</em> approximate <code>M</code>, but rather the regularized graph Laplacian formed from <code>M</code>. Similarly, the varimax-rotated network approximate reconstruction is</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fa</span><span class="op">$</span><span class="va">Z</span> <span class="op">%*%</span> <span class="va">fa</span><span class="op">$</span><span class="va">B</span> <span class="op">%*%</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">fa</span><span class="op">$</span><span class="va">Y</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">fa</span><span class="op">$</span><span class="va">Z</span> <span class="op"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html" class="external-link">%*%</a></span> <span class="va">fa</span><span class="op">$</span><span class="va">B</span> <span class="op"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">fa</span><span class="op">$</span><span class="va">Y</span><span class="op">)</span>
 <span class="co">#&gt; 12 x 12 Matrix of class "dgeMatrix"</span>
-<span class="co">#&gt;           col01     col02     col03     col04     col05     col06     col07</span>
-<span class="co">#&gt; row01 0.3626349 0.3685737 0.4889053 0.2395072 0.4547848 0.4184406 0.2627740</span>
-<span class="co">#&gt; row02 0.3293882 0.4112074 0.5682507 0.2775004 0.4384382 0.4509832 0.3951748</span>
-<span class="co">#&gt; row03 0.2931440 0.4530405 0.5172771 0.2680881 0.4009199 0.3879035 0.2843592</span>
-<span class="co">#&gt; row04 0.4448575 0.4819843 0.6518902 0.3196051 0.5443695 0.5483496 0.3960547</span>
-<span class="co">#&gt; row05 0.2766927 0.3726490 0.4780891 0.2382100 0.4328331 0.3714717 0.2889701</span>
-<span class="co">#&gt; row06 0.3463559 0.4602700 0.5718340 0.2882801 0.4727084 0.4507448 0.3346975</span>
-<span class="co">#&gt; row07 0.3785166 0.5205481 0.6405201 0.3330413 0.5607402 0.5436619 0.3589563</span>
-<span class="co">#&gt; row08 0.1760412 0.3600172 0.3802566 0.2143533 0.3045147 0.3156372 0.1910094</span>
-<span class="co">#&gt; row09 0.2879117 0.3847913 0.5272874 0.2705491 0.4385241 0.4690693 0.3542003</span>
-<span class="co">#&gt; row10 0.3856726 0.4953756 0.6766464 0.3325613 0.5654713 0.5377511 0.4556677</span>
-<span class="co">#&gt; row11 0.3516883 0.5248301 0.6228830 0.3231477 0.5074850 0.4932522 0.3533754</span>
-<span class="co">#&gt; row12 0.3835173 0.4845762 0.6453282 0.3307872 0.5623238 0.5735256 0.3984346</span>
-<span class="co">#&gt;           col08     col09     col10     col11     col12</span>
-<span class="co">#&gt; row01 0.4978104 0.3549721 0.2772726 0.3272216 0.3561539</span>
-<span class="co">#&gt; row02 0.5568373 0.4582011 0.3797378 0.3700906 0.2957426</span>
-<span class="co">#&gt; row03 0.5644257 0.3736279 0.3387020 0.3202714 0.2818346</span>
-<span class="co">#&gt; row04 0.6494710 0.5018320 0.4079492 0.3932402 0.3847103</span>
-<span class="co">#&gt; row05 0.4900140 0.3440633 0.2748794 0.3920068 0.3497812</span>
-<span class="co">#&gt; row06 0.5949977 0.4218016 0.3572779 0.3794581 0.3454618</span>
-<span class="co">#&gt; row07 0.6413375 0.4349848 0.3556319 0.4177000 0.4036972</span>
-<span class="co">#&gt; row08 0.3965942 0.2288815 0.2106987 0.2124799 0.1926773</span>
-<span class="co">#&gt; row09 0.4799008 0.3810857 0.2995476 0.3267779 0.2821759</span>
-<span class="co">#&gt; row10 0.6643117 0.5212659 0.4194996 0.4992067 0.4164087</span>
-<span class="co">#&gt; row11 0.6507707 0.4401237 0.3814521 0.3991134 0.3587202</span>
-<span class="co">#&gt; row12 0.6072293 0.4538744 0.3553245 0.4082886 0.3867618</span></code></pre></div>
+<span class="co">#&gt;              col01      col02        col03      col04        col05      col06</span>
+<span class="co">#&gt; row01  0.068079834 0.11685250 -0.012327561 0.17958717  0.051332186 0.14916294</span>
+<span class="co">#&gt; row02  0.060110094 0.06853968 -0.018695117 0.12275274  0.148677010 0.21449918</span>
+<span class="co">#&gt; row03 -0.021013165 0.03581390 -0.035383341 0.04101432  0.006701423 0.05371847</span>
+<span class="co">#&gt; row04  0.091057659 0.13320165 -0.020130769 0.20854961  0.102789013 0.22491882</span>
+<span class="co">#&gt; row05  0.135190005 0.09418834 -0.025070872 0.20295220  0.088575648 0.14929767</span>
+<span class="co">#&gt; row06  0.070184924 0.07543105 -0.014155596 0.11378814  0.060223995 0.14602515</span>
+<span class="co">#&gt; row07  0.027008396 0.11861694 -0.049432428 0.16000430  0.045251019 0.17561564</span>
+<span class="co">#&gt; row08  0.025104042 0.10048800 -0.050485149 0.14055248  0.014108185 0.12253884</span>
+<span class="co">#&gt; row09 -0.026276605 0.05948916 -0.021633441 0.05264643 -0.011201190 0.06337831</span>
+<span class="co">#&gt; row10  0.005833957 0.02601563  0.001398434 0.05497328  0.081787006 0.08493431</span>
+<span class="co">#&gt; row11  0.062806518 0.09622420 -0.007659286 0.14734303  0.145572777 0.23949574</span>
+<span class="co">#&gt; row12  0.050296371 0.03565375 -0.039840003 0.09773757  0.100163565 0.12388281</span>
+<span class="co">#&gt;              col07        col08      col09        col10         col11</span>
+<span class="co">#&gt; row01  0.006596797  0.003310369 0.06798066  0.026936607  1.006472e-01</span>
+<span class="co">#&gt; row02  0.083292221  0.032146378 0.11372282  0.117572599  8.045099e-02</span>
+<span class="co">#&gt; row03 -0.032362571 -0.048452679 0.07087336 -0.029138633 -4.624341e-02</span>
+<span class="co">#&gt; row04  0.059423638  0.038739592 0.11122316  0.093861719  1.352589e-01</span>
+<span class="co">#&gt; row05  0.116567441  0.046523431 0.11604276  0.060787909  1.353948e-01</span>
+<span class="co">#&gt; row06  0.092151244  0.083258972 0.07634208  0.117468053  1.128398e-01</span>
+<span class="co">#&gt; row07 -0.002877941 -0.018769673 0.13258102  0.024728589  3.257596e-02</span>
+<span class="co">#&gt; row08 -0.007266987 -0.026670739 0.11922608 -0.007582559  1.432950e-02</span>
+<span class="co">#&gt; row09 -0.058291145 -0.035197858 0.04027578 -0.017967873 -1.716508e-02</span>
+<span class="co">#&gt; row10 -0.026809702 -0.053872723 0.02898994 -0.009502465  9.793742e-05</span>
+<span class="co">#&gt; row11  0.065548932  0.043177833 0.09555099  0.132312702  1.137027e-01</span>
+<span class="co">#&gt; row12  0.066758680 -0.017945855 0.12698890  0.027287308  9.526040e-03</span>
+<span class="co">#&gt;              col12</span>
+<span class="co">#&gt; row01  0.083823660</span>
+<span class="co">#&gt; row02  0.041710175</span>
+<span class="co">#&gt; row03 -0.029415288</span>
+<span class="co">#&gt; row04  0.079934222</span>
+<span class="co">#&gt; row05  0.074680459</span>
+<span class="co">#&gt; row06  0.017763002</span>
+<span class="co">#&gt; row07  0.005287041</span>
+<span class="co">#&gt; row08 -0.006344251</span>
+<span class="co">#&gt; row09 -0.007617832</span>
+<span class="co">#&gt; row10  0.060960648</span>
+<span class="co">#&gt; row11  0.069197891</span>
+<span class="co">#&gt; row12  0.004550312</span></code></pre></div>
 <p>In general, you won’t want to explicit reconstruct the network matrix for large networks since the reconstruction will be dense.</p>
 <p>If you want to directly manipulate the estimates, you can access them as we have above with <code>fa$B</code> and so on and so forth. Note that these are <code>matrix</code> and <code>Matrix</code> objects, and you may need to perform type coercions. We also provide some utility functions to extract estimates into <code>tibbles</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_varimax_z.html">get_varimax_z</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 12 × 6</span>
-<span class="co">#&gt;    id       z1    z2     z3     z4     z5</span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 row01 -4.26 -4.65 -2.19  -1.44  -0.990</span>
-<span class="co">#&gt;  2 row02 -4.48 -2.26 -2.79  -1.19  -4.22 </span>
-<span class="co">#&gt;  3 row03 -3.38 -4.03 -2.84  -3.15  -4.09 </span>
-<span class="co">#&gt;  4 row04 -5.12 -4.13 -4.18  -1.61  -2.71 </span>
-<span class="co">#&gt;  5 row05 -4.31 -4.51  0.192 -1.52  -3.26 </span>
-<span class="co">#&gt;  6 row06 -4.33 -4.39 -2.48  -2.32  -3.69 </span>
-<span class="co">#&gt;  7 row07 -4.37 -6.49 -2.66  -1.32  -4.08 </span>
-<span class="co">#&gt;  8 row08 -1.49 -4.54 -2.29  -1.30  -3.90 </span>
-<span class="co">#&gt;  9 row09 -3.45 -3.81 -2.65   0.675 -4.04 </span>
-<span class="co">#&gt; 10 row10 -5.74 -4.23 -1.46  -1.25  -4.97 </span>
-<span class="co">#&gt; 11 row11 -4.16 -5.35 -2.91  -2.53  -4.73 </span>
-<span class="co">#&gt; 12 row12 -4.45 -5.65 -3.06   0.135 -3.98</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 6</span></span>
+<span class="co">#&gt;    id       z1     z2      z3      z4     z5</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> row01 1.54  -<span style="color: #BB0000;">1.60</span>  -<span style="color: #BB0000;">1.95</span>    0.559  -<span style="color: #BB0000;">3.19</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> row02 3.30  -<span style="color: #BB0000;">1.99</span>   0.942  -<span style="color: #BB0000;">0.711</span>  -<span style="color: #BB0000;">2.51</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> row03 0.305 -<span style="color: #BB0000;">1.80</span>   0.720  -<span style="color: #BB0000;">0.844</span>  -<span style="color: #BB0000;">2.45</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> row04 2.72  -<span style="color: #BB0000;">2.64</span>  -<span style="color: #BB0000;">1.22</span>    0.161  -<span style="color: #BB0000;">3.10</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> row05 1.59  -<span style="color: #BB0000;">2.07</span>  -<span style="color: #BB0000;">0.042</span><span style="color: #BB0000; text-decoration: underline;">9</span>  2.56   -<span style="color: #BB0000;">2.43</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> row06 1.73  -<span style="color: #BB0000;">2.44</span>  -<span style="color: #BB0000;">0.197</span>  -<span style="color: #BB0000;">0.021</span><span style="color: #BB0000; text-decoration: underline;">3</span>  0.222</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> row07 1.58  -<span style="color: #BB0000;">3.66</span>  -<span style="color: #BB0000;">0.207</span>  -<span style="color: #BB0000;">0.876</span>  -<span style="color: #BB0000;">3.79</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> row08 0.711 -<span style="color: #BB0000;">3.34</span>  -<span style="color: #BB0000;">0.051</span><span style="color: #BB0000; text-decoration: underline;">5</span> -<span style="color: #BB0000;">0.230</span>  -<span style="color: #BB0000;">3.38</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> row09 0.356 -<span style="color: #BB0000;">1.60</span>  -<span style="color: #BB0000;">0.772</span>  -<span style="color: #BB0000;">1.31</span>   -<span style="color: #BB0000;">2.02</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> row10 1.62   0.552 -<span style="color: #BB0000;">0.162</span>  -<span style="color: #BB0000;">0.339</span>  -<span style="color: #BB0000;">3.41</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> row11 3.60  -<span style="color: #BB0000;">1.90</span>  -<span style="color: #BB0000;">0.365</span>  -<span style="color: #BB0000;">1.06</span>   -<span style="color: #BB0000;">2.50</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> row12 1.68  -<span style="color: #BB0000;">1.94</span>   2.14    0.551  -<span style="color: #BB0000;">3.20</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_varimax_y.html">get_varimax_y</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 12 × 6</span>
-<span class="co">#&gt;    id       y1     y2     y3    y4     y5</span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 col01 -4.17 -1.22   1.20  2.64   1.06 </span>
-<span class="co">#&gt;  2 col02 -1.87 -1.43   1.17  3.59  -2.38 </span>
-<span class="co">#&gt;  3 col03 -4.90 -1.89   1.89  3.17  -2.56 </span>
-<span class="co">#&gt;  4 col04 -1.82 -1.10   1.20  1.61  -1.59 </span>
-<span class="co">#&gt;  5 col05 -4.31 -0.604  2.91  2.77  -1.63 </span>
-<span class="co">#&gt;  6 col06 -3.85 -2.32   3.19  1.71  -1.69 </span>
-<span class="co">#&gt;  7 col07 -4.40 -1.29   0.796 0.551 -2.54 </span>
-<span class="co">#&gt;  8 col08 -4.35 -1.39   0.712 4.67  -2.11 </span>
-<span class="co">#&gt;  9 col09 -5.15 -1.49   0.252 2.14  -1.44 </span>
-<span class="co">#&gt; 10 col10 -3.62 -1.45  -0.510 2.28  -1.32 </span>
-<span class="co">#&gt; 11 col11 -4.33  1.16   1.02  2.25  -2.80 </span>
-<span class="co">#&gt; 12 col12 -3.66  0.926  1.94  2.73  -0.768</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 6</span></span>
+<span class="co">#&gt;    id        y1     y2     y3      y4      y5</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> col01  0.286 -<span style="color: #BB0000;">2.37</span>  -<span style="color: #BB0000;">1.39</span>   1.43   -<span style="color: #BB0000;">0.926</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> col02 -<span style="color: #BB0000;">1.06</span>  -<span style="color: #BB0000;">1.63</span>  -<span style="color: #BB0000;">0.655</span> -<span style="color: #BB0000;">1.19</span>   -<span style="color: #BB0000;">0.377</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> col03  0.340  0.391 -<span style="color: #BB0000;">1.10</span>  -<span style="color: #BB0000;">0.084</span><span style="color: #BB0000; text-decoration: underline;">7</span>  0.093<span style="text-decoration: underline;">4</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> col04 -<span style="color: #BB0000;">0.420</span> -<span style="color: #BB0000;">3.30</span>  -<span style="color: #BB0000;">1.24</span>  -<span style="color: #BB0000;">0.223</span>  -<span style="color: #BB0000;">1.62</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> col05  2.87  -<span style="color: #BB0000;">2.02</span>  -<span style="color: #BB0000;">1.11</span>  -<span style="color: #BB0000;">0.018</span><span style="color: #BB0000; text-decoration: underline;">7</span> -<span style="color: #BB0000;">0.044</span><span style="color: #BB0000; text-decoration: underline;">5</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> col06  1.10  -<span style="color: #BB0000;">3.39</span>  -<span style="color: #BB0000;">1.18</span>  -<span style="color: #BB0000;">1.78</span>    0.570 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> col07  0.741 -<span style="color: #BB0000;">2.71</span>  -<span style="color: #BB0000;">0.836</span>  2.16    0.458 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> col08 -<span style="color: #BB0000;">0.781</span> -<span style="color: #BB0000;">1.62</span>  -<span style="color: #BB0000;">1.47</span>   0.674   1.35  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> col09  0.280 -<span style="color: #BB0000;">2.19</span>   1.36   0.224  -<span style="color: #BB0000;">0.250</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> col10  0.451 -<span style="color: #BB0000;">2.31</span>  -<span style="color: #BB0000;">1.70</span>  -<span style="color: #BB0000;">0.279</span>   2.00  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> col11 -<span style="color: #BB0000;">0.333</span> -<span style="color: #BB0000;">2.81</span>  -<span style="color: #BB0000;">2.96</span>   0.341  -<span style="color: #BB0000;">0.045</span><span style="color: #BB0000; text-decoration: underline;">8</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> col12  1.12  -<span style="color: #BB0000;">0.996</span> -<span style="color: #BB0000;">2.44</span>  -<span style="color: #BB0000;">0.180</span>  -<span style="color: #BB0000;">1.39</span></span></code></pre></div>
 <p>To visualize a screeplot of the singular value, use:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># screeplot(fa)</span></code></pre></div>
@@ -337,11 +346,11 @@
 <code class="sourceCode R"><span class="co"># TODO</span></code></pre></div>
 <p>TODO: visualizing B</p>
 <p>TODO: selecting k</p>
-<div id="tidygraph-integration" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tidygraph-integration" class="anchor"></a>Tidygraph integration</h2>
+<div class="section level2">
+<h2 id="tidygraph-integration">Tidygraph integration<a class="anchor" aria-label="anchor" href="#tidygraph-integration"></a>
+</h2>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com" class="external-link">tidygraph</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'tidygraph'</span>
 <span class="co">#&gt; The following object is masked from 'package:igraph':</span>
@@ -351,39 +360,39 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     filter</span>
 
-<span class="va">sbm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/component_games.html">play_blocks</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">25</span>, <span class="fl">0.1</span><span class="op">)</span></code></pre></div>
+<span class="va">sbm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/component_games.html" class="external-link">play_blocks</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">25</span>, <span class="fl">0.1</span><span class="op">)</span></code></pre></div>
 <p><code>vsp</code> also works on <code>igraph</code> and <code>tidygraph</code> objects:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fa2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">sbm</span>, rank <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <p>You can then add the resulting factor loadings back into the node information about the graph:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># if you already have a vsp object</span>
-<span class="va">sbm_fa2</span> <span class="op">&lt;-</span> <span class="va">sbm</span> <span class="op">%&gt;%</span> 
+<span class="va">sbm_fa2</span> <span class="op">&lt;-</span> <span class="va">sbm</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/bind_varimax_z.html">bind_varimax_z</a></span><span class="op">(</span><span class="va">fa2</span><span class="op">)</span>
 
 <span class="va">sbm_fa2</span>
-<span class="co">#&gt; # A tbl_graph: 25 nodes and 50 edges</span>
-<span class="co">#&gt; #</span>
-<span class="co">#&gt; # A directed simple graph with 1 component</span>
-<span class="co">#&gt; #</span>
-<span class="co">#&gt; # Node Data: 25 × 6 (active)</span>
-<span class="co">#&gt;   id         z1      z2     z3      z4      z5</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 row01  0.666  -0.392   0.384 -0.551   1.51  </span>
-<span class="co">#&gt; 2 row02 -0.0445  0.575   0.169  1.35   -0.517 </span>
-<span class="co">#&gt; 3 row03  0.0192  0.137   4.15  -0.102   0.0589</span>
-<span class="co">#&gt; 4 row04  0.844   1.40    1.22  -0.301  -1.28  </span>
-<span class="co">#&gt; 5 row05  1.01    0.0434 -0.251 -0.0912 -0.202 </span>
-<span class="co">#&gt; 6 row06 -0.675   0.713   0.364 -0.922   2.03  </span>
-<span class="co">#&gt; # … with 19 more rows</span>
-<span class="co">#&gt; #</span>
-<span class="co">#&gt; # Edge Data: 50 × 2</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tbl_graph: 25 nodes and 45 edges</span></span>
+<span class="co"><span style="color: #949494;">#&gt; #</span></span>
+<span class="co"><span style="color: #949494;">#&gt; # A directed simple graph with 1 component</span></span>
+<span class="co"><span style="color: #949494;">#&gt; #</span></span>
+<span class="co"><span style="color: #949494;">#&gt; # Node Data: 25 × 6 (active)</span></span>
+<span class="co">#&gt;   id          z1      z2      z3      z4      z5</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> row01 -<span style="color: #BB0000;">0.007</span><span style="color: #BB0000; text-decoration: underline;">20</span>  0.552  -<span style="color: #BB0000;">0.060</span><span style="color: #BB0000; text-decoration: underline;">6</span>  0.047<span style="text-decoration: underline;">4</span>  0.359 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> row02  0.779    0.021<span style="text-decoration: underline;">0</span>  0.012<span style="text-decoration: underline;">3</span> -<span style="color: #BB0000;">0.218</span>  -<span style="color: #BB0000;">0.085</span><span style="color: #BB0000; text-decoration: underline;">8</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> row03 -<span style="color: #BB0000;">0.113</span>    0.016<span style="text-decoration: underline;">8</span> -<span style="color: #BB0000;">0.040</span><span style="color: #BB0000; text-decoration: underline;">0</span>  0.089<span style="text-decoration: underline;">8</span>  4.02  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> row04  0.911   -<span style="color: #BB0000;">0.076</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.918</span>   3.38    0.288 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> row05 -<span style="color: #BB0000;">0.114</span>   -<span style="color: #BB0000;">0.055</span><span style="color: #BB0000; text-decoration: underline;">4</span> -<span style="color: #BB0000;">0.295</span>   0.597   0.221 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> row06 -<span style="color: #BB0000;">0.039</span><span style="color: #BB0000; text-decoration: underline;">4</span>  -<span style="color: #BB0000;">0.340</span>   1.09   -<span style="color: #BB0000;">0.338</span>   2.17  </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 19 more rows</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#</span></span>
+<span class="co"><span style="color: #949494;">#&gt; # Edge Data: 45 × 2</span></span>
 <span class="co">#&gt;    from    to</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1     1    25</span>
-<span class="co">#&gt; 2    11     2</span>
-<span class="co">#&gt; 3    14     2</span>
-<span class="co">#&gt; # … with 47 more rows</span></code></pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    17     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    12     2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    22     2</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 42 more rows</span></span></code></pre></div>
 </div>
   </div>
 
@@ -398,11 +407,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Karl Rohe, Muzhe Zeng, <a href="https://alexpghayes.com">Alex Hayes</a>, Fan Chen.</p>
+  <p></p>
+<p>Developed by Karl Rohe, Muzhe Zeng, <a href="https://alexpghayes.com" class="external-link">Alex Hayes</a>, Fan Chen.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -410,6 +421,8 @@
 
   
 
+
+  
 
   </body>
 </html>

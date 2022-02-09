@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">vsp</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9012</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9013</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/vsp.html">Get started</a>
 </li>
@@ -64,7 +60,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/RoheLab/vsp/">
+  <a href="https://github.com/RoheLab/vsp/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -83,37 +79,37 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>bff</h1>
-                        <h4 class="author">Fan Chen</h4>
+                        <h4 data-toc-skip class="author">Fan Chen</h4>
             
-            <h4 class="date">2021-10-12</h4>
+            <h4 data-toc-skip class="date">2022-02-09</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/RoheLab/vsp/blob/master/vignettes/bff.Rmd"><code>vignettes/bff.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/RoheLab/vsp/blob/HEAD/vignettes/bff.Rmd" class="external-link"><code>vignettes/bff.Rmd</code></a></small>
       <div class="hidden name"><code>bff.Rmd</code></div>
 
     </div>
 
     
     
-<div id="intro" class="section level2">
-<h2 class="hasAnchor">
-<a href="#intro" class="anchor"></a>Intro</h2>
+<div class="section level2">
+<h2 id="intro">Intro<a class="anchor" aria-label="anchor" href="#intro"></a>
+</h2>
 <p>In post-clustering analysis, the Best Feature Function (BFF) is useful in selecting representative features for each cluster, especially in the case when additional covariates are available for each feature. For example, consider a social network of <span class="math inline">\(n\)</span> users partitioned into <span class="math inline">\(k\)</span> clusters, and each user possess a series of text document (covariates). We want to summarize words that are representative to each cluster. The BFF is suitable for this type of task.</p>
 <p>This document describes the intuition behind the BFF as a follow-up step after the <code>vsp</code> (vintage specral clustering) and touches several technical issues regarding implementation.</p>
 </div>
-<div id="methodology" class="section level2">
-<h2 class="hasAnchor">
-<a href="#methodology" class="anchor"></a>Methodology</h2>
+<div class="section level2">
+<h2 id="methodology">Methodology<a class="anchor" aria-label="anchor" href="#methodology"></a>
+</h2>
 <p>For simplicity, we consider a symmetric square input matrix (e.g., the adjacency matrix of an undirected graph); the analysis on rectangular input is also supported by <code><a href="../reference/bff.html">bff()</a></code>. Given a data matrix <span class="math inline">\(A \in \mathbb{R}^{n \times n}\)</span>, the <code>vsp</code> returns an approximation with factorization, <span class="math inline">\(ZBY^T\)</span>, where <span class="math inline">\(B \in \mathbb{R}^{k \times k}\)</span> is low-rank, and <span class="math inline">\(Y \in \mathbb{R}^{n \times k}\)</span> encodes the loadings of each feature (i.e., columns of <span class="math inline">\(A\)</span>) with respect to clusters. In particular, when <span class="math inline">\(A\)</span> is the adjacency matrix of an undirected Blockmodel graph, each row of <span class="math inline">\(Y\)</span> decodes the block (cluster) membership of the vertex (feature). Generally, the loading <span class="math inline">\(Y_{ij}\)</span> (for <span class="math inline">\(i=1,...,n\)</span> and <span class="math inline">\(j=1,...,k\)</span>) can be interpreted as an membership measure of the <span class="math inline">\(i\)</span>-th feature to the <span class="math inline">\(j\)</span>-th cluster. <!-- When normalized, it is also an estimator of mixed membership. --></p>
 <p>Now, suppose in addition that we have covariates on each feature, <span class="math inline">\(D \in \mathbb{R}^{n \times p}\)</span>, where <span class="math inline">\(p\)</span> is the dimension of covariates. For example, <span class="math inline">\(D\)</span> can be a document-term matrix, where all text data associated with <span class="math inline">\(i\)</span>-th (for <span class="math inline">\(i=1,...,n\)</span>) feature are pooled into a meta document, and <span class="math inline">\(p\)</span> under this circumstance is the size of corpus (i.e., total number of words/terms), and <span class="math inline">\(D_{il}\)</span> is the frequency of word <span class="math inline">\(l\)</span> (for <span class="math inline">\(l=1,...,p\)</span>) appearing in the <span class="math inline">\(i\)</span>-th document.</p>
 <p>The BFF then uses <span class="math inline">\(Y\)</span> and <span class="math inline">\(D\)</span> to produce an assessment of covariates “best” for each cluster. To start with, suppose both <span class="math inline">\(Y\)</span> and <span class="math inline">\(D\)</span> has only non-negative entries. Define the importance, <span class="math inline">\(I \in \mathbb{R}^{p \times k}\)</span>, of the <span class="math inline">\(l\)</span>-th covariate to the <span class="math inline">\(j\)</span>-th cluster by the average of <span class="math inline">\(l\)</span>-th covariate (the <span class="math inline">\(l\)</span>-th columns of <span class="math inline">\(D\)</span>), weighted by the <span class="math inline">\(j\)</span>-th column of <span class="math inline">\(Y\)</span>, <span class="math display">\[I_{lj} = \sum_{j=1}^n D_{jl} Y_{ij}, \text{ for } l=1,...,p,i=1,...n,\]</span> or compactly (side note: the cross product <span class="math inline">\(\langle D,Y \rangle\)</span> is defined as <span class="math inline">\(D^T Y\)</span> as in convention),</p>
 <p><span class="math display">\[I=\langle D,Y \rangle.\]</span> As such, a higher value in <span class="math inline">\(I_{lj}\)</span> indicates more significant importance. BFF selects the “best” covariates for each cluster according to the <span class="math inline">\(j\)</span>-th (for <span class="math inline">\(j=1,...,k\)</span>) column of <span class="math inline">\(I\)</span>.</p>
 </div>
-<div id="implementation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#implementation" class="anchor"></a>Implementation</h2>
+<div class="section level2">
+<h2 id="implementation">Implementation<a class="anchor" aria-label="anchor" href="#implementation"></a>
+</h2>
 <p>Below are a few notes on the implementation of BFF:</p>
 <ul>
-<li><p><strong>Positive skewness</strong>. When <span class="math inline">\(D\)</span> is a document-term matrix (a.k.a., bags of words), it holds that all elements are non-negative. However, there is absolutely no guarantee that <span class="math inline">\(Y\)</span> has all non-negative entries. This motivates the positive-skew transformation, i.e., we flip the signs of those columns of <span class="math inline">\(Y\)</span> that have negative sample third <a href="https://en.wikipedia.org/wiki/Moment_(mathematics)">moment</a>.</p></li>
+<li><p><strong>Positive skewness</strong>. When <span class="math inline">\(D\)</span> is a document-term matrix (a.k.a., bags of words), it holds that all elements are non-negative. However, there is absolutely no guarantee that <span class="math inline">\(Y\)</span> has all non-negative entries. This motivates the positive-skew transformation, i.e., we flip the signs of those columns of <span class="math inline">\(Y\)</span> that have negative sample third <a href="https://en.wikipedia.org/wiki/Moment_(mathematics)" class="external-link">moment</a>.</p></li>
 <li><p><strong>Handling negative elements</strong>. For now, we undergo a rather ad-hoc solution to the existence of negative elements in <span class="math inline">\(Y\)</span> – pretending they have little effects. In the above importance calculation, negative weights (<span class="math inline">\(Y_{ij}&lt;0\)</span>) are equally treated as <span class="math inline">\(-1\)</span>. In other words, the negative elements result in some subtractions/reduction/contraction in the importance metrics.</p></li>
 <li><p><strong>Weight normalization</strong>. In BFF, we utilize the <span class="math inline">\(Y\)</span> matrix as a way of weighting covariates (in <span class="math inline">\(D\)</span>). It is therefore natrual to expect the columns of <span class="math inline">\(Y\)</span> to be (akin to) some probability distributions, i.e., the probability to select one member from the cluster at random. Recall also that the columns of <span class="math inline">\(Y\)</span> all have (or close to) unit <span class="math inline">\(\ell_2\)</span>-norm. Hence, additional transformation is needed: we normalized <span class="math inline">\(Y\)</span> by column. In particular, this is done separately for positive and negative elements.</p></li>
 <li><p><strong>Variance stabilization</strong>. If we model <span class="math inline">\(I_{lj}\)</span> with Poisson rate model <span class="math inline">\(\text{Poisson}(\lambda_{lj})\)</span>, the sample mean and variance are coupled (i.e., both have the expectation of <span class="math inline">\(\lambda_{lj}\)</span>). In order to standardize our importance measure <span class="math inline">\(I\)</span>, we need to decouple these two statistics. Performing a square-root transformation, <span class="math inline">\(f(x)=\sqrt{x}\)</span>, does the trick; it stabilizes the sampling variance, which becomes nearly constant.</p></li>
@@ -132,11 +128,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Karl Rohe, Muzhe Zeng, <a href="https://alexpghayes.com">Alex Hayes</a>, Fan Chen.</p>
+  <p></p>
+<p>Developed by Karl Rohe, Muzhe Zeng, <a href="https://alexpghayes.com" class="external-link">Alex Hayes</a>, Fan Chen.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -144,6 +142,8 @@
 
   
 
+
+  
 
   </body>
 </html>

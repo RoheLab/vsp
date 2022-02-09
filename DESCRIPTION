@@ -2,27 +2,17 @@ Type: Package
 Package: vsp
 Title: Vintage Sparse PCA for Semi-Parametric Factor Analysis
 Version: 0.0.0.9013
-Authors@R: 
-    c(person(given = "Karl",
-             family = "Rohe",
-             role = "aut",
-             email = "karlrohe@stat.wisc.edu"),
-      person(given = "Muzhe",
-             family = "Zeng",
-             role = "aut",
-             email = "mzeng6@wisc.edu"),
-      person(given = "Alex",
-             family = "Hayes",
-             role = c("aut", "cre"),
-             email = "alexpghayes@gmail.com",
-             comment = c(ORCID = "0000-0002-4985-5160")),
-      person(given = "Fan",
-             family = "Chen",
-             role = "aut"))
-Description: Provides fast spectral estimation of latent factors
-    in random dot product graphs using the vsp estimator. Under mild
-    assumptions, the vsp estimator is consistent for (degree-corrected)
-    stochastic blockmodels, (degree-corrected) mixed-membership stochastic
+Authors@R: c(
+    person("Karl", "Rohe", , "karlrohe@stat.wisc.edu", role = "aut"),
+    person("Muzhe", "Zeng", , "mzeng6@wisc.edu", role = "aut"),
+    person("Alex", "Hayes", , "alexpghayes@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-4985-5160")),
+    person("Fan", "Chen", role = "aut")
+  )
+Description: Provides fast spectral estimation of latent factors in random
+    dot product graphs using the vsp estimator. Under mild assumptions,
+    the vsp estimator is consistent for (degree-corrected) stochastic
+    blockmodels, (degree-corrected) mixed-membership stochastic
     blockmodels, and degree-corrected overlapping stochastic blockmodels.
 License: MIT + file LICENSE
 URL: https://github.com/RoheLab/vsp
@@ -63,4 +53,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1.9001
+RoxygenNote: 7.1.2

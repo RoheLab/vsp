@@ -11,7 +11,7 @@
   centerer = NULL,
   scaler = NULL,
   recenter = FALSE,
-  rescale = FALSE,
+  renormalize = FALSE,
   kaiser_normalize_u = FALSE,
   kaiser_normalize_v = FALSE,
   rownames = NULL,
@@ -26,7 +26,7 @@ to node \code{j}.}
 
 \item{rank}{The number of factors to calculate.}
 
-\item{...}{Ignored.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{centerer}{TODO}
 
@@ -35,7 +35,7 @@ to node \code{j}.}
 \item{recenter}{Should the varimax factors be re-centered around the
 original factor means? Only used when \code{center = TRUE}, defaults to \code{FALSE}.}
 
-\item{rescale}{Should the regularized graph laplacian be used instead of the
+\item{renormalize}{Should the regularized graph laplacian be used instead of the
 raw adjacency matrix? Defaults to \code{TRUE}. If \code{center = TRUE}, \code{A} will
 first be centered and then normalized.}
 

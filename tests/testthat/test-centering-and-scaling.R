@@ -6,9 +6,9 @@ library(LRMF3)
 # other test: recover A with k = rank(A)
 # recover A when using transformations
 
-# four options: center, recenter, scale, rescale
+# four options: center, recenter, degree_normalize, renormalize
 
-# 16 options total, but can only recenter or rescale after centering
+# 16 options total, but can only recenter or renormalize after centering
 # or scaling in the first place, expect errors in those cases
 
 test_that("vsp.Matrix defaults", {
@@ -24,8 +24,8 @@ test_that("vsp.Matrix FFFF", {
       rank = 5,
       center = FALSE,
       recenter = FALSE,
-      scale = FALSE,
-      rescale = FALSE
+      degree_normalize = FALSE,
+      renormalize = FALSE
     )
   )
 })
@@ -37,10 +37,10 @@ test_that("vsp.Matrix FFFT", {
       rank = 5,
       center = FALSE,
       recenter = FALSE,
-      scale = FALSE,
-      rescale = TRUE
+      degree_normalize = FALSE,
+      renormalize = TRUE
     ),
-    regexp = "`rescale` must be FALSE when `scale` is FALSE."
+    regexp = "`renormalize` must be FALSE when `degree_normalize` is FALSE."
   )
 })
 
@@ -51,8 +51,8 @@ test_that("vsp.Matrix FFTF", {
       rank = 5,
       center = FALSE,
       recenter = FALSE,
-      scale = TRUE,
-      rescale = FALSE
+      degree_normalize = TRUE,
+      renormalize = FALSE
     )
   )
 })
@@ -64,8 +64,8 @@ test_that("vsp.Matrix FFTT", {
       rank = 5,
       center = FALSE,
       recenter = FALSE,
-      scale = TRUE,
-      rescale = TRUE
+      degree_normalize = TRUE,
+      renormalize = TRUE
     )
   )
 })
@@ -77,8 +77,8 @@ test_that("vsp.Matrix FTFF", {
       rank = 5,
       center = FALSE,
       recenter = TRUE,
-      scale = FALSE,
-      rescale = FALSE
+      degree_normalize = FALSE,
+      renormalize = FALSE
     ),
     regexp = "`recenter` must be FALSE when `center` is FALSE."
   )
@@ -91,8 +91,8 @@ test_that("vsp.Matrix FTFT", {
       rank = 5,
       center = FALSE,
       recenter = TRUE,
-      scale = FALSE,
-      rescale = TRUE
+      degree_normalize = FALSE,
+      renormalize = TRUE
     ),
     regexp = "`recenter` must be FALSE when `center` is FALSE."
   )
@@ -105,8 +105,8 @@ test_that("vsp.Matrix FTTF", {
       rank = 5,
       center = FALSE,
       recenter = TRUE,
-      scale = TRUE,
-      rescale = FALSE
+      degree_normalize = TRUE,
+      renormalize = FALSE
     ),
     regexp = "`recenter` must be FALSE when `center` is FALSE."
   )
@@ -119,8 +119,8 @@ test_that("vsp.Matrix FTTT", {
       rank = 5,
       center = FALSE,
       recenter = TRUE,
-      scale = TRUE,
-      rescale = TRUE
+      degree_normalize = TRUE,
+      renormalize = TRUE
     ),
     regexp = "`recenter` must be FALSE when `center` is FALSE."
   )
@@ -133,8 +133,8 @@ test_that("vsp.Matrix TFFF", {
       rank = 5,
       center = TRUE,
       recenter = FALSE,
-      scale = FALSE,
-      rescale = FALSE
+      degree_normalize = FALSE,
+      renormalize = FALSE
     )
   )
 })
@@ -146,10 +146,10 @@ test_that("vsp.Matrix TFFT", {
       rank = 5,
       center = TRUE,
       recenter = FALSE,
-      scale = FALSE,
-      rescale = TRUE
+      degree_normalize = FALSE,
+      renormalize = TRUE
     ),
-    regexp = "`rescale` must be FALSE when `scale` is FALSE."
+    regexp = "`renormalize` must be FALSE when `degree_normalize` is FALSE."
   )
 })
 
@@ -160,8 +160,8 @@ test_that("vsp.Matrix TFTF", {
       rank = 5,
       center = TRUE,
       recenter = FALSE,
-      scale = TRUE,
-      rescale = FALSE
+      degree_normalize = TRUE,
+      renormalize = FALSE
     )
   )
 })
@@ -173,8 +173,8 @@ test_that("vsp.Matrix TFTT", {
       rank = 5,
       center = TRUE,
       recenter = FALSE,
-      scale = TRUE,
-      rescale = TRUE
+      degree_normalize = TRUE,
+      renormalize = TRUE
     )
   )
 })
@@ -186,8 +186,8 @@ test_that("vsp.Matrix TTFF", {
       rank = 5,
       center = TRUE,
       recenter = TRUE,
-      scale = FALSE,
-      rescale = FALSE
+      degree_normalize = FALSE,
+      renormalize = FALSE
     )
   )
 })
@@ -199,10 +199,10 @@ test_that("vsp.Matrix TTFT", {
       rank = 5,
       center = TRUE,
       recenter = TRUE,
-      scale = FALSE,
-      rescale = TRUE
+      degree_normalize = FALSE,
+      renormalize = TRUE
     ),
-    regexp = "`rescale` must be FALSE when `scale` is FALSE."
+    regexp = "`renormalize` must be FALSE when `degree_normalize` is FALSE."
   )
 })
 
@@ -213,8 +213,8 @@ test_that("vsp.Matrix TTTF", {
       rank = 5,
       center = TRUE,
       recenter = TRUE,
-      scale = TRUE,
-      rescale = FALSE
+      degree_normalize = TRUE,
+      renormalize = FALSE
     )
   )
 })
@@ -226,8 +226,8 @@ test_that("vsp.Matrix TTTT", {
       rank = 5,
       center = TRUE,
       recenter = TRUE,
-      scale = TRUE,
-      rescale = TRUE
+      degree_normalize = TRUE,
+      renormalize = TRUE
     )
   )
 })

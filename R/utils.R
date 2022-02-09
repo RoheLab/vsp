@@ -111,6 +111,7 @@ utils::globalVariables(
     "leverage",
     "loading",
     "mutate",
+    "node",
     "nodes",
     "pivot_longer",
     "pivot_wider",

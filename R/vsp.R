@@ -46,7 +46,7 @@
 #'  are propagated into the row names of the `V` and `Y`. Defaults
 #'  to `NULL`.
 #'
-#' @param ... Ignored.
+#' @inheritParams rlang::args_dots_empty
 #'
 #' @details Sparse SVDs use `RSpectra` for performance.
 #'
@@ -58,19 +58,9 @@
 #'
 #' library(LRMF3)
 #'
-#' vsp(
-#'   ml100k,
-#'   rank = 2,
-#'   degree_normalize = TRUE,
-#'   renormalize = FALSE,
-#'   center = FALSE,
-#'   recenter = FALSE,
-#'   rownames = rownames(ml100k),
-#'   colnames = colnames(ml100k)
-#' )
+#' vsp(ml100k, rank = 2)
 #'
 vsp <- function(x, rank, ...) {
-  rlang::check_dots_used()
   UseMethod("vsp")
 }
 
@@ -91,6 +81,8 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
                        kaiser_normalize_v = FALSE,
                        rownames = NULL, colnames = NULL) {
 
+  rlang::check_dots_empty()
+
   if (!is.integer(rank))
     rank <- round(rank)
 
@@ -102,6 +94,14 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
 
   if (renormalize && !degree_normalize)
     stop("`renormalize` must be FALSE when `degree_normalize` is FALSE.", call. = FALSE)
+
+  if (is.null(rownames)) {
+    rownames <- rownames(x)
+  }
+
+  if (is.null(colnames)) {
+    colnames <- colnames(x)
+  }
 
   n <- nrow(x)
   d <- ncol(x)
@@ -188,6 +188,8 @@ vsp.svd_like <- function(x, rank, ...,
                          kaiser_normalize_v = FALSE,
                          rownames = NULL, colnames = NULL) {
 
+  rlang::check_dots_empty()
+
   n <- nrow(x$u)
   d <- nrow(x$v)
 
@@ -240,6 +242,7 @@ vsp.dgCMatrix <- vsp.matrix
 #' @rdname vsp
 #' @export
 vsp.igraph <- function(x, rank, ..., edge_weights = NULL) {
+  rlang::check_dots_empty()
   x <- igraph::get.adjacency(x, sparse = TRUE, attr = edge_weights)
   vsp.matrix(x, rank, ...)
 }

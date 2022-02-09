@@ -17,7 +17,7 @@ test_that("SVD and factor reconstructions match", {
 
 
 test_that("SVD and factor reconstructions match, scaling", {
-  fa <- vsp(A, rank = 5, scale = TRUE)
+  fa <- vsp(A, rank = 5, degree_normalize = TRUE)
 
   udv <- as.matrix(fa$u %*% diag(fa$d) %*% t(fa$v))
   zby <- as.matrix(fa$Z %*% fa$B %*% t(fa$Y))

@@ -19,8 +19,8 @@ vsp(x, rank, ...)
   ...,
   center = FALSE,
   recenter = FALSE,
-  scale = FALSE,
-  rescale = FALSE,
+  degree_normalize = TRUE,
+  renormalize = FALSE,
   tau_row = NULL,
   tau_col = NULL,
   kaiser_normalize_u = FALSE,
@@ -35,8 +35,8 @@ vsp(x, rank, ...)
   ...,
   center = FALSE,
   recenter = FALSE,
-  scale = FALSE,
-  rescale = FALSE,
+  degree_normalize = TRUE,
+  renormalize = FALSE,
   tau_row = NULL,
   tau_col = NULL,
   kaiser_normalize_u = FALSE,
@@ -51,8 +51,8 @@ vsp(x, rank, ...)
   ...,
   center = FALSE,
   recenter = FALSE,
-  scale = FALSE,
-  rescale = FALSE,
+  degree_normalize = TRUE,
+  renormalize = FALSE,
   tau_row = NULL,
   tau_col = NULL,
   kaiser_normalize_u = FALSE,
@@ -71,7 +71,7 @@ to node \code{j}.}
 
 \item{rank}{The number of factors to calculate.}
 
-\item{...}{Ignored.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{center}{Should the adjacency matrix be row \emph{and} column centered?
 Defaults to \code{FALSE}.}
@@ -79,19 +79,19 @@ Defaults to \code{FALSE}.}
 \item{recenter}{Should the varimax factors be re-centered around the
 original factor means? Only used when \code{center = TRUE}, defaults to \code{FALSE}.}
 
-\item{scale}{Should the regularized graph laplacian be used instead of the
+\item{degree_normalize}{Should the regularized graph laplacian be used instead of the
 raw adjacency matrix? Defaults to \code{TRUE}. If \code{center = TRUE}, \code{A} will
 first be centered and then normalized.}
 
-\item{rescale}{Should the regularized graph laplacian be used instead of the
+\item{renormalize}{Should the regularized graph laplacian be used instead of the
 raw adjacency matrix? Defaults to \code{TRUE}. If \code{center = TRUE}, \code{A} will
 first be centered and then normalized.}
 
 \item{tau_row}{Row regularization term. Default is \code{NULL}, in which case
-we use the row degree. Ignored when \code{scale = FALSE}.}
+we use the row degree. Ignored when \code{degree_normalize = FALSE}.}
 
 \item{tau_col}{Column regularization term. Default is \code{NULL}, in which case
-we use the column degree. Ignored when \code{scale = FALSE}.}
+we use the column degree. Ignored when \code{degree_normalize = FALSE}.}
 
 \item{kaiser_normalize_u}{Whether or not to use Kaiser normalization
 when rotating the left singular vectors \code{U}. Defaults to \code{FALSE}.}
@@ -123,15 +123,6 @@ Sparse SVDs use \code{RSpectra} for performance.
 
 library(LRMF3)
 
-vsp(
-  ml100k,
-  rank = 2,
-  scale = TRUE,
-  rescale = FALSE,
-  center = FALSE,
-  recenter = FALSE,
-  rownames = rownames(ml100k),
-  colnames = colnames(ml100k)
-)
+vsp(ml100k, rank = 2)
 
 }

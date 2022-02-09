@@ -69,14 +69,20 @@ plot_svd_u <- function(fa, factors = 1:min(5, fa$rank)) {
 
   fa %>%
     get_svd_u(factors) %>%
-    mutate(element = row_number()) %>%
-    gather(eigen, value, -element) %>%
-    ggplot(aes(element, value)) +
+    select(-id) %>%
+    mutate(
+      leverage = purrr::pmap_dbl(., sum)
+    ) %>%
+    sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
+    mutate(node = row_number()) %>%
+    gather(eigen, value, -node) %>%
+    ggplot(aes(node, value)) +
     geom_line() +
     facet_wrap(~eigen) +
     theme_minimal() +
     scale_x_continuous(breaks = scales::pretty_breaks())
 }
+
 #' Title
 #'
 #' @param fa TODO
@@ -93,9 +99,14 @@ plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
 
   fa %>%
     get_svd_v(factors) %>%
-    mutate(element = row_number()) %>%
-    gather(eigen, value, -element) %>%
-    ggplot(aes(element, value)) +
+    select(-id) %>%
+    mutate(
+      leverage = purrr::pmap_dbl(., sum)
+    ) %>%
+    sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
+    mutate(node = row_number()) %>%
+    gather(eigen, value, -node) %>%
+    ggplot(aes(node, value)) +
     geom_line() +
     facet_wrap(~eigen) +
     theme_minimal() +

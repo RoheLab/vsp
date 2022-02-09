@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2020 Alex Hayes, Karl Rohe, Muzhe Zeng, Fan Chen
+Copyright (c) 2022 vsp authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

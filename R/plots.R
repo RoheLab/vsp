@@ -9,6 +9,8 @@
 #' @inheritParams get_svd_u
 #' @inheritDotParams GGally::ggpairs
 #'
+#' @import ggplot2
+#'
 #' @return A [ggplot2::ggplot()] plot or [GGally::ggpairs()] plot.
 #'
 #' @export
@@ -27,8 +29,8 @@ plot_varimax_z_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
     ) %>%
     dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
     dplyr::select(-leverage) %>%
-    GGally::ggpairs(aes(alpha = 0.001), ...) +
-    ggplot::theme_minimal()
+    GGally::ggpairs(ggplot2::aes(alpha = 0.001), ...) +
+    ggplot2::theme_minimal()
 }
 
 #' @describeIn plot_varimax_z_pairs Create a pairs plot of select Z factors
@@ -47,8 +49,8 @@ plot_varimax_y_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
     ) %>%
     dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
     dplyr::select(-leverage) %>%
-    GGally::ggpairs(aes(alpha = 0.001), ...) +
-    ggplot::theme_minimal()
+    GGally::ggpairs(ggplot2::aes(alpha = 0.001), ...) +
+    ggplot2::theme_minimal()
 }
 
 #' @describeIn plot_varimax_z_pairs Create a pairs plot of select left singular vectors
@@ -68,11 +70,11 @@ plot_svd_u <- function(fa, factors = 1:min(5, fa$rank)) {
     dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
     dplyr::mutate(node = row_number()) %>%
     tidyr::gather(eigen, value, -node) %>%
-    ggplot(aes(node, value)) +
-    geom_line() +
-    facet_wrap(~eigen) +
-    theme_minimal() +
-    scale_x_continuous(breaks = scales::pretty_breaks())
+    ggplot2::ggplot(ggplot2::aes(node, value)) +
+    ggplot2::geom_line() +
+    ggplot2::facet_wrap(~eigen) +
+    ggplot2::theme_minimal() +
+    ggplot2::scale_x_continuous(breaks = scales::pretty_breaks())
 }
 
 #' @describeIn plot_varimax_z_pairs Create a pairs plot of select right singular vectors
@@ -92,11 +94,11 @@ plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
     dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
     dplyr::mutate(node = row_number()) %>%
     tidyr::gather(eigen, value, -node) %>%
-    ggplot(aes(node, value)) +
-    geom_line() +
-    facet_wrap(~eigen) +
-    theme_minimal() +
-    scale_x_continuous(breaks = scales::pretty_breaks())
+    ggplot2::ggplot(ggplot2::aes(node, value)) +
+    ggplot2::geom_line() +
+    ggplot2::facet_wrap(~eigen) +
+    ggplot2::theme_minimal() +
+    ggplot2::scale_x_continuous(breaks = scales::pretty_breaks())
 }
 
 #' Create a screeplot from a factor analysis object
@@ -111,15 +113,15 @@ plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
 #' @importFrom stats screeplot
 screeplot.vsp_fa <- function(x, ...) {
 
-  ggplot(data = NULL, aes(1:x$rank, x$d)) +
-    geom_point() +
-    labs(
+  ggplot2::ggplot(data = NULL, ggplot2::aes(1:x$rank, x$d)) +
+    ggplot2::geom_point() +
+    ggplot2::labs(
       title = "Screeplot of graph spectrum",
       x = "Index",
       y = "Singular value"
     ) +
-    expand_limits(x = 1, y = 0) +
-    theme_minimal()
+    ggplot2::expand_limits(x = 1, y = 0) +
+    ggplot2::theme_minimal()
 }
 
 #' Plot the mixing matrix B
@@ -130,10 +132,10 @@ screeplot.vsp_fa <- function(x, ...) {
 plot_mixing_matrix <- function(fa) {
   as_tibble(as.matrix(fa$B), rownames = "row") %>%
     tidyr::gather(col, value, -row) %>%
-    ggplot(aes(x = col, y = row, fill = value)) +
-    geom_tile() +
-    scale_fill_gradient2() +
-    theme_minimal()
+    ggplot2::ggplot(ggplot2::aes(x = col, y = row, fill = value)) +
+    ggplot2::geom_tile() +
+    ggplot2::scale_fill_gradient2() +
+    ggplot2::theme_minimal()
 }
 
 #' Plot pairs of inverse participation ratios for singular vectors
@@ -157,14 +159,14 @@ plot_ipr_pairs <- function(fa) {
   ipr_u <- apply(fa$u, 2, ipr)
   ipr_v <- apply(fa$v, 2, ipr)
 
-  ggplot(data = NULL) +
-    aes(x = ipr_u, y = ipr_v) +
-    geom_point(alpha = 0.5) +
-    expand_limits(x = 0, y = 0) +
-    labs(
+  ggplot2::ggplot(data = NULL) +
+    ggplot2::aes(x = ipr_u, y = ipr_v) +
+    ggplot2::geom_point(alpha = 0.5) +
+    ggplot2::expand_limits(x = 0, y = 0) +
+    ggplot2::labs(
       title = "Inverse participation ratios of singular vectors",
       x = "U (left singular vectors)",
       y = "V (right singular vectors)"
     ) +
-    theme_minimal()
+    ggplot2::theme_minimal()
 }

@@ -13,8 +13,6 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-
-library(tidyverse) # this is a hack that hides NAMESPACE errors that i will fix
 ```
 
 # vsp

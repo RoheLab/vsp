@@ -22,8 +22,8 @@ Depends:
 Imports:
     ggplot2,
     glue,
-    invertiforms (>= 0.0.0.9002),
-    LRMF3 (>= 0.0.0.9009),
+    invertiforms,
+    LRMF3,
     magrittr,
     Matrix,
     rlang,
@@ -46,9 +46,6 @@ Suggests:
     tidyr
 VignetteBuilder: 
     knitr
-Remotes: 
-    RoheLab/invertiforms,
-    RoheLab/LRMF3
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true

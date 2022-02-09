@@ -7,16 +7,16 @@
 \alias{get_varimax_y}
 \title{Get left singular vectors in a tibble}
 \usage{
-get_svd_u(x, factors = 1:x$rank)
+get_svd_u(fa, factors = 1:fa$rank)
 
-get_svd_v(x, factors = 1:x$rank)
+get_svd_v(fa, factors = 1:fa$rank)
 
-get_varimax_z(x, factors = 1:x$rank)
+get_varimax_z(fa, factors = 1:fa$rank)
 
-get_varimax_y(x, factors = 1:x$rank)
+get_varimax_y(fa, factors = 1:fa$rank)
 }
 \arguments{
-\item{x}{A \code{\link[=vsp_fa]{vsp_fa()}} object.}
+\item{fa}{A \code{\link[=vsp_fa]{vsp_fa()}} object.}
 
 \item{factors}{The specific columns to index into. The most reliable
 option here is to index with an integer vector of column indices,

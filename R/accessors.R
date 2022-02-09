@@ -1,6 +1,6 @@
 #' Get left singular vectors in a tibble
 #'
-#' @param x A [vsp_fa()] object.
+#' @param fa A [vsp_fa()] object.
 #' @param factors The specific columns to index into. The most reliable
 #'   option here is to index with an integer vector of column indices,
 #'   but you could also use a character vector if columns have been named.
@@ -12,26 +12,26 @@
 #'
 #' @export
 #'
-get_svd_u <- function(x, factors = 1:x$rank) {
-  as_tibble(as.matrix(x$u[, factors, drop = FALSE]), rownames = "id")
+get_svd_u <- function(fa, factors = 1:fa$rank) {
+  as_tibble(as.matrix(fa$u[, factors, drop = FALSE]), rownames = "id")
 }
 
 #' @export
 #' @describeIn get_svd_u Get right singular vectors in a tibble
-get_svd_v <- function(x, factors = 1:x$rank) {
-  as_tibble(as.matrix(x$v[, factors, drop = FALSE]), rownames = "id")
+get_svd_v <- function(fa, factors = 1:fa$rank) {
+  as_tibble(as.matrix(fa$v[, factors, drop = FALSE]), rownames = "id")
 }
 
 #' @export
 #' @describeIn get_svd_u Get varimax Y factors in a tibble
-get_varimax_z <- function(x, factors = 1:x$rank) {
-  as_tibble(as.matrix(x$Z[, factors, drop = FALSE]), rownames = "id")
+get_varimax_z <- function(fa, factors = 1:fa$rank) {
+  as_tibble(as.matrix(fa$Z[, factors, drop = FALSE]), rownames = "id")
 }
 
 #' @export
 #' @describeIn get_svd_u Get varimax Z factors in a tibble
-get_varimax_y <- function(x, factors = 1:x$rank) {
-  as_tibble(as.matrix(x$Y[, factors, drop = FALSE]), rownames = "id")
+get_varimax_y <- function(fa, factors = 1:fa$rank) {
+  as_tibble(as.matrix(fa$Y[, factors, drop = FALSE]), rownames = "id")
 }
 
 

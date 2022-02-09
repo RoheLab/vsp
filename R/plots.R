@@ -102,14 +102,15 @@ plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
 #' Create a screeplot from a factor analysis object
 #'
 #' @inherit get_svd_u params return
+#' @param ... Ignored, included only for consistency with S3 generic.
 #'
 #' @method screeplot vsp_fa
 #' @export
 #' @import ggplot2
 #' @importFrom stats screeplot
-screeplot.vsp_fa <- function(x, ...) {
+screeplot.vsp_fa <- function(fa, ...) {
 
-  ggplot(data = NULL, aes(1:x$rank, x$d)) +
+  ggplot(data = NULL, aes(1:fa$rank, fa$d)) +
     geom_point() +
     labs(
       title = "Screeplot of graph spectrum",

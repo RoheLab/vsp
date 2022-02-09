@@ -6,6 +6,9 @@
 \usage{
 plot_mixing_matrix(fa)
 }
+\arguments{
+\item{fa}{A \code{\link[=vsp_fa]{vsp_fa()}} object.}
+}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each node, and one column
 containing each of the requested factor or singular vector, plus

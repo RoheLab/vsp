@@ -3,7 +3,7 @@
 #' `vsp_fa` objects are a subclass of [LRMF3::fa_like()], with additional
 #'  fields `u`, `d`, `v`, `transformers`, `R_U`, and `R_V`
 #'
-#'  @inheritParams LRMF3::fa_like
+#' @inheritParams LRMF3::fa_like
 #'
 #' @param u A [matrix()] of "left singular-ish" vectors.
 #'

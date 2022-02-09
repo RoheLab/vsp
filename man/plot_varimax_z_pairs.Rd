@@ -16,6 +16,8 @@ plot_svd_u(fa, factors = 1:min(5, fa$rank))
 plot_svd_v(fa, factors = 1:min(5, fa$rank))
 }
 \arguments{
+\item{fa}{A \code{\link[=vsp_fa]{vsp_fa()}} object.}
+
 \item{factors}{The specific columns to index into. The most reliable
 option here is to index with an integer vector of column indices,
 but you could also use a character vector if columns have been named.

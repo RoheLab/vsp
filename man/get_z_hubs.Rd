@@ -10,6 +10,8 @@ get_z_hubs(fa, hubs_per_factor = 10, factors = 1:fa$rank)
 get_y_hubs(fa, hubs_per_factor = 10, factors = 1:fa$rank)
 }
 \arguments{
+\item{fa}{A \code{\link[=vsp_fa]{vsp_fa()}} object.}
+
 \item{hubs_per_factor}{The number of important nodes to get per
 latent factor. Defaults to \code{10}.}
 

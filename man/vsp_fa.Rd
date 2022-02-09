@@ -25,6 +25,14 @@ vsp_fa(
 
 \item{v}{A \code{\link[=matrix]{matrix()}} of "right singular-ish" vectors.}
 
+\item{Z}{A \emph{matrix} of embeddings for each observation.}
+
+\item{B}{A mixing \emph{matrix} describing how observation embeddings
+and topics interact. Does not have to be diagonal!}
+
+\item{Y}{A \emph{matrix} describing the compositions of various topics
+or factors.}
+
 \item{transformers}{A list of transformatioms from the \link{invertiforms}
 package.}
 
@@ -46,7 +54,4 @@ A \code{svd_fa} object.
 \description{
 \code{vsp_fa} objects are a subclass of \code{\link[LRMF3:fa_like]{LRMF3::fa_like()}}, with additional
 fields \code{u}, \code{d}, \code{v}, \code{transformers}, \code{R_U}, and \code{R_V}
-}
-\details{
-@inheritParams LRMF3::fa_like
 }

@@ -4,10 +4,12 @@
 \alias{screeplot.vsp_fa}
 \title{Create a screeplot from a factor analysis object}
 \usage{
-\method{screeplot}{vsp_fa}(x, ...)
+\method{screeplot}{vsp_fa}(fa, ...)
 }
 \arguments{
-\item{x}{A \code{\link[=vsp_fa]{vsp_fa()}} object.}
+\item{fa}{A \code{\link[=vsp_fa]{vsp_fa()}} object.}
+
+\item{...}{Ignored, included only for consistency with S3 generic.}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with one row for each node, and one column

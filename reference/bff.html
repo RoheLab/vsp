@@ -54,7 +54,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">bff</span><span class="op">(</span><span class="va">loadings</span>, <span class="va">features</span>, <span class="va">num_best</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">bff</span><span class="op">(</span><span class="va">loadings</span>, <span class="va">features</span>, <span class="va">num_best</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -69,13 +69,15 @@ node in the network.</p></dd>
 <dt>num_best</dt>
 <dd><p>An integer indicating how many of the top features
 for differentiating between loadings you want.</p></dd>
-<dt>...</dt>
-<dd><p>Ignored.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>An <code>n</code> by <code>k</code> matrix whose <code>[i, j]</code> entry is the
 ith "most important" feature for cluster j.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>See <code><a href="../articles/bff.html">vignette("bff")</a></code>.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

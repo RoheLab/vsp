@@ -25,40 +25,16 @@
     <loc>https://rohelab.github.io/vsp/reference/bff.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/vsp/reference/bind_svd_u.html</loc>
-  </url>
-  <url>
     <loc>https://rohelab.github.io/vsp/reference/bind_varimax_z.html</loc>
   </url>
   <url>
     <loc>https://rohelab.github.io/vsp/reference/get_svd_u.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/vsp/reference/get_svd_v.html</loc>
-  </url>
-  <url>
-    <loc>https://rohelab.github.io/vsp/reference/get_varimax_y.html</loc>
-  </url>
-  <url>
-    <loc>https://rohelab.github.io/vsp/reference/get_varimax_z.html</loc>
-  </url>
-  <url>
-    <loc>https://rohelab.github.io/vsp/reference/get_y_clusters.html</loc>
-  </url>
-  <url>
-    <loc>https://rohelab.github.io/vsp/reference/get_y_hubs.html</loc>
-  </url>
-  <url>
-    <loc>https://rohelab.github.io/vsp/reference/get_z_clusters.html</loc>
-  </url>
-  <url>
     <loc>https://rohelab.github.io/vsp/reference/get_z_hubs.html</loc>
   </url>
   <url>
     <loc>https://rohelab.github.io/vsp/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rohelab.github.io/vsp/reference/left_padded_sequence.html</loc>
   </url>
   <url>
     <loc>https://rohelab.github.io/vsp/reference/make_skew_positive.html</loc>
@@ -73,22 +49,13 @@
     <loc>https://rohelab.github.io/vsp/reference/plot_mixing_matrix.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/vsp/reference/plot_svd_u.html</loc>
-  </url>
-  <url>
-    <loc>https://rohelab.github.io/vsp/reference/plot_svd_v.html</loc>
-  </url>
-  <url>
-    <loc>https://rohelab.github.io/vsp/reference/plot_varimax_y_pairs.html</loc>
-  </url>
-  <url>
     <loc>https://rohelab.github.io/vsp/reference/plot_varimax_z_pairs.html</loc>
   </url>
   <url>
     <loc>https://rohelab.github.io/vsp/reference/safe_row_l2_normalize.html</loc>
   </url>
   <url>
-    <loc>https://rohelab.github.io/vsp/reference/set_y_factor_names.html</loc>
+    <loc>https://rohelab.github.io/vsp/reference/screeplot.vsp_fa.html</loc>
   </url>
   <url>
     <loc>https://rohelab.github.io/vsp/reference/set_z_factor_names.html</loc>

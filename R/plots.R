@@ -21,14 +21,14 @@ plot_varimax_z_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
 
   fa %>%
     get_varimax_z(factors) %>%
-    select(-id) %>%
-    mutate(
+    dplyr::select(-id) %>%
+    dplyr::mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
-    sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
-    select(-leverage) %>%
+    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
+    dplyr::select(-leverage) %>%
     GGally::ggpairs(aes(alpha = 0.001), ...) +
-    theme_minimal()
+    ggplot::theme_minimal()
 }
 
 #' @describeIn plot_varimax_z_pairs Create a pairs plot of select Z factors
@@ -41,14 +41,14 @@ plot_varimax_y_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
 
   fa %>%
     get_varimax_y(factors) %>%
-    select(-id) %>%
-    mutate(
+    dplyr::select(-id) %>%
+    dplyr::mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
-    sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
-    select(-leverage) %>%
+    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
+    dplyr::select(-leverage) %>%
     GGally::ggpairs(aes(alpha = 0.001), ...) +
-    theme_minimal()
+    ggplot::theme_minimal()
 }
 
 #' @describeIn plot_varimax_z_pairs Create a pairs plot of select left singular vectors
@@ -61,13 +61,13 @@ plot_svd_u <- function(fa, factors = 1:min(5, fa$rank)) {
 
   fa %>%
     get_svd_u(factors) %>%
-    select(-id) %>%
-    mutate(
+    dplyr::select(-id) %>%
+    dplyr::mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
-    sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
-    mutate(node = row_number()) %>%
-    gather(eigen, value, -node) %>%
+    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
+    dplyr::mutate(node = row_number()) %>%
+    tidyr::gather(eigen, value, -node) %>%
     ggplot(aes(node, value)) +
     geom_line() +
     facet_wrap(~eigen) +
@@ -85,13 +85,13 @@ plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
 
   fa %>%
     get_svd_v(factors) %>%
-    select(-id) %>%
-    mutate(
+    dplyr::select(-id) %>%
+    dplyr::mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
-    sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
-    mutate(node = row_number()) %>%
-    gather(eigen, value, -node) %>%
+    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
+    dplyr::mutate(node = row_number()) %>%
+    tidyr::gather(eigen, value, -node) %>%
     ggplot(aes(node, value)) +
     geom_line() +
     facet_wrap(~eigen) +

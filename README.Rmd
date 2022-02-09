@@ -14,8 +14,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 
-library(ggplot2)
-theme_set(theme_minimal())
+library(tidyverse) # this is a hack that hides NAMESPACE errors that i will fix
 ```
 
 # vsp
@@ -60,113 +59,46 @@ Here we demonstrate `vsp` usage on an `igraph` object, using the `enron` network
 library(igraph)
 data(enron, package = "igraphdata")
 
-enron
+image(sign(get.adjacency(enron, sparse = FALSE)))
 ```
 
 Now we estimate:
 
 ```{r}
-library(Matrix)
+library(vsp)
 
-enron_fa <- vsp(enron, rank = 30)
-enron_fa
+fa <- vsp(enron, rank = 30)
+fa
 ```
-
-The default print method has a large amount of valuable information. First, we learn that the graph has 184 nodes, and that we have used `rank = 30` as our guess of the rank of `A`, the network adjacency matrix. The 30th singular value of `A` is 0.2039. This is of interest, as we expect `lambda[k] ~ 0` to indicate that we have we have overestimated the rank of `A`, in say, blockmodels. 
-
-The pre-processing section indicates that the matrix representation of the graph was *not* row- and column-centered before estimation (`center = FALSE`), and that we used the graph Laplacian rather than the adjacency matrix (`normalize = TRUE`).
-
-By default, `normalize = TRUE` not only uses the graph Laplacian, but also regularizes the graph Laplacian using mean in-degree and out-degree. See [1] for details on how we form the regularized graph Laplacian.
-
-In general, you do not need to tune `tau_row` and `tau_col`. To turn off regularization (not recommended!), see `tau_row = 0` and `tau_col = 0`. This often leads to eigenvector localization and thus overfitting.
-
-```{r}
-vsp(M, rank = 5, tau_row = 0, tau_col = 0)
-```
-
-The components `U`, `d`, and `V` are the standard elements of the singular value decomposition of your network.
-
-At the moment, we are performing centering explicitly, which is inefficient and converts adjacency matrices from sparse into dense matrices. Setting `center = TRUE` produces a warning to remind you of this. We plan to implement implicit centering shortly.
-
-```{r warning = TRUE}
-vsp(M, rank = 5, center = TRUE)
-```
-
-You can approximately reconstruct the matrix representation of your network as follows:
-
-```{r}
-fa2 <- vsp(M, rank = 5, normalize = FALSE)
-
-fa2$u %*% diag(fa2$d) %*% t(fa2$v)
-```
-
-In the example above, this will *not* approximate `M`, but rather the regularized graph Laplacian formed from `M`. Similarly, the varimax-rotated network approximate reconstruction is
-
-```{r}
-fa$Z %*% fa$B %*% t(fa$Y)
-```
-
-In general, you won't want to explicit reconstruct the network matrix for large networks since the reconstruction will be dense. 
-
-If you want to directly manipulate the estimates, you can access them as we have above with `fa$B` and so on and so forth. Note that these are `matrix` and `Matrix` objects, and you may need to perform type coercions. We also provide some utility functions to extract estimates into `tibbles`:
 
 ```{r}
 get_varimax_z(fa)
 ```
 
-```{r}
-get_varimax_y(fa)
-```
-
 To visualize a screeplot of the singular value, use:
 
 ```{r}
-# screeplot(fa)
+screeplot(fa)
 ```
 
 At the moment, we also enjoy using pairs plots of the factors as a diagnostic measure:
 
 ```{r}
-# plot_varimax_z_pairs(fa, 1:3)
+plot_varimax_z_pairs(fa, 1:5)
 ```
 
 ```{r}
-# plot_varimax_y_pairs(fa, 1:3)
+plot_varimax_y_pairs(fa, 1:5)
 ```
 
 Similarly, an IPR pairs plot can be a good way to check for singular vector localization (and thus overfitting!).
 
 ```{r}
-# TODO
+plot_ipr_pairs(fa)
 ```
 
-TODO: visualizing B
-
-TODO: selecting k
-
-
-## Tidygraph integration
-
 ```{r}
-library(tidygraph)
-
-sbm <- play_blocks(25, 25, 0.1)
-```
-
-`vsp` also works on `igraph` and `tidygraph` objects:
-
-```{r}
-fa2 <- vsp(sbm, rank = 5)
-```
-
-You can then add the resulting factor loadings back into the node information about the graph:
-
-```{r}
-# if you already have a vsp object
-sbm_fa2 <- sbm %>% 
-  bind_varimax_z(fa2)
-
-sbm_fa2
+plot_mixing_matrix(fa)
 ```
 
 ## References

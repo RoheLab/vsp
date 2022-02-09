@@ -242,7 +242,6 @@ vsp.dgCMatrix <- vsp.matrix
 #' @rdname vsp
 #' @export
 vsp.igraph <- function(x, rank, ..., edge_weights = NULL) {
-  rlang::check_dots_empty()
   x <- igraph::get.adjacency(x, sparse = TRUE, attr = edge_weights)
   vsp.matrix(x, rank, ...)
 }

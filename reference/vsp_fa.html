@@ -12,7 +12,7 @@ fields u, d, v, transformers, R_U, and R_V"><!-- mathjax --><script src="https:/
     
     <a class="navbar-brand me-2" href="../index.html">vsp</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9013</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9014</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,6 +80,14 @@ fields <code>u</code>, <code>d</code>, <code>v</code>, <code>transformers</code>
 <dd><p>A <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric()</a></code> vector of "singular-ish" values.</p></dd>
 <dt>v</dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix()</a></code> of "right singular-ish" vectors.</p></dd>
+<dt>Z</dt>
+<dd><p>A <em>matrix</em> of embeddings for each observation.</p></dd>
+<dt>B</dt>
+<dd><p>A mixing <em>matrix</em> describing how observation embeddings
+and topics interact. Does not have to be diagonal!</p></dd>
+<dt>Y</dt>
+<dd><p>A <em>matrix</em> describing the compositions of various topics
+or factors.</p></dd>
 <dt>transformers</dt>
 <dd><p>A list of transformatioms from the invertiforms
 package.</p></dd>
@@ -99,10 +107,6 @@ row column left-padded with zeros as a name.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code>svd_fa</code> object.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>@inheritParams LRMF3::fa_like</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

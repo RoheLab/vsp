@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">vsp</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9013</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9014</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,18 +54,18 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_svd_u</span><span class="op">(</span><span class="va">x</span>, factors <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">x</span><span class="op">$</span><span class="va">rank</span><span class="op">)</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_svd_u</span><span class="op">(</span><span class="va">fa</span>, factors <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">fa</span><span class="op">$</span><span class="va">rank</span><span class="op">)</span>
 
-<span class="fu">get_svd_v</span><span class="op">(</span><span class="va">x</span>, factors <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">x</span><span class="op">$</span><span class="va">rank</span><span class="op">)</span>
+<span class="fu">get_svd_v</span><span class="op">(</span><span class="va">fa</span>, factors <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">fa</span><span class="op">$</span><span class="va">rank</span><span class="op">)</span>
 
-<span class="fu">get_varimax_z</span><span class="op">(</span><span class="va">x</span>, factors <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">x</span><span class="op">$</span><span class="va">rank</span><span class="op">)</span>
+<span class="fu">get_varimax_z</span><span class="op">(</span><span class="va">fa</span>, factors <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">fa</span><span class="op">$</span><span class="va">rank</span><span class="op">)</span>
 
-<span class="fu">get_varimax_y</span><span class="op">(</span><span class="va">x</span>, factors <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">x</span><span class="op">$</span><span class="va">rank</span><span class="op">)</span></code></pre></div>
+<span class="fu">get_varimax_y</span><span class="op">(</span><span class="va">fa</span>, factors <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">fa</span><span class="op">$</span><span class="va">rank</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>x</dt>
+    <dl><dt>fa</dt>
 <dd><p>A <code><a href="vsp_fa.html">vsp_fa()</a></code> object.</p></dd>
 <dt>factors</dt>
 <dd><p>The specific columns to index into. The most reliable

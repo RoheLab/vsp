@@ -8,6 +8,8 @@
 [![Codecov test
 coverage](https://codecov.io/gh/RoheLab/vsp/branch/main/graph/badge.svg)](https://app.codecov.io/gh/RoheLab/vsp?branch=main)
 [![R-CMD-check](https://github.com/RoheLab/vsp/workflows/R-CMD-check/badge.svg)](https://github.com/RoheLab/vsp/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/vsp)](https://CRAN.R-project.org/package=vsp)
 <!-- badges: end -->
 
 The goal of `vsp` is to enable fast, spectral estimation of latent

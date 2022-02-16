@@ -41,7 +41,7 @@ Suggests:
     purrr,
     rmarkdown,
     scales,
-    testthat,
+    testthat (>= 3.0.0),
     tidygraph,
     tidyr
 VignetteBuilder: 

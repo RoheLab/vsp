@@ -3,7 +3,7 @@ pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   bff: bff.html
-last_built: 2022-02-16T19:40Z
+last_built: 2022-02-20T23:47Z
 urls:
   reference: https://rohelab.github.io/vsp/reference
   article: https://rohelab.github.io/vsp/articles

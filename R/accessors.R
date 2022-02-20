@@ -61,7 +61,7 @@ get_z_hubs <- function(fa, hubs_per_factor = 10, factors = 1:fa$rank) {
     get_varimax_z(factors) %>%
     tidyr::gather(factor, loading, dplyr::contains("z"), -id) %>%
     dplyr::group_by(factor) %>%
-    dplyr::top_n(x = ., n = hubs_per_factor, wt = abs(loading))
+    dplyr::slice_max(order_by = abs(loading), n = hubs_per_factor, with_ties = FALSE)
 }
 
 #' @export
@@ -72,10 +72,10 @@ get_y_hubs <- function(fa, hubs_per_factor = 10, factors = 1:fa$rank) {
   stop_if_not_installed("tidyr")
 
   fa %>%
-    get_varimax_y(factors) %>%
+    get_varimax_y() %>%
     tidyr::gather(factor, loading, dplyr::contains("y"), -id) %>%
     dplyr::group_by(factor) %>%
-    dplyr::top_n(x = ., n = hubs_per_factor, wt = abs(loading))
+    dplyr::slice_max(order_by = abs(loading), n = hubs_per_factor, with_ties = FALSE)
 }
 
 #' Add Z factor loadings to node table of tidygraph

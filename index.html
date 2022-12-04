@@ -12,8 +12,8 @@
     blockmodels, and degree-corrected overlapping stochastic blockmodels.">
 <title>Vintage Sparse PCA for Semi-Parametric Factor Analysis • vsp</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Vintage Sparse PCA for Semi-Parametric Factor Analysis">
 <meta property="og:description" content="Provides fast spectral estimation of latent factors in random
@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="index.html">vsp</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,6 +51,9 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="articles/bff.html">Interpreting factors with bff(), the Best Feature Function</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -75,7 +78,6 @@
 <div class="page-header"><h1 id="vsp">vsp<a class="anchor" aria-label="anchor" href="#vsp"></a>
 </h1></div>
 <!-- badges: start -->
-
 <p>The goal of <code>vsp</code> is to enable fast, spectral estimation of latent factors in random dot product graphs. Under mild assumptions, the <code>vsp</code> estimator is consistent for (degree-corrected) stochastic blockmodels, (degree-corrected) mixed-membership stochastic blockmodels, and degree-corrected overlapping stochastic blockmodels.</p>
 <p>More generally, the <code>vsp</code> estimator is consistent for random dot product graphs that can be written in the form</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">E</span>(A) =<span class="st"> </span>Z B Y<span class="op">^</span>T</span></code></pre></div>
@@ -85,11 +87,11 @@
 </h2>
 <p>You can install the released version of <code>vsp</code> from CRAN with</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"vsp"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"vsp"</span><span class="op">)</span></span></code></pre></div>
 <p>You can install the development version of <code>vsp</code> with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"RoheLab/vsp"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"RoheLab/vsp"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -97,81 +99,80 @@
 <p>Obtaining estimates from <code>vsp</code> is straightforward. We recommend representing networks as <a href="https://igraph.org/r/" class="external-link"><code>igraph</code></a> objects or sparse adjacency matrices using the <a href="https://cran.r-project.org/package=Matrix" class="external-link"><code>Matrix</code></a> package. Once you have your network in one of these formats, you can get estimates by calling the <code><a href="reference/vsp.html">vsp()</a></code> function. The result is a <code>vsp_fa</code> S3 object.</p>
 <p>Here we demonstrate <code>vsp</code> usage on an <code>igraph</code> object, using the <code>enron</code> network from <code>igraphdata</code> package to demonstrate this functionality. First we peak at the graph:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">enron</span>, package <span class="op">=</span> <span class="st">"igraphdata"</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sign.html" class="external-link">sign</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/as_adjacency_matrix.html" class="external-link">get.adjacency</a></span><span class="op">(</span><span class="va">enron</span>, sparse <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">enron</span>, package <span class="op">=</span> <span class="st">"igraphdata"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sign.html" class="external-link">sign</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/as_adjacency_matrix.html" class="external-link">get.adjacency</a></span><span class="op">(</span><span class="va">enron</span>, sparse <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-1-1.png" width="100%"></p>
 <p>Now we estimate:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RoheLab/vsp" class="external-link">vsp</a></span><span class="op">)</span>
-
-<span class="va">fa</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">enron</span>, rank <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>
-<span class="va">fa</span>
-<span class="co">#&gt; Vintage Sparse PCA Factor Analysis</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Rows (n):   184</span>
-<span class="co">#&gt; Cols (d):   184</span>
-<span class="co">#&gt; Factors (rank): 30</span>
-<span class="co">#&gt; Lambda[rank]:   0.2077</span>
-<span class="co">#&gt; Components</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Z: 184 x 30 [dgeMatrix] </span>
-<span class="co">#&gt; B: 30 x 30 [dgeMatrix] </span>
-<span class="co">#&gt; Y: 184 x 30 [dgeMatrix] </span>
-<span class="co">#&gt; u: 184 x 30 [matrix] </span>
-<span class="co">#&gt; d: 30      [numeric] </span>
-<span class="co">#&gt; v: 184 x 30 [matrix]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RoheLab/vsp" class="external-link">vsp</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fa</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/vsp.html">vsp</a></span><span class="op">(</span><span class="va">enron</span>, rank <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
+<span><span class="va">fa</span></span>
+<span><span class="co">#&gt; Vintage Sparse PCA Factor Analysis</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Rows (n):   184</span></span>
+<span><span class="co">#&gt; Cols (d):   184</span></span>
+<span><span class="co">#&gt; Factors (rank): 30</span></span>
+<span><span class="co">#&gt; Lambda[rank]:   0.2077</span></span>
+<span><span class="co">#&gt; Components</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Z: 184 x 30 [dgeMatrix] </span></span>
+<span><span class="co">#&gt; B: 30 x 30 [dgeMatrix] </span></span>
+<span><span class="co">#&gt; Y: 184 x 30 [dgeMatrix] </span></span>
+<span><span class="co">#&gt; u: 184 x 30 [matrix] </span></span>
+<span><span class="co">#&gt; d: 30      [numeric] </span></span>
+<span><span class="co">#&gt; v: 184 x 30 [matrix]</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/get_svd_u.html">get_varimax_z</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 184 × 31</span>
-<span class="co">#&gt;    id         z01      z02      z03      z04      z05      z06      z07      z08</span>
-<span class="co">#&gt;    &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 row0…  2.42e-4 -0.00245 -2.99e-2  3.37e-4  9.96e-5 -0.0114  -0.00849  0.502  </span>
-<span class="co">#&gt;  2 row0… -2.52e-3  0.00135  6.70e-4 -1.63e-1 -1.47e-2  0.0471   0.190    0.00181</span>
-<span class="co">#&gt;  3 row0…  2.98e-4 -0.100    1.17e-4 -3.62e-3 -2.06e-2  0.187   -0.158    0.00303</span>
-<span class="co">#&gt;  4 row0… -7.75e-5 -0.0183   1.17e-4  5.42e-2 -5.58e-3  0.00165 -0.0367  -0.00106</span>
-<span class="co">#&gt;  5 row0… -2.31e-3  0.00150  2.57e-1 -1.42e-2 -4.38e-2  0.00629  1.18    -0.0179 </span>
-<span class="co">#&gt;  6 row0… -3.46e-2 -0.0527  -2.61e-2 -1.26e-2 -1.83e-2  0.0282   0.408   -0.0286 </span>
-<span class="co">#&gt;  7 row0… -1.08e-3 -0.327   -6.01e-1 -6.98e-2 -9.85e-2 -0.0709   0.509    0.0511 </span>
-<span class="co">#&gt;  8 row0…  1.58e-2 -0.0518  -1.34e-2 -1.03e-2 -4.12e-3 -0.0139   0.225   -0.0244 </span>
-<span class="co">#&gt;  9 row0…  2.22e-3  0.0752   3.30e-2 -6.50e-4 -5.00e-1 -0.0278  -0.0740  -0.00556</span>
-<span class="co">#&gt; 10 row0…  7.13e-4 -0.0119   1.95e-2 -5.06e-3 -7.08e-3  0.00341 -0.00369 13.4    </span>
-<span class="co">#&gt; # … with 174 more rows, and 22 more variables: z09 &lt;dbl&gt;, z10 &lt;dbl&gt;, z11 &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   z12 &lt;dbl&gt;, z13 &lt;dbl&gt;, z14 &lt;dbl&gt;, z15 &lt;dbl&gt;, z16 &lt;dbl&gt;, z17 &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   z18 &lt;dbl&gt;, z19 &lt;dbl&gt;, z20 &lt;dbl&gt;, z21 &lt;dbl&gt;, z22 &lt;dbl&gt;, z23 &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   z24 &lt;dbl&gt;, z25 &lt;dbl&gt;, z26 &lt;dbl&gt;, z27 &lt;dbl&gt;, z28 &lt;dbl&gt;, z29 &lt;dbl&gt;, z30 &lt;dbl&gt;</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_svd_u.html">get_varimax_z</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 184 × 31</span></span>
+<span><span class="co">#&gt;    id         z01      z02      z03      z04      z05      z06      z07      z08</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 row0…  2.42e-4 -0.00245 -2.99e-2  3.37e-4  9.96e-5 -0.0114  -0.00849  0.502  </span></span>
+<span><span class="co">#&gt;  2 row0… -2.52e-3  0.00135  6.70e-4 -1.63e-1 -1.47e-2  0.0471   0.190    0.00181</span></span>
+<span><span class="co">#&gt;  3 row0…  2.98e-4 -0.100    1.17e-4 -3.62e-3 -2.06e-2  0.187   -0.158    0.00303</span></span>
+<span><span class="co">#&gt;  4 row0… -7.75e-5 -0.0183   1.17e-4  5.42e-2 -5.58e-3  0.00165 -0.0367  -0.00106</span></span>
+<span><span class="co">#&gt;  5 row0… -2.31e-3  0.00150  2.57e-1 -1.42e-2 -4.38e-2  0.00629  1.18    -0.0179 </span></span>
+<span><span class="co">#&gt;  6 row0… -3.46e-2 -0.0527  -2.61e-2 -1.26e-2 -1.83e-2  0.0282   0.408   -0.0286 </span></span>
+<span><span class="co">#&gt;  7 row0… -1.08e-3 -0.327   -6.01e-1 -6.98e-2 -9.85e-2 -0.0709   0.509    0.0511 </span></span>
+<span><span class="co">#&gt;  8 row0…  1.58e-2 -0.0518  -1.34e-2 -1.03e-2 -4.12e-3 -0.0139   0.225   -0.0244 </span></span>
+<span><span class="co">#&gt;  9 row0…  2.22e-3  0.0752   3.30e-2 -6.50e-4 -5.00e-1 -0.0278  -0.0740  -0.00556</span></span>
+<span><span class="co">#&gt; 10 row0…  7.13e-4 -0.0119   1.95e-2 -5.06e-3 -7.08e-3  0.00341 -0.00369 13.4    </span></span>
+<span><span class="co">#&gt; # … with 174 more rows, and 22 more variables: z09 &lt;dbl&gt;, z10 &lt;dbl&gt;, z11 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   z12 &lt;dbl&gt;, z13 &lt;dbl&gt;, z14 &lt;dbl&gt;, z15 &lt;dbl&gt;, z16 &lt;dbl&gt;, z17 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   z18 &lt;dbl&gt;, z19 &lt;dbl&gt;, z20 &lt;dbl&gt;, z21 &lt;dbl&gt;, z22 &lt;dbl&gt;, z23 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   z24 &lt;dbl&gt;, z25 &lt;dbl&gt;, z26 &lt;dbl&gt;, z27 &lt;dbl&gt;, z28 &lt;dbl&gt;, z29 &lt;dbl&gt;, z30 &lt;dbl&gt;</span></span></code></pre></div>
 <p>To visualize a screeplot of the singular value, use:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
 <p>At the moment, we also enjoy using pairs plots of the factors as a diagnostic measure:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/plot_varimax_z_pairs.html">plot_varimax_z_pairs</a></span><span class="op">(</span><span class="va">fa</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_varimax_z_pairs.html">plot_varimax_z_pairs</a></span><span class="op">(</span><span class="va">fa</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/plot_varimax_z_pairs.html">plot_varimax_y_pairs</a></span><span class="op">(</span><span class="va">fa</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_varimax_z_pairs.html">plot_varimax_y_pairs</a></span><span class="op">(</span><span class="va">fa</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
 <p>Similarly, an IPR pairs plot can be a good way to check for singular vector localization (and thus overfitting!).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/plot_ipr_pairs.html">plot_ipr_pairs</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_ipr_pairs.html">plot_ipr_pairs</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/plot_mixing_matrix.html">plot_mixing_matrix</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_mixing_matrix.html">plot_mixing_matrix</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-8-1.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<ol style="list-style-type: decimal">
-<li>Rohe, K. &amp; Zeng, M. <em>Vintage Factor Analysis with Varimax Performs Statistical Inference</em>. 2022+. <a href="https://arxiv.org/abs/2004.05387" class="external-link uri">https://arxiv.org/abs/2004.05387</a>.</li>
-</ol>
+<ol style="list-style-type: decimal"><li>Rohe, K. &amp; Zeng, M. <em>Vintage Factor Analysis with Varimax Performs Statistical Inference</em>. 2022+. <a href="https://arxiv.org/abs/2004.05387" class="external-link uri">https://arxiv.org/abs/2004.05387</a>.</li></ol>
 <p>Code to reproduce the results from the paper is <a href="https://github.com/RoheLab/vsp-paper" class="external-link">available here</a>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=vsp" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/RoheLab/vsp/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/RoheLab/vsp/issues" class="external-link">Report a bug</a></li>
 </ul>
@@ -204,13 +205,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://app.codecov.io/gh/RoheLab/vsp?branch=main" class="external-link"><img src="https://codecov.io/gh/RoheLab/vsp/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/RoheLab/vsp/actions" class="external-link"><img src="https://github.com/RoheLab/vsp/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>
@@ -223,7 +218,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>

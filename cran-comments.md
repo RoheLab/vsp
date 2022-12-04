@@ -1,11 +1,5 @@
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
-* This is a new release.
-
-   Possibly mis-spelled words in DESCRIPTION:
-     blockmodels (15:5, 16:5, 16:62)
-     vsp (13:34, 14:9)
-     
-These spellings seem fine to me.
+vsp was archived because its dependency invertiforms was archived. The invertiforms archival was a false positive. vsp is still perfectly functional and compatible with the CRAN version of invertiforms.

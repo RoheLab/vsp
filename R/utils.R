@@ -51,19 +51,17 @@ make_skew_positive <- function(fa) {
   Z_column_skew_signs <- apply(fa$Z, 2, skew_sign)
   Y_column_skew_signs <- apply(fa$Y, 2, skew_sign)
 
-  S_Z <- Diagonal(n = ncol(fa$Z), x = Z_column_skew_signs)
-  S_Y <- Diagonal(n = ncol(fa$Y), x = Y_column_skew_signs)
+  # use rowScale and dimScale instead of matrix multiplication
+  # to preserve column names following update to Matrix package
 
-  # note that S_Z and S_Y are their own inverses
-
-  fa$Z <- fa$Z %*% S_Z
-  fa$B <- S_Z %*% fa$B %*% S_Y
-  fa$Y <- fa$Y %*% S_Y
+  fa$Z <- colScale(fa$Z, Z_column_skew_signs)
+  fa$B <- dimScale(fa$B, Z_column_skew_signs, Y_column_skew_signs)
+  fa$Y <- colScale(fa$Y, Y_column_skew_signs)
 
   # update the rotation matrices so that we still have
   # Z = sqrt(n) * U %*% R_U, etc
-  fa$R_U <- fa$R_U %*% S_Z
-  fa$R_V <- fa$R_V %*% S_Y
+  fa$R_U <- colScale(fa$R_U, Z_column_skew_signs)
+  fa$R_V <- colScale(fa$R_V, Y_column_skew_signs)
 
   # in some cases (i.e. columns of Y or Z are constant) the skew
   # is zero

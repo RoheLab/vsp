@@ -12,6 +12,19 @@
 #'
 #' @export
 #'
+#' @examples
+#'
+#' data(enron, package = "igraphdata")
+#'
+#' fa <- vsp(enron, rank = 30)
+#' fa
+#'
+#' get_svd_u(fa)
+#' get_svd_v(fa)
+#'
+#' get_varimax_z(fa)
+#' get_varimax_y(fa)
+#'
 get_svd_u <- function(fa, factors = 1:fa$rank) {
   as_tibble(as.matrix(fa$u[, factors, drop = FALSE]), rownames = "id")
 }
@@ -51,6 +64,16 @@ get_varimax_y <- function(fa, factors = 1:fa$rank) {
 #'   - `loading`: The actual value of the hubs factor loading for that factor.
 #'
 #' @export
+#'
+#' @examples
+#'
+#' data(enron, package = "igraphdata")
+#'
+#' fa <- vsp(enron, rank = 30)
+#' fa
+#'
+#' get_z_hubs(fa)
+#' get_y_hubs(fa)
 #'
 get_z_hubs <- function(fa, hubs_per_factor = 10, factors = 1:fa$rank) {
 

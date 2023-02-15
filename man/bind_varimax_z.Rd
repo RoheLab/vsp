@@ -40,10 +40,10 @@ Add Z factor loadings to node table of tidygraph
 }
 \section{Functions}{
 \itemize{
-\item \code{bind_varimax_y}: Add Y factor loadings to node table of tidygraph
+\item \code{bind_varimax_y()}: Add Y factor loadings to node table of tidygraph
 
-\item \code{bind_svd_u}: Add left singular vectors to node table of tidygraph
+\item \code{bind_svd_u()}: Add left singular vectors to node table of tidygraph
 
-\item \code{bind_svd_v}: Add right singular vectors to node table of tidygraph
+\item \code{bind_svd_v()}: Add right singular vectors to node table of tidygraph
+
 }}
-

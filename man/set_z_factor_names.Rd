@@ -25,6 +25,6 @@ Give the dimensions of Z factors informative names
 }
 \section{Functions}{
 \itemize{
-\item \code{set_y_factor_names}: Give the dimensions of Y factors informative names
-}}
+\item \code{set_y_factor_names()}: Give the dimensions of Y factors informative names
 
+}}

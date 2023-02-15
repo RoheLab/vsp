@@ -29,9 +29,7 @@ By default returns all factors/singular vectors.}
     \item{\code{data}}{data set using.  Can have both numerical and categorical data.}
     \item{\code{mapping}}{aesthetic mapping (besides \code{x} and \code{y}).  See \code{\link[ggplot2]{aes}()}.  If \code{mapping} is numeric, \code{columns} will be set to the \code{mapping} value and \code{mapping} will be set to \code{NULL}.}
     \item{\code{columns}}{which columns are used to make plots.  Defaults to all columns.}
-    \item{\code{title}}{title, x label, and y label for the graph}
-    \item{\code{xlab}}{title, x label, and y label for the graph}
-    \item{\code{ylab}}{title, x label, and y label for the graph}
+    \item{\code{title,xlab,ylab}}{title, x label, and y label for the graph}
     \item{\code{upper}}{see Details}
     \item{\code{lower}}{see Details}
     \item{\code{diag}}{see Details}
@@ -59,10 +57,10 @@ to be sampled).
 }
 \section{Functions}{
 \itemize{
-\item \code{plot_varimax_y_pairs}: Create a pairs plot of select Z factors
+\item \code{plot_varimax_y_pairs()}: Create a pairs plot of select Z factors
 
-\item \code{plot_svd_u}: Create a pairs plot of select left singular vectors
+\item \code{plot_svd_u()}: Create a pairs plot of select left singular vectors
 
-\item \code{plot_svd_v}: Create a pairs plot of select right singular vectors
+\item \code{plot_svd_v()}: Create a pairs plot of select right singular vectors
+
 }}
-

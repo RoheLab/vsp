@@ -35,6 +35,17 @@ Get most important hubs for each Z factor
 }
 \section{Functions}{
 \itemize{
-\item \code{get_y_hubs}: Get most important hubs for each Y factor
-}}
+\item \code{get_y_hubs()}: Get most important hubs for each Y factor
 
+}}
+\examples{
+
+data(enron, package = "igraphdata")
+
+fa <- vsp(enron, rank = 30)
+fa
+
+get_z_hubs(fa)
+get_y_hubs(fa)
+
+}

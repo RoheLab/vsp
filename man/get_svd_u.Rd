@@ -33,10 +33,24 @@ Get left singular vectors in a tibble
 }
 \section{Functions}{
 \itemize{
-\item \code{get_svd_v}: Get right singular vectors in a tibble
+\item \code{get_svd_v()}: Get right singular vectors in a tibble
 
-\item \code{get_varimax_z}: Get varimax Y factors in a tibble
+\item \code{get_varimax_z()}: Get varimax Y factors in a tibble
 
-\item \code{get_varimax_y}: Get varimax Z factors in a tibble
+\item \code{get_varimax_y()}: Get varimax Z factors in a tibble
+
 }}
+\examples{
 
+data(enron, package = "igraphdata")
+
+fa <- vsp(enron, rank = 30)
+fa
+
+get_svd_u(fa)
+get_svd_v(fa)
+
+get_varimax_z(fa)
+get_varimax_y(fa)
+
+}

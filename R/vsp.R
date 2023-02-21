@@ -241,11 +241,6 @@ vsp.svd_like <- function(x, rank, ...,
 
     stop_if_not_installed("clue")
 
-    # the idea here is to make B as close to a diagonal matrix as possible
-    # in particular, we want the diagonal to encode *positive* relationships
-    # between factors, and we don't really care where negative relationships
-    # end up in B
-
     B_pos <- pmax(as.matrix(B), 0)
     soln <- clue::solve_LSAP(B_pos, maximum = TRUE)
     perm <- as.integer(soln)

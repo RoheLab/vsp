@@ -26,7 +26,8 @@ vsp(x, rank, ...)
   kaiser_normalize_u = FALSE,
   kaiser_normalize_v = FALSE,
   rownames = NULL,
-  colnames = NULL
+  colnames = NULL,
+  match_columns = TRUE
 )
 
 \method{vsp}{Matrix}(
@@ -42,7 +43,8 @@ vsp(x, rank, ...)
   kaiser_normalize_u = FALSE,
   kaiser_normalize_v = FALSE,
   rownames = NULL,
-  colnames = NULL
+  colnames = NULL,
+  match_columns = TRUE
 )
 
 \method{vsp}{dgCMatrix}(
@@ -58,7 +60,8 @@ vsp(x, rank, ...)
   kaiser_normalize_u = FALSE,
   kaiser_normalize_v = FALSE,
   rownames = NULL,
-  colnames = NULL
+  colnames = NULL,
+  match_columns = TRUE
 )
 
 \method{vsp}{igraph}(x, rank, ..., edge_weights = NULL)
@@ -106,6 +109,11 @@ to \code{NULL}.}
 \item{colnames}{Character vector of column names of \code{x}. These column names
 are propagated into the row names of the \code{V} and \code{Y}. Defaults
 to \code{NULL}.}
+
+\item{match_columns}{Should the columns of \code{Y} be re-ordered such that
+\code{Y[, i]} corresponds to \code{Z[, i]} to the extent possible? Defaults to
+\code{TRUE}. Typically helps with interpretation, and often makes \code{B} more
+diagonally dominant.}
 
 \item{edge_weights}{When \code{x} is an \link[igraph:aaa-igraph-package]{igraph::igraph}, an edge attribute
 to use to form a weighted adjacency matrix.}

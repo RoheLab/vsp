@@ -41,7 +41,6 @@ skew_sign <- function(x) {
 #'   of `Z` and `Y` has positive skew, that is otherwise
 #'   equivalent to the original object.
 #'
-#' @export
 #' @keywords internal
 make_skew_positive <- function(fa) {
 
@@ -77,7 +76,6 @@ stop_if_not_installed <- function(package) {
     stop(glue("Must install {package} for this functionality.", call. = FALSE))
   }
 }
-
 
 #' Safe L2 row normalization
 #'

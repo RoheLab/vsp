@@ -46,6 +46,11 @@
 #'  are propagated into the row names of the `V` and `Y`. Defaults
 #'  to `NULL`.
 #'
+#' @param match_columns Should the columns of `Y` be re-ordered such that
+#'  `Y[, i]` corresponds to `Z[, i]` to the extent possible? Defaults to
+#'  `TRUE`. Typically helps with interpretation, and often makes `B` more
+#'  diagonally dominant.
+#'
 #' @inheritParams rlang::args_dots_empty
 #'
 #' @details Sparse SVDs use `RSpectra` for performance.
@@ -79,7 +84,8 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
                        tau_row = NULL, tau_col = NULL,
                        kaiser_normalize_u = FALSE,
                        kaiser_normalize_v = FALSE,
-                       rownames = NULL, colnames = NULL) {
+                       rownames = NULL, colnames = NULL,
+                       match_columns = TRUE) {
 
   rlang::check_dots_empty()
 
@@ -143,6 +149,24 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
 
   B <- t(R_U) %*% Diagonal(n = rank, x = s$d) %*% R_V / (sqrt(n) * sqrt(d))
 
+  if (match_columns) {
+
+    stop_if_not_installed("clue")
+
+    # the idea here is to make B as close to a diagonal matrix as possible
+    # in particular, we want the diagonal to encode *positive* relationships
+    # between factors, and we don't really care where negative relationships
+    # end up in B
+
+    B_pos <- pmax(as.matrix(B), 0)
+    soln <- clue::solve_LSAP(B_pos, maximum = TRUE)
+    perm <- as.integer(soln)
+
+    B <- B[, perm]
+    Y <- Y[, perm]
+    R_V <- R_V[, perm]
+  }
+
   fa <- vsp_fa(
     u = s$u, d = s$d, v = s$v,
     Z = Z, B = B, Y = Y,
@@ -186,7 +210,8 @@ vsp.svd_like <- function(x, rank, ...,
                          recenter = FALSE, renormalize = FALSE,
                          kaiser_normalize_u = FALSE,
                          kaiser_normalize_v = FALSE,
-                         rownames = NULL, colnames = NULL) {
+                         rownames = NULL, colnames = NULL,
+                         match_columns = TRUE) {
 
   rlang::check_dots_empty()
 
@@ -210,6 +235,24 @@ vsp.svd_like <- function(x, rank, ...,
   Y <- sqrt(d) * x$v %*% R_V
 
   B <- t(R_U) %*% Diagonal(n = rank, x = x$d) %*% R_V / (sqrt(n) * sqrt(d))
+
+  if (match_columns) {
+
+    stop_if_not_installed("clue")
+
+    # the idea here is to make B as close to a diagonal matrix as possible
+    # in particular, we want the diagonal to encode *positive* relationships
+    # between factors, and we don't really care where negative relationships
+    # end up in B
+
+    B_pos <- pmax(as.matrix(B), 0)
+    soln <- clue::solve_LSAP(B_pos, maximum = TRUE)
+    perm <- as.integer(soln)
+
+    B <- B[, perm]
+    Y <- Y[, perm]
+    R_V <- R_V[, perm]
+  }
 
   fa <- vsp_fa(
     u = x$u, d = x$d, v = x$v,

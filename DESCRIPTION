@@ -33,6 +33,7 @@ Imports:
     tibble,
     withr
 Suggests: 
+    clue,
     covr,
     dplyr,
     GGally,

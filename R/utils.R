@@ -71,6 +71,40 @@ make_skew_positive <- function(fa) {
   fa
 }
 
+#' Match co-factors across Z and Y to the extent possible
+#'
+#' @param fa A [fa_like()] object.
+#'
+#' @return A new [fa_like()] object where the columns
+#'   of `Z` and `Y` have been re-ordered to correspond with each other,
+#'   by making `B` as diagonally dominant as possible.
+#'
+#' @keywords internal
+match_column_order <- function(fa) {
+
+  # see https://github.com/RoheLab/vsp/issues/55
+
+  if (!inherits(fa, "fa_like"))
+    stop("`match_column_order` is only intended for `fa_like` objects.")
+
+  stop_if_not_installed("clue")
+
+  # the idea here is to make B as close to a diagonal matrix as possible
+  # in particular, we want the diagonal to encode *positive* relationships
+  # between factors, and we don't really care where negative relationships
+  # end up in B
+
+  B_pos <- pmax(as.matrix(fa$B), 0)
+  soln <- clue::solve_LSAP(B_pos, maximum = TRUE)
+  perm <- as.integer(soln)
+
+  fa$B <- fa$B[, perm]
+  fa$Y <- fa$Y[, perm]
+  fa$R_V <- fa$R_V[, perm]
+
+  fa
+}
+
 stop_if_not_installed <- function(package) {
   if (!requireNamespace(package, quietly = TRUE)) {
     stop(glue("Must install {package} for this functionality.", call. = FALSE))

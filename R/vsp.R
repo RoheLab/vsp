@@ -160,6 +160,7 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
   }
 
   fa <- make_skew_positive(fa)
+  fa <- match_column_order(fa)
   fa
 }
 
@@ -228,6 +229,7 @@ vsp.svd_like <- function(x, rank, ...,
   }
 
   fa <- make_skew_positive(fa)
+  fa <- match_column_order(fa)
   fa
 }
 

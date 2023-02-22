@@ -21,88 +21,9 @@ left_padded_sequence <- function(x) {
   formatC(x, width = max_digits, format = "d", flag = "0")
 }
 
-
 # return +1 when skew positive, -1 when skew negative
 skew_sign <- function(x) {
   sign(sum((x - mean(x))^3))
-}
-
-#' Make factors columnwise skew positive
-#'
-#' Given a factor analysis like object, flip
-#' signs so that columns of `Z` and `Y` are
-#' skew positive. Note that this also causes
-#' corresponding sign flips in `B`. This
-#' helps with interpretability of factors.
-#'
-#' @param fa A [fa_like()] object.
-#'
-#' @return A new [fa_like()] object where the columns
-#'   of `Z` and `Y` has positive skew, that is otherwise
-#'   equivalent to the original object.
-#'
-#' @keywords internal
-make_skew_positive <- function(fa) {
-
-  if (!inherits(fa, "fa_like"))
-    stop("`make_skew_positive` is only intended for `fa_like` objects.")
-
-  Z_column_skew_signs <- apply(fa$Z, 2, skew_sign)
-  Y_column_skew_signs <- apply(fa$Y, 2, skew_sign)
-
-  # use rowScale and dimScale instead of matrix multiplication
-  # to preserve column names following update to Matrix package
-
-  fa$Z <- colScale(fa$Z, Z_column_skew_signs)
-  fa$B <- dimScale(fa$B, Z_column_skew_signs, Y_column_skew_signs)
-  fa$Y <- colScale(fa$Y, Y_column_skew_signs)
-
-  # update the rotation matrices so that we still have
-  # Z = sqrt(n) * U %*% R_U, etc
-  fa$R_U <- colScale(fa$R_U, Z_column_skew_signs)
-  fa$R_V <- colScale(fa$R_V, Y_column_skew_signs)
-
-  # in some cases (i.e. columns of Y or Z are constant) the skew
-  # is zero
-
-  stopifnot(all(apply(fa$Z, 2, skew_sign) >= 0))
-  stopifnot(all(apply(fa$Y, 2, skew_sign) >= 0))
-
-  fa
-}
-
-#' Match co-factors across Z and Y to the extent possible
-#'
-#' @param fa A [fa_like()] object.
-#'
-#' @return A new [fa_like()] object where the columns
-#'   of `Z` and `Y` have been re-ordered to correspond with each other,
-#'   by making `B` as diagonally dominant as possible.
-#'
-#' @keywords internal
-match_column_order <- function(fa) {
-
-  # see https://github.com/RoheLab/vsp/issues/55
-
-  if (!inherits(fa, "fa_like"))
-    stop("`match_column_order` is only intended for `fa_like` objects.")
-
-  stop_if_not_installed("clue")
-
-  # the idea here is to make B as close to a diagonal matrix as possible
-  # in particular, we want the diagonal to encode *positive* relationships
-  # between factors, and we don't really care where negative relationships
-  # end up in B
-
-  B_pos <- pmax(as.matrix(fa$B), 0)
-  soln <- clue::solve_LSAP(B_pos, maximum = TRUE)
-  perm <- as.integer(soln)
-
-  fa$B <- fa$B[, perm]
-  fa$Y <- fa$Y[, perm]
-  fa$R_V <- fa$R_V[, perm]
-
-  fa
 }
 
 stop_if_not_installed <- function(package) {

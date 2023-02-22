@@ -149,6 +149,30 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
 
   B <- t(R_U) %*% Diagonal(n = rank, x = s$d) %*% R_V / (sqrt(n) * sqrt(d))
 
+  ### interpretation niceties --------------------------------------------------
+
+  # Z and Y are only identified up to signed permutation matrices. however,
+  # we some heuristics for ordering the columns of Z and Y so that they match
+  # up, and for setting the signs of the columns
+
+  # Heuristic 1: force columns to have positive skew
+
+  Z_column_skew_signs <- apply(Z, 2, skew_sign)
+  Y_column_skew_signs <- apply(Y, 2, skew_sign)
+
+  # use rowScale and dimScale to preserve column names
+
+  Z <- colScale(Z, Z_column_skew_signs)
+  B <- dimScale(B, Z_column_skew_signs, Y_column_skew_signs)
+  Y <- colScale(Y, Y_column_skew_signs)
+
+  # update the rotation matrices so that we still have
+  # Z = sqrt(n) * U %*% R_U, etc
+  R_U <- colScale(R_U, Z_column_skew_signs)
+  R_V <- colScale(R_V, Y_column_skew_signs)
+
+  # Heuristic 2: match columns of Z and Y using Hungarian algorithm
+
   if (match_columns) {
 
     stop_if_not_installed("clue")
@@ -156,7 +180,8 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
     # the idea here is to make B as close to a diagonal matrix as possible
     # in particular, we want the diagonal to encode *positive* relationships
     # between factors, and we don't really care where negative relationships
-    # end up in B
+    # end up in B. since we use the sign of B here, it's important to make
+    # columns skew-positive before doing this step
 
     B_pos <- pmax(as.matrix(B), 0)
     soln <- clue::solve_LSAP(B_pos, maximum = TRUE)
@@ -183,8 +208,6 @@ vsp.matrix <- function(x, rank, ..., center = FALSE, recenter = FALSE,
     fa <- inverse_transform(centerer, fa)
   }
 
-  fa <- make_skew_positive(fa)
-  fa <- match_column_order(fa)
   fa
 }
 
@@ -237,9 +260,39 @@ vsp.svd_like <- function(x, rank, ...,
 
   B <- t(R_U) %*% Diagonal(n = rank, x = x$d) %*% R_V / (sqrt(n) * sqrt(d))
 
+  ### interpretation niceties --------------------------------------------------
+
+  # Z and Y are only identified up to signed permutation matrices. however,
+  # we some heuristics for ordering the columns of Z and Y so that they match
+  # up, and for setting the signs of the columns
+
+  # Heuristic 1: force columns to have positive skew
+
+  Z_column_skew_signs <- apply(Z, 2, skew_sign)
+  Y_column_skew_signs <- apply(Y, 2, skew_sign)
+
+  # use rowScale and dimScale to preserve column names
+
+  Z <- colScale(Z, Z_column_skew_signs)
+  B <- dimScale(B, Z_column_skew_signs, Y_column_skew_signs)
+  Y <- colScale(Y, Y_column_skew_signs)
+
+  # update the rotation matrices so that we still have
+  # Z = sqrt(n) * U %*% R_U, etc
+  R_U <- colScale(R_U, Z_column_skew_signs)
+  R_V <- colScale(R_V, Y_column_skew_signs)
+
+  # Heuristic 2: match columns of Z and Y using Hungarian algorithm
+
   if (match_columns) {
 
     stop_if_not_installed("clue")
+
+    # the idea here is to make B as close to a diagonal matrix as possible
+    # in particular, we want the diagonal to encode *positive* relationships
+    # between factors, and we don't really care where negative relationships
+    # end up in B. since we use the sign of B here, it's important to make
+    # columns skew-positive before doing this step
 
     B_pos <- pmax(as.matrix(B), 0)
     soln <- clue::solve_LSAP(B_pos, maximum = TRUE)
@@ -266,8 +319,6 @@ vsp.svd_like <- function(x, rank, ...,
     fa <- inverse_transform(centerer, fa)
   }
 
-  fa <- make_skew_positive(fa)
-  fa <- match_column_order(fa)
   fa
 }
 

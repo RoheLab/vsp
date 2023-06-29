@@ -154,8 +154,6 @@ plot_mixing_matrix <- function(fa) {
 #' @export
 plot_ipr_pairs <- function(fa) {
 
-  ipr <- function(x) sum(x^4)
-
   ipr_u <- apply(fa$u, 2, ipr)
   ipr_v <- apply(fa$v, 2, ipr)
 

@@ -68,7 +68,7 @@ plot_svd_u <- function(fa, factors = 1:min(5, fa$rank)) {
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
     dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
-    dplyr::mutate(node = row_number()) %>%
+    dplyr::mutate(node = dplyr::row_number()) %>%
     tidyr::gather(eigen, value, -node) %>%
     ggplot2::ggplot(ggplot2::aes(node, value)) +
     ggplot2::geom_line() +
@@ -92,7 +92,7 @@ plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
     dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
-    dplyr::mutate(node = row_number()) %>%
+    dplyr::mutate(node = dplyr::row_number()) %>%
     tidyr::gather(eigen, value, -node) %>%
     ggplot2::ggplot(ggplot2::aes(node, value)) +
     ggplot2::geom_line() +

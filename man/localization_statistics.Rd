@@ -24,11 +24,13 @@ Title
 library(igraphdata)
 library(furrr)
 
-plan(multisession, workers = 10)
+data(karate, package = "igraphdata")
+
+plan(multicore, workers = 10)
 
 # karate is undirected, enron is directed
 
-stats <- localization_statistics(karate, max_rank = 10, num_tau = 10)
+stats <- localization_statistics(karate, max_rank = 15, num_tau = 200)
 
 plot_cumulative_curves(stats)
 plot_ipr_curves(stats)

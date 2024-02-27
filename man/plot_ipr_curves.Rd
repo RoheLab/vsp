@@ -4,7 +4,7 @@
 \alias{plot_ipr_curves}
 \title{Title}
 \usage{
-plot_ipr_curves(stats, indices = NULL)
+plot_ipr_curves(localization, indices = NULL)
 }
 \arguments{
 \item{indices}{}

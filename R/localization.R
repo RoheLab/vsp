@@ -1,9 +1,32 @@
+#' Title
+#'
+#' @param U
+#'
+#' @return
+#' @export
+#'
 cumulative_participation <- function(U) {
   sum(rowSums(U^2)^2)
 }
 
-ipr <- function(x) sum(x^4)
+#' Title
+#'
+#' @param x
+#'
+#' @return
+#' @export
+#'
+ipr <- function(x) {
+  sum(x^4)
+}
 
+#' Title
+#'
+#' @param s
+#'
+#' @return
+#' @export
+#'
 iprs <- function(s) {
   tibble(
     ipr_u = apply(s$u, 2, ipr),
@@ -61,7 +84,7 @@ localization_statistics <- function(graph, max_rank, ..., tau_min = 10^-2, tau_m
 
   localization <- laplacians %>%
     dplyr::mutate(
-      s = furrr::future_map(L_tau, RSpectra::svds, max_rank, .options = furrr_options(seed = TRUE)),
+      s = furrr::future_map(L_tau, RSpectra::svds, max_rank, .options = furrr::furrr_options(seed = TRUE)),
       ipr = furrr::future_map(s, iprs),
       cum_u = furrr::future_map_dbl(s, ~ cumulative_participation(.x$u)),
       cum_v = furrr::future_map_dbl(s, ~ cumulative_participation(.x$v))
@@ -120,7 +143,7 @@ plot_cumulative_curves <- function(localization) {
 plot_ipr_curves <- function(localization, indices = NULL) {
 
   if (is.null(indices)) {
-    max_index <- min(max(stats$i), 10)
+    max_index <- min(max(localization$stats$i), 10)
     indices <- 1:max_index
   }
 

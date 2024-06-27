@@ -15,7 +15,7 @@ Description: Provides fast spectral estimation of latent factors in random
     blockmodels, (degree-corrected) mixed-membership stochastic
     blockmodels, and degree-corrected overlapping stochastic blockmodels.
 License: MIT + file LICENSE
-URL: https://github.com/RoheLab/vsp
+URL: https://rohelab.github.io/vsp/, https://github.com/RoheLab/vsp
 BugReports: https://github.com/RoheLab/vsp/issues
 Depends: 
     R (>= 3.1)

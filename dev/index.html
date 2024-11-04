@@ -98,9 +98,9 @@
 <span><span class="co">#&gt; Lambda[rank]:   0.2077</span></span>
 <span><span class="co">#&gt; Components</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Z: 184 x 30 [dgeMatrix] </span></span>
-<span><span class="co">#&gt; B: 30 x 30 [dgeMatrix] </span></span>
-<span><span class="co">#&gt; Y: 184 x 30 [dgeMatrix] </span></span>
+<span><span class="co">#&gt; Z: 184 x 30 [matrix] </span></span>
+<span><span class="co">#&gt; B: 30 x 30 [matrix] </span></span>
+<span><span class="co">#&gt; Y: 184 x 30 [matrix] </span></span>
 <span><span class="co">#&gt; u: 184 x 30 [matrix] </span></span>
 <span><span class="co">#&gt; d: 30      [numeric] </span></span>
 <span><span class="co">#&gt; v: 184 x 30 [matrix]</span></span></code></pre></div>
@@ -119,10 +119,11 @@
 <span><span class="co">#&gt;  8 row0…  1.58e-2 -0.0518  -1.34e-2 -1.03e-2 -4.12e-3 -0.0139   0.225   -0.0244 </span></span>
 <span><span class="co">#&gt;  9 row0…  2.22e-3  0.0752   3.30e-2 -6.50e-4 -5.00e-1 -0.0278  -0.0740  -0.00556</span></span>
 <span><span class="co">#&gt; 10 row0…  7.13e-4 -0.0119   1.95e-2 -5.06e-3 -7.08e-3  0.00341 -0.00369 13.4    </span></span>
-<span><span class="co">#&gt; # … with 174 more rows, and 22 more variables: z09 &lt;dbl&gt;, z10 &lt;dbl&gt;, z11 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   z12 &lt;dbl&gt;, z13 &lt;dbl&gt;, z14 &lt;dbl&gt;, z15 &lt;dbl&gt;, z16 &lt;dbl&gt;, z17 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   z18 &lt;dbl&gt;, z19 &lt;dbl&gt;, z20 &lt;dbl&gt;, z21 &lt;dbl&gt;, z22 &lt;dbl&gt;, z23 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   z24 &lt;dbl&gt;, z25 &lt;dbl&gt;, z26 &lt;dbl&gt;, z27 &lt;dbl&gt;, z28 &lt;dbl&gt;, z29 &lt;dbl&gt;, z30 &lt;dbl&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 174 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 22 more variables: z09 &lt;dbl&gt;, z10 &lt;dbl&gt;, z11 &lt;dbl&gt;, z12 &lt;dbl&gt;, z13 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   z14 &lt;dbl&gt;, z15 &lt;dbl&gt;, z16 &lt;dbl&gt;, z17 &lt;dbl&gt;, z18 &lt;dbl&gt;, z19 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   z20 &lt;dbl&gt;, z21 &lt;dbl&gt;, z22 &lt;dbl&gt;, z23 &lt;dbl&gt;, z24 &lt;dbl&gt;, z25 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   z26 &lt;dbl&gt;, z27 &lt;dbl&gt;, z28 &lt;dbl&gt;, z29 &lt;dbl&gt;, z30 &lt;dbl&gt;</span></span></code></pre></div>
 <p>To visualize a screeplot of the singular value, use:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></span></code></pre></div>
@@ -145,9 +146,7 @@
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<ol style="list-style-type: decimal">
-<li>Rohe, K. &amp; Zeng, M. <em>Vintage Factor Analysis with Varimax Performs Statistical Inference</em>. 2022+. <a href="https://arxiv.org/abs/2004.05387" class="external-link uri">https://arxiv.org/abs/2004.05387</a>.</li>
-</ol>
+<p>[1] Rohe, Karl, and Muzhe Zeng. “Vintage Factor Analysis with Varimax Performs Statistical Inference.” Journal of the Royal Statistical Society Series B: Statistical Methodology 85, no. 4 (September 29, 2023): 1037–60. <a href="https://doi.org/10.1093/jrsssb/qkad029" class="external-link uri">https://doi.org/10.1093/jrsssb/qkad029</a>.</p>
 <p>Code to reproduce the results from the paper is <a href="https://github.com/RoheLab/vsp-paper" class="external-link">available here</a>.</p>
 </div>
 </div>
@@ -191,8 +190,8 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://app.codecov.io/gh/RoheLab/vsp?branch=main" class="external-link"><img src="https://codecov.io/gh/RoheLab/vsp/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/RoheLab/vsp/actions" class="external-link"><img src="https://github.com/RoheLab/vsp/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://CRAN.R-project.org/package=vsp" class="external-link"><img src="https://www.r-pkg.org/badges/version/vsp" alt="CRAN status"></a></li>
+<li><a href="https://github.com/RoheLab/vsp/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/RoheLab/vsp/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 

@@ -104,7 +104,7 @@ plot_mixing_matrix(fa)
 
 ## References
 
-1. Rohe, K. & Zeng, M. *Vintage Factor Analysis with Varimax Performs Statistical Inference*. 2022+. https://arxiv.org/abs/2004.05387.
+[1] Rohe, Karl, and Muzhe Zeng. “Vintage Factor Analysis with Varimax Performs Statistical Inference.” Journal of the Royal Statistical Society Series B: Statistical Methodology 85, no. 4 (September 29, 2023): 1037–60. https://doi.org/10.1093/jrsssb/qkad029.
 
 Code to reproduce the results from the paper is [available here](https://github.com/RoheLab/vsp-paper).
 

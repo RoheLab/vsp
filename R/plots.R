@@ -15,6 +15,7 @@
 #'
 #' @export
 #'
+#' @examples
 #'
 #' data(enron, package = "igraphdata")
 #'

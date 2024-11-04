@@ -3,7 +3,6 @@
 \docType{package}
 \name{vsp-package}
 \alias{vsp-package}
-\alias{_PACKAGE}
 \title{vsp: Vintage Sparse PCA for Semi-Parametric Factor Analysis}
 \description{
 Provides fast spectral estimation of latent factors in random dot product graphs using the vsp estimator. Under mild assumptions, the vsp estimator is consistent for (degree-corrected) stochastic blockmodels, (degree-corrected) mixed-membership stochastic blockmodels, and degree-corrected overlapping stochastic blockmodels.
@@ -11,6 +10,7 @@ Provides fast spectral estimation of latent factors in random dot product graphs
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://rohelab.github.io/vsp/}
   \item \url{https://github.com/RoheLab/vsp}
   \item Report bugs at \url{https://github.com/RoheLab/vsp/issues}
 }

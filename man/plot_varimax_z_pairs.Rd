@@ -64,3 +64,22 @@ to be sampled).
 \item \code{plot_svd_v()}: Create a pairs plot of select right singular vectors
 
 }}
+\examples{
+
+data(enron, package = "igraphdata")
+
+fa <- vsp(enron, rank = 5)
+
+plot_varimax_z_pairs(fa)
+plot_varimax_y_pairs(fa)
+
+plot_svd_u(fa)
+plot_svd_v(fa)
+
+screeplot(fa)
+
+plot_mixing_matrix(fa)
+
+plot_ipr_pairs(fa)
+
+}

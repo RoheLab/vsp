@@ -82,8 +82,8 @@ clusters, and each user possess a series of text document (covariates).
 We want to summarize words that are representative to each cluster. The
 BFF is suitable for this type of task.</p>
 <p>This document describes the intuition behind the BFF as a follow-up
-step after the <code>vsp</code> (vintage specral clustering) and touches
-several technical issues regarding implementation.</p>
+step after the <code>vsp</code> (vintage spectral clustering) and
+touches several technical issues regarding implementation.</p>
 </div>
 <div class="section level2">
 <h2 id="methodology">Methodology<a class="anchor" aria-label="anchor" href="#methodology"></a>
@@ -103,7 +103,7 @@ encodes the loadings of each feature (i.e., columns of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>)
 with respect to clusters. In particular, when
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
-is the adjacency matrix of an undirected Blockmodel graph, each row of
+is the adjacency matrix of an undirected block model graph, each row of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
 decodes the block (cluster) membership of the vertex (feature).
 Generally, the loading

@@ -152,6 +152,40 @@ By default returns all factors/singular vectors.</p></dd>
 <li><p><code>plot_svd_v()</code>: Create a pairs plot of select right singular vectors</p></li>
 </ul></div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">enron</span>, package <span class="op">=</span> <span class="st">"igraphdata"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">fa</span> <span class="op">&lt;-</span> <span class="fu"><a href="vsp.html">vsp</a></span><span class="op">(</span><span class="va">enron</span>, rank <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> This graph was created by an old(er) igraph version.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Call `igraph::upgrade_graph()` on it to use with the current igraph version.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> For now we convert it on the fly...</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">plot_varimax_z_pairs</span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Registered S3 method overwritten by 'GGally':</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   method from   </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   +.gg   ggplot2</span>
+<span class="r-plt img"><img src="plot_varimax_z_pairs-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">plot_varimax_y_pairs</span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot_varimax_z_pairs-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">plot_svd_u</span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot_varimax_z_pairs-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu">plot_svd_v</span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot_varimax_z_pairs-4.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/screeplot.html" class="external-link">screeplot</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot_varimax_z_pairs-5.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_mixing_matrix.html">plot_mixing_matrix</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot_varimax_z_pairs-6.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_ipr_pairs.html">plot_ipr_pairs</a></span><span class="op">(</span><span class="va">fa</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot_varimax_z_pairs-7.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

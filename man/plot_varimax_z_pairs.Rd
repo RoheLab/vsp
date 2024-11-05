@@ -68,7 +68,7 @@ to be sampled).
 
 data(enron, package = "igraphdata")
 
-fa <- vsp(enron, rank = 5)
+fa <- vsp(enron, rank = 3)
 
 plot_varimax_z_pairs(fa)
 plot_varimax_y_pairs(fa)

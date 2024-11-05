@@ -5,77 +5,63 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="vsp">
 <title>Interpreting factors with bff(), the Best Feature Function • vsp</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Interpreting factors with bff(), the Best Feature Function">
-<meta property="og:description" content="vsp">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Interpreting factors with bff(), the Best Feature Function">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">vsp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.2</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/bff.html">Interpreting factors with bff(), the Best Feature Function</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/bff.html">Interpreting factors with bff(), the Best Feature Function</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/RoheLab/vsp/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/RoheLab/vsp/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
 
 
-<script src="bff_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Interpreting factors with bff(), the Best Feature Function</h1>
+
+      <h1>Interpreting factors with bff(), the Best Feature Function</h1>
                         <h4 data-toc-skip class="author">Fan Chen</h4>
             
-            <h4 data-toc-skip class="date">2022-12-04</h4>
+            <h4 data-toc-skip class="date">2024-11-05</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/RoheLab/vsp/blob/HEAD/vignettes/bff.Rmd" class="external-link"><code>vignettes/bff.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/RoheLab/vsp/blob/main/vignettes/bff.Rmd" class="external-link"><code>vignettes/bff.Rmd</code></a></small>
       <div class="d-none name"><code>bff.Rmd</code></div>
     </div>
 
@@ -84,53 +70,194 @@
 <div class="section level2">
 <h2 id="intro">Intro<a class="anchor" aria-label="anchor" href="#intro"></a>
 </h2>
-<p>In post-clustering analysis, the Best Feature Function (BFF) is useful in selecting representative features for each cluster, especially in the case when additional covariates are available for each feature. For example, consider a social network of <span class="math inline">\(n\)</span> users partitioned into <span class="math inline">\(k\)</span> clusters, and each user possess a series of text document (covariates). We want to summarize words that are representative to each cluster. The BFF is suitable for this type of task.</p>
-<p>This document describes the intuition behind the BFF as a follow-up step after the <code>vsp</code> (vintage specral clustering) and touches several technical issues regarding implementation.</p>
+<p>In post-clustering analysis, the Best Feature Function (BFF) is
+useful in selecting representative features for each cluster, especially
+in the case when additional covariates are available for each feature.
+For example, consider a social network of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+users partitioned into
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+clusters, and each user possess a series of text document (covariates).
+We want to summarize words that are representative to each cluster. The
+BFF is suitable for this type of task.</p>
+<p>This document describes the intuition behind the BFF as a follow-up
+step after the <code>vsp</code> (vintage spectral clustering) and
+touches several technical issues regarding implementation.</p>
 </div>
 <div class="section level2">
 <h2 id="methodology">Methodology<a class="anchor" aria-label="anchor" href="#methodology"></a>
 </h2>
-<p>For simplicity, we consider a symmetric square input matrix (e.g., the adjacency matrix of an undirected graph); the analysis on rectangular input is also supported by <code><a href="../reference/bff.html">bff()</a></code>. Given a data matrix <span class="math inline">\(A \in \mathbb{R}^{n \times n}\)</span>, the <code>vsp</code> returns an approximation with factorization, <span class="math inline">\(ZBY^T\)</span>, where <span class="math inline">\(B \in \mathbb{R}^{k \times k}\)</span> is low-rank, and <span class="math inline">\(Y \in \mathbb{R}^{n \times k}\)</span> encodes the loadings of each feature (i.e., columns of <span class="math inline">\(A\)</span>) with respect to clusters. In particular, when <span class="math inline">\(A\)</span> is the adjacency matrix of an undirected Blockmodel graph, each row of <span class="math inline">\(Y\)</span> decodes the block (cluster) membership of the vertex (feature). Generally, the loading <span class="math inline">\(Y_{ij}\)</span> (for <span class="math inline">\(i=1,...,n\)</span> and <span class="math inline">\(j=1,...,k\)</span>) can be interpreted as an membership measure of the <span class="math inline">\(i\)</span>-th feature to the <span class="math inline">\(j\)</span>-th cluster. <!-- When normalized, it is also an estimator of mixed membership. --></p>
-<p>Now, suppose in addition that we have covariates on each feature, <span class="math inline">\(D \in \mathbb{R}^{n \times p}\)</span>, where <span class="math inline">\(p\)</span> is the dimension of covariates. For example, <span class="math inline">\(D\)</span> can be a document-term matrix, where all text data associated with <span class="math inline">\(i\)</span>-th (for <span class="math inline">\(i=1,...,n\)</span>) feature are pooled into a meta document, and <span class="math inline">\(p\)</span> under this circumstance is the size of corpus (i.e., total number of words/terms), and <span class="math inline">\(D_{il}\)</span> is the frequency of word <span class="math inline">\(l\)</span> (for <span class="math inline">\(l=1,...,p\)</span>) appearing in the <span class="math inline">\(i\)</span>-th document.</p>
-<p>The BFF then uses <span class="math inline">\(Y\)</span> and <span class="math inline">\(D\)</span> to produce an assessment of covariates “best” for each cluster. To start with, suppose both <span class="math inline">\(Y\)</span> and <span class="math inline">\(D\)</span> has only non-negative entries.Define the importance, <span class="math inline">\(I \in \mathbb{R}^{p \times k}\)</span>, of the <span class="math inline">\(l\)</span>-th covariate to the <span class="math inline">\(j\)</span>-th cluster by the average of <span class="math inline">\(l\)</span>-th covariate (the <span class="math inline">\(l\)</span>-th columns of <span class="math inline">\(D\)</span>), weighted by the <span class="math inline">\(j\)</span>-th column of <span class="math inline">\(Y\)</span>,</p>
-<p><span class="math display">\[I_{lj} = \sum_{j=1}^n D_{jl} Y_{ij}, \text{ for } l=1,...,p,i=1,...n,\]</span></p>
-<p>or compactly (side note: the cross product <span class="math inline">\(\langle D,Y \rangle\)</span> is defined as <span class="math inline">\(D^T Y\)</span> as in convention),</p>
-<p><span class="math display">\[I=\langle D,Y \rangle.\]</span></p>
-<p>As such, a higher value in <span class="math inline">\(I_{lj}\)</span> indicates more significant importance. BFF selects the “best” covariates for each cluster according to the <span class="math inline">\(j\)</span>-th (for <span class="math inline">\(j=1, ..., k\)</span>) column of <span class="math inline">\(I\)</span>.</p>
+<p>For simplicity, we consider a symmetric square input matrix (e.g.,
+the adjacency matrix of an undirected graph); the analysis on
+rectangular input is also supported by <code><a href="../reference/bff.html">bff()</a></code>. Given a data
+matrix
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow></msup></mrow><annotation encoding="application/x-tex">A \in \mathbb{R}^{n \times n}</annotation></semantics></math>,
+the <code>vsp</code> returns an approximation with factorization,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Z</mi><mi>B</mi><msup><mi>Y</mi><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">ZBY^T</annotation></semantics></math>,
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>k</mi><mo>×</mo><mi>k</mi></mrow></msup></mrow><annotation encoding="application/x-tex">B \in \mathbb{R}^{k \times k}</annotation></semantics></math>
+is low-rank, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>n</mi><mo>×</mo><mi>k</mi></mrow></msup></mrow><annotation encoding="application/x-tex">Y \in \mathbb{R}^{n \times k}</annotation></semantics></math>
+encodes the loadings of each feature (i.e., columns of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>)
+with respect to clusters. In particular, when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+is the adjacency matrix of an undirected block model graph, each row of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+decodes the block (cluster) membership of the vertex (feature).
+Generally, the loading
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Y</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">Y_{ij}</annotation></semantics></math>
+(for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">i=1,...,n</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">j=1,...,k</annotation></semantics></math>)
+can be interpreted as an membership measure of the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>-th
+feature to the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>-th
+cluster.
+<!-- When normalized, it is also an estimator of mixed membership. --></p>
+<p>Now, suppose in addition that we have covariates on each feature,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>n</mi><mo>×</mo><mi>p</mi></mrow></msup></mrow><annotation encoding="application/x-tex">D \in \mathbb{R}^{n \times p}</annotation></semantics></math>,
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
+is the dimension of covariates. For example,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+can be a document-term matrix, where all text data associated with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>-th
+(for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">i=1,...,n</annotation></semantics></math>)
+feature are pooled into a meta document, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
+under this circumstance is the size of corpus (i.e., total number of
+words/terms), and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>D</mi><mrow><mi>i</mi><mi>l</mi></mrow></msub><annotation encoding="application/x-tex">D_{il}</annotation></semantics></math>
+is the frequency of word
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>l</mi><annotation encoding="application/x-tex">l</annotation></semantics></math>
+(for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">l=1,...,p</annotation></semantics></math>)
+appearing in the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>-th
+document.</p>
+<p>The BFF then uses
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+to produce an assessment of covariates “best” for each cluster. To start
+with, suppose both
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+has only non-negative entries.Define the importance,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>p</mi><mo>×</mo><mi>k</mi></mrow></msup></mrow><annotation encoding="application/x-tex">I \in \mathbb{R}^{p \times k}</annotation></semantics></math>,
+of the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>l</mi><annotation encoding="application/x-tex">l</annotation></semantics></math>-th
+covariate to the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>-th
+cluster by the average of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>l</mi><annotation encoding="application/x-tex">l</annotation></semantics></math>-th
+covariate (the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>l</mi><annotation encoding="application/x-tex">l</annotation></semantics></math>-th
+columns of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>),
+weighted by the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>-th
+column of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mrow><mi>l</mi><mi>j</mi></mrow></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>D</mi><mrow><mi>j</mi><mi>l</mi></mrow></msub><msub><mi>Y</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>,</mo><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> for </mtext><mspace width="0.333em"></mspace></mrow><mi>l</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><mi>p</mi><mo>,</mo><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mi>n</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">I_{lj} = \sum_{j=1}^n D_{jl} Y_{ij}, \text{ for } l=1,...,p,i=1,...n,</annotation></semantics></math></p>
+<p>or compactly (side note: the cross product
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⟨</mo><mi>D</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">⟩</mo></mrow><annotation encoding="application/x-tex">\langle D,Y \rangle</annotation></semantics></math>
+is defined as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>D</mi><mi>T</mi></msup><mi>Y</mi></mrow><annotation encoding="application/x-tex">D^T Y</annotation></semantics></math>
+as in convention),</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo>=</mo><mo stretchy="false" form="prefix">⟨</mo><mi>D</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">⟩</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">I=\langle D,Y \rangle.</annotation></semantics></math></p>
+<p>As such, a higher value in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>I</mi><mrow><mi>l</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">I_{lj}</annotation></semantics></math>
+indicates more significant importance. BFF selects the “best” covariates
+for each cluster according to the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>-th
+(for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">j=1, ..., k</annotation></semantics></math>)
+column of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>.</p>
 </div>
 <div class="section level2">
 <h2 id="implementation">Implementation<a class="anchor" aria-label="anchor" href="#implementation"></a>
 </h2>
 <p>Below are a few notes on the implementation of BFF:</p>
 <ul>
-<li><p><strong>Positive skewness</strong>. When <span class="math inline">\(D\)</span> is a document-term matrix (a.k.a., bags of words), it holds that all elements are non-negative. However, there is absolutely no guarantee that <span class="math inline">\(Y\)</span> has all non-negative entries. This motivates the positive-skew transformation, i.e., we flip the signs of those columns of <span class="math inline">\(Y\)</span> that have negative sample third <a href="https://en.wikipedia.org/wiki/Moment_(mathematics)" class="external-link">moment</a>.</p></li>
-<li><p><strong>Handling negative elements</strong>. For now, we undergo a rather ad-hoc solution to the existence of negative elements in <span class="math inline">\(Y\)</span> – pretending they have little effects. In the above importance calculation, negative weights (<span class="math inline">\(Y_{ij}&lt;0\)</span>) are equally treated as <span class="math inline">\(-1\)</span>. In other words, the negative elements result in some subtractions/reduction/contraction in the importance metrics.</p></li>
-<li><p><strong>Weight normalization</strong>. In BFF, we utilize the <span class="math inline">\(Y\)</span> matrix as a way of weighting covariates (in <span class="math inline">\(D\)</span>). It is therefore natrual to expect the columns of <span class="math inline">\(Y\)</span> to be (akin to) some probability distributions, i.e., the probability to select one member from the cluster at random. Recall also that the columns of <span class="math inline">\(Y\)</span> all have (or close to) unit <span class="math inline">\(\ell_2\)</span>-norm. Hence, additional transformation is needed: we normalized <span class="math inline">\(Y\)</span> by column. In particular, this is done separately for positive and negative elements.</p></li>
-<li><p><strong>Variance stabilization</strong>. If we model <span class="math inline">\(I_{lj}\)</span> with Poisson rate model <span class="math inline">\(\text{Poisson}(\lambda_{lj})\)</span>, the sample mean and variance are coupled (i.e., both have the expectation of <span class="math inline">\(\lambda_{lj}\)</span>). In order to standardize our importance measure <span class="math inline">\(I\)</span>, we need to decouple these two statistics. Performing a square-root transformation, <span class="math inline">\(f(x)=\sqrt{x}\)</span>, does the trick; it stabilizes the sampling variance, which becomes nearly constant.</p></li>
+<li><p><strong>Positive skewness</strong>. When
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+is a document-term matrix (a.k.a., bags of words), it holds that all
+elements are non-negative. However, there is absolutely no guarantee
+that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+has all non-negative entries. This motivates the positive-skew
+transformation, i.e., we flip the signs of those columns of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+that have negative sample third <a href="https://en.wikipedia.org/wiki/Moment_(mathematics)" class="external-link">moment</a>.</p></li>
+<li><p><strong>Handling negative elements</strong>. For now, we undergo
+a rather ad-hoc solution to the existence of negative elements in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+– pretending they have little effects. In the above importance
+calculation, negative weights
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Y_{ij}&lt;0</annotation></semantics></math>)
+are equally treated as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math>.
+In other words, the negative elements result in some
+subtractions/reduction/contraction in the importance metrics.</p></li>
+<li><p><strong>Weight normalization</strong>. In BFF, we utilize the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+matrix as a way of weighting covariates (in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>).
+It is therefore natrual to expect the columns of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+to be (akin to) some probability distributions, i.e., the probability to
+select one member from the cluster at random. Recall also that the
+columns of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+all have (or close to) unit
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mo>ℓ</mo><mn>2</mn></msub><annotation encoding="application/x-tex">\ell_2</annotation></semantics></math>-norm.
+Hence, additional transformation is needed: we normalized
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+by column. In particular, this is done separately for positive and
+negative elements.</p></li>
+<li><p><strong>Variance stabilization</strong>. If we model
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>I</mi><mrow><mi>l</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">I_{lj}</annotation></semantics></math>
+with Poisson rate model
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Poisson</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>λ</mi><mrow><mi>l</mi><mi>j</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Poisson}(\lambda_{lj})</annotation></semantics></math>,
+the sample mean and variance are coupled (i.e., both have the
+expectation of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>λ</mi><mrow><mi>l</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">\lambda_{lj}</annotation></semantics></math>).
+In order to standardize our importance measure
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>,
+we need to decouple these two statistics. Performing a square-root
+transformation,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msqrt><mi>x</mi></msqrt></mrow><annotation encoding="application/x-tex">f(x)=\sqrt{x}</annotation></semantics></math>,
+does the trick; it stabilizes the sampling variance, which becomes
+nearly constant.</p></li>
 </ul>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Karl Rohe, Muzhe Zeng, <a href="https://alexpghayes.com" class="external-link">Alex Hayes</a>, Fan Chen.</p>
+  <p>Developed by Karl Rohe, Muzhe Zeng, <a href="https://alexpghayes.com" class="external-link">Alex Hayes</a>, Fan Chen.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

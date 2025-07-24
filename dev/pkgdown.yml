@@ -1,9 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   bff: bff.html
-last_built: 2024-11-04T22:00Z
+last_built: 2025-07-24T15:30Z
 urls:
   reference: https://rohelab.github.io/vsp/reference
   article: https://rohelab.github.io/vsp/articles

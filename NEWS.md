@@ -1,5 +1,7 @@
 # vsp (development version)
 
+- Re-submission per CRAN request
+
 # vsp 0.1.2
 
 - Default to using `clue` to heuristically align `Z` and `Y` factors (use `match_columns = FALSE` for previous behavior)

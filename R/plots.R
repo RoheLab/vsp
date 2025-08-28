@@ -45,7 +45,7 @@ plot_varimax_z_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
     dplyr::mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
-    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
+    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2 + 1e-10) %>%
     dplyr::select(-leverage) %>%
     GGally::ggpairs(ggplot2::aes(alpha = 0.001), ...) +
     ggplot2::theme_minimal()
@@ -65,7 +65,7 @@ plot_varimax_y_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
     dplyr::mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
-    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
+    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2 + 1e-10) %>%
     dplyr::select(-leverage) %>%
     GGally::ggpairs(ggplot2::aes(alpha = 0.001), ...) +
     ggplot2::theme_minimal()

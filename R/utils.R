@@ -10,6 +10,26 @@
 #' @usage lhs \%>\% rhs
 NULL
 
+
+as_csparse <- function(graph, ...) {
+  UseMethod("as_csparse")
+}
+
+as_csparse.Matrix <- function(graph, ...) {
+  methods::as(graph, "CsparseMatrix")
+}
+
+as_csparse.igraph <- function(graph, ..., edge_weights = NULL) {
+
+  if (igraph::is.bipartite(graph)) {
+    A <- igraph::as_incidence_matrix(graph, sparse = TRUE, attr = edge_weights)
+  } else {
+    A <- igraph::as_adjacency_matrix(graph, sparse = TRUE, attr = edge_weights)
+  }
+
+  methods::as(A, "CsparseMatrix")
+}
+
 left_padded_sequence <- function(x) {
 
   original <- withr::with_options(

@@ -7,9 +7,9 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/RoheLab/vsp/branch/main/graph/badge.svg)](https://app.codecov.io/gh/RoheLab/vsp?branch=main)
-[![R-CMD-check](https://github.com/RoheLab/vsp/workflows/R-CMD-check/badge.svg)](https://github.com/RoheLab/vsp/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/vsp)](https://CRAN.R-project.org/package=vsp)
+[![R-CMD-check](https://github.com/RoheLab/vsp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/RoheLab/vsp/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `vsp` is to enable fast, spectral estimation of latent
@@ -79,9 +79,9 @@ fa
 #> Lambda[rank]:   0.2077
 #> Components
 #> 
-#> Z: 184 x 30 [dgeMatrix] 
-#> B: 30 x 30 [dgeMatrix] 
-#> Y: 184 x 30 [dgeMatrix] 
+#> Z: 184 x 30 [matrix] 
+#> B: 30 x 30 [matrix] 
+#> Y: 184 x 30 [matrix] 
 #> u: 184 x 30 [matrix] 
 #> d: 30      [numeric] 
 #> v: 184 x 30 [matrix]
@@ -102,10 +102,11 @@ get_varimax_z(fa)
 #>  8 row0…  1.58e-2 -0.0518  -1.34e-2 -1.03e-2 -4.12e-3 -0.0139   0.225   -0.0244 
 #>  9 row0…  2.22e-3  0.0752   3.30e-2 -6.50e-4 -5.00e-1 -0.0278  -0.0740  -0.00556
 #> 10 row0…  7.13e-4 -0.0119   1.95e-2 -5.06e-3 -7.08e-3  0.00341 -0.00369 13.4    
-#> # … with 174 more rows, and 22 more variables: z09 <dbl>, z10 <dbl>, z11 <dbl>,
-#> #   z12 <dbl>, z13 <dbl>, z14 <dbl>, z15 <dbl>, z16 <dbl>, z17 <dbl>,
-#> #   z18 <dbl>, z19 <dbl>, z20 <dbl>, z21 <dbl>, z22 <dbl>, z23 <dbl>,
-#> #   z24 <dbl>, z25 <dbl>, z26 <dbl>, z27 <dbl>, z28 <dbl>, z29 <dbl>, z30 <dbl>
+#> # ℹ 174 more rows
+#> # ℹ 22 more variables: z09 <dbl>, z10 <dbl>, z11 <dbl>, z12 <dbl>, z13 <dbl>,
+#> #   z14 <dbl>, z15 <dbl>, z16 <dbl>, z17 <dbl>, z18 <dbl>, z19 <dbl>,
+#> #   z20 <dbl>, z21 <dbl>, z22 <dbl>, z23 <dbl>, z24 <dbl>, z25 <dbl>,
+#> #   z26 <dbl>, z27 <dbl>, z28 <dbl>, z29 <dbl>, z30 <dbl>
 ```
 
 To visualize a screeplot of the singular value, use:
@@ -148,8 +149,10 @@ plot_mixing_matrix(fa)
 
 ## References
 
-1.  Rohe, K. & Zeng, M. *Vintage Factor Analysis with Varimax Performs
-    Statistical Inference*. 2022+. <https://arxiv.org/abs/2004.05387>.
+\[1\] Rohe, Karl, and Muzhe Zeng. “Vintage Factor Analysis with Varimax
+Performs Statistical Inference.” Journal of the Royal Statistical
+Society Series B: Statistical Methodology 85, no. 4 (September 29,
+2023): 1037–60. <https://doi.org/10.1093/jrsssb/qkad029>.
 
 Code to reproduce the results from the paper is [available
 here](https://github.com/RoheLab/vsp-paper).

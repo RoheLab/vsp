@@ -33,7 +33,7 @@ and topics interact. Does not have to be diagonal!}
 \item{Y}{A \emph{matrix} describing the compositions of various topics
 or factors.}
 
-\item{transformers}{A list of transformatioms from the \link{invertiforms}
+\item{transformers}{A list of transformations from the \code{invertiforms}
 package.}
 
 \item{R_U}{Varimax rotation matrix use to transform \code{u} into \code{Z}.}

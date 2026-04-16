@@ -11,7 +11,7 @@
 #'
 #' @param v A [matrix()] of "right singular-ish" vectors.
 #'
-#' @param transformers A list of transformatioms from the [invertiforms]
+#' @param transformers A list of transformations from the `invertiforms`
 #'   package.
 #'
 #' @param R_U Varimax rotation matrix use to transform `u` into `Z`.

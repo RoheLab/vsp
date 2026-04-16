@@ -15,6 +15,24 @@
 #'
 #' @export
 #'
+#' @examples
+#'
+#' data(enron, package = "igraphdata")
+#'
+#' fa <- vsp(enron, rank = 3)
+#'
+#' plot_varimax_z_pairs(fa)
+#' plot_varimax_y_pairs(fa)
+#'
+#' plot_svd_u(fa)
+#' plot_svd_v(fa)
+#'
+#' screeplot(fa)
+#'
+#' plot_mixing_matrix(fa)
+#'
+#' plot_ipr_pairs(fa)
+#'
 plot_varimax_z_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
 
   stop_if_not_installed("dplyr")
@@ -27,7 +45,7 @@ plot_varimax_z_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
     dplyr::mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
-    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
+    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2 + 1e-10) %>%
     dplyr::select(-leverage) %>%
     GGally::ggpairs(ggplot2::aes(alpha = 0.001), ...) +
     ggplot2::theme_minimal()
@@ -47,7 +65,7 @@ plot_varimax_y_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
     dplyr::mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
-    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
+    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2 + 1e-10) %>%
     dplyr::select(-leverage) %>%
     GGally::ggpairs(ggplot2::aes(alpha = 0.001), ...) +
     ggplot2::theme_minimal()
@@ -68,7 +86,7 @@ plot_svd_u <- function(fa, factors = 1:min(5, fa$rank)) {
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
     dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
-    dplyr::mutate(node = row_number()) %>%
+    dplyr::mutate(node = dplyr::row_number()) %>%
     tidyr::gather(eigen, value, -node) %>%
     ggplot2::ggplot(ggplot2::aes(node, value)) +
     ggplot2::geom_line() +
@@ -92,7 +110,7 @@ plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
     dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
-    dplyr::mutate(node = row_number()) %>%
+    dplyr::mutate(node = dplyr::row_number()) %>%
     tidyr::gather(eigen, value, -node) %>%
     ggplot2::ggplot(ggplot2::aes(node, value)) +
     ggplot2::geom_line() +

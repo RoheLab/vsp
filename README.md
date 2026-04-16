@@ -62,7 +62,7 @@ data(enron, package = "igraphdata")
 image(sign(get.adjacency(enron, sparse = FALSE)))
 ```
 
-<img src="man/figures/README-unnamed-chunk-1-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-1-1.png" alt="" width="100%" />
 
 Now we estimate:
 
@@ -115,7 +115,7 @@ To visualize a screeplot of the singular value, use:
 screeplot(fa)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" alt="" width="100%" />
 
 At the moment, we also enjoy using pairs plots of the factors as a
 diagnostic measure:
@@ -124,13 +124,13 @@ diagnostic measure:
 plot_varimax_z_pairs(fa, 1:5)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" alt="" width="100%" />
 
 ``` r
 plot_varimax_y_pairs(fa, 1:5)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" alt="" width="100%" />
 
 Similarly, an IPR pairs plot can be a good way to check for singular
 vector localization (and thus overfitting!).
@@ -139,13 +139,13 @@ vector localization (and thus overfitting!).
 plot_ipr_pairs(fa)
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" alt="" width="100%" />
 
 ``` r
 plot_mixing_matrix(fa)
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" alt="" width="100%" />
 
 ## References
 

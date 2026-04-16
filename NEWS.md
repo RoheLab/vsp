@@ -1,3 +1,5 @@
+# vsp 0.1.4
+
 # vsp 0.1.3.9000
 
 - Improve compatibility with `RSpectra` (#78)

@@ -1,5 +1,7 @@
 # vsp 0.1.3
 
+# vsp 0.1.3
+
 - Re-submission per CRAN request
 
 # vsp 0.1.2

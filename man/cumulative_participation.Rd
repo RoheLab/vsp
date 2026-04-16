@@ -2,13 +2,16 @@
 % Please edit documentation in R/localization.R
 \name{cumulative_participation}
 \alias{cumulative_participation}
-\title{Title}
+\title{Calculate cumulative participation of a set of singular vectors.}
 \usage{
 cumulative_participation(U)
 }
 \arguments{
-\item{U}{}
+\item{U}{A matrix of singular vectors.}
+}
+\value{
+A scalar numeric value representing the cumulative participation.
 }
 \description{
-Title
+Calculate cumulative participation of a set of singular vectors.
 }

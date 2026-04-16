@@ -21,37 +21,40 @@ Depends:
     R (>= 3.1)
 Imports:
     clue,
+    dplyr,
+    furrr,
     ggplot2,
     glue,
+    igraph,
     invertiforms,
     LRMF3,
     magrittr,
     Matrix,
+    methods,
+    purrr,
     rlang,
     RSpectra,
+    scales,
     stats,
     tibble,
+    tidyselect,
+    tidyr,
     withr
 Suggests: 
     covr,
-    dplyr,
     GGally,
-    igraph,
     igraphdata,
     knitr,
-    purrr,
     rmarkdown,
-    scales,
     testthat (>= 3.0.0),
-    tidygraph,
-    tidyr
+    tidygraph
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Collate: 
     'accessors.R'
     'bff.R'

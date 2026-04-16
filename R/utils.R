@@ -15,10 +15,12 @@ as_csparse <- function(graph, ...) {
   UseMethod("as_csparse")
 }
 
+#' @export
 as_csparse.Matrix <- function(graph, ...) {
   methods::as(graph, "CsparseMatrix")
 }
 
+#' @export
 as_csparse.igraph <- function(graph, ..., edge_weights = NULL) {
 
   if (igraph::is.bipartite(graph)) {
@@ -75,24 +77,35 @@ safe_row_l2_normalize <- function(x, eps = 1e-10) {
 utils::globalVariables(
   c(
     ".",
+    ".x",
+    "A",
+    "L_tau",
     "activate",
     "arrange",
+    "cum_u",
+    "cum_v",
     "desc",
     "element",
     "gather",
     "group_by",
+    "i",
     "id",
     "importance",
+    "ipr",
     "leverage",
     "loading",
     "mutate",
+    "name",
     "node",
     "nodes",
     "pivot_longer",
     "pivot_wider",
     "row_number",
+    "s",
     "sample_n",
+    "scaler",
     "select",
+    "tau",
     "top_n",
     "ungroup",
     "value",

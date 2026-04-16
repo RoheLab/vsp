@@ -2,7 +2,7 @@
 % Please edit documentation in R/localization.R
 \name{localization_statistics}
 \alias{localization_statistics}
-\title{Title}
+\title{Compute localization statistics across various regularization parameters.}
 \usage{
 localization_statistics(
   graph,
@@ -14,19 +14,32 @@ localization_statistics(
 )
 }
 \arguments{
-\item{num_tau}{}
+\item{graph}{An igraph object or a sparse matrix.}
+
+\item{max_rank}{The maximum number of singular vectors to compute.}
+
+\item{...}{Additional arguments passed to as_csparse.}
+
+\item{tau_min}{The minimum value for the regularization parameter tau.}
+
+\item{tau_max}{The maximum value for the regularization parameter tau.}
+
+\item{num_tau}{The number of values of tau to test.}
+}
+\value{
+A list of class \code{localization_stats} containing the results.
 }
 \description{
-Title
+Compute localization statistics across various regularization parameters.
 }
 \examples{
-
+\dontrun{
 library(igraphdata)
 library(furrr)
 
 data(karate, package = "igraphdata")
 
-plan(multicore, workers = 10)
+plan(multisession, workers = 2)
 
 # karate is undirected, enron is directed
 
@@ -34,5 +47,5 @@ stats <- localization_statistics(karate, max_rank = 15, num_tau = 200)
 
 plot_cumulative_curves(stats)
 plot_ipr_curves(stats)
-
+}
 }

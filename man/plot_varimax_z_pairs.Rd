@@ -33,7 +33,7 @@ By default returns all factors/singular vectors.}
     \item{\code{upper}}{see Details}
     \item{\code{lower}}{see Details}
     \item{\code{diag}}{see Details}
-    \item{\code{params}}{deprecated.  Please see \code{\link[GGally]{wrap_fn_with_param_arg}}}
+    \item{\code{params}}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{\link[GGally]{wrap_fn_with_param_arg}}}
     \item{\code{axisLabels}}{either "show" to display axisLabels, "internal" for labels in the diagonal plots, or "none" for no axis labels}
     \item{\code{columnLabels}}{label names to be displayed.  Defaults to names of columns being used.}
     \item{\code{labeller}}{labeller for facets. See \code{\link[ggplot2]{labellers}}. Common values are \code{"label_value"} (default) and \code{"label_parsed"}.}
@@ -43,7 +43,7 @@ By default returns all factors/singular vectors.}
     \item{\code{cardinality_threshold}}{maximum number of levels allowed in a character / factor column.  Set this value to NULL to not check factor columns. Defaults to 15}
     \item{\code{progress}}{\code{NULL} (default) for a progress bar in interactive sessions with more than 15 plots, \code{TRUE} for a progress bar, \code{FALSE} for no progress bar, or a function that accepts at least a plot matrix and returns a new \code{progress::\link[progress]{progress_bar}}.  See \code{\link[GGally]{ggmatrix_progress}}.}
     \item{\code{proportions}}{Value to change how much area is given for each plot. Either \code{NULL} (default), numeric value matching respective length, \code{grid::\link[grid]{unit}} object with matching respective length or \code{"auto"} for automatic relative proportions based on the number of levels for categorical variables.}
-    \item{\code{legends}}{deprecated}
+    \item{\code{legends}}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
   }}
 }
 \value{

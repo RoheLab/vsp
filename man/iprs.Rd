@@ -2,13 +2,16 @@
 % Please edit documentation in R/localization.R
 \name{iprs}
 \alias{iprs}
-\title{Title}
+\title{Calculate IPR for all singular vectors in a list.}
 \usage{
 iprs(s)
 }
 \arguments{
-\item{s}{}
+\item{s}{A list containing \code{u} and \code{v} matrices of singular vectors.}
+}
+\value{
+A tibble with IPR values for each singular vector in \code{u} and \code{v}.
 }
 \description{
-Title
+Calculate IPR for all singular vectors in a list.
 }

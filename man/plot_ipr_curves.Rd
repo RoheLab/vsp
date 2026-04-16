@@ -2,13 +2,21 @@
 % Please edit documentation in R/localization.R
 \name{plot_ipr_curves}
 \alias{plot_ipr_curves}
-\title{Title}
+\title{Plot IPR curves.}
 \usage{
 plot_ipr_curves(localization, indices = NULL)
 }
 \arguments{
-\item{indices}{}
+\item{localization}{A \code{localization_stats} object.}
+
+\item{indices}{A vector of integers specifying which singular vectors to plot.}
+}
+\value{
+A \code{ggplot2} object.
 }
 \description{
-Title
+Plot IPR curves.
+}
+\examples{
+# See localization_statistics for examples
 }

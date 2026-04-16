@@ -1,30 +1,30 @@
-#' Title
+#' Calculate cumulative participation of a set of singular vectors.
 #'
-#' @param U
+#' @param U A matrix of singular vectors.
 #'
-#' @return
+#' @return A scalar numeric value representing the cumulative participation.
 #' @export
 #'
 cumulative_participation <- function(U) {
   sum(rowSums(U^2)^2)
 }
 
-#' Title
+#' Calculate the inverse participation ratio (IPR) for a vector.
 #'
-#' @param x
+#' @param x A numeric vector.
 #'
-#' @return
+#' @return A scalar numeric value representing the IPR.
 #' @export
 #'
 ipr <- function(x) {
   sum(x^4)
 }
 
-#' Title
+#' Calculate IPR for all singular vectors in a list.
 #'
-#' @param s
+#' @param s A list containing `u` and `v` matrices of singular vectors.
 #'
-#' @return
+#' @return A tibble with IPR values for each singular vector in `u` and `v`.
 #' @export
 #'
 iprs <- function(s) {
@@ -35,27 +35,27 @@ iprs <- function(s) {
   )
 }
 
-#' Title
+#' Compute localization statistics across various regularization parameters.
 #'
-#' @param graph
-#' @param max_rank
-#' @param ...
-#' @param tau_min
-#' @param tau_max
-#' @param num_tau
+#' @param graph An igraph object or a sparse matrix.
+#' @param max_rank The maximum number of singular vectors to compute.
+#' @param ... Additional arguments passed to as_csparse.
+#' @param tau_min The minimum value for the regularization parameter tau.
+#' @param tau_max The maximum value for the regularization parameter tau.
+#' @param num_tau The number of values of tau to test.
 #'
-#' @return
+#' @return A list of class `localization_stats` containing the results.
 #' @export
 #' @include utils.R
 #'
 #' @examples
-#'
+#' \dontrun{
 #' library(igraphdata)
 #' library(furrr)
 #'
 #' data(karate, package = "igraphdata")
 #'
-#' plan(multicore, workers = 10)
+#' plan(multisession, workers = 2)
 #'
 #' # karate is undirected, enron is directed
 #'
@@ -63,7 +63,7 @@ iprs <- function(s) {
 #'
 #' plot_cumulative_curves(stats)
 #' plot_ipr_curves(stats)
-#'
+#' }
 localization_statistics <- function(graph, max_rank, ..., tau_min = 10^-2, tau_max = 10^4, num_tau = 50) {
 
   stop_if_not_installed("invertiforms")
@@ -103,43 +103,45 @@ localization_statistics <- function(graph, max_rank, ..., tau_min = 10^-2, tau_m
   localization
 }
 
-#' Title
+#' Plot cumulative participation curves.
 #'
-#' @param stats
+#' @param localization A `localization_stats` object.
 #'
-#' @return
+#' @return A `ggplot2` object.
 #' @export
 #'
 #' @examples
+#' # See localization_statistics for examples
 plot_cumulative_curves <- function(localization) {
   localization$stats %>%
-    tidyr::pivot_longer(contains("cum")) %>%
+    tidyr::pivot_longer(tidyselect::contains("cum")) %>%
     dplyr::mutate(
       name = dplyr::if_else(name == "cum_u", "U (left)", "V (right)")
     ) |>
-    ggplot() +
-    aes(x = tau, y = value, color = name) +
-    geom_line() +
-    scale_x_log10(
+    ggplot2::ggplot() +
+    ggplot2::aes(x = tau, y = value, color = name) +
+    ggplot2::geom_line() +
+    ggplot2::scale_x_log10(
       breaks = scales::trans_breaks("log10", function(x) 10^x),
       labels = scales::trans_format("log10", scales::math_format(10^.x))
     ) +
-    labs(
+    ggplot2::labs(
       y = "Cumulative participation",
       x = "Regularization parameter (tau)",
       color = "Singular vectors"
     )
 }
 
-#' Title
+#' Plot IPR curves.
 #'
-#' @param stats
-#' @param indices
+#' @param localization A `localization_stats` object.
+#' @param indices A vector of integers specifying which singular vectors to plot.
 #'
-#' @return
+#' @return A `ggplot2` object.
 #' @export
 #'
 #' @examples
+#' # See localization_statistics for examples
 plot_ipr_curves <- function(localization, indices = NULL) {
 
   if (is.null(indices)) {
@@ -148,24 +150,24 @@ plot_ipr_curves <- function(localization, indices = NULL) {
   }
 
   localization$stats %>%
-    dplyr::filter(i %in% indices) |>
-    tidyr::pivot_longer(contains("ipr")) %>%
+    dplyr::filter(i %in% indices) %>%
+    tidyr::pivot_longer(tidyselect::contains("ipr")) %>%
     dplyr::mutate(
       name = dplyr::if_else(name == "ipr_u", "U (left)", "V (right)")
     ) |>
-    ggplot() +
-    aes(x = tau, y = value, color = name) +
-    geom_line() +
-    scale_x_log10(
+    ggplot2::ggplot() +
+    ggplot2::aes(x = tau, y = value, color = name) +
+    ggplot2::facet_wrap(~i) +
+    ggplot2::geom_line() +
+    ggplot2::scale_x_log10(
       breaks = scales::trans_breaks("log10", function(x) 10^x),
       labels = scales::trans_format("log10", scales::math_format(10^.x))
     ) +
-    labs(
-      y = "Inverse participation ratio",
+    ggplot2::labs(
+      y = "Inverse participation ratio (IPR)",
       x = "Regularization parameter (tau)",
       color = "Singular vectors"
-    ) +
-    facet_grid(rows = vars(i))
+    )
 }
 
 

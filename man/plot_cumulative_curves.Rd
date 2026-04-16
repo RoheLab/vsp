@@ -2,13 +2,19 @@
 % Please edit documentation in R/localization.R
 \name{plot_cumulative_curves}
 \alias{plot_cumulative_curves}
-\title{Title}
+\title{Plot cumulative participation curves.}
 \usage{
 plot_cumulative_curves(localization)
 }
 \arguments{
-\item{stats}{}
+\item{localization}{A \code{localization_stats} object.}
+}
+\value{
+A \code{ggplot2} object.
 }
 \description{
-Title
+Plot cumulative participation curves.
+}
+\examples{
+# See localization_statistics for examples
 }

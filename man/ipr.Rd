@@ -2,13 +2,16 @@
 % Please edit documentation in R/localization.R
 \name{ipr}
 \alias{ipr}
-\title{Title}
+\title{Calculate the inverse participation ratio (IPR) for a vector.}
 \usage{
 ipr(x)
 }
 \arguments{
-\item{x}{}
+\item{x}{A numeric vector.}
+}
+\value{
+A scalar numeric value representing the IPR.
 }
 \description{
-Title
+Calculate the inverse participation ratio (IPR) for a vector.
 }

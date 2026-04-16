@@ -26,3 +26,10 @@ reference:
 - title: "Plotting"
   contents:
   - contains("plot")
+- title: "Localization heuristics"
+  contents:
+  - "ipr"
+  - "iprs"
+  - "cumulative_participation"
+  - "localization_statistics"
+  

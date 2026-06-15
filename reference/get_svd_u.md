@@ -46,6 +46,7 @@ requested factor or singular vector, plus an additional `id` column.
 ## Examples
 
 ``` r
+
 data(enron, package = "igraphdata")
 
 fa <- vsp(enron, rank = 30)

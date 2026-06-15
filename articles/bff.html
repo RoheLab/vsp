@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Interpreting factors with bff(), the Best Feature Function • vsp</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Interpreting factors with bff(), the Best Feature Function">
 </head>
@@ -59,7 +59,7 @@
       <h1>Interpreting factors with bff(), the Best Feature Function</h1>
                         <h4 data-toc-skip class="author">Fan Chen</h4>
             
-            <h4 data-toc-skip class="date">2026-04-16</h4>
+            <h4 data-toc-skip class="date">2026-06-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/RoheLab/vsp/blob/main/vignettes/bff.Rmd" class="external-link"><code>vignettes/bff.Rmd</code></a></small>
       <div class="d-none name"><code>bff.Rmd</code></div>
@@ -203,7 +203,7 @@ a rather ad-hoc solution to the existence of negative elements in
 calculation, negative weights
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Y_{ij}&lt;0</annotation></semantics></math>)
 are equally treated as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math>.
 In other words, the negative elements result in some
 subtractions/reduction/contraction in the importance metrics.</p></li>
 <li><p><strong>Weight normalization</strong>. In BFF, we utilize the
@@ -217,7 +217,7 @@ select one member from the cluster at random. Recall also that the
 columns of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
 all have (or close to) unit
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mo>ℓ</mo><mn>2</mn></msub><annotation encoding="application/x-tex">\ell_2</annotation></semantics></math>-norm.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℓ</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\ell_2</annotation></semantics></math>-norm.
 Hence, additional transformation is needed: we normalized
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
 by column. In particular, this is done separately for positive and
@@ -225,7 +225,7 @@ negative elements.</p></li>
 <li><p><strong>Variance stabilization</strong>. If we model
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>I</mi><mrow><mi>l</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">I_{lj}</annotation></semantics></math>
 with Poisson rate model
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Poisson</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>λ</mi><mrow><mi>l</mi><mi>j</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Poisson}(\lambda_{lj})</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Poisson</mtext><mo stretchy="false" form="prefix">(</mo><msub><mi>λ</mi><mrow><mi>l</mi><mi>j</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\text{Poisson}(\lambda_{lj})</annotation></semantics></math>,
 the sample mean and variance are coupled (i.e., both have the
 expectation of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>λ</mi><mrow><mi>l</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">\lambda_{lj}</annotation></semantics></math>).
@@ -233,7 +233,7 @@ In order to standardize our importance measure
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>,
 we need to decouple these two statistics. Performing a square-root
 transformation,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msqrt><mi>x</mi></msqrt></mrow><annotation encoding="application/x-tex">f(x)=\sqrt{x}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msqrt><mi>x</mi></msqrt></mrow><annotation encoding="application/x-tex">f(x)=\sqrt{x}</annotation></semantics></math>,
 does the trick; it stabilizes the sampling variance, which becomes
 nearly constant.</p></li>
 </ul>

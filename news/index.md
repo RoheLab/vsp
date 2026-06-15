@@ -2,6 +2,8 @@
 
 ## vsp 0.1.4
 
+CRAN release: 2026-04-16
+
 ## vsp 0.1.3.9000
 
 - Improve compatibility with `RSpectra`

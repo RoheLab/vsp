@@ -90,6 +90,7 @@ vsp(
 ## Examples
 
 ``` r
+
 library(LRMF3)
 library(RSpectra)
 

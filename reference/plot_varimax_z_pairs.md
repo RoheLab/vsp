@@ -167,6 +167,7 @@ plot.
 ## Examples
 
 ``` r
+
 data(enron, package = "igraphdata")
 
 fa <- vsp(enron, rank = 3)

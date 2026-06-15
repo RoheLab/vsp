@@ -50,6 +50,7 @@ where each row corresponds to a single hub, and three columns:
 ## Examples
 
 ``` r
+
 data(enron, package = "igraphdata")
 
 fa <- vsp(enron, rank = 30)

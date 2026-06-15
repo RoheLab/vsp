@@ -22,12 +22,14 @@ graphs. Note that `vsp` is a semi-parametric estimator.
 You can install the released version of `vsp` from CRAN with
 
 ``` r
+
 install.packages("vsp")
 ```
 
 You can install the development version of `vsp` with:
 
 ``` r
+
 install.packages("devtools")
 devtools::install_github("RoheLab/vsp")
 ```
@@ -47,6 +49,7 @@ network from `igraphdata` package to demonstrate this functionality.
 First we peak at the graph:
 
 ``` r
+
 library(igraph)
 data(enron, package = "igraphdata")
 
@@ -58,6 +61,7 @@ image(sign(get.adjacency(enron, sparse = FALSE)))
 Now we estimate:
 
 ``` r
+
 library(vsp)
 
 fa <- vsp(enron, rank = 30)
@@ -79,6 +83,7 @@ fa
 ```
 
 ``` r
+
 get_varimax_z(fa)
 #> # A tibble: 184 × 31
 #>    id         z01      z02      z03      z04      z05      z06      z07      z08
@@ -103,6 +108,7 @@ get_varimax_z(fa)
 To visualize a screeplot of the singular value, use:
 
 ``` r
+
 screeplot(fa)
 ```
 
@@ -112,12 +118,14 @@ At the moment, we also enjoy using pairs plots of the factors as a
 diagnostic measure:
 
 ``` r
+
 plot_varimax_z_pairs(fa, 1:5)
 ```
 
 ![](reference/figures/README-unnamed-chunk-5-1.png)
 
 ``` r
+
 plot_varimax_y_pairs(fa, 1:5)
 ```
 
@@ -127,12 +135,14 @@ Similarly, an IPR pairs plot can be a good way to check for singular
 vector localization (and thus overfitting!).
 
 ``` r
+
 plot_ipr_pairs(fa)
 ```
 
 ![](reference/figures/README-unnamed-chunk-7-1.png)
 
 ``` r
+
 plot_mixing_matrix(fa)
 ```
 

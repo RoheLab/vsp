@@ -162,6 +162,7 @@ Sparse SVDs use `RSpectra` for performance.
 ## Examples
 
 ``` r
+
 library(LRMF3)
 #> Loading required package: Matrix
 

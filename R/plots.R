@@ -1,4 +1,3 @@
-
 #' Create a pairs plot of select Y factors
 #'
 #' To avoid overplotting, plots data for a maximum of 1000 nodes. If there
@@ -34,7 +33,6 @@
 #' plot_ipr_pairs(fa)
 #'
 plot_varimax_z_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
-
   stop_if_not_installed("dplyr")
   stop_if_not_installed("GGally")
   stop_if_not_installed("purrr")
@@ -54,7 +52,6 @@ plot_varimax_z_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
 #' @describeIn plot_varimax_z_pairs Create a pairs plot of select Z factors
 #' @export
 plot_varimax_y_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
-
   stop_if_not_installed("dplyr")
   stop_if_not_installed("GGally")
   stop_if_not_installed("purrr")
@@ -74,7 +71,6 @@ plot_varimax_y_pairs <- function(fa, factors = 1:min(5, fa$rank), ...) {
 #' @describeIn plot_varimax_z_pairs Create a pairs plot of select left singular vectors
 #' @export
 plot_svd_u <- function(fa, factors = 1:min(5, fa$rank)) {
-
   stop_if_not_installed("dplyr")
   stop_if_not_installed("ggplot2")
   stop_if_not_installed("tidyr")
@@ -85,7 +81,7 @@ plot_svd_u <- function(fa, factors = 1:min(5, fa$rank)) {
     dplyr::mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
-    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
+    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2 + 1e-10) %>%
     dplyr::mutate(node = dplyr::row_number()) %>%
     tidyr::gather(eigen, value, -node) %>%
     ggplot2::ggplot(ggplot2::aes(node, value)) +
@@ -98,7 +94,6 @@ plot_svd_u <- function(fa, factors = 1:min(5, fa$rank)) {
 #' @describeIn plot_varimax_z_pairs Create a pairs plot of select right singular vectors
 #' @export
 plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
-
   stop_if_not_installed("dplyr")
   stop_if_not_installed("scales")
   stop_if_not_installed("tidyr")
@@ -109,7 +104,7 @@ plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
     dplyr::mutate(
       leverage = purrr::pmap_dbl(., sum)
     ) %>%
-    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2) %>%
+    dplyr::sample_n(min(nrow(.), 1000), weight = leverage^2 + 1e-10) %>%
     dplyr::mutate(node = dplyr::row_number()) %>%
     tidyr::gather(eigen, value, -node) %>%
     ggplot2::ggplot(ggplot2::aes(node, value)) +
@@ -130,7 +125,6 @@ plot_svd_v <- function(fa, factors = 1:min(5, fa$rank)) {
 #' @import ggplot2
 #' @importFrom stats screeplot
 screeplot.vsp_fa <- function(x, ...) {
-
   ggplot2::ggplot(data = NULL, ggplot2::aes(1:x$rank, x$d)) +
     ggplot2::geom_point() +
     ggplot2::labs(
@@ -171,7 +165,6 @@ plot_mixing_matrix <- function(fa) {
 #'
 #' @export
 plot_ipr_pairs <- function(fa) {
-
   ipr_u <- apply(fa$u, 2, ipr)
   ipr_v <- apply(fa$v, 2, ipr)
 
